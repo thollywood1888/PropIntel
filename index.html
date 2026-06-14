@@ -13869,19 +13869,6 @@ function renderTopTownPropertyMatrix() {
 
   root.innerHTML = '' +
     '<div class="town-top-matrix" id="town-top-matrix-shell" data-view="cards" data-mode="investor">' +
-      '<div class="town-terminal-nav">' +
-        '<span class="town-terminal-nav-label">Command Nav</span>' +
-        '<button onclick="switchView(\'dashboard\')">Dashboard</button>' +
-        '<button onclick="document.getElementById(\'town-top-matrix-root\').scrollIntoView({behavior:\'smooth\',block:\'start\'})">Town Matrix</button>' +
-        '<button onclick="switchView(\'comps\')">Evidence Register</button>' +
-        '<button onclick="switchView(\'deal-underwriter\')">Deal Lab</button>' +
-        '<button onclick="switchView(\'pdf-export\')">Reports</button>' +
-        '<button onclick="toggleTownMethodology()">Methodology</button>' +
-      '</div>' +
-      '<div class="town-top-head">' +
-        '<div><div class="town-top-eyebrow">Institutional Town Intelligence Layer</div><h2 class="town-top-title">' + counts.towns + ' Towns — Property-Type Command Matrix</h2><p class="town-top-subtitle">A terminal-style market layer showing every town, property-type coverage, evidence depth, confidence and click-through comps. Use card view for screening, heat-map view for coverage gaps, investor mode for acquisition logic and valuer mode for comparable evidence checks.</p></div>' +
-        '<div class="town-top-kpis"><div class="town-top-kpi"><b>' + counts.towns + '</b><span>Towns</span></div><div class="town-top-kpi"><b>' + counts.live + '</b><span>Live markets</span></div><div class="town-top-kpi"><b>' + counts.strong + '</b><span>Strong buy</span></div><div class="town-top-kpi"><b>' + counts.evidence + '</b><span>Comp signals</span></div><div class="town-top-kpi"><b>' + counts.gaps + '</b><span>Data gaps</span></div></div>' +
-      '</div>' +
       '<div class="town-top-modebar">' +
         '<div class="town-toggle-group"><span class="town-toggle-label">Display</span><button id="town-view-cards" class="town-toggle-btn active" onclick="setTownMatrixView(\'cards\')">Card View</button><button id="town-view-heat" class="town-toggle-btn" onclick="setTownMatrixView(\'heat\')">Heat Map</button></div>' +
         '<div class="town-toggle-group"><span class="town-toggle-label">Mode</span><button id="town-mode-investor" class="town-toggle-btn active" onclick="setTownDisplayMode(\'investor\')">Investor Mode</button><button id="town-mode-valuer" class="town-toggle-btn" onclick="setTownDisplayMode(\'valuer\')">Valuer Mode</button></div>' +
