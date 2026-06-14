@@ -32442,5 +32442,511 @@ body.redesign-v71 .logo-sub{letter-spacing:.2px}
 
 })();
 </script>
+
+<script>
+/* =========================================================
+   EVIDENCE EXPORT MODULE — v1.0
+   Panel ID: evidence-export-panel
+   Storage: residential_agent_helper_v71_rows (read)
+            residential_agent_helper_v71_audit (write)
+            propintel_export_filters (persist)
+   ========================================================= */
+(function() {
+'use strict';
+
+var ROWS_KEY   = 'residential_agent_helper_v71_rows';
+var AUDIT_KEY  = 'residential_agent_helper_v71_audit';
+var FILTER_KEY = 'propintel_export_filters';
+var PANEL_ID   = 'evidence-export-panel';
+var ALL_STATUSES = ['Pending','Needs Check','Ready To Import','Imported','Rejected'];
+
+function esc(v){ return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+function loadRows(){ try{ return JSON.parse(localStorage.getItem(ROWS_KEY)||'[]')||[]; }catch(e){ return []; } }
+
+function writeAudit(msg){
+  var items=[];
+  try{ items=JSON.parse(localStorage.getItem(AUDIT_KEY)||'[]')||[]; }catch(e){}
+  items.push({ ts:new Date().toLocaleString('en-GB'), msg:msg });
+  try{ localStorage.setItem(AUDIT_KEY, JSON.stringify(items.slice(-80))); }catch(e){}
+}
+
+function loadSavedFilters(){ try{ return JSON.parse(localStorage.getItem(FILTER_KEY)||'{}')||{}; }catch(e){ return {}; } }
+function saveSavedFilters(f){ try{ localStorage.setItem(FILTER_KEY, JSON.stringify(f)); }catch(e){} }
+
+function readFilters(){
+  var statuses=[];
+  ALL_STATUSES.forEach(function(s){
+    var cb=document.getElementById('eep-cb-'+s.replace(/ /g,'_'));
+    if(cb&&cb.checked) statuses.push(s);
+  });
+  var g=function(id){ var e=document.getElementById(id); return e?e.value:''; };
+  return { statuses:statuses, town:g('eep-town'), evType:g('eep-evtype'), dateFrom:g('eep-date-from'), dateTo:g('eep-date-to') };
+}
+
+function applyFilters(rows,f){
+  return rows.filter(function(r){
+    if(f.statuses.length>0 && f.statuses.indexOf(r.status)===-1) return false;
+    if(f.town && r.town!==f.town) return false;
+    if(f.evType && r.evidenceType!==f.evType) return false;
+    if(f.dateFrom && r.dateChecked<f.dateFrom) return false;
+    if(f.dateTo && r.dateChecked>f.dateTo) return false;
+    return true;
+  });
+}
+
+function todayStr(){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+
+function dlBlob(content,name,type){
+  var blob=new Blob([content],{type:type});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a'); a.href=url; a.download=name;
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); },500);
+}
+
+function escCSV(v){ var s=String(v==null?'':v); return (s.indexOf(',')>=0||s.indexOf('"')>=0||s.indexOf('\n')>=0)?'"'+s.replace(/"/g,'""')+'"':s; }
+
+function updateCount(){
+  var rows=loadRows();
+  var f=readFilters();
+  var df=f.dateFrom, dt=f.dateTo;
+  var dateInvalid=!!(df&&dt&&dt<df);
+  var errEl=document.getElementById('eep-date-err');
+  if(errEl) errEl.style.display=dateInvalid?'block':'none';
+  var filtered=applyFilters(rows,f);
+  var n=filtered.length;
+  var cEl=document.getElementById('eep-count');
+  if(cEl) cEl.textContent=n+' row'+(n===1?'':' s')+' match current filters';
+  var dis=n===0||dateInvalid;
+  ['eep-btn-csv','eep-btn-json','eep-btn-copy'].forEach(function(id){ var b=document.getElementById(id); if(b){ b.disabled=dis; b.style.opacity=dis?'0.45':'1'; } });
+  saveSavedFilters(f);
+  return { filtered:filtered, dateInvalid:dateInvalid };
+}
+
+function renderSummary(){
+  var el=document.getElementById('eep-summary'); if(!el) return;
+  var rows=loadRows();
+  var counts={}; ALL_STATUSES.forEach(function(s){ counts[s]=0; });
+  var townMap={};
+  rows.forEach(function(r){
+    if(counts[r.status]!==undefined) counts[r.status]++; else counts[r.status]=(counts[r.status]||0)+1;
+    if(r.town) townMap[r.town]=(townMap[r.town]||0)+1;
+  });
+  var top5=Object.keys(townMap).sort(function(a,b){ return townMap[b]-townMap[a]; }).slice(0,5);
+  var sbg={'Pending':'#4a6055','Needs Check':'#92400e','Ready To Import':'#B68D40','Imported':'#1b4332','Rejected':'#7f1d1d'};
+  var html='<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;">';
+  html+='<div style="background:#0f3d2e;color:#ffe9a1;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:700;">Total: '+rows.length+'</div>';
+  ALL_STATUSES.forEach(function(s){ html+='<div style="background:'+(sbg[s]||'#666')+';color:#fff;border-radius:8px;padding:7px 13px;font-size:11px;font-weight:600;">'+esc(s)+': '+(counts[s]||0)+'</div>'; });
+  html+='</div>';
+  if(top5.length>0) html+='<div style="font-size:11px;color:#4a6055;">Top towns: '+top5.map(function(t){ return esc(t)+' ('+townMap[t]+')'; }).join(' · ')+'</div>';
+  el.innerHTML=html;
+}
+
+function populateTownFilter(){
+  var sel=document.getElementById('eep-town'); if(!sel) return;
+  var rows=loadRows(); var towns=[];
+  rows.forEach(function(r){ if(r.town&&towns.indexOf(r.town)===-1) towns.push(r.town); });
+  towns.sort();
+  sel.innerHTML='<option value="">All Towns</option>';
+  towns.forEach(function(t){ var o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
+}
+
+function restoreFilters(){
+  var f=loadSavedFilters();
+  var statuses=f.statuses&&f.statuses.length>0?f.statuses:ALL_STATUSES.slice();
+  ALL_STATUSES.forEach(function(s){ var cb=document.getElementById('eep-cb-'+s.replace(/ /g,'_')); if(cb) cb.checked=statuses.indexOf(s)>=0; });
+  var set=function(id,v){ if(!v&&v!==0) return; var e=document.getElementById(id); if(e) e.value=v; };
+  set('eep-town',f.town); set('eep-evtype',f.evType); set('eep-date-from',f.dateFrom); set('eep-date-to',f.dateTo);
+}
+
+function showFallback(text){
+  var fb=document.getElementById('eep-fallback'); if(!fb) return;
+  fb.value=text; fb.style.display='block'; fb.select();
+  if(typeof window.showToast==='function') window.showToast('Clipboard unavailable — select text below and press Ctrl+C');
+}
+
+window.exportEvidenceCSV=function(){
+  var res=updateCount(); if(res.dateInvalid||!res.filtered.length) return;
+  var cols=['id','batchRef','town','propertyType','evidenceType','address','priceRent','valueType','source','dateChecked','status'];
+  var csv=cols.join(',')+'\n';
+  res.filtered.forEach(function(r){ csv+=cols.map(function(c){ return escCSV(r[c]||''); }).join(',')+'\n'; });
+  dlBlob(csv,'PropIntel-Evidence-'+todayStr()+'.csv','text/csv;charset=utf-8');
+  writeAudit('Evidence Export: CSV — '+res.filtered.length+' rows exported');
+};
+
+window.exportEvidenceJSON=function(){
+  var res=updateCount(); if(res.dateInvalid||!res.filtered.length) return;
+  dlBlob(JSON.stringify(res.filtered,null,2),'PropIntel-Evidence-'+todayStr()+'.json','application/json');
+  writeAudit('Evidence Export: JSON — '+res.filtered.length+' rows exported');
+};
+
+window.copyReadyToImport=function(){
+  var rows=loadRows().filter(function(r){ return r.status==='Ready To Import'; });
+  if(!rows.length){ if(typeof window.showToast==='function') window.showToast('No Ready To Import rows'); return; }
+  var header='| Address | Value | Value Type | Source | Date Checked | Town | Prop Type | Ev Type |';
+  var sep='|---|---|---|---|---|---|---|---|';
+  var lines=[header,sep];
+  rows.forEach(function(r){
+    lines.push('| '+[r.address,r.priceRent,r.valueType,r.source,r.dateChecked,r.town,r.propertyType,r.evidenceType].map(function(v){ return String(v||'—').replace(/\|/g,'\\|'); }).join(' | ')+' |');
+  });
+  var text=lines.join('\n');
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){ if(typeof window.showToast==='function') window.showToast(rows.length+' rows copied as markdown table'); }).catch(function(){ showFallback(text); });
+  } else { showFallback(text); }
+  writeAudit('Evidence Export: Markdown copy — '+rows.length+' Ready To Import rows');
+};
+
+window.eepOnFilter=function(){ updateCount(); };
+
+function panelHtml(){
+  var cbHtml=ALL_STATUSES.map(function(s){
+    return '<label style="display:flex;align-items:center;gap:5px;font-size:11px;cursor:pointer;white-space:nowrap;"><input type="checkbox" id="eep-cb-'+s.replace(/ /g,'_')+'" checked onchange="window.eepOnFilter()"> '+esc(s)+'</label>';
+  }).join('');
+  var iStyle='width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid rgba(31,59,44,.18);border-radius:8px;font-size:12px;background:var(--surface,#fff);color:var(--text,#102016);';
+  return '<section id="'+PANEL_ID+'" style="background:var(--surface,#fff);border:1px solid rgba(31,59,44,.13);border-radius:18px;padding:22px 24px;margin-top:24px;">'+
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">'+
+      '<h2 style="font-family:\'Playfair Display\',Georgia,serif;font-size:17px;font-weight:700;color:#0f3d2e;margin:0;">⬇ Evidence Export</h2>'+
+      '<span style="font-size:10px;font-weight:700;background:rgba(182,141,64,.15);color:#B68D40;border:1px solid #B68D40;border-radius:4px;padding:2px 8px;letter-spacing:.5px;">EXPORT</span>'+
+    '</div>'+
+    '<div id="eep-summary" style="margin-bottom:14px;"></div>'+
+    '<div style="background:var(--bg,#F5F2EC);border-radius:10px;padding:14px 16px;margin-bottom:14px;">'+
+      '<div style="font-size:10px;font-weight:700;color:#4a6055;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">Filters</div>'+
+      '<div style="margin-bottom:10px;"><div style="font-size:10px;color:#4a6055;margin-bottom:5px;font-weight:600;">Status</div><div style="display:flex;flex-wrap:wrap;gap:8px;">'+cbHtml+'</div></div>'+
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;">'+
+        '<div><label style="font-size:10px;color:#4a6055;display:block;margin-bottom:3px;font-weight:600;">Town</label><select id="eep-town" onchange="window.eepOnFilter()" style="'+iStyle+'"><option value="">All Towns</option></select></div>'+
+        '<div><label style="font-size:10px;color:#4a6055;display:block;margin-bottom:3px;font-weight:600;">Evidence Type</label><select id="eep-evtype" onchange="window.eepOnFilter()" style="'+iStyle+'"><option value="">All</option><option value="Rent">Rent</option><option value="Sold">Sold</option></select></div>'+
+        '<div><label style="font-size:10px;color:#4a6055;display:block;margin-bottom:3px;font-weight:600;">Date From</label><input type="date" id="eep-date-from" onchange="window.eepOnFilter()" style="'+iStyle+'"></div>'+
+        '<div><label style="font-size:10px;color:#4a6055;display:block;margin-bottom:3px;font-weight:600;">Date To</label><input type="date" id="eep-date-to" onchange="window.eepOnFilter()" style="'+iStyle+'"></div>'+
+      '</div>'+
+      '<div id="eep-date-err" style="display:none;color:#b91c1c;font-size:11px;margin-top:6px;font-weight:600;">Date To must be after Date From</div>'+
+    '</div>'+
+    '<div id="eep-count" style="font-size:12px;font-weight:600;color:#4a6055;margin-bottom:12px;">Calculating…</div>'+
+    '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">'+
+      '<button id="eep-btn-csv" onclick="window.exportEvidenceCSV()" disabled style="padding:8px 16px;background:#0f3d2e;color:#ffe9a1;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;opacity:.45;">⬇ Export CSV</button>'+
+      '<button id="eep-btn-json" onclick="window.exportEvidenceJSON()" disabled style="padding:8px 16px;background:#1b4332;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;opacity:.45;">⬇ Export JSON</button>'+
+      '<button id="eep-btn-copy" onclick="window.copyReadyToImport()" disabled style="padding:8px 16px;background:#B68D40;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;opacity:.45;">⎘ Copy Ready To Import</button>'+
+    '</div>'+
+    '<textarea id="eep-fallback" style="display:none;width:100%;box-sizing:border-box;height:100px;font-size:11px;font-family:monospace;border:1px solid rgba(31,59,44,.18);border-radius:8px;padding:8px;background:var(--bg,#F5F2EC);resize:vertical;" readonly placeholder="Markdown table appears here if clipboard is unavailable"></textarea>'+
+  '</section>';
+}
+
+function install_EvidenceExport(){
+  if(document.getElementById(PANEL_ID)) return true;
+  var anchor=document.getElementById('pipeline-v80-coverage')||document.getElementById('ah-runner-panel')||document.getElementById('view-agent-helper');
+  if(!anchor){ console.log('[EvidenceExport] no anchor yet'); return false; }
+  console.log('[EvidenceExport] mounting after #'+anchor.id);
+  anchor.insertAdjacentHTML('afterend', panelHtml());
+  populateTownFilter();
+  restoreFilters();
+  renderSummary();
+  updateCount();
+  return true;
+}
+
+function tryInstall_EvidenceExport(){
+  var tries=0;
+  var timer=setInterval(function(){ tries++; if(install_EvidenceExport()||tries>40) clearInterval(timer); },250);
+}
+
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',tryInstall_EvidenceExport);
+else tryInstall_EvidenceExport();
+
+})();
+</script>
+
+<script>
+/* =========================================================
+   BTL DEAL SCORER MODULE — v1.0
+   Panel ID: btl-scorer-panel
+   Storage: ayrshire_portfolio_v1 (write)
+            residential_agent_helper_v71_rows (write)
+            residential_agent_helper_v71_audit (write)
+            propintel_scorer_last (persist form)
+   ========================================================= */
+(function() {
+'use strict';
+
+var ROWS_KEY      = 'residential_agent_helper_v71_rows';
+var PORTFOLIO_KEY = 'ayrshire_portfolio_v1';
+var AUDIT_KEY     = 'residential_agent_helper_v71_audit';
+var LAST_KEY      = 'propintel_scorer_last';
+var PANEL_ID      = 'btl-scorer-panel';
+
+var TOWNS=['Ayr','Kilmarnock','Irvine','Troon','Prestwick','Saltcoats','Stevenston','Ardrossan','Largs','Beith','Kilbirnie','Dalry','West Kilbride','Girvan','Maybole','Cumnock','Auchinleck','Mauchline','Newmilns','Galston','Darvel','Muirkirk','Hamilton','Motherwell','Wishaw','Bellshill','Coatbridge','Airdrie','Paisley','Greenock','Other'];
+var PTYPE_LABELS={'1bf':'1 Bed Flat','2bf':'2 Bed Flat','2bh':'2 Bed House'};
+
+var debounceTimer=null;
+
+function esc(v){ return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+function writeAudit(msg){
+  var items=[];
+  try{ items=JSON.parse(localStorage.getItem(AUDIT_KEY)||'[]')||[]; }catch(e){}
+  items.push({ ts:new Date().toLocaleString('en-GB'), msg:msg });
+  try{ localStorage.setItem(AUDIT_KEY, JSON.stringify(items.slice(-80))); }catch(e){}
+}
+
+function todayStr(){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+
+function iStyle(){ return 'width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid rgba(31,59,44,.18);border-radius:8px;font-size:12px;background:var(--surface,#fff);color:var(--text,#102016);font-family:\'Outfit\',sans-serif;outline:none;'; }
+
+function field(labelText,inputHtml,errId){
+  return '<div style="display:flex;flex-direction:column;gap:3px;">'+
+    '<label style="font-size:10px;color:#4a6055;font-weight:600;">'+esc(labelText)+'</label>'+
+    inputHtml+
+    (errId?'<div id="'+errId+'" style="display:none;color:#b91c1c;font-size:10px;font-weight:600;"></div>':'')+
+  '</div>';
+}
+
+function kpi(id,label){
+  return '<div style="background:var(--bg,#F5F2EC);border:1px solid rgba(31,59,44,.13);border-radius:8px;padding:10px;">'+
+    '<div style="font-size:9px;color:#4a6055;margin-bottom:2px;">'+esc(label)+'</div>'+
+    '<div id="'+id+'" style="font-family:\'DM Mono\',monospace;font-weight:700;font-size:18px;color:#6b7280;">—</div>'+
+  '</div>';
+}
+
+function panelHtml(){
+  var townOpts=TOWNS.map(function(t){ return '<option value="'+esc(t)+'">'+esc(t)+'</option>'; }).join('');
+  var iS=iStyle();
+  var prefixWrap=function(id,ph,handler,errId){
+    return field(ph,'<div style="position:relative;"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#4a6055;font-size:12px;pointer-events:none;">£</span><input type="number" id="'+id+'" oninput="window.btsOnInput()" style="'+iS+';padding-left:22px;" placeholder="0"></div>',errId);
+  };
+
+  return '<section id="'+PANEL_ID+'" style="background:var(--surface,#fff);border:1px solid rgba(31,59,44,.13);border-radius:18px;padding:22px 24px;margin-top:24px;">'+
+    '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">'+
+      '<h2 style="font-family:\'Playfair Display\',Georgia,serif;font-size:17px;font-weight:700;color:#0f3d2e;margin:0;">🏠 BTL Deal Scorer</h2>'+
+      '<span style="font-size:10px;font-weight:700;background:rgba(182,141,64,.15);color:#B68D40;border:1px solid #B68D40;border-radius:4px;padding:2px 8px;letter-spacing:.5px;">LIVE CALC</span>'+
+    '</div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;">'+
+
+      /* ── LEFT col: inputs ── */
+      '<div style="display:flex;flex-direction:column;gap:10px;">'+
+        '<div style="font-size:10px;font-weight:700;color:#4a6055;text-transform:uppercase;letter-spacing:.6px;">Property Details</div>'+
+
+        field('Address','<input type="text" id="bts-address" oninput="window.btsOnInput()" style="'+iS+'" placeholder="Full property address">','bts-err-address')+
+
+        field('Town','<select id="bts-town" onchange="window.btsOnInput()" style="'+iS+'"><option value="">— Select Town —</option>'+townOpts+'</select>','')+
+
+        field('Property Type','<select id="bts-ptype" onchange="window.btsOnInput()" style="'+iS+'"><option value="1bf">1 Bed Flat</option><option value="2bf">2 Bed Flat</option><option value="2bh">2 Bed House</option></select>','')+
+
+        field('Purchase Price £','<div style="position:relative;"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#4a6055;font-size:12px;pointer-events:none;">£</span><input type="number" id="bts-price" oninput="window.btsOnInput()" style="'+iS+';padding-left:22px;" placeholder="75000" min="1000" max="5000000"></div>','bts-err-price')+
+
+        field('Refurb Cost £','<div style="position:relative;"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#4a6055;font-size:12px;pointer-events:none;">£</span><input type="number" id="bts-refurb" oninput="window.btsOnInput()" style="'+iS+';padding-left:22px;" value="0" min="0" max="500000"></div>','')+
+
+        field('Monthly Rent £','<div style="position:relative;"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#4a6055;font-size:12px;pointer-events:none;">£</span><input type="number" id="bts-rent" oninput="window.btsOnInput()" style="'+iS+';padding-left:22px;" placeholder="550" min="50" max="20000"></div>','bts-err-rent')+
+
+        field('Acquisition Method','<select id="bts-method" onchange="window.btsOnMethod()" style="'+iS+'"><option value="Mortgage" selected>Mortgage</option><option value="Cash">Cash</option><option value="BRRR">BRRR</option></select>','')+
+
+        '<div id="bts-mortgage-wrap" style="display:flex;flex-direction:column;gap:10px;">'+
+          field('Deposit %','<input type="number" id="bts-deposit" oninput="window.btsOnInput()" style="'+iS+'" min="5" max="95" value="25">','bts-err-deposit')+
+          field('Mortgage Rate %','<input type="number" id="bts-rate" oninput="window.btsOnInput()" style="'+iS+'" min="0.1" max="20" step="0.1" value="5.5">','bts-err-rate')+
+          field('Mortgage Term (yrs)','<input type="number" id="bts-term" oninput="window.btsOnInput()" style="'+iS+'" min="1" max="35" value="25">','')+
+        '</div>'+
+
+        field('Mgmt Fee %','<input type="number" id="bts-mgmt" oninput="window.btsOnInput()" style="'+iS+'" min="0" max="30" value="10">','')+
+        field('Annual Maintenance £','<div style="position:relative;"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#4a6055;font-size:12px;pointer-events:none;">£</span><input type="number" id="bts-maint" oninput="window.btsOnInput()" style="'+iS+';padding-left:22px;" min="0" max="50000" value="500"></div>','')+
+
+        '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;">'+
+          '<button id="bts-btn-portfolio" onclick="window.btsSavePortfolio()" disabled style="padding:8px 14px;background:#0f3d2e;color:#ffe9a1;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;opacity:.45;">Save to Portfolio</button>'+
+          '<button id="bts-btn-evidence" onclick="window.btsSaveEvidence()" disabled style="padding:8px 14px;background:#B68D40;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;opacity:.45;">Save as Evidence Row</button>'+
+          '<button onclick="window.btsClearForm()" style="padding:8px 14px;background:transparent;color:#4a6055;border:1px solid rgba(31,59,44,.18);border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;">Clear</button>'+
+        '</div>'+
+      '</div>'+
+
+      /* ── RIGHT col: outputs ── */
+      '<div style="display:flex;flex-direction:column;gap:10px;">'+
+        '<div style="font-size:10px;font-weight:700;color:#4a6055;text-transform:uppercase;letter-spacing:.6px;">Live Results</div>'+
+
+        '<div id="bts-score-badge" style="border-radius:12px;padding:18px 20px;text-align:center;background:#e5e7eb;margin-bottom:4px;">'+
+          '<div id="bts-score-val" style="font-size:42px;font-weight:700;font-family:\'DM Mono\',monospace;color:#6b7280;line-height:1;">—</div>'+
+          '<div id="bts-score-label" style="font-size:12px;font-weight:700;letter-spacing:1.5px;margin-top:6px;color:#6b7280;">ENTER VALUES TO SCORE</div>'+
+        '</div>'+
+
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'+
+          kpi('bts-gross-yield','Gross Yield')+
+          kpi('bts-net-yield','Net Yield')+
+          kpi('bts-mortgage','Monthly Mortgage')+
+          kpi('bts-net-cf','Net Monthly CF')+
+          kpi('bts-cash-in','Total Cash In')+
+          kpi('bts-coc','Cash-on-Cash')+
+          '<div style="grid-column:1/-1;background:var(--bg,#F5F2EC);border:1px solid rgba(31,59,44,.13);border-radius:8px;padding:10px;">'+
+            '<div style="font-size:9px;color:#4a6055;margin-bottom:2px;" title="Debt Service Coverage Ratio. Lender minimum is typically 1.25x">DSCR <span style="cursor:help;color:#B68D40;font-size:8px;">ⓘ</span></div>'+
+            '<div id="bts-dscr" style="font-family:\'DM Mono\',monospace;font-weight:700;font-size:20px;color:#6b7280;">—</div>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+  '</section>';
+}
+
+function getInp(){
+  function v(id){ var e=document.getElementById(id); return e?e.value:''; }
+  function n(id){ var x=parseFloat(v(id)); return isNaN(x)?0:x; }
+  return { address:(v('bts-address')||'').trim(), town:v('bts-town'), ptype:v('bts-ptype')||'1bf', price:n('bts-price'), refurb:n('bts-refurb'), rent:n('bts-rent'), method:v('bts-method')||'Mortgage', deposit:n('bts-deposit')||25, rate:n('bts-rate')||5.5, term:n('bts-term')||25, mgmt:n('bts-mgmt'), maint:n('bts-maint') };
+}
+
+function validate(inp){
+  var e={};
+  if(!inp.address||inp.address.length<5) e.address='Address required (min 5 characters)';
+  if(!inp.price||inp.price<1000) e.price='Price seems too low';
+  if(!inp.rent||inp.rent<50) e.rent='Monthly rent required';
+  if(inp.price>0&&inp.rent>inp.price*0.02) e.rent='Rent looks unusually high vs purchase price — please verify';
+  if(inp.price>0&&inp.rent>0&&inp.rent<inp.price*0.001) e.rent='Rent looks unusually low vs purchase price — please verify';
+  if(inp.method!=='Cash'){
+    if(inp.deposit>95) e.deposit='Deposit cannot exceed 95%';
+    if(inp.deposit<5) e.deposit='Minimum deposit is 5%';
+    if(inp.rate>15) e.rate='Rate looks high — please verify';
+  }
+  return e;
+}
+
+function showErrors(errors){
+  ['address','price','rent','deposit','rate'].forEach(function(f){
+    var eEl=document.getElementById('bts-err-'+f); var iEl=document.getElementById('bts-'+f);
+    if(eEl){ eEl.textContent=errors[f]||''; eEl.style.display=errors[f]?'block':'none'; }
+    if(iEl) iEl.style.borderColor=errors[f]?'#b91c1c':'';
+  });
+}
+
+function setKpi(id,val,color){
+  var e=document.getElementById(id); if(!e) return;
+  e.textContent=val; if(color) e.style.color=color;
+}
+
+function resetOutputs(){
+  ['bts-gross-yield','bts-net-yield','bts-mortgage','bts-net-cf','bts-cash-in','bts-coc','bts-dscr'].forEach(function(id){ setKpi(id,'—','#6b7280'); });
+  var b=document.getElementById('bts-score-badge'); if(b) b.style.background='#e5e7eb';
+  var sv=document.getElementById('bts-score-val'); if(sv){ sv.textContent='—'; sv.style.color='#6b7280'; }
+  var sl=document.getElementById('bts-score-label'); if(sl){ sl.textContent='ENTER VALUES TO SCORE'; sl.style.color='#6b7280'; }
+}
+
+function calculate(){
+  var inp=getInp();
+  if(!inp.price||!inp.rent){ resetOutputs(); return null; }
+  var errors=validate(inp); showErrors(errors);
+  var isCash=inp.method==='Cash';
+  var grossY=(inp.rent*12/inp.price)*100;
+  var annualCosts=(inp.rent*12*inp.mgmt/100)+inp.maint;
+  var netY=((inp.rent*12-annualCosts)/inp.price)*100;
+  var loan=isCash?0:inp.price*(1-inp.deposit/100);
+  var mMort=isCash?0:loan*(inp.rate/100/12);
+  var netCF=inp.rent-mMort-(annualCosts/12);
+  var cashIn=isCash?(inp.price+inp.refurb):(inp.price*inp.deposit/100)+inp.refurb;
+  var coc=cashIn>0?(netCF*12/cashIn)*100:0;
+  var dscr=isCash?null:(mMort>0?(inp.rent*12)/(mMort*12):0);
+
+  /* Score */
+  var score=0;
+  if(grossY>=9) score+=25; else if(grossY>=7) score+=15;
+  if(netCF>0) score+=20;
+  if(isCash||(dscr!==null&&dscr>=1.25)) score+=20;
+  if(coc>=8) score+=20;
+  if(inp.refurb===0) score+=15;
+
+  /* KPIs */
+  setKpi('bts-gross-yield',grossY.toFixed(1)+'%',grossY>=9?'#14532d':grossY>=7?'#B68D40':'#8a1f1f');
+  setKpi('bts-net-yield',netY.toFixed(1)+'%',netY>=7?'#14532d':netY>=5?'#B68D40':'#8a1f1f');
+  setKpi('bts-mortgage',isCash?'N/A':'£'+Math.round(mMort).toLocaleString()+'/mo','#0f3d2e');
+  setKpi('bts-net-cf',(netCF>=0?'+':'')+'£'+Math.round(netCF).toLocaleString(),netCF>=0?'#14532d':'#8a1f1f');
+  setKpi('bts-cash-in','£'+Math.round(cashIn).toLocaleString(),'#0f3d2e');
+  setKpi('bts-coc',cashIn>0?coc.toFixed(1)+'%':'N/A',coc>=8?'#14532d':coc>=4?'#B68D40':'#8a1f1f');
+
+  var dscrEl=document.getElementById('bts-dscr');
+  if(dscrEl){
+    if(isCash){ dscrEl.textContent='N/A'; dscrEl.style.color='#6b7280'; }
+    else{ dscrEl.textContent=dscr.toFixed(2)+'x'; dscrEl.style.color=dscr>=1.25?'#14532d':dscr>=1.0?'#B68D40':'#8a1f1f'; }
+  }
+
+  /* Score badge */
+  var bc=score>=80?{bg:'#14532d',col:'#ffe9a1',label:'STRONG BUY'}:score>=60?{bg:'#B68D40',col:'#fff',label:'VIABLE'}:score>=40?{bg:'#92400e',col:'#fff',label:'BORDERLINE'}:{bg:'#8a1f1f',col:'#fff',label:'PASS'};
+  var badge=document.getElementById('bts-score-badge'); if(badge) badge.style.background=bc.bg;
+  var sv=document.getElementById('bts-score-val'); if(sv){ sv.textContent=score; sv.style.color=bc.col; }
+  var sl=document.getElementById('bts-score-label'); if(sl){ sl.textContent=bc.label; sl.style.color=bc.col; }
+
+  /* Button states */
+  var canPort=inp.address.length>=5&&inp.price>=1000&&inp.rent>=50;
+  var canEv=inp.address.length>=5&&inp.rent>=50;
+  var pb=document.getElementById('bts-btn-portfolio'); if(pb){ pb.disabled=!canPort; pb.style.opacity=canPort?'1':'0.45'; }
+  var eb=document.getElementById('bts-btn-evidence'); if(eb){ eb.disabled=!canEv; eb.style.opacity=canEv?'1':'0.45'; }
+
+  /* Persist (no address) */
+  try{ localStorage.setItem(LAST_KEY, JSON.stringify({ town:inp.town,ptype:inp.ptype,refurb:inp.refurb,method:inp.method,deposit:inp.deposit,rate:inp.rate,term:inp.term,mgmt:inp.mgmt,maint:inp.maint })); }catch(e){}
+
+  return { inp:inp, score:score, grossY:grossY };
+}
+
+function toggleMortgageWrap(){
+  var m=(document.getElementById('bts-method')||{}).value;
+  var w=document.getElementById('bts-mortgage-wrap'); if(w) w.style.display=(m==='Cash')?'none':'flex';
+}
+
+window.btsOnMethod=function(){ toggleMortgageWrap(); window.btsOnInput(); };
+window.btsOnInput=function(){ clearTimeout(debounceTimer); debounceTimer=setTimeout(calculate,150); };
+
+window.btsSavePortfolio=function(){
+  var inp=getInp();
+  var errors=validate(inp); showErrors(errors);
+  if(!inp.address||inp.address.length<5||!inp.price||!inp.rent){ var firstKey=Object.keys(errors)[0]; if(firstKey){ var fe=document.getElementById('bts-'+firstKey); if(fe) fe.scrollIntoView({behavior:'smooth',block:'center'}); } return; }
+  var res=calculate();
+  var score=res?res.score:0; var grossY=res?res.grossY:0;
+  var row={ id:Date.now().toString(), address:inp.address, town:inp.town||'Other', townName:inp.town||'Other', type:inp.ptype, typeLabel:PTYPE_LABELS[inp.ptype]||inp.ptype, purchasePrice:inp.price, monthlyRent:inp.rent, purchaseDate:todayStr(), status:'Prospect', method:inp.method==='Cash'?'cash':inp.method==='BRRR'?'brrr':'btl', depositPct:inp.deposit, mortgageRate:inp.rate, refurbCost:inp.refurb, notes:'BTL Scorer · Score: '+score+' · Gross yield: '+grossY.toFixed(1)+'%', starred:false };
+  var rows=[]; try{ rows=JSON.parse(localStorage.getItem(PORTFOLIO_KEY)||'[]')||[]; }catch(e){}
+  rows.unshift(row);
+  try{ localStorage.setItem(PORTFOLIO_KEY, JSON.stringify(rows)); }catch(e){}
+  writeAudit('BTL Scorer: saved to portfolio — '+inp.address+' — score '+score+' — gross yield '+grossY.toFixed(1)+'%');
+  if(typeof window.showToast==='function') window.showToast('Saved to Portfolio ✓');
+};
+
+window.btsSaveEvidence=function(){
+  var inp=getInp();
+  if(!inp.address||inp.address.length<5||!inp.rent) return;
+  var row={ id:'EXP-'+Date.now(), batchRef:'', town:inp.town||'', propertyType:PTYPE_LABELS[inp.ptype]||inp.ptype, evidenceType:'Rent', address:inp.address, priceRent:'£'+inp.rent+' pcm', valueType:'Advertised Rent', source:'BTL Scorer', dateChecked:todayStr(), status:'Pending' };
+  var rows=[]; try{ rows=JSON.parse(localStorage.getItem(ROWS_KEY)||'[]')||[]; }catch(e){}
+  rows.unshift(row);
+  try{ localStorage.setItem(ROWS_KEY, JSON.stringify(rows)); }catch(e){}
+  writeAudit('BTL Scorer: saved evidence row — '+inp.address+' — £'+inp.rent+' pcm — Pending');
+  if(typeof window.showToast==='function') window.showToast('Saved as Pending evidence row ✓');
+};
+
+window.btsClearForm=function(){
+  var defs={ 'bts-address':'','bts-refurb':'0','bts-price':'','bts-rent':'','bts-deposit':'25','bts-rate':'5.5','bts-term':'25','bts-mgmt':'10','bts-maint':'500' };
+  Object.keys(defs).forEach(function(id){ var e=document.getElementById(id); if(e) e.value=defs[id]; });
+  try{ localStorage.removeItem(LAST_KEY); }catch(e){}
+  showErrors({}); resetOutputs();
+  var pb=document.getElementById('bts-btn-portfolio'); if(pb){ pb.disabled=true; pb.style.opacity='0.45'; }
+  var eb=document.getElementById('bts-btn-evidence'); if(eb){ eb.disabled=true; eb.style.opacity='0.45'; }
+};
+
+function restoreForm(){
+  try{
+    var f=JSON.parse(localStorage.getItem(LAST_KEY)||'{}')||{};
+    var s=function(id,v){ if(v===undefined||v===null||v==='') return; var e=document.getElementById(id); if(e) e.value=v; };
+    s('bts-town',f.town); s('bts-ptype',f.ptype); s('bts-refurb',f.refurb); s('bts-method',f.method);
+    s('bts-deposit',f.deposit); s('bts-rate',f.rate); s('bts-term',f.term); s('bts-mgmt',f.mgmt); s('bts-maint',f.maint);
+  }catch(e){}
+  toggleMortgageWrap();
+}
+
+function install_BTLScorer(){
+  if(document.getElementById(PANEL_ID)) return true;
+  var anchor=document.getElementById('evidence-export-panel')||document.getElementById('pipeline-v80-coverage')||document.getElementById('ah-runner-panel')||document.getElementById('view-agent-helper');
+  if(!anchor){ console.log('[BTLScorer] no anchor yet'); return false; }
+  console.log('[BTLScorer] mounting after #'+anchor.id);
+  anchor.insertAdjacentHTML('afterend', panelHtml());
+  restoreForm();
+  return true;
+}
+
+function tryInstall_BTLScorer(){
+  var tries=0;
+  var timer=setInterval(function(){ tries++; if(install_BTLScorer()||tries>40) clearInterval(timer); },250);
+}
+
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',tryInstall_BTLScorer);
+else tryInstall_BTLScorer();
+
+})();
+</script>
 </body>
 </html>
