@@ -4788,9 +4788,6 @@ body.redesign-v74 .drawer-overlay{backdrop-filter:blur(5px) !important;}
     <!-- ========== DASHBOARD ========== -->
     <div id="view-dashboard">
 
-
-      <section id="town-top-matrix-root" aria-label="64 towns property-type matrix"></section>
-
 <!-- ═════════════════════════════════════════════════════════════════════════
      Executive Investment Command Centre — EICC v1.0
      Data: TOWNS, DEALS, LIVE_DATA, AUCTION_LOTS globals.
@@ -4993,6 +4990,9 @@ body.redesign-v74 .drawer-overlay{backdrop-filter:blur(5px) !important;}
   </div>
 
 </div><!-- /eicc -->
+
+      <section id="town-top-matrix-root" aria-label="64 towns property-type matrix"></section>
+
     </div><!-- /view-dashboard -->
 
     <!-- ========== MARKET OVERVIEW ========== -->
@@ -12340,6 +12340,7 @@ function switchView(view) {
   closeDrawer();
 
   // Trigger view-specific logic
+  if (view === 'dashboard') { var _ca = document.getElementById('content-area'); if (_ca) _ca.scrollTop = 0; }
   if (view === 'dashboard' && typeof renderExecDashboard === 'function') renderExecDashboard();
   if (view === 'btl-matrix') renderBTLTable();
   if (view === 'comparator' && compareList.length > 0) renderComparator();
@@ -24691,7 +24692,7 @@ body.redesign-v64 #view-dashboard #town-top-matrix-root {
   margin-top: 14px;
 }
 body.redesign-v64 .eicc::before {
-  content: 'Dataset Summary — totals, evidence inventory and next actions only. Town ranking remains in the Town Matrix above.';
+  content: 'Dataset Summary — totals, evidence inventory and next actions only. Town ranking is in the Town Matrix below.';
   display: block;
   margin-bottom: 12px;
   padding: 10px 12px;
