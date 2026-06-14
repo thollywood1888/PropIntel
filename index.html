@@ -4429,54 +4429,127 @@ body.redesign-v74 .drawer-overlay{backdrop-filter:blur(5px) !important;}
 </style>
 </head>
 <body>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Outfit:wght@400;500;600&display=swap');
+#pi-gate{position:fixed;inset:0;z-index:999999;background:#0f3d2e;display:flex;align-items:center;justify-content:center;font-family:'Outfit',system-ui,sans-serif}
+#pi-card{background:#fffdf7;border-radius:18px;padding:52px 44px 44px;width:380px;max-width:calc(100vw - 40px);text-align:center;box-shadow:0 8px 48px rgba(0,0,0,0.28),0 2px 12px rgba(0,0,0,0.16)}
+#pi-brand{font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#B68D40;letter-spacing:-0.02em;margin:0 0 6px}
+#pi-sub{font-size:12px;font-weight:500;color:#4a6055;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 32px}
+#pi-input{width:100%;box-sizing:border-box;background:#f7f5ef;border:1.5px solid rgba(31,59,44,0.18);border-radius:10px;color:#102016;font-family:'Outfit',sans-serif;font-size:15px;padding:13px 16px;outline:none;text-align:center;letter-spacing:0.12em;transition:border-color 0.18s}
+#pi-input:focus{border-color:#B68D40;box-shadow:0 0 0 3px rgba(182,141,64,0.12)}
+#pi-btn{margin-top:14px;width:100%;background:#0f3d2e;color:#ffe9a1;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.08em;padding:13px;border:none;border-radius:10px;cursor:pointer;transition:background 0.18s,transform 0.1s,opacity 0.18s}
+#pi-btn:hover:not(:disabled){background:#1b4332}
+#pi-btn:active:not(:disabled){transform:scale(0.98)}
+#pi-btn:disabled{opacity:0.55;cursor:not-allowed}
+#pi-msg{font-size:12px;margin-top:12px;min-height:18px;font-weight:500;color:#b96b16}
+#pi-attempts{font-size:11px;color:#4a6055;margin-top:6px;min-height:16px}
+@keyframes pi-shake{0%,100%{transform:translateX(0)}15%{transform:translateX(-7px)}35%{transform:translateX(7px)}55%{transform:translateX(-5px)}75%{transform:translateX(5px)}90%{transform:translateX(-2px)}}
+.pi-shake{animation:pi-shake 0.42s ease}
+</style>
 <script>
 (function(){
-  var PASS = 'wpg2026';
-  var KEY  = 'ayrshire_intel_auth';
-  if(sessionStorage.getItem(KEY) === PASS) return;
+  var SESS_KEY   = 'propintel_unlocked';
+  var AUDIT_KEY  = 'residential_agent_helper_v71_audit';
+  var CORRECT    = 'wpg2026';
+  var MAX_TRIES  = 5;
+  var LOCK_MS    = 3000;
+  var attempts   = 0;
+  var locked     = false;
+
+  if(sessionStorage.getItem(SESS_KEY) === '1') return;
+
   document.documentElement.style.overflow = 'hidden';
-  var overlay = document.createElement('div');
-  overlay.id = 'auth-gate';
-  overlay.innerHTML = [
-    '<style>',
-    '#auth-gate{position:fixed;inset:0;z-index:99999;background:#0a1a10;display:flex;align-items:center;justify-content:center;font-family:"Outfit",sans-serif}',
-    '#auth-box{background:#132D1E;border:1px solid rgba(182,141,64,0.3);border-radius:12px;padding:48px 40px;width:360px;text-align:center}',
-    '#auth-box .logo{font-size:11px;letter-spacing:3px;color:#B68D40;margin-bottom:8px;font-weight:600}',
-    '#auth-box h2{color:#E8E0D0;font-size:18px;font-weight:600;margin:0 0 6px}',
-    '#auth-box p{color:#9A9485;font-size:13px;margin:0 0 28px}',
-    '#auth-input{width:100%;box-sizing:border-box;background:#0D1F17;border:1px solid rgba(182,141,64,0.25);border-radius:8px;color:#E8E0D0;font-size:15px;padding:12px 16px;outline:none;text-align:center;letter-spacing:2px}',
-    '#auth-input:focus{border-color:rgba(182,141,64,0.6)}',
-    '#auth-btn{margin-top:16px;width:100%;background:#1B4332;border:1px solid rgba(182,141,64,0.4);border-radius:8px;color:#B68D40;font-size:14px;font-weight:600;letter-spacing:1px;padding:12px;cursor:pointer;transition:background 0.2s}',
-    '#auth-btn:hover{background:#254d3a}',
-    '#auth-error{color:#e05252;font-size:12px;margin-top:10px;min-height:16px}',
-    '</style>',
-    '<div id="auth-box">',
-    '<div class="logo">WOOD PROPERTY GROUP</div>',
-    '<h2>Ayrshire Property Intelligence</h2>',
-    '<p>Enter your access code to continue</p>',
-    '<input id="auth-input" type="password" placeholder="Access code" autocomplete="off"/>',
-    '<button id="auth-btn">ENTER TERMINAL</button>',
-    '<div id="auth-error"></div>',
-    '</div>'
-  ].join('');
-  document.body.insertBefore(overlay, document.body.firstChild);
+
+  var gate = document.createElement('div');
+  gate.id = 'pi-gate';
+  gate.innerHTML =
+    '<div id="pi-card">' +
+      '<div id="pi-brand">PropIntel</div>' +
+      '<div id="pi-sub">Ayrshire Property Intelligence Terminal</div>' +
+      '<input id="pi-input" type="password" placeholder="Enter password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>' +
+      '<button id="pi-btn">Unlock Terminal</button>' +
+      '<div id="pi-msg"></div>' +
+      '<div id="pi-attempts"></div>' +
+    '</div>';
+  document.body.insertBefore(gate, document.body.firstChild);
   document.body.style.overflow = 'hidden';
+
+  var inp  = document.getElementById('pi-input');
+  var btn  = document.getElementById('pi-btn');
+  var msg  = document.getElementById('pi-msg');
+  var atxt = document.getElementById('pi-attempts');
+
+  setTimeout(function(){ inp.focus(); }, 80);
+
+  function writeAudit(message){
+    try{
+      var items = JSON.parse(localStorage.getItem(AUDIT_KEY)||'[]');
+      items.push({ ts: new Date().toLocaleString('en-GB'), msg: message });
+      localStorage.setItem(AUDIT_KEY, JSON.stringify(items.slice(-80)));
+    }catch(e){}
+  }
+
+  function shake(){
+    inp.classList.remove('pi-shake');
+    void inp.offsetWidth;
+    inp.classList.add('pi-shake');
+    inp.addEventListener('animationend', function(){ inp.classList.remove('pi-shake'); }, { once: true });
+  }
+
+  function lockFor(ms){
+    locked = true;
+    btn.disabled = true;
+    inp.disabled = true;
+    var remaining = Math.ceil(ms / 1000);
+    msg.textContent = 'Too many attempts. Wait ' + remaining + 's…';
+    var tick = setInterval(function(){
+      remaining--;
+      if(remaining > 0){
+        msg.textContent = 'Too many attempts. Wait ' + remaining + 's…';
+      } else {
+        clearInterval(tick);
+        locked = false;
+        btn.disabled = false;
+        inp.disabled = false;
+        attempts = 0;
+        msg.textContent = '';
+        atxt.textContent = '';
+        inp.value = '';
+        inp.focus();
+      }
+    }, 1000);
+  }
+
   function attempt(){
-    var val = document.getElementById('auth-input').value.trim();
-    if(val === PASS){
-      sessionStorage.setItem(KEY, PASS);
-      document.getElementById('auth-gate').remove();
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
+    if(locked) return;
+    var val = inp.value;
+    if(val === CORRECT){
+      sessionStorage.setItem(SESS_KEY, '1');
+      writeAudit('PropIntel unlocked — session authenticated');
+      gate.style.transition = 'opacity 0.35s';
+      gate.style.opacity = '0';
+      setTimeout(function(){
+        gate.remove();
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+      }, 360);
     } else {
-      document.getElementById('auth-error').textContent = 'Incorrect access code. Try again.';
-      document.getElementById('auth-input').value = '';
-      document.getElementById('auth-input').focus();
+      attempts++;
+      shake();
+      inp.value = '';
+      var left = MAX_TRIES - attempts;
+      if(attempts >= MAX_TRIES){
+        lockFor(LOCK_MS);
+      } else {
+        msg.textContent = 'Incorrect password.';
+        atxt.textContent = left + ' attempt' + (left === 1 ? '' : 's') + ' remaining';
+        inp.focus();
+      }
     }
   }
-  document.getElementById('auth-btn').addEventListener('click', attempt);
-  document.getElementById('auth-input').addEventListener('keydown', function(e){ if(e.key==='Enter') attempt(); });
-  document.getElementById('auth-input').focus();
+
+  btn.addEventListener('click', attempt);
+  inp.addEventListener('keydown', function(e){ if(e.key === 'Enter') attempt(); });
 })();
 </script>
 <!-- ===== HEADER ===== -->
