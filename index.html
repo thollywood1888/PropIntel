@@ -6086,19 +6086,25 @@ body.redesign-v74 .drawer-overlay{backdrop-filter:blur(5px) !important;}
               </div>
               <div class="bm-field">
                 <label class="bm-label">Method</label>
-                <select id="pa-method" class="bm-select">
+                <select id="pa-method" class="bm-select" onchange="portToggleFinanceFields()">
                   <option value="btl">BTL Mortgage</option>
                   <option value="cash">Cash</option>
                   <option value="brrr">BRRR</option>
                 </select>
               </div>
-              <div class="bm-field">
-                <label class="bm-label">Deposit %</label>
-                <input id="pa-deposit" type="number" class="bm-input" value="25" min="0" max="100">
+              <div id="pa-finance-wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;grid-column:1/-1;">
+                <div class="bm-field">
+                  <label class="bm-label">Deposit %</label>
+                  <input id="pa-deposit" type="number" class="bm-input" value="25" min="0" max="100">
+                </div>
+                <div class="bm-field">
+                  <label class="bm-label">Mortgage Rate %</label>
+                  <input id="pa-rate" type="number" class="bm-input" value="5.5" step="0.1">
+                </div>
               </div>
               <div class="bm-field">
-                <label class="bm-label">Mortgage Rate %</label>
-                <input id="pa-rate" type="number" class="bm-input" value="5.5" step="0.1">
+                <label class="bm-label">Refurb Cost £</label>
+                <div class="bm-input-wrap"><span class="bm-prefix">£</span><input id="pa-refurb" type="number" class="bm-input bm-input-pre" placeholder="0" min="0"></div>
               </div>
             </div>
             <div class="bm-field" style="margin-bottom:12px">
@@ -6113,6 +6119,11 @@ body.redesign-v74 .drawer-overlay{backdrop-filter:blur(5px) !important;}
         <div id="port-chart-wrap" style="display:none" class="port-section-card">
           <div class="port-section-label">Yield by Property</div>
           <div id="port-yield-chart"></div>
+        </div>
+
+        <!-- Portfolio PDF Export -->
+        <div id="port-pdf-export-bar" style="display:none;margin-bottom:10px;padding:0 2px;">
+          <button onclick="exportPortfolioPDF()" style="padding:7px 16px;background:#0f3d2e;color:#ffe9a1;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.04em;">⬇ Export Portfolio PDF</button>
         </div>
 
         <!-- Table -->
@@ -6131,9 +6142,12 @@ body.redesign-v74 .drawer-overlay{backdrop-filter:blur(5px) !important;}
                 <th>Town</th>
                 <th>Type</th>
                 <th>Price</th>
+                <th>Refurb</th>
                 <th>Rent</th>
+                <th>Net CF</th>
                 <th>Yield</th>
                 <th>vs Benchmark</th>
+                <th>Date</th>
                 <th>Status</th>
                 <th>Method</th>
                 <th>Actions</th>
@@ -6325,6 +6339,7 @@ body.redesign-v74 .drawer-overlay{backdrop-filter:blur(5px) !important;}
               <div style="background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:10px;"><div style="font-size:9px;color:var(--text-muted);">Cash-on-Cash</div><div id="auction-out-coc" style="font-family:'DM Mono',monospace;font-weight:700;font-size:18px;color:var(--forest);">0.0%</div></div>
               <div style="background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:10px;"><div style="font-size:9px;color:var(--text-muted);">Payback</div><div id="auction-out-payback" style="font-family:'DM Mono',monospace;font-weight:700;font-size:18px;color:var(--forest);">—</div></div>
               <div style="background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:10px;"><div style="font-size:9px;color:var(--text-muted);">IRR (5yr est.)</div><div id="auction-out-irr" style="font-family:'DM Mono',monospace;font-weight:700;font-size:18px;color:var(--forest);">0.0%</div></div>
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:10px;"><div style="font-size:9px;color:var(--text-muted);" title="Debt Service Coverage Ratio — NOI ÷ Annual Debt Service. Assumes 5.5% interest-only. Lender minimum is typically 1.25x. Set LTV &gt; 0 to activate.">DSCR <span style="cursor:help;color:var(--gold);font-size:8px;">ⓘ</span></div><div id="auction-out-dscr" style="font-family:'DM Mono',monospace;font-weight:700;font-size:18px;color:var(--text-muted);">—</div></div>
               <div style="background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:10px;"><div style="font-size:9px;color:var(--text-muted);">Equity Multiple</div><div id="auction-out-multiple" style="font-family:'DM Mono',monospace;font-weight:700;font-size:18px;color:var(--forest);">0.00x</div></div>
               <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:7px;padding:10px;"><div style="font-size:9px;color:#92400E;">Buyers Fee (est.)</div><div id="auction-out-fee" style="font-family:'DM Mono',monospace;font-weight:700;font-size:18px;color:#92400E;">£0</div></div>
             </div>
@@ -17081,6 +17096,7 @@ function initPortfolio() {
     });
   }
   renderPortfolio();
+  portToggleFinanceFields();
 }
 
 function togglePortSection(bodyId, arrowId) {
@@ -17114,6 +17130,7 @@ function addPortfolioProperty() {
   const rate    = parseFloat(document.getElementById('pa-rate').value) || 5.5;
   const date    = document.getElementById('pa-date').value;
   const notes   = document.getElementById('pa-notes').value.trim();
+  const refurb  = parseFloat(document.getElementById('pa-refurb')?.value) || 0;
 
   if (!addr || !townId || !price || !rent) {
     showToast('Please fill Address, Town, Price and Rent'); return;
@@ -17125,13 +17142,13 @@ function addPortfolioProperty() {
     typeLabel: typeLabels[typeId]||typeId,
     purchasePrice: price, monthlyRent: rent, purchaseDate: date,
     status, method, depositPct: deposit, mortgageRate: rate,
-    refurbCost: 0, notes, starred: false
+    refurbCost: refurb, notes, starred: false
   });
   savePortfolioToStorage();
   renderPortfolio();
 
   // Reset form
-  ['pa-address','pa-price','pa-rent','pa-date','pa-notes'].forEach(id => {
+  ['pa-address','pa-price','pa-rent','pa-date','pa-notes','pa-refurb'].forEach(id => {
     const el = document.getElementById(id); if(el) el.value = '';
   });
   togglePortSection('port-add-body','port-add-arrow');
@@ -17154,17 +17171,20 @@ function renderPortfolio() {
   const empty = document.getElementById('port-empty-state');
   const tableWrap = document.getElementById('port-table-wrap');
   const chartWrap = document.getElementById('port-chart-wrap');
+  const exportBar = document.getElementById('port-pdf-export-bar');
 
   if (PORTFOLIO_DATA.length === 0) {
     if (empty) empty.style.display = 'block';
     if (tableWrap) tableWrap.style.display = 'none';
     if (chartWrap) chartWrap.style.display = 'none';
+    if (exportBar) exportBar.style.display = 'none';
     renderPortKPIs();
     return;
   }
   if (empty) empty.style.display = 'none';
   if (tableWrap) tableWrap.style.display = 'block';
   if (chartWrap) chartWrap.style.display = 'block';
+  if (exportBar) exportBar.style.display = 'block';
 
   renderPortKPIs();
   renderPortTable();
@@ -17201,20 +17221,39 @@ function renderPortTable() {
         : `<span class="port-delta-down">↓ ${delta}%</span>`;
     }
     const statusClass = `port-status-${p.status}`;
+    // Net cashflow (interest-only mortgage)
+    let netCFHtml = '<span style="color:var(--text-muted);font-size:11px">—</span>';
+    if (p.method !== 'cash') {
+      const loan = p.purchasePrice * (1 - ((p.depositPct||25)/100));
+      const monthlyMortgage = loan * ((p.mortgageRate||5.5)/100) / 12;
+      const netCF = p.monthlyRent - monthlyMortgage;
+      const cfColor = netCF >= 0 ? '#2A8C5A' : '#DC2626';
+      netCFHtml = `<span style="font-family:'DM Mono',monospace;font-size:12px;font-weight:600;color:${cfColor};">${netCF>=0?'+':''}£${Math.round(netCF).toLocaleString()}</span>`;
+    }
+    // Date DD/MM/YYYY
+    const dateStr = p.purchaseDate ? (d => {
+      const pts = d.split('-'); return pts.length===3 ? pts[2]+'/'+pts[1]+'/'+pts[0] : d;
+    })(p.purchaseDate) : '—';
+    // Refurb
+    const refurbStr = (p.refurbCost && p.refurbCost > 0) ? '£'+Math.round(p.refurbCost).toLocaleString() : '—';
     return `<tr class="${p.starred?'starred':''}">
       <td><button class="port-action-btn" onclick="togglePortfolioStar('${p.id}')" title="Star">${p.starred?'★':'☆'}</button></td>
-      <td style="font-weight:600;color:var(--forest);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.address}">${p.address}</td>
-      <td>${p.townName}</td>
-      <td style="color:var(--text-muted)">${p.typeLabel}</td>
+      <td style="font-weight:600;color:var(--forest);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;" title="Click to toggle notes" onclick="portToggleNotes('${p.id}')">${esc(p.address)}</td>
+      <td>${esc(p.townName)}</td>
+      <td style="color:var(--text-muted)">${esc(p.typeLabel)}</td>
       <td style="font-family:'DM Mono',monospace">£${p.purchasePrice.toLocaleString()}</td>
+      <td style="font-family:'DM Mono',monospace;color:var(--text-muted);font-size:11px">${refurbStr}</td>
       <td style="font-family:'DM Mono',monospace">£${p.monthlyRent}/mo</td>
+      <td>${netCFHtml}</td>
       <td class="${yClass}">${y}%</td>
       <td>${deltaHtml}</td>
+      <td style="font-size:11px;color:var(--text-muted)">${dateStr}</td>
       <td><span class="port-status-pill ${statusClass}">${p.status.replace('_',' ')}</span></td>
       <td style="color:var(--text-muted);font-size:11px">${p.method.toUpperCase()}</td>
-      <td>
-        <button class="port-action-btn del" onclick="deletePortfolioProperty('${p.id}')">✕</button>
-      </td>
+      <td><button class="port-action-btn del" onclick="deletePortfolioProperty('${p.id}')">✕</button></td>
+    </tr>
+    <tr id="port-notes-${p.id}" style="display:none;background:var(--bg);">
+      <td colspan="14" style="padding:8px 14px;font-size:11.5px;color:var(--text-muted);font-style:italic;border-bottom:1px solid var(--border);">${p.notes ? esc(p.notes) : '<em style="color:var(--border-dk)">No notes recorded</em>'}</td>
     </tr>`;
   }).join('');
 }
@@ -17253,6 +17292,41 @@ function renderPortUnderperformer() {
   }
   strip.style.display = 'block';
   strip.textContent = `⚠ ${underperformers.length} propert${underperformers.length>1?'ies are':'y is'} underperforming their market benchmark by more than 1.5% — review recommended`;
+}
+
+function portToggleFinanceFields() {
+  const method = document.getElementById('pa-method')?.value;
+  const wrap = document.getElementById('pa-finance-wrap');
+  if (!wrap) return;
+  wrap.style.display = (method === 'cash') ? 'none' : 'grid';
+}
+
+function portToggleNotes(id) {
+  const row = document.getElementById('port-notes-' + id);
+  if (!row) return;
+  row.style.display = row.style.display === 'none' ? '' : 'none';
+}
+
+function exportPortfolioPDF() {
+  let ps = document.getElementById('port-print-css');
+  if (!ps) {
+    ps = document.createElement('style');
+    ps.id = 'port-print-css';
+    ps.setAttribute('media', 'print');
+    ps.textContent = [
+      '@media print {',
+      '  body * { visibility: hidden !important; }',
+      '  #view-portfolio, #view-portfolio * { visibility: visible !important; }',
+      '  #view-portfolio { position: fixed; left: 0; top: 0; width: 100%; padding: 20px; }',
+      '  #port-add-body, .port-collapsible-hdr, #port-pdf-export-bar,',
+      '  #port-chart-wrap, #port-underperformer-strip, .port-action-btn { display: none !important; }',
+      '  .port-table { font-size: 8pt; width: 100%; }',
+      '  .port-table th, .port-table td { padding: 4px 6px; border: 1px solid #ccc; }',
+      '}'
+    ].join('\n');
+    document.head.appendChild(ps);
+  }
+  window.print();
 }
 
 </script>
@@ -17840,7 +17914,21 @@ let auctionActiveChips = {};
 window.auctionModuleInit = function() {
   if (auctionModuleReady) return;
   auctionModuleReady = true;
+  // Restore persisted filter state
+  try {
+    const sf = JSON.parse(localStorage.getItem('propintel_auction_filters') || '{}');
+    if (sf.location) auctionActiveChips['location'] = sf.location;
+    if (sf.occupation) auctionActiveChips['occupation'] = sf.occupation;
+    if (sf.sort) { const s = document.getElementById('auction-sort'); if (s) s.value = sf.sort; }
+    if (sf.search) { const s = document.getElementById('auction-search'); if (s) s.value = sf.search; }
+  } catch(e) {}
   auctionRenderLotCards();
+  // Restore chip visual state
+  document.querySelectorAll('.auction-chip').forEach(function(c) {
+    const m = (c.getAttribute('onclick')||'').match(/auctionToggleChip\(this,'(\w+)','([^']+)'\)/);
+    if (m && auctionActiveChips[m[1]] === m[2]) { c.style.background = '#1B4332'; c.style.color = '#fff'; }
+  });
+  if (Object.keys(auctionActiveChips).length > 0) auctionFilterAndSort();
   auctionPopulateDealLabSelector();
   auctionRenderCharts();
   auctionUpdatePortfolioUI();
@@ -17958,6 +18046,7 @@ window.auctionToggleChip = function(el, type, val) {
     el.style.background = '#1B4332';
     el.style.color = '#fff';
   }
+  try { localStorage.setItem('propintel_auction_filters', JSON.stringify({ location: auctionActiveChips['location']||'', occupation: auctionActiveChips['occupation']||'', sort: document.getElementById('auction-sort')?.value||'score-desc', search: document.getElementById('auction-search')?.value||'' })); } catch(e) {}
   auctionFilterAndSort();
 };
 
@@ -17970,6 +18059,7 @@ window.auctionClearFilters = function() {
     c.style.color = 'var(--text-muted)';
   });
   document.querySelectorAll('.auction-lot-card').forEach(c => c.style.display = '');
+  try { localStorage.removeItem('propintel_auction_filters'); } catch(e) {}
 };
 
 // ─── Charts ───────────────────────────────────────────────────────────────
@@ -18098,6 +18188,20 @@ window.auctionCalculateDeal = function() {
   set('auction-out-multiple', ((netOp * hold + exitValue) / (totalAcq || 1)).toFixed(2) + 'x');
   set('auction-out-fee', '£' + Math.round(buyersFee).toLocaleString());
   set('auction-out-payback', equity > 0 && netOp > 0 ? (equity / netOp).toFixed(1) + ' yrs' : '—');
+  // DSCR — interest-only at assumed 5.5% (no rate input in deal lab)
+  const dscrEl = document.getElementById('auction-out-dscr');
+  if (dscrEl) {
+    if (ltv > 0) {
+      const loanAmt = price * (ltv / 100);
+      const annualDebt = loanAmt * 0.055;
+      const dscr = annualDebt > 0 ? netOp / annualDebt : 0;
+      dscrEl.textContent = dscr.toFixed(2) + 'x';
+      dscrEl.style.color = dscr >= 1.25 ? '#2A8C5A' : dscr >= 1.0 ? '#B68D40' : '#DC2626';
+    } else {
+      dscrEl.textContent = 'N/A';
+      dscrEl.style.color = 'var(--text-muted)';
+    }
+  }
 
   const tbody = document.getElementById('auction-cashflow-table');
   if (tbody) {
@@ -18142,11 +18246,19 @@ window.auctionAddToPortfolio = function() {
   const acqText = document.getElementById('auction-out-acq')?.textContent?.replace(/[£,]/g, '') || price;
   const grossText = document.getElementById('auction-out-gross')?.textContent?.replace('%','') || '0';
   const irrText = document.getElementById('auction-out-irr')?.textContent?.replace('%','') || '0';
+  const netText = document.getElementById('auction-out-net')?.textContent?.replace('%','') || '0';
+  const matchedLot = lotSel ? AUCTION_LOTS.find(l => l.id === lotSel) : null;
   const entry = {
     id: lotSel || 'custom-' + Date.now(),
     price, acq: parseFloat(acqText) || price,
     grossYield: parseFloat(grossText) || 0,
+    netYield: parseFloat(netText) || 0,
     irr: parseFloat(irrText) || 0,
+    capex: parseFloat(document.getElementById('auction-deal-capex')?.value) || 0,
+    holdPeriod: parseFloat(document.getElementById('auction-deal-hold')?.value) || 5,
+    ltv: parseFloat(document.getElementById('auction-deal-ltv')?.value) || 0,
+    monthlyRent: parseFloat(document.getElementById('auction-deal-rent')?.value) || 0,
+    address: matchedLot ? matchedLot.address : 'Custom Deal',
     timestamp: new Date().toISOString()
   };
   auctionPortfolio.push(entry);
@@ -18173,11 +18285,21 @@ window.auctionUpdatePortfolioUI = function() {
     totalEquity += p.acq || p.price;
     totalGross += p.grossYield || 0;
     if (lot) { totalScore += lot.score; scoreCount++; }
-    html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-bottom:1px solid var(--border);font-size:12px;">
-      <div><strong>${label}</strong> @ £${p.price.toLocaleString()}</div>
-      <div style="display:flex;gap:12px;align-items:center;">
-        <span style="font-family:'DM Mono',monospace;font-size:11px;">Gross: ${p.grossYield?.toFixed(1) || 0}% · IRR: ${p.irr?.toFixed(1) || 0}%</span>
-        <button onclick="auctionRemoveFromPortfolio(${i})" style="color:#DC2626;background:none;border:none;cursor:pointer;font-size:13px;">×</button>
+    const addedTs = p.timestamp ? (() => {
+      const d = new Date(p.timestamp);
+      const pad = n => String(n).padStart(2,'0');
+      return 'Added ' + pad(d.getDate()) + '/' + pad(d.getMonth()+1) + '/' + d.getFullYear() + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+    })() : '';
+    const dispAddr = p.address || label;
+    html += `<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-weight:700;font-size:12px;color:var(--forest);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:2px;" title="${dispAddr}">${dispAddr}</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-bottom:2px;">Bid: £${p.price.toLocaleString()} · Acq: £${Math.round(p.acq||p.price).toLocaleString()} · LTV: ${p.ltv||0}% · Hold: ${p.holdPeriod||'—'}yr · Capex: £${Math.round(p.capex||0).toLocaleString()} · Rent: £${p.monthlyRent||0}/mo</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;">Gross: ${(p.grossYield||0).toFixed(1)}% · Net: ${(p.netYield||0).toFixed(1)}% · IRR: ${(p.irr||0).toFixed(1)}%</div>
+          ${addedTs ? `<div style="font-size:10px;color:var(--text-muted);margin-top:3px;">${addedTs}</div>` : ''}
+        </div>
+        <button onclick="auctionRemoveFromPortfolio(${i})" style="color:#DC2626;background:none;border:none;cursor:pointer;font-size:16px;flex-shrink:0;line-height:1;">×</button>
       </div>
     </div>`;
   });
