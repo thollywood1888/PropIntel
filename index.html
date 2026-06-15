@@ -6960,26 +6960,23 @@ window.DEALS = DEALS; // expose to window (const is not auto-attached to window 
 
 </script>
 <script>
-/*
- * LIVE_DATA — PropIntel Town Intelligence Store
+/* =========================================================
+   PORTAL MODULE: Core Constants + State (continued)
+   Purpose: LIVE_DATA — comparable evidence store (~4000 lines, pure data)
+   DO NOT MOVE OR REFACTOR THIS BLOCK — data integrity critical
+   ========================================================= */
+/**
+ * live-data.js
+ * Ayrshire Property Intelligence — Live Comparable Data Store
  *
- * Contains 40 hardcoded town profiles with manually
- * written analyst notes, strategy text, verdict labels,
- * BTL underwriting metrics, and comparable evidence.
+ * Structure: LIVE_DATA[townId][propTypeId] = { kpis, sold[], rental[], btl[], notes[], verdict, verdictLabel, strategy }
+ * Town IDs:  troon | kilmarnock | irvine | stevenston | saltcoats | ardrossan | kilwinning |
+ *            ayr | prestwick | largs | beith | dalry | kilbirnie | maybole | girvan |
+ *            cumnock | newmilns | galston
+ * Prop IDs:  1bf (1-Bed Flat) | 2bf (2-Bed Flat) | 2bh (2-Bed House)
  *
- * At runtime, the PropIntel Hydration Engine
- * (injected before </body>) extends this object:
- *   - Overlays live KPI figures for existing 40 towns
- *     from evidence.json (744+ rows, growing)
- *   - Injects full data-driven profiles for towns
- *     present in evidence.json but not hardcoded here
- *   - Updates dashboard KPI strip with live metrics
- *
- * DO NOT hardcode new towns here.
- * Add evidence rows to Master excel Propintel.xlsx
- * and run syncprop. The hydration engine handles the rest.
- *
- * Last updated: 15 June 2026
+ * To add a new town section: copy an existing entry and update all fields.
+ * Data last updated: June 2026
  */
 
 const LIVE_DATA = {
@@ -17095,7 +17092,6 @@ function buildReportFooter() {
         };
       });
 
-      window.__evidenceRowsLoaded = true;
       window.dispatchEvent(new CustomEvent('propintel-data-ready'));
       console.log('[PropIntel Bridge] Evidence Bridge v2 applied.');
     })
@@ -33342,279 +33338,6 @@ else tryInstall_BTLScorer();
       console.log('From Excel:',xl.length);
     }
   };
-})();
-</script>
-<!-- PropIntel Hydration Engine — Stage 2 -->
-<script id="propintel-hydration-engine">
-(function () {
-  'use strict';
-  if (window.__propIntelHydrated) return;
-  window.__propIntelHydrated = true;
-
-  var EVIDENCE_URL = 'https://thollywood1888.github.io/PropIntel/evidence.json';
-
-  /* Normalise to LIVE_DATA key scheme: lowercase, alphanumeric only */
-  function toLiveKey(str) {
-    return String(str || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
-  }
-
-  function parsePrice(str) {
-    var n = parseInt(String(str || '').replace(/[£,pcm\s]/gi, ''), 10);
-    return isNaN(n) ? null : n;
-  }
-
-  function toPropSlug(raw) {
-    var p = (raw || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-    if (/1bed|1bf/.test(p))      return '1bf';
-    if (/2bedflat|2bf/.test(p))  return '2bf';
-    if (/2bedhouse|2bh/.test(p)) return '2bh';
-    return null;
-  }
-
-  /* Local dot/bar helpers — setDot/setBar are not globally scoped */
-  function _setDot(id, green) {
-    var el = document.getElementById(id);
-    if (el) el.classList.toggle('amber', !green);
-  }
-  function _setBar(id, pct) {
-    var el = document.getElementById(id);
-    if (el) el.style.width = Math.min(100, Math.max(0, pct)) + '%';
-  }
-
-  var _hydrationRun = false;
-
-  function runHydration() {
-    if (_hydrationRun) return;
-    _hydrationRun = true;
-
-    fetch(EVIDENCE_URL)
-      .then(function (res) { return res.json(); })
-      .then(function (evidenceData) {
-        var rows = Array.isArray(evidenceData)
-          ? evidenceData
-          : (evidenceData.rows || []);
-
-        /* ── Part A: Build town/propType aggregation map ── */
-        var agg = {};
-        rows.forEach(function (row) {
-          if (!row.town) return;
-          var tk = toLiveKey(row.town);
-          var pt = toPropSlug(row.propertyType || row.type || '');
-          if (!pt) return;
-
-          if (!agg[tk]) agg[tk] = { _townName: row.town };
-          if (!agg[tk][pt]) {
-            agg[tk][pt] = {
-              soldPrices: [], rentPrices: [],
-              soldRows: [],   rentRows: [],
-              compCount: 0
-            };
-          }
-
-          var isRent = String(row.evidenceType || '').toLowerCase().indexOf('rent') !== -1;
-          var price  = parsePrice(row.priceRent);
-
-          if (isRent) {
-            agg[tk][pt].rentRows.push(row);
-            if (price) agg[tk][pt].rentPrices.push(price);
-          } else {
-            agg[tk][pt].soldRows.push(row);
-            if (price) agg[tk][pt].soldPrices.push(price);
-          }
-          agg[tk][pt].compCount++;
-        });
-
-        /* ── Part B: KPI calculator ── */
-        function calcKpis(ptAgg) {
-          if (!ptAgg) return null;
-          var sp = ptAgg.soldPrices;
-          var rp = ptAgg.rentPrices;
-          var avgSoldRaw  = sp.length ? sp.reduce(function(a,b){return a+b;},0)/sp.length : 0;
-          var avgSold     = Math.round(avgSoldRaw / 1000) * 1000;
-          var avgRentRaw  = rp.length ? rp.reduce(function(a,b){return a+b;},0)/rp.length : 0;
-          var avgRent     = Math.round(avgRentRaw / 5) * 5;
-          var grossYield  = (avgSold > 0 && avgRent > 0)
-            ? parseFloat(((avgRent * 12) / avgSold * 100).toFixed(1))
-            : null;
-          var minP = sp.length ? Math.min.apply(null, sp) : null;
-          var maxP = sp.length ? Math.max.apply(null, sp) : null;
-          var entryRange = sp.length >= 2
-            ? '£' + minP.toLocaleString() + ' – £' + maxP.toLocaleString()
-            : sp.length === 1 ? '£' + sp[0].toLocaleString()
-            : 'TBC';
-          return {
-            entryRange:   entryRange,
-            rentDisplay:  avgRent > 0 ? '£' + avgRent + ' pcm' : 'TBC',
-            yieldDisplay: grossYield !== null ? grossYield.toFixed(1) + '% avg' : 'TBC',
-            grossYield:   grossYield,
-            compCount:    ptAgg.compCount
-          };
-        }
-
-        /* ── Part C: Overlay kpis for existing 40 LIVE_DATA towns ── */
-        Object.keys(agg).forEach(function (tk) {
-          if (!window.LIVE_DATA || !window.LIVE_DATA[tk]) return;
-          ['1bf','2bf','2bh'].forEach(function (pt) {
-            var ptAgg = agg[tk][pt];
-            if (!ptAgg || !window.LIVE_DATA[tk][pt]) return;
-            var k = calcKpis(ptAgg);
-            if (!k) return;
-
-            window.LIVE_DATA[tk][pt].kpis = {
-              entry: k.entryRange,
-              yield: k.yieldDisplay,
-              rent:  k.rentDisplay,
-              comps: k.compCount + ' confirmed'
-            };
-
-            if (!Array.isArray(window.LIVE_DATA[tk][pt].sold))   window.LIVE_DATA[tk][pt].sold   = [];
-            if (!Array.isArray(window.LIVE_DATA[tk][pt].rental)) window.LIVE_DATA[tk][pt].rental = [];
-
-            var existSold = window.LIVE_DATA[tk][pt].sold.map(function(r){ return r.addr; });
-            ptAgg.soldRows.forEach(function (r) {
-              var addr = r.address || r.addr || '';
-              if (existSold.indexOf(addr) === -1) {
-                window.LIVE_DATA[tk][pt].sold.push({
-                  addr: addr, pc: r.postcode || '', price: r.priceRent || '',
-                  date: r.dateChecked || '', src: r.source || '',
-                  sig: 'sig-neutral', sigLabel: 'LIVE', note: r.notes || ''
-                });
-              }
-            });
-
-            var existRent = window.LIVE_DATA[tk][pt].rental.map(function(r){ return r.addr; });
-            ptAgg.rentRows.forEach(function (r) {
-              var addr = r.address || r.addr || '';
-              if (existRent.indexOf(addr) === -1) {
-                window.LIVE_DATA[tk][pt].rental.push({
-                  addr: addr, pc: r.postcode || '', rent: r.priceRent || '',
-                  status: 'Live', agent: r.source || '',
-                  period: r.dateChecked || '', note: r.notes || ''
-                });
-              }
-            });
-          });
-        });
-
-        /* ── Part D: Inject towns in evidence.json not in LIVE_DATA ── */
-        Object.keys(agg).forEach(function (tk) {
-          if (window.LIVE_DATA && window.LIVE_DATA[tk]) return;
-          window.LIVE_DATA = window.LIVE_DATA || {};
-          window.LIVE_DATA[tk] = {};
-          ['1bf','2bf','2bh'].forEach(function (pt) {
-            var ptAgg = agg[tk][pt];
-            if (!ptAgg || ptAgg.compCount === 0) return;
-            var k = calcKpis(ptAgg);
-            window.LIVE_DATA[tk][pt] = {
-              verdict:      'verdict-neutral',
-              verdictLabel: 'DATA LAYER',
-              strategy:     'Automated data profile compiled from live spreadsheet evidence. Human analysis pending.',
-              kpis: {
-                entry: k.entryRange,
-                yield: k.yieldDisplay,
-                rent:  k.rentDisplay,
-                comps: k.compCount + ' confirmed'
-              },
-              sold: ptAgg.soldRows.map(function (r) {
-                return {
-                  addr: r.address || '', pc: r.postcode || '', price: r.priceRent || '',
-                  date: r.dateChecked || '', src: r.source || '',
-                  sig: 'sig-neutral', sigLabel: 'LIVE', note: r.notes || ''
-                };
-              }),
-              rental: ptAgg.rentRows.map(function (r) {
-                return {
-                  addr: r.address || '', pc: r.postcode || '', rent: r.priceRent || '',
-                  status: 'Live', agent: r.source || '',
-                  period: r.dateChecked || '', note: r.notes || ''
-                };
-              }),
-              btl: [{
-                label: 'Data Confidence',
-                val:   ptAgg.compCount >= 3 ? 'Good' : 'Thin',
-                col:   ptAgg.compCount >= 3 ? '#2d6a4f' : '#92400e'
-              }],
-              notes: [{
-                warn: false,
-                text: 'This profile is data-driven from live spreadsheet uploads. Analyst review pending.'
-              }]
-            };
-          });
-        });
-
-        /* ── Part E: Update dashboard KPI strip ── */
-        var ld = window.LIVE_DATA || {};
-        var totalTowns   = Object.keys(ld).length;
-        var totalRecords = 0;
-        var allYields    = [];
-
-        Object.keys(ld).forEach(function (tk) {
-          ['1bf','2bf','2bh'].forEach(function (pt) {
-            var sec = ld[tk][pt];
-            if (!sec) return;
-            totalRecords += (Array.isArray(sec.sold)   ? sec.sold.length   : 0);
-            totalRecords += (Array.isArray(sec.rental) ? sec.rental.length : 0);
-            var ptAgg2 = agg[tk] && agg[tk][pt];
-            if (ptAgg2) {
-              var k2 = calcKpis(ptAgg2);
-              if (k2 && k2.grossYield !== null) allYields.push(k2.grossYield);
-            }
-          });
-        });
-
-        var avgYield = allYields.length
-          ? (allYields.reduce(function(a,b){return a+b;},0)/allYields.length).toFixed(1) + '%'
-          : '—';
-        var topYield = allYields.length
-          ? Math.max.apply(null, allYields).toFixed(1) + '%'
-          : '—';
-
-        if (typeof setEl === 'function') {
-          setEl('ei-kpi-towns',     totalTowns);
-          setEl('ei-kpi-records',   totalRecords.toLocaleString());
-          setEl('ei-kpi-avg-yield', avgYield);
-          setEl('ei-kpi-top-yield', topYield);
-        }
-
-        _setDot('ei-dot-towns',   totalTowns   >= 40);
-        _setDot('ei-dot-records', totalRecords >= 2000);
-        _setDot('ei-dot-avg',     parseFloat(avgYield) >= 8.5);
-        _setDot('ei-dot-top',     parseFloat(topYield) >= 10.0);
-
-        _setBar('ei-bar-towns',   Math.min((totalTowns   / 61)   * 100, 100));
-        _setBar('ei-bar-records', Math.min((totalRecords / 2500) * 100, 100));
-        _setBar('ei-bar-avg',     Math.min((parseFloat(avgYield) / 12) * 100, 100));
-        _setBar('ei-bar-top',     Math.min((parseFloat(topYield) / 12) * 100, 100));
-
-        console.log(
-          '[propintel-hydration-engine] Complete. Towns:', totalTowns,
-          '| Records:', totalRecords,
-          '| AvgYield:', avgYield,
-          '| TopYield:', topYield
-        );
-      })
-      .catch(function (err) {
-        console.error('[PropIntel Hydration] fetch failed:', err);
-      });
-  }
-
-  /* Primary trigger: Evidence Bridge fires this after fetch completes */
-  window.addEventListener('propintel-data-ready', function () {
-    runHydration();
-  });
-
-  /* Fallback polling: catches the case where the event already fired */
-  var __hydrationTimer = setInterval(function () {
-    if (
-      window.LIVE_DATA &&
-      typeof setEl === 'function' &&
-      window.__evidenceRowsLoaded
-    ) {
-      clearInterval(__hydrationTimer);
-      runHydration();
-    }
-  }, 300);
-
 })();
 </script>
 </body>
