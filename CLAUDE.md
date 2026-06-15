@@ -90,11 +90,11 @@ Step 6 — Confirm row counts:
     do not treat as success. Run syncprop to resolve.
 
 Step 7 — Confirm index.html integrity:
-  wc -l ~/Desktop/PropIntel-Master/index.html
-  tail -3 ~/Desktop/PropIntel-Master/index.html
+  wc -l ~/Projects/PropIntel/index.html
+  tail -3 ~/Projects/PropIntel/index.html
   grep -c "residential_agent_helper_v71_rows" \
-    ~/Desktop/PropIntel-Master/index.html
-  → Line count must be >= 33153
+    ~/Projects/PropIntel/index.html
+  → Line count must be >= 33344
     (Baseline before Phase 4 — will increase after
     LIVE_DATA wiring task is executed)
   → Last line must contain: </html>
@@ -152,8 +152,8 @@ Step 3 — Validate evidence.json is valid JSON:
   → Any error here: HARD ABORT.
 
 Step 4 — Confirm index.html integrity:
-  wc -l ~/Desktop/PropIntel-Master/index.html
-  → Must be >= 33153 (unless index.html was the task,
+  wc -l ~/Projects/PropIntel/index.html
+  → Must be >= 33344 (unless index.html was the task,
     in which case must be >= pre-flight count)
 
 Step 5 — Confirm no new runtime files created:
@@ -192,7 +192,7 @@ STOP IMMEDIATELY if:
   - A core file is missing from the manifest
   - A duplicate runtime file is detected
   - evidence.json fails JSON validation
-  - index.html line count drops below 33153
+  - index.html line count drops below 33344
   - index.html does not end with </html>
   - git push fails after changes
 
@@ -275,8 +275,8 @@ Git repo: ~/Desktop/PropIntel-Master/
 ═══════════════════════════════════════════════════════
 THE TERMINAL FILE
 ═══════════════════════════════════════════════════════
-File:    ~/Desktop/PropIntel-Master/index.html
-Lines:   >= 33,153 (baseline — increases after Phase 4)
+File:    ~/Projects/PropIntel/index.html
+Lines:   >= 33,344 (baseline — increases after Phase 4)
 Closes:  </html>
 Size:    ~2.57MB
 
