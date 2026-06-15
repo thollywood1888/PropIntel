@@ -16909,6 +16909,197 @@ function buildReportFooter() {
 
 
 
+<!--
+  EVIDENCE BRIDGE v2 — Final production version
+  - Stronger ptId regex (catches 1bf/2bf/2bh shorthands)
+  - Graceful fallback for towns with zero evidence rows (Extra Towns)
+  - Fixes East Kilbride name mismatch automatically
+  - Auto-hydrates all 24 missing/empty panels from real evidence.json data
+  - Fully additive. Never overwrites existing LIVE_DATA.
+-->
+<script id="evidence-bridge">
+(function () {
+  'use strict';
+  if (window.__propintelBridgeApplied) return;
+  window.__propintelBridgeApplied = true;
+
+  var EVIDENCE_URL = 'https://thollywood1888.github.io/PropIntel/evidence.json';
+
+  function buildNameToId() {
+    var map = {};
+    (window.TOWNS || []).forEach(function (t) {
+      var cleanKey = t.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+      map[cleanKey] = t.id;
+    });
+    return map;
+  }
+
+  function ptId(raw) {
+    var p = (raw || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (/1bed|1bf/.test(p)) return '1bf';
+    if (/2bedflat|2bf/.test(p)) return '2bf';
+    if (/2bedhouse|2bh/.test(p)) return '2bh';
+    return null;
+  }
+
+  function prices(rows) {
+    return rows.map(function (r) {
+      var m = String(r.priceRent || '').replace(/[£,\s]/g, '').match(/\d+/);
+      return m ? parseInt(m[0], 10) : null;
+    }).filter(Boolean).sort(function (a, b) { return a - b; });
+  }
+
+  function buildSection(soldRows, rentRows, townName, ptLabel) {
+    var sp = prices(soldRows);
+    var rp = prices(rentRows);
+    var avgRent = rp.length ? Math.round(rp.reduce(function (a, b) { return a + b; }, 0) / rp.length) : 0;
+    var midSold = sp.length ? sp[Math.floor(sp.length / 2)] : 0;
+
+    var entryStr = sp.length
+      ? '£' + sp[0].toLocaleString() + (sp.length > 1 ? ' – £' + sp[sp.length - 1].toLocaleString() : '')
+      : '—';
+
+    var rentStr = avgRent ? '£' + avgRent.toLocaleString() + ' pcm est.' : 'Not supported';
+
+    var yieldStr = (midSold && avgRent)
+      ? (avgRent * 12 / midSold * 100).toFixed(1) + '% est. (directional)'
+      : '—';
+
+    var comps = (soldRows.length + rentRows.length) + ' rows · evidence.json';
+
+    var hasBoth = soldRows.length > 0 && rentRows.length > 0;
+    var verdict = hasBoth ? 'verdict-buy' : 'verdict-watch';
+    var verdictL = hasBoth ? 'BUY' : 'WATCH';
+
+    var sold = soldRows.length ? soldRows.map(function (r) {
+      return {
+        addr: r.address || '—',
+        pc: r.postcode || '',
+        price: r.priceRent || '—',
+        date: r.dateChecked || '—',
+        src: r.source || 'PropIntel Dataset',
+        sig: 'verdict-watch',
+        sigLabel: 'EVIDENCE',
+        note: r.notes || ''
+      };
+    }) : [{
+      addr: 'No sold evidence found',
+      pc: '',
+      price: '—',
+      date: '—',
+      src: 'PropIntel Dataset',
+      sig: 'verdict-watch',
+      sigLabel: 'GAP',
+      note: 'No sold comparables in evidence.json for this combination.'
+    }];
+
+    var rental = rentRows.length ? rentRows.map(function (r) {
+      return {
+        addr: r.address || '—',
+        pc: r.postcode || '',
+        rent: r.priceRent || '—',
+        status: 'PropIntel Dataset',
+        agent: r.source || 'PropIntel Dataset',
+        period: r.dateChecked || '—',
+        note: r.notes || ''
+      };
+    }) : [{
+      addr: 'No rental evidence found',
+      pc: '',
+      rent: '—',
+      status: 'Evidence gap',
+      agent: 'PropIntel Dataset',
+      period: '2026',
+      note: 'No rental comparables in evidence.json for this combination.'
+    }];
+
+    return {
+      verdict: verdict,
+      verdictLabel: verdictL,
+      strategy: townName + ' · ' + ptLabel + ': ' + soldRows.length + ' sold, ' + rentRows.length + ' rent rows. Source: PropIntel Master Dataset.',
+      kpis: {
+        entry: entryStr,
+        yield: yieldStr,
+        rent: rentStr,
+        comps: comps
+      },
+      sold: sold,
+      rental: rental,
+      btl: [
+        { label: 'Evidence source', val: 'PropIntel Master Dataset · evidence.json', col: 'var(--text-muted)' },
+        { label: 'Sold comps', val: soldRows.length + ' rows', col: soldRows.length >= 3 ? 'var(--forest)' : 'var(--amber)' },
+        { label: 'Rental comps', val: rentRows.length + ' rows', col: rentRows.length >= 3 ? 'var(--forest)' : 'var(--amber)' },
+        yieldStr !== '—' ? { label: 'Indicative gross yield', val: yieldStr, col: 'var(--gold)' } : null
+      ].filter(Boolean),
+      notes: [
+        { warn: false, text: 'Auto-generated from PropIntel Master Dataset. Verify live status before underwriting.' }
+      ]
+    };
+  }
+
+  fetch(EVIDENCE_URL)
+    .then(function (res) { return res.json(); })
+    .then(function (evidenceData) {
+      window.LIVE_DATA = window.LIVE_DATA || {};
+      var nameToId = buildNameToId();
+
+      var grouped = {};
+      var rows = Array.isArray(evidenceData) ? evidenceData : (evidenceData.rows || []);
+
+      rows.forEach(function (row) {
+        if (!row.town) return;
+
+        var cleanTownKey = row.town.toLowerCase().replace(/[^a-z0-9]/g, '');
+        var townId = nameToId[cleanTownKey];
+        if (!townId) return;
+
+        var propType = ptId(row.propertyType || row.type);
+        if (!propType) return;
+
+        var marker = String(row.evidenceType || row.market || '').toLowerCase();
+        var isRent = marker.indexOf('rent') !== -1;
+
+        if (!grouped[townId]) {
+          grouped[townId] = {
+            name: row.town,
+            '1bf': { sold: [], rent: [] },
+            '2bf': { sold: [], rent: [] },
+            '2bh': { sold: [], rent: [] }
+          };
+        }
+
+        grouped[townId][propType][isRent ? 'rent' : 'sold'].push(row);
+      });
+
+      (window.TOWNS || []).forEach(function (t) {
+        if (window.LIVE_DATA[t.id]) return;
+
+        var townData = grouped[t.id];
+
+        if (!townData) {
+          window.LIVE_DATA[t.id] = {
+            '1bf': buildSection([], [], t.name, '1 Bed Flat'),
+            '2bf': buildSection([], [], t.name, '2 Bed Flat'),
+            '2bh': buildSection([], [], t.name, '2 Bed House')
+          };
+          return;
+        }
+
+        window.LIVE_DATA[t.id] = {
+          '1bf': buildSection(townData['1bf'].sold, townData['1bf'].rent, t.name, '1 Bed Flat'),
+          '2bf': buildSection(townData['2bf'].sold, townData['2bf'].rent, t.name, '2 Bed Flat'),
+          '2bh': buildSection(townData['2bh'].sold, townData['2bh'].rent, t.name, '2 Bed House')
+        };
+      });
+
+      window.dispatchEvent(new CustomEvent('propintel-data-ready'));
+      console.log('[PropIntel Bridge] Evidence Bridge v2 applied.');
+    })
+    .catch(function (err) {
+      console.error('PropIntel Bridge failed to link runtime evidence:', err);
+    });
+})();
+</script>
 </body></html>`;
 }
 
