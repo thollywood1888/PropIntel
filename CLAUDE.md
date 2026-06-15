@@ -36,16 +36,36 @@ Columns in DASHBOARD_IMPORT_CLEAN:
   Source Row Count In Group, Dedupe Key
 
 ═══════════════════════════════════════════════════════
-THE SYNC WORKFLOW
+EXCEL SYNC WORKFLOW — TWO COMMANDS
 ═══════════════════════════════════════════════════════
-Script:   ~/Desktop/MASTER-PROPINTEL-EXCEL/sync.py
-Output:   ~/Projects/PropIntel/evidence.json
-Mode:     Append-only (rows never removed)
-URL:      https://thollywood1888.github.io/PropIntel/evidence.json
+Master Excel: ~/Desktop/PropIntel-Master/
+              Master excel Propintel.xlsx
+Sync script:  ~/Desktop/PropIntel-Master/sync.py
+Output:       ~/Projects/PropIntel/evidence.json
+Sheet:        DASHBOARD_IMPORT_CLEAN
+Mode:         Append-only (rows never removed)
+Live URL:     https://thollywood1888.github.io/PropIntel/evidence.json
 
-To sync after updating Excel:
-  cd ~/Desktop/MASTER-PROPINTEL-EXCEL
-  python3 sync.py
+COMMAND 1 — syncprop
+Use after manually editing the master Excel.
+Runs: cd ~/Desktop/PropIntel-Master && python3 sync.py
+Never overwrites the Excel file.
+
+COMMAND 2 — syncintel
+Use after downloading a new Excel from Claude/ChatGPT.
+Finds newest Master excel Propintel*.xlsx in ~/Downloads/
+Ignores backup files.
+Copies to PropIntel-Master, then runs sync.py.
+
+MANUAL EDIT WORKFLOW:
+1. Open Master excel Propintel.xlsx
+2. Add rows to DASHBOARD_IMPORT_CLEAN
+3. Save the file
+4. Run: syncprop
+
+DOWNLOADED EXCEL WORKFLOW:
+1. Download new Excel from Claude/ChatGPT to ~/Downloads/
+2. Run: syncintel
 
 ═══════════════════════════════════════════════════════
 THE TERMINAL FILE
