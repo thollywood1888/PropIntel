@@ -62,7 +62,7 @@ Step 2 — Confirm core files exist:
 
 Step 3 — Confirm no duplicate runtime files:
   find ~/Desktop/PropIntel-Master -name "*.xlsx" | sort
-  find ~/Desktop/PropIntel-Master -name "*.json" | sort
+  find ~/Projects/PropIntel -maxdepth 1 -name "*.json" | sort
   find ~/Projects/PropIntel -maxdepth 1 -name "*.html" | sort
   → Each must return exactly one result.
   → If more than one: HARD ABORT.
@@ -164,7 +164,7 @@ Step 4 — Confirm index.html integrity:
 
 Step 5 — Confirm no new runtime files created:
   find ~/Desktop/PropIntel-Master -name "*.xlsx" | sort
-  find ~/Desktop/PropIntel-Master -name "*.json" | sort
+  find ~/Projects/PropIntel -maxdepth 1 -name "*.json" | sort
   find ~/Projects/PropIntel -maxdepth 1 -name "*.html" | sort
   → Each must return exactly one result.
 
