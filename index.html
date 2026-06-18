@@ -33785,5 +33785,142 @@ else tryInstall_BTLScorer();
   else{setTimeout(tryInstall,600);}
 })();
 </script>
+
+<!-- v5.7b Macro Briefings Extended Data · docx import 18 Jun 2026 -->
+<script>
+(function tryInstallMacroBriefingsV57B(){
+  'use strict';
+  if(document.getElementById('v57b-macro-live-init'))return;
+
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
+  var EXT={
+    'mortgage-rates':{
+      headline:'Rightmove: 5.05% 2yr · 5.06% 5yr · Moneyfacts: 5.62%/5.59%',
+      figures:['BTL (Rightmove, 75%LTV, £1k fee): 5.67% 2yr / 5.55% 5yr','7,132 products in market Jun 2026 · trend: easing MoM'],
+      metaSource:'Rightmove; Moneyfacts; Moneyfacts Group',
+      metaChecked:'18 Jun 2026',
+      metaConf:'High (Rightmove tracker + Moneyfacts)',
+      entries:[
+        {label:'Residential fixed — Rightmove tracker',value:'Average 2-year fixed: 5.05%. Average 5-year fixed: 5.06%. Weekly: 2yr −0.04pp, 5yr −0.05pp. Rightmove/Podium tracker updated 16 Jun 2026; covers ~95% of market on £999 fee basis.',source:'Rightmove / Podium, 18 Jun 2026',url:'https://www.rightmove.co.uk/news/articles/property-news/current-uk-mortgage-rates/'},
+        {label:'Residential fixed — Moneyfacts all-product',value:'Moneyfacts broader average (all products, updated 12 Jun 2026): 2-year 5.62%, 5-year 5.59%. Wider product scope than Rightmove tracker — higher because it includes higher-fee and higher-rate products.',source:'Moneyfacts — latest fixed rate mortgage rates',url:'https://moneyfactscompare.co.uk/mortgages/fixed-rate-mortgages/'},
+        {label:'BTL fixed rates — Rightmove representative',value:'75% LTV / £1,000 fee basis (updated 13 Jun 2026): 2-year BTL 5.67%, 5-year BTL 5.55%. This is a representative product average, not a whole-market all-LTV figure.',source:'Rightmove — current average BTL mortgage rates',url:'https://www.rightmove.co.uk/mortgages/guides/mortgage-rates/buy-to-let-mortgages-btl-mortgage-rates/'},
+        {label:'Market trend — product choice recovery',value:'Moneyfacts June 2026 dataset: 7,132 products available (recovering). Average fixed rate eased MoM: 5.68% (2yr) and 5.63% (5yr). Trend is improving but still above pre-March 2026 levels.',source:'Moneyfacts Group — mortgage product choice on the road to recovery',url:'https://www.moneyfactsgroup.co.uk/media-centre/group/mortgage-product-choice-on-the-road-to-recovery/'}
+      ],
+      note:'Rightmove and Moneyfacts track different product sets — never compare averages across sources without noting the methodology.',
+      impact:'At 5%+ headline rates and Moneyfacts all-product view above 5.6%, stress-testing every Ayrshire acquisition is non-negotiable. Gross yields of 7%+ clear an ICR test at 125% if structured correctly at 75% LTV.'
+    },
+    'btl-finance':{
+      headline:'59,489 new BTL loans Q4 2025 · Accord ICR: 125%/145%',
+      figures:['Avg BTL rate: 4.77% · avg yield: 7.18% · avg ICR: 218%','Stress: higher of 5.5% or pay rate +2.0% (Accord, fixes <5yr)'],
+      metaSource:'UK Finance; Accord; Paragon; Bank of England',
+      metaChecked:'18 Jun 2026',
+      metaConf:'High — UK Finance + verified lender criteria',
+      entries:[
+        {label:'Q4 2025 BTL lending (UK Finance)',value:'59,489 new BTL loans, £11.2bn. Volume up 18.2% YoY, value up 21.3% YoY. Avg new BTL rate: 4.77%. Avg gross BTL yield: 7.18%. Avg ICR: 218%. Growth concentrated in remortgage, not broad-based purchases.',source:'UK Finance — Buy-to-Let Lending Update',url:'https://www.ukfinance.org.uk/data-and-research/data/buy-to-let-lending'},
+        {label:'Q1 2026 BTL arrears & possessions',value:'8,960 BTL mortgages in arrears = 0.47% of total; down 6% QoQ and 24% YoY. BTL possessions: 810, up 5% QoQ.',source:'UK Finance — Arrears & Possessions Q1 2026',url:'https://www.ukfinance.org.uk/news-and-insight/press-release/uk-finance-mortgage-arrears-and-possessions-q1-2026'},
+        {label:'Stress-rate / ICR — live lender (Accord)',value:'Accord (live criteria): 125% ICR for basic-rate taxpayers; 145% ICR for higher-rate taxpayers. Stress rate: higher of 5.5% or pay rate +2.0% for fixes under 5 years. BoE confirms this structure is typical across lenders.',source:'Accord Mortgages — rental coverage criteria',url:'https://www.accordmortgages.com/w/btl/criteria/rental-coverage'},
+        {label:'Deposit / LTV context',value:'Current market: 60%–75% LTV is the core range. Selective 80% LTV products available (e.g. Paragon). 25% deposit / 75% LTV remains the primary underwriting reference point for purchase BTL.',source:'Paragon Bank — lending criteria',url:'https://www.paragonbank.co.uk/intermediary/mortgages/lending-criteria'},
+        {label:'Specialist yields — Paragon Q1 2026',value:'Paragon Q1 2026 report: gross yields at 6.96% (vanilla BTL); HMO 8.78%; MUB (multi-unit block) 7.48%. Specialist stock offers materially stronger income metrics but is fee-, LTV-, and management-sensitive.',source:'Paragon Bank — Q1 2026 BTL yield report',url:'https://www.paragonbank.co.uk/press-releases/buy-to-let-rental-yields-increase-in-q1-as-wales-and-the-north-east-lead-regionally'}
+      ],
+      note:'ICR stress-rate framework tightens for higher-rate taxpayers (145% vs 125%). Specialist product yields (HMO/MUB) significantly outperform vanilla BTL.',
+      impact:'For Ayrshire: sector avg ICR 218% is the benchmark. At 125% ICR stressed at 5.5%, a £150k property needs ~£750pcm to pass (basic rate). HMO opportunities carry better yield headroom for ICR compliance and are worth modelling for larger properties.'
+    },
+    'scotland-hpi':{
+      headline:'April 2026: £192,000 · +2.8% annual (latest)',
+      figures:['March 2026: £187,000 · +1.6% annual (preceding release)','UK avg: £268,000 · Scotland £76k below UK mean'],
+      metaSource:'Registers of Scotland / UK HPI',
+      metaChecked:'18 Jun 2026',
+      metaConf:'High — official, provisional HPI',
+      entries:[
+        {label:'Scotland HPI — April 2026 (latest release)',value:'Average house price: £192,000. Monthly: +2.7% NSA / +1.0% SA. Annual: +2.8%. Index: 109.6. Published 17 June 2026.',source:'Registers of Scotland / UK HPI — April 2026',url:'https://www.ros.gov.uk/about/news/2026/uk-house-price-index-figures-for-Scotland-2026'},
+        {label:'Scotland HPI — March 2026 (preceding release)',value:'Average house price: £187,000. Monthly: −0.2% NSA. Annual: +1.6%. Published 20 May 2026. UK average in same release: £268,000.',source:'Registers of Scotland / UK HPI — March 2026',url:'https://www.ros.gov.uk/about/news/2026/uk-house-price-index-figures-for-Scotland-2025'},
+        {label:'Affordability context',value:'Scotland average (£192k, Apr 2026) is £76k below UK average (£268k). Higher-LTV buyers still face elevated financing costs: Moneyfacts June 2026 averages above 5.6% for most fixed terms. Lower-deposit buyers remain most constrained despite lower entry prices.',source:'Registers of Scotland; Moneyfacts',url:'https://www.ros.gov.uk/about/news/2026/uk-house-price-index-figures-for-Scotland-2026'}
+      ],
+      note:'Two successive months show price acceleration: +1.6% annual (Mar) → +2.8% annual (Apr). Scotland entry prices remain £76k below the UK mean.',
+      impact:'Ayrshire prices likely sit below the Scottish mean of £192k, supporting accessible entry points. Accelerating annual growth (+2.8%) provides a cautious positive price outlook for 2026 — but mortgage costs at 5%+ limit buyer depth at higher price points.'
+    },
+    'auction-sentiment':{
+      headline:'UK: 70–85% success rates · £42m+ per session',
+      figures:['Savills 9 Jun: 183 offered · 128 sold · 70% · £42.2m','Allsop commercial May: 39 sold · 85% · £26.5m'],
+      metaSource:'Savills; Allsop; Auction House Scotland; FPA; Pugh',
+      metaChecked:'18 Jun 2026',
+      metaConf:'High (UK national) · Medium (Scottish specific)',
+      entries:[
+        {label:'Scottish auction results',value:'Auction House Scotland: latest visible result — 67E Sandeman St, Dundee, Sold After (26 May 2026). FPA: live timed auction active 18 Jun 2026. Aggregate Scottish sale-rate data not published on accessible pages.',source:'Auction House Scotland — past auctions',url:'https://www.auctionhouse.co.uk/scotland/auction/past-auctions'},
+        {label:'UK — Savills (9 Jun 2026)',value:'Savills remote auction 9 Jun 2026: 183 offered, 128 sold, 70% success rate, £42.20m raised. Active but selective clearing.',source:'Savills Auctions — past auctions',url:'https://auctions.savills.co.uk/past-auctions'},
+        {label:'UK — Allsop Residential (May 2026)',value:'Allsop May 2026 residential: 158 sold, 77% success rate, £39.02m raised. Next Allsop residential: 25 Jun 2026 (245-lot catalogue).',source:'Allsop — residential auctions',url:'https://www.allsop.co.uk/auctions/residential-auctions/'},
+        {label:'UK — Allsop Commercial (May 2026)',value:'Allsop May 2026 commercial: 39 sold, 85% success rate, £26.5m raised. June commercial catalogue: 73 lots released. Next: 15 Jul 2026. Stronger success rate than residential indicates better price certainty in income-led assets.',source:'Allsop — commercial auction results',url:'https://www.allsop.co.uk/insights/allsop-commercial-auction-results/'},
+        {label:'Near-term pipeline — key dates',value:'Savills: 23 Jun 2026. Pugh (timed + live): 22–24 Jun 2026. Allsop Residential: 25 Jun 2026 (245 lots). Allsop Commercial: 15 Jul 2026. FPA Scotland: timed auctions active ~18 Jun and ~2 Jul 2026. MPC (rate decision): 30 Jul 2026.',source:'Allsop; Pugh; Savills; FPA Scotland',url:'https://www.allsop.co.uk/auctions/residential-auctions/'}
+      ],
+      note:'Commercial clearing rates (85%) outperform residential (70–77%). Scottish lot-level data active but aggregate metrics not published publicly.',
+      impact:'Near-term auction pipeline is healthy with multiple major events before end of Jun 2026. For Ayrshire: Scottish auctions remain viable for distressed acquisitions — but lot-by-lot pricing analysis is essential. Commercial income-led assets clearing at 85% suggests investor appetite for secure income at the right price.'
+    }
+  };
+
+  function panelHtmlExt(id){
+    var d=EXT[id];if(!d)return null;
+    var rows=d.entries.map(function(e){
+      return '<div class="v56-field">'+
+        '<span class="v56-field-label">'+esc(e.label)+'</span>'+
+        '<span class="v56-field-value">'+esc(e.value)+'</span>'+
+        '<a href="'+esc(e.url)+'" target="_blank" rel="noopener" style="display:block;margin-top:5px;font-size:10px;color:#D6B45F;text-decoration:none">'+esc(e.source)+' ↗</a>'+
+        '</div>';
+    }).join('');
+    return '<div class="v56-panel-head">'+
+      '<div class="v56-eyebrow">Live Briefing · '+esc(d.metaChecked)+'</div>'+
+      '<h3 class="v56-panel-title" style="font-size:13px;line-height:1.2">'+esc(d.headline)+'</h3>'+
+      '<p class="v56-panel-sub">'+esc(d.note)+'</p>'+
+      '</div>'+
+      '<div class="v56-panel-body"><div class="v56-field-grid">'+rows+
+      '<div class="v56-field"><span class="v56-field-label">Confidence</span><span class="v56-field-value">'+esc(d.metaConf)+'</span></div>'+
+      '<div class="v56-field"><span class="v56-field-label">Ayrshire investor impact</span><span class="v56-field-value">'+esc(d.impact)+'</span></div>'+
+      '</div></div>';
+  }
+
+  function upgradeCard(id){
+    var d=EXT[id];if(!d)return;
+    var card=document.querySelector('[data-briefing-id="'+id+'"]');if(!card)return;
+    var lc=card.querySelector('.v57-lc');
+    if(lc){
+      var h='<div style="font-family:\'DM Mono\',monospace;font-size:12px;font-weight:700;color:#F1DFA2;line-height:1.3;margin-bottom:4px">'+esc(d.headline)+'</div>';
+      h+=d.figures.map(function(f){return '<div style="font-size:10.5px;color:rgba(244,239,227,.60);line-height:1.4">'+esc(f)+'</div>';}).join('');
+      lc.innerHTML=h;
+    }
+    var mrs=card.querySelectorAll('.v56-meta-row');
+    var s0=mrs[0]&&mrs[0].querySelector('span:last-child');
+    var s1=mrs[1]&&mrs[1].querySelector('span:last-child');
+    var s2=mrs[2]&&mrs[2].querySelector('span:last-child');
+    if(s0)s0.textContent=d.metaSource;
+    if(s1)s1.textContent=d.metaChecked;
+    if(s2)s2.textContent=d.metaConf;
+  }
+
+  var prevOpen=window.v56OpenBriefing;
+  window.v56OpenBriefing=function(id){
+    var html=panelHtmlExt(id);
+    if(html){
+      var panel=document.getElementById('v56-briefing-panel');
+      if(panel){
+        panel.innerHTML=html;
+        document.querySelectorAll('[data-briefing-card]').forEach(function(c){c.style.borderColor=c.getAttribute('data-briefing-id')===id?'rgba(241,223,162,.55)':'';});
+      }
+    }else if(prevOpen){prevOpen(id);}
+  };
+
+  function tryInstall(n){
+    if(document.getElementById('v57b-macro-live-init'))return;
+    var root=document.getElementById('macro-briefings-root');
+    if(!root){if((n||0)<10)setTimeout(function(){tryInstall((n||0)+1);},250);return;}
+    Object.keys(EXT).forEach(upgradeCard);
+    var fc=document.querySelector('[data-briefing-card]');
+    if(fc)window.v56OpenBriefing(fc.getAttribute('data-briefing-id'));
+    var m=document.createElement('span');m.id='v57b-macro-live-init';m.style.display='none';document.body.appendChild(m);
+  }
+
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){setTimeout(tryInstall,800);});}
+  else{setTimeout(tryInstall,800);}
+})();
+</script>
 </body>
 </html>
