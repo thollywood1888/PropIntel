@@ -10,13 +10,17 @@
 Fixed project folder (one folder, always):
   ~/Desktop/PropIntel-Master/
 
-Fixed core file manifest (exactly 6 runtime files):
-  1. CLAUDE.md
-  2. README.md
-  3. Master excel Propintel.xlsx
-  4. sync.py
-  5. evidence.json
-  6. index.html
+Fixed core file manifest (two folders — both required):
+
+  ~/Desktop/PropIntel-Master/ (4 core data files):
+    1. CLAUDE.md
+    2. README.md
+    3. Master excel Propintel.xlsx
+    4. sync.py
+
+  ~/Projects/PropIntel/ (git repo — managed by sync.py and Claude):
+    5. evidence.json  ← written here by sync.py
+    6. index.html     ← the live terminal
 
 Additional files policy:
   Additional files (exports, logs, screenshots) are
@@ -50,14 +54,16 @@ Step 1 — Confirm working directory:
 
 Step 2 — Confirm core files exist:
   ls -1 ~/Desktop/PropIntel-Master/
-  → Must include all 6 core files.
-  → If any core file is missing: HARD ABORT.
+  → Must include all 4 core data files:
+    CLAUDE.md, README.md, Master excel Propintel.xlsx, sync.py
+  → evidence.json and index.html live in ~/Projects/PropIntel/
+  → If any of the 4 data files is missing: HARD ABORT.
   → If extra files exist: flag them, continue.
 
 Step 3 — Confirm no duplicate runtime files:
   find ~/Desktop/PropIntel-Master -name "*.xlsx" | sort
   find ~/Desktop/PropIntel-Master -name "*.json" | sort
-  find ~/Desktop/PropIntel-Master -name "*.html" | sort
+  find ~/Projects/PropIntel -maxdepth 1 -name "*.html" | sort
   → Each must return exactly one result.
   → If more than one: HARD ABORT.
 
@@ -105,7 +111,7 @@ Step 8 — Print pre-flight summary table:
   │ Check                       │ Result   │
   ├─────────────────────────────┼──────────┤
   │ Working directory           │ [ok/FAIL]│
-  │ All 6 core files present    │ [ok/FAIL]│
+  │ All 4 data files present    │ [ok/FAIL]│
   │ No duplicate runtime files  │ [ok/FAIL]│
   │ Excel rows                  │ [N]      │
   │ evidence.json rows          │ [N]      │
@@ -159,7 +165,7 @@ Step 4 — Confirm index.html integrity:
 Step 5 — Confirm no new runtime files created:
   find ~/Desktop/PropIntel-Master -name "*.xlsx" | sort
   find ~/Desktop/PropIntel-Master -name "*.json" | sort
-  find ~/Desktop/PropIntel-Master -name "*.html" | sort
+  find ~/Projects/PropIntel -maxdepth 1 -name "*.html" | sort
   → Each must return exactly one result.
 
 Step 6 — Confirm git is clean:
