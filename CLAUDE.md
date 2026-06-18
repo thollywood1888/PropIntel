@@ -76,8 +76,8 @@ Step 4 — Confirm Excel row count:
 
 Step 5 — Confirm evidence.json row count:
   python3 -c "
-  import json
-  with open('./evidence.json') as f:
+  import json, os
+  with open(os.path.expanduser('~/Projects/PropIntel/evidence.json')) as f:
     d = json.load(f)
   print(f'evidence.json rows: {len(d[\"rows\"])}')
   "
@@ -136,16 +136,16 @@ Step 1 — Recount Excel rows:
 
 Step 2 — Recount evidence.json rows:
   python3 -c "
-  import json
-  with open('./evidence.json') as f:
+  import json, os
+  with open(os.path.expanduser('~/Projects/PropIntel/evidence.json')) as f:
     d = json.load(f)
   print(f'evidence.json rows after: {len(d[\"rows\"])}')
   "
 
 Step 3 — Validate evidence.json is valid JSON:
   python3 -c "
-  import json
-  with open('./evidence.json') as f:
+  import json, os
+  with open(os.path.expanduser('~/Projects/PropIntel/evidence.json')) as f:
     json.load(f)
   print('evidence.json: valid')
   "
@@ -163,7 +163,7 @@ Step 5 — Confirm no new runtime files created:
   → Each must return exactly one result.
 
 Step 6 — Confirm git is clean:
-  git -C ~/Desktop/PropIntel-Master status
+  git -C ~/Projects/PropIntel status
   → Must show: nothing to commit, working tree clean
   → If not clean after a push: HARD ABORT.
 
@@ -215,9 +215,9 @@ If validation fails, follow this sequence only:
 Step 1 — Do not edit any file.
 Step 2 — Report the exact failure with values.
 Step 3 — Check git log for last clean commit:
-  git -C ~/Desktop/PropIntel-Master log --oneline -5
+  git -C ~/Projects/PropIntel log --oneline -5
 Step 4 — If instructed, restore last clean state:
-  git -C ~/Desktop/PropIntel-Master checkout HEAD -- \
+  git -C ~/Projects/PropIntel checkout HEAD -- \
     [filename]
 Step 5 — Re-run pre-flight validation from scratch.
 Step 6 — Confirm clean state before proceeding.
@@ -234,7 +234,7 @@ syncprop
   What it does:
     - Reads DASHBOARD_IMPORT_CLEAN from master Excel
     - Converts rows to PropIntel evidence schema
-    - Writes evidence.json to PropIntel-Master
+    - Writes evidence.json to ~/Projects/PropIntel/
     - Pushes evidence.json to GitHub
     - Live terminal updates in ~60 seconds
   Runs: cd ~/Desktop/PropIntel-Master && python3 sync.py
@@ -270,7 +270,7 @@ GitHub:   https://github.com/thollywood1888/PropIntel
 Branch:   main
 Live URL: https://thollywood1888.github.io/PropIntel/
 Password: wpg2026 (sessionStorage: propintel_unlocked)
-Git repo: ~/Desktop/PropIntel-Master/
+Git repo: ~/Projects/PropIntel/
 
 ═══════════════════════════════════════════════════════
 THE TERMINAL FILE
@@ -319,7 +319,7 @@ Excel master:  ~/Desktop/PropIntel-Master/
 Sheet:         DASHBOARD_IMPORT_CLEAN
 Towns:         61+ (dynamic — increases as research runs)
 Rows:          720+ (growing — do not assert fixed count)
-Sync output:   ~/Desktop/PropIntel-Master/evidence.json
+Sync output:   ~/Projects/PropIntel/evidence.json
 Fetch URL:     https://thollywood1888.github.io/PropIntel/
                evidence.json
 Sync mode:     Append-only. Rows never removed.
@@ -455,19 +455,19 @@ Font headings:      'Playfair Display', Georgia, serif
 ═══════════════════════════════════════════════════════
 GIT WORKFLOW
 ═══════════════════════════════════════════════════════
-Repo local:  ~/Desktop/PropIntel-Master/
+Repo local:  ~/Projects/PropIntel/
 Remote:      https://github.com/thollywood1888/PropIntel
 Branch:      main
 
 After every task:
-  cd ~/Desktop/PropIntel-Master
+  cd ~/Projects/PropIntel
   git add [specific files only — never git add .]
   git commit -m "type: description"
   git push origin main
 
 Check status:
-  git -C ~/Desktop/PropIntel-Master status
-  git -C ~/Desktop/PropIntel-Master log --oneline -5
+  git -C ~/Projects/PropIntel status
+  git -C ~/Projects/PropIntel log --oneline -5
 
 Types: feat / fix / patch / security / data / docs
 
