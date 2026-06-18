@@ -33340,5 +33340,268 @@ else tryInstall_BTLScorer();
   };
 })();
 </script>
+
+<!-- ═══════════════════════════════════════════════════════
+     Market Overview — Premium Visual Theme v1
+     Additive · CSS + IIFE · scoped entirely to #view-market
+     ═══════════════════════════════════════════════════════ -->
+<style id="mkt-v1-css">
+
+/* ── Page header ──────────────────────────────────────── */
+#view-market .page-title {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-size: 38px !important;
+  font-weight: 700 !important;
+  color: #102016 !important;
+  letter-spacing: -0.4px !important;
+  line-height: 1.12 !important;
+  margin-bottom: 6px !important;
+}
+#view-market .page-sub {
+  font-size: 11.5px !important;
+  color: #7a8f84 !important;
+  margin-bottom: 28px !important;
+  letter-spacing: 0.05px !important;
+}
+
+/* ── KPI bar → dark institutional strip ──────────────── */
+#view-market .kpi-bar {
+  background: #0e2318 !important;
+  border-radius: 13px !important;
+  padding: 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(6, 1fr) !important;
+  gap: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(182,141,64,0.22) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.04) !important;
+  margin-bottom: 28px !important;
+}
+#view-market .kpi-bar .kpi,
+#view-market .kpi-bar .kpi.gold-top,
+#view-market .kpi-bar .kpi.green-top {
+  background: transparent !important;
+  border: none !important;
+  border-top: none !important;
+  border-right: 1px solid rgba(255,255,255,0.07) !important;
+  border-radius: 0 !important;
+  padding: 22px 18px 20px !important;
+  box-shadow: none !important;
+}
+#view-market .kpi-bar .kpi:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+#view-market .kpi-bar .kpi:last-child {
+  border-right: none !important;
+}
+#view-market .kpi-bar .kpi-label {
+  font-size: 8.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,0.36) !important;
+  margin-bottom: 10px !important;
+  line-height: 1.45 !important;
+}
+#view-market .kpi-bar .kpi-value {
+  font-size: 24px !important;
+  font-weight: 800 !important;
+  color: #fff !important;
+  letter-spacing: -0.4px !important;
+  line-height: 1 !important;
+  font-family: 'Outfit', system-ui, sans-serif !important;
+}
+#view-market .kpi-bar .kpi-value.signal { color: #7adba0 !important; }
+#view-market .kpi-bar .kpi-value.accent { color: #c9a04a !important; }
+#view-market .kpi-bar .kpi > div:last-child {
+  color: rgba(255,255,255,0.3) !important;
+  font-size: 10px !important;
+  margin-top: 7px !important;
+}
+
+/* ── Section headers — gold small-caps ───────────────── */
+#view-market .section-header {
+  margin-top: 6px !important;
+  margin-bottom: 14px !important;
+}
+#view-market .section-title {
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.7px !important;
+  text-transform: uppercase !important;
+  color: #B68D40 !important;
+  font-family: 'Outfit', system-ui, sans-serif !important;
+  gap: 0 !important;
+}
+#view-market .section-title::before { display: none !important; }
+
+/* ── Thesis card (class added by IIFE) ───────────────── */
+#view-market .mkt-thesis {
+  border-radius: 13px !important;
+  padding: 24px 28px !important;
+  margin-bottom: 26px !important;
+  border: 1px solid rgba(182,141,64,0.15) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  font-size: 12.5px !important;
+  line-height: 1.78 !important;
+  color: rgba(255,255,255,0.78) !important;
+}
+#view-market .mkt-thesis > div:first-child {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #B68D40 !important;
+  margin-bottom: 10px !important;
+  font-family: 'Playfair Display', Georgia, serif !important;
+  letter-spacing: -0.1px !important;
+}
+#view-market .mkt-thesis > div:last-child {
+  font-size: 10.5px !important;
+  color: rgba(255,255,255,0.38) !important;
+  margin-top: 14px !important;
+  padding-top: 12px !important;
+  border-top: 1px solid rgba(255,255,255,0.09) !important;
+}
+
+/* ── View toggle (injected by IIFE) ─────────────────── */
+.mkt-view-toggle { display: flex; gap: 5px; align-items: center; }
+.mkt-vt-btn {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
+  padding: 6px 14px; border-radius: 7px; cursor: pointer;
+  font-family: 'Outfit', system-ui, sans-serif; line-height: 1;
+  transition: opacity 0.15s;
+}
+.mkt-vt-active  { background: #0f3d2e; color: #fff; border: 1px solid #0f3d2e; }
+.mkt-vt-inactive { background: transparent; color: #4a6055; border: 1px solid rgba(31,59,44,0.2); }
+.mkt-vt-btn:hover { opacity: 0.72; }
+
+/* ── Tables — sharper, more institutional ────────────── */
+#view-market .table-wrap {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(31,59,44,0.1) !important;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05) !important;
+  margin-bottom: 26px !important;
+}
+#view-market .table-wrap table { border-collapse: collapse !important; }
+#view-market .table-wrap table thead tr { background: #f0ede8 !important; }
+#view-market .table-wrap table thead th {
+  font-size: 9px !important; font-weight: 800 !important;
+  letter-spacing: 1.2px !important; text-transform: uppercase !important;
+  color: #4a6055 !important; padding: 12px 14px !important;
+  border-bottom: 1px solid rgba(31,59,44,0.1) !important;
+  white-space: nowrap !important; background: transparent !important;
+}
+#view-market .table-wrap table tbody tr {
+  border-bottom: 1px solid rgba(31,59,44,0.055) !important;
+  background: transparent !important;
+}
+#view-market .table-wrap table tbody tr:last-child { border-bottom: none !important; }
+#view-market .table-wrap table tbody tr:hover { background: rgba(15,61,46,0.03) !important; }
+#view-market .table-wrap table tbody td {
+  padding: 13px 14px !important;
+  font-size: 12px !important;
+  vertical-align: middle !important;
+}
+#view-market .table-wrap .mono {
+  font-family: 'DM Mono', monospace !important; font-size: 11.5px !important;
+}
+#view-market .table-wrap .gold-text {
+  color: #9e7a30 !important; font-family: 'DM Mono', monospace !important; font-weight: 600 !important;
+}
+#view-market .table-wrap .muted { color: #5a7068 !important; }
+#view-market .table-wrap .verdict {
+  font-size: 9px !important; font-weight: 700 !important;
+  letter-spacing: 0.7px !important; text-transform: uppercase !important;
+  padding: 4px 12px !important; border-radius: 999px !important;
+}
+
+/* ── Risk register (class added by IIFE) ─────────────── */
+#view-market .mkt-risk {
+  border-radius: 12px !important; overflow: hidden !important;
+  border: 1px solid rgba(31,59,44,0.1) !important;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05) !important;
+  margin-bottom: 26px !important;
+}
+#view-market .mkt-risk > div:first-child {
+  background: #0f3d2e !important; padding: 11px 16px !important;
+  font-size: 9px !important; font-weight: 800 !important;
+  letter-spacing: 1.5px !important; text-transform: uppercase !important;
+  color: #B68D40 !important;
+}
+
+/* ── Data room cards ─────────────────────────────────── */
+#view-market .card-grid .card {
+  border-radius: 12px !important; border: 1px solid rgba(31,59,44,0.1) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+#view-market .card-grid .card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1) !important;
+}
+#view-market .card-grid .card .card-title {
+  font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.1px !important;
+}
+
+</style>
+<script>
+(function tryInstallMktThemeV1(){
+  'use strict';
+  if (document.getElementById('mkt-v1-init')) return;
+
+  function install(){
+    var vm = document.getElementById('view-market');
+    if (!vm) return;
+
+    // Tag thesis and risk-register via their inline style signatures
+    var kids = vm.children;
+    for (var i = 0; i < kids.length; i++) {
+      var el = kids[i];
+      var st = el.getAttribute('style') || '';
+      // Thesis: background:var(--forest) + line-height
+      if (st.indexOf('var(--forest)') > -1 && st.indexOf('line-height') > -1) {
+        el.classList.add('mkt-thesis');
+      }
+      // Risk register: background:var(--surface) + first child has var(--forest)
+      if (st.indexOf('var(--surface)') > -1 && el.children.length > 0) {
+        var fc = el.children[0];
+        if ((fc.getAttribute('style') || '').indexOf('var(--forest)') > -1) {
+          el.classList.add('mkt-risk');
+        }
+      }
+    }
+
+    // Add view-toggle to Council Area Overview section header
+    var headers = vm.querySelectorAll('.section-header');
+    for (var j = 0; j < headers.length; j++) {
+      var t = headers[j].querySelector('.section-title');
+      if (t && t.textContent.trim() === 'Council Area Overview') {
+        if (!headers[j].querySelector('.mkt-view-toggle')) {
+          var tg = document.createElement('div');
+          tg.className = 'mkt-view-toggle';
+          tg.innerHTML = '<button class="mkt-vt-btn mkt-vt-active">View: Table</button>'
+                       + '<button class="mkt-vt-btn mkt-vt-inactive">Cards</button>';
+          headers[j].appendChild(tg);
+        }
+        break;
+      }
+    }
+
+    // Mark installed
+    var m = document.createElement('span');
+    m.id = 'mkt-v1-init';
+    m.style.display = 'none';
+    document.body.appendChild(m);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
 </body>
 </html>
