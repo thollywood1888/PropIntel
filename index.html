@@ -34434,5 +34434,56 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
   else setTimeout(tryInstallRRA,700);
 })();
 </script>
+
+<!-- R1 Rental Comps — Troon KA10 · Jun-26 · additive merge into LIVE_DATA · no overwrite -->
+<script id="r1-troon-jun26-script">
+(function(){
+  'use strict';
+  if(window.__R1_TROON_JUN26__)return;
+  window.__R1_TROON_JUN26__=true;
+
+  var D='Jun-26 (R1 live collection)';
+
+  var COMPS={
+    '1bf':[
+      {addr:'Portland Street, Troon',pc:'KA10',rent:'£375',status:'NOW LET — Citylets',agent:'Citylets',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. 1-bed flat NOW LET on Citylets. Lower-band demand signal. No active 1BF stock found on any portal at time of R1 run.',source_version:'R1-jun26'},
+      {addr:'Barassie Street, Troon',pc:'KA10',rent:'£495',status:'NOW LET — Citylets',agent:'Citylets',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. 1-bed flat NOW LET on Citylets. No active 1BF listings in Troon. Demand signal only.',source_version:'R1-jun26'}
+    ],
+    '2bf':[
+      {addr:'Gillies Street, Troon (2BF)',pc:'KA10',rent:'£395',status:'NOW LET — Citylets',agent:'Citylets / Clyde Property Ayr',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. 2-bed flat NOW LET. Lower-band Citylets demand signal. No active 2BF stock in Troon at time of R1 run.',source_version:'R1-jun26'},
+      {addr:'Dundonald Road, Troon',pc:'KA10',rent:'£440',status:'NOW LET — Citylets',agent:'Citylets',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. 2-bed flat NOW LET. Demand signal only.',source_version:'R1-jun26'},
+      {addr:'Titchfield Road, Troon',pc:'KA10',rent:'£525',status:'NOW LET — Citylets',agent:'Citylets / Slater Hogg & Howison Ayr',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. 2-bed flat NOW LET. Mid-range demand signal.',source_version:'R1-jun26'},
+      {addr:'Ayr Street, Troon',pc:'KA10',rent:'£550',status:'NOW LET — Citylets',agent:'Citylets / Clyde Property Ayr',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. 2-bed flat NOW LET. Mid-range demand signal.',source_version:'R1-jun26'},
+      {addr:'Barassiebank Lane (Flat C), Troon',pc:'KA10',rent:'£635',status:'NOW LET — Citylets (waterfront)',agent:'Citylets / Slater Hogg & Howison Ayr',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET · WATERFRONT',note:'R1 Jun-26. 2-bed ground floor flat on Barassie Shore Front, sea views to Arran. NOW LET. Waterfront premium — exclude from standard BTL yield modelling.',source_version:'R1-jun26'},
+      {addr:'North Shore Road, Troon (2BF R1)',pc:'KA10',rent:'£700',status:'NOW LET — Citylets',agent:'Citylets / Slater Hogg & Howison Ayr',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. 2-bed flat North Shore Road NOW LET. Premium coastal street — treat with caution for standard BTL yield.',source_version:'R1-jun26'}
+    ],
+    '2bh':[
+      {addr:'Deveron Road, Troon',pc:'KA10',rent:'£550',status:'ACTIVE — OnTheMarket',agent:'OnTheMarket',period:D,src:'OnTheMarket',sig:'verdict-buy',sigLabel:'ACTIVE — BENCHMARK',note:'R1 Jun-26. 2-bed terraced house ACTIVE on OnTheMarket (added < 7 days). Only confirmed active 2BH rental in Troon at time of R1 run. Benchmark comp.',source_version:'R1-jun26'},
+      {addr:'Logan Drive, Troon',pc:'KA10',rent:'£495',status:'NOW LET — Citylets',agent:'Citylets / The Property Box Scotland',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. 2-bed terraced house Logan Drive NOW LET. Lower-band demand signal.',source_version:'R1-jun26'},
+      {addr:'Staffin Road, Troon',pc:'KA10',rent:'£675',status:'LET AGREED — OnTheMarket',agent:'OnTheMarket / Slater Hogg & Howison Ayr',period:D,src:'OnTheMarket',sig:'verdict-watch',sigLabel:'LET AGREED',note:'R1 Jun-26. 2-bed semi-detached bungalow LET AGREED. Near Royal Troon Golf Course. Demand signal only.',source_version:'R1-jun26'},
+      {addr:'Adlington Gardens, Troon',pc:'KA10',rent:'£900',status:'NOW LET — Citylets',agent:'Citylets / Slater Hogg & Howison Ayr',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. 2-bed terraced house Adlington Gardens NOW LET. Upper-band demand signal.',source_version:'R1-jun26'}
+    ]
+  };
+
+  var NOTES={
+    '1bf':{warn:true, text:'R1 Jun-26: Zero active 1BF listings in Troon on any portal. All Citylets records NOW LET. Let-agreed range £375–£495 pcm. Market is fast-moving — 0 active stock at time of collection. M1 priority gap.'},
+    '2bf':{warn:true, text:'R1 Jun-26: Zero active 2BF listings in Troon. 6 Citylets records all NOW LET. Range £395–£700 pcm (ex-corporate). Waterfront/premium stock excluded from BTL benchmark. M1 priority gap.'},
+    '2bh':{warn:false,text:'R1 Jun-26: 1 active 2BH — Deveron Road £550 pcm (OnTheMarket, added <7 days). Let-agreed demand signals: Logan Drive £495 NOW LET, Staffin Road £675 let-agreed (semi bungalow near Royal Troon GC), Adlington Gardens £900 NOW LET. BTL benchmark: £550 pcm (Deveron Road terraced).'}
+  };
+
+  function rk(r){return String((r.addr||'')+'|'+(r.rent||r.value||'')+'|'+(r.period||r.date||'')).toLowerCase().replace(/[^a-z0-9£]+/g,'');}
+
+  ['1bf','2bf','2bh'].forEach(function(t){
+    var node=((window.LIVE_DATA||{}).troon||{})[t];
+    if(!node)return;
+    if(!Array.isArray(node.rental))node.rental=[];
+    var ex=new Set(node.rental.map(rk));
+    (COMPS[t]||[]).forEach(function(r){var k=rk(r);if(!ex.has(k)){node.rental.push(r);ex.add(k);}});
+    if(!Array.isArray(node.notes))node.notes=[];
+    var hasNote=node.notes.some(function(n){return String(n&&n.text||'').indexOf('R1 Jun-26')>=0;});
+    if(!hasNote&&NOTES[t])node.notes.push(NOTES[t]);
+  });
+})();
+</script>
 </body>
 </html>
