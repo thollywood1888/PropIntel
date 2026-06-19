@@ -1,9 +1,9 @@
 {
   "meta": {
-    "generated": "2026-06-19 18:39",
+    "generated": "2026-06-19 18:47",
     "source": "Master excel Propintel.xlsx",
     "sheet": "DASHBOARD_IMPORT_CLEAN",
-    "totalRows": 754,
+    "totalRows": 756,
     "syncMode": "append",
     "version": "2.0.0",
     "note": "Append-only. Rows never removed. This is the PropIntel master evidence file."
@@ -12824,6 +12824,40 @@
       "dateChecked": "Jun 2026",
       "notes": "Current listing. Terraced house, Chapelhall village within ML6/Airdrie catchment. Price reduced today. Pets allowed, DG.",
       "qaStatus": "Benchmark/Included",
+      "status": "Pending",
+      "_fromExcel": true
+    },
+    {
+      "id": "XLSX-46C75BF829",
+      "batchRef": "MASTER-IMPORT-2026",
+      "town": "Mauchline",
+      "propertyType": "2 Bed Flat",
+      "evidenceType": "Rent",
+      "address": "Ballochmyle Way, Mauchline, KA5",
+      "priceRent": "£675 pcm",
+      "valueType": "Advertised Rent",
+      "source": "Citylets",
+      "sourceUrl": "https://www.citylets.co.uk/property-rent/mauchline-ballochmyle-way-ka5-306151/",
+      "dateChecked": "Jun 2026",
+      "notes": "Let agreed. Flat, unfurnished. Agent: Murphy Scoular, Ayr. Now Let — removed from active market. Demand signal: let quickly. Gap note: only 1 comp found for 2BF, minimum 3 not met.",
+      "qaStatus": "Watchlist",
+      "status": "Pending",
+      "_fromExcel": true
+    },
+    {
+      "id": "XLSX-94D5D9F03E",
+      "batchRef": "MASTER-IMPORT-2026",
+      "town": "Mauchline",
+      "propertyType": "2 Bed House",
+      "evidenceType": "Rent",
+      "address": "Sunnyside Crescent, Mauchline, KA5",
+      "priceRent": "£695 pcm",
+      "valueType": "Advertised Rent",
+      "source": "Citylets",
+      "sourceUrl": "https://www.citylets.co.uk/property-rent/mauchline-sunnyside-crescent-ka5-549995/",
+      "dateChecked": "Jun 2026",
+      "notes": "Let agreed. End-of-terrace house, unfurnished, private front/rear gardens, gas CH combi boiler, modern kitchen/bathroom, DG. Council Tax Band B. EPC: D. Now Let — demand signal. Gap note: only 1 comp found for 2BH, minimum 3 not met.",
+      "qaStatus": "Watchlist",
       "status": "Pending",
       "_fromExcel": true
     }
