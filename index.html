@@ -33922,5 +33922,517 @@ else tryInstall_BTLScorer();
   else{setTimeout(tryInstall,800);}
 })();
 </script>
+<!-- Residential Research Agents · v1.0 · additive only -->
+<style id="rra-v1-style">
+.rra-shell{padding:32px 28px;max-width:1200px;margin:0 auto;font-family:'Outfit',system-ui,sans-serif;color:#102016}
+.rra-hero{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+.rra-hero-left{display:flex;flex-direction:column;gap:8px}
+.rra-hero-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.rra-h1{font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#102016;margin:0;line-height:1.2}
+.rra-fw-pill{background:#1b4332;color:#B68D40;font-size:11px;font-weight:700;letter-spacing:.06em;padding:4px 12px;border-radius:999px;font-family:'DM Mono',monospace}
+.rra-sub{font-size:13px;color:#4a6055;margin:0}
+.rra-copy-all{background:#B68D40;color:#fff;border:none;border-radius:999px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:7px;font-family:'Outfit',system-ui,sans-serif;flex-shrink:0}
+.rra-copy-all:hover{opacity:.88}
+.rra-master{background:#1b4332;color:#e8f5ef;border-radius:18px;padding:24px 28px;margin-bottom:32px}
+.rra-master-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.rra-master-icon{width:40px;height:40px;background:#B68D40;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.rra-master-title{font-size:16px;font-weight:700;color:#fff;margin:0}
+.rra-rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 32px;margin-bottom:14px}
+.rra-rule{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:#c8ddd4;line-height:1.5}
+.rra-rule-check{color:#B68D40;flex-shrink:0;margin-top:1px}
+.rra-master-note{font-size:12px;color:#ffe9a1;border-left:3px solid #B68D40;padding-left:12px;margin-top:8px;line-height:1.5}
+.rra-stream{margin-bottom:32px}
+.rra-stream-hd{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.rra-stream-lbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4a6055;font-family:'DM Mono',monospace;white-space:nowrap}
+.rra-stream-hr{flex:1;height:1px;background:rgba(31,59,44,.13)}
+.rra-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rra-grid-1{display:grid;grid-template-columns:minmax(0,460px);gap:16px}
+.rra-card{background:#fff;border:1px solid rgba(31,59,44,.13);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.rra-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.rra-card-title-row{display:flex;align-items:center;gap:8px}
+.rra-card-ico{font-size:16px;color:#B68D40}
+.rra-card-title{font-size:14px;font-weight:700;color:#102016;margin:0}
+.rra-ready{background:#1b4332;color:#ffe9a1;font-size:10px;font-weight:700;letter-spacing:.06em;padding:3px 9px;border-radius:999px;font-family:'DM Mono',monospace;display:inline-block;width:fit-content}
+.rra-prompt-btn{background:transparent;border:1px solid rgba(31,59,44,.25);border-radius:8px;padding:5px 11px;font-size:11px;font-weight:600;color:#1b4332;cursor:pointer;display:flex;align-items:center;gap:5px;white-space:nowrap;font-family:'Outfit',system-ui,sans-serif;flex-shrink:0}
+.rra-prompt-btn:hover{background:#1b4332;color:#fff;border-color:#1b4332}
+.rra-card-desc{font-size:12.5px;color:#4a6055;line-height:1.5;margin:0}
+.rra-card-focus{font-size:11.5px;color:#B68D40;margin:0}
+.rra-agent-id{font-family:'DM Mono',monospace;font-size:10px;color:#4a6055;font-weight:700;background:rgba(31,59,44,.06);padding:2px 7px;border-radius:999px;display:inline-block;margin-right:4px}
+#rra-toast-v1{position:fixed;bottom:28px;right:28px;background:#1b4332;color:#ffe9a1;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none;font-family:'Outfit',system-ui,sans-serif}
+#rra-toast-v1.rra-toast-on{opacity:1}
+@media(max-width:900px){.rra-grid-3{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.rra-grid-3{grid-template-columns:1fr}.rra-hero{flex-direction:column}.rra-rules-grid{grid-template-columns:1fr}}
+</style>
+<script id="rra-v1-script">
+(function(){'use strict';
+  if(document.getElementById('rra-v1-init'))return;
+
+  var VIEW_ID='res-agents';
+
+  var PROMPTS={
+R1:`You are the Rental Comp Collector Agent for PropIntel — Scottish Residential BTL Intelligence Terminal.
+
+Your job is to collect live asking rent evidence for a single target town across three property types.
+
+TARGET TOWN: [INSERT TOWN]
+TARGET TYPES: 1 Bed Flat | 2 Bed Flat | 2 Bed House
+EVIDENCE TYPE: Rent (advertised asking rent only)
+
+Sources to check in this order:
+1. Rightmove (rightmove.co.uk/property-to-rent)
+2. Zoopla (zoopla.co.uk/to-rent)
+3. OnTheMarket (onthemarket.com)
+4. PrimeLocation (primelocation.com/to-rent)
+5. SpareRoom (spareroom.co.uk) — 1BF only, whole-property listings only
+6. Local agent sites if visible in search results
+
+Rules:
+- Residential only. No HMO, serviced apartments, holiday lets
+- Must have a visible asking price — no POA, no "price on application"
+- Must be clearly 1 bed flat, 2 bed flat, or 2 bed house — no studio, no bedsit, no ambiguous listings
+- Let agreed listings = include but mark valueType as "Let Agreed Rent" and qaStatus as "Watchlist"
+- Active listings = mark valueType as "Advertised Rent" and qaStatus as "Benchmark/Included"
+- Target minimum: 3 comps per property type (9 total). Collect up to 5 per type if available
+- If fewer than 3 exist for a type, collect all available and note gap in notes field
+- Never invent figures. Never estimate. If not found, write "Not found — insufficient listings"
+
+Output one row per record in this exact schema:
+town | propertyType | evidenceType | address | priceRent | valueType | source | sourceUrl | dateChecked | notes | qaStatus
+
+Notes field must include:
+- Listing status (current / let agreed / recently listed)
+- Property sub-type where visible (upper flat, ground floor, end terrace etc)
+- Any quality flags (e.g. furnished premium suspected, inclusive bills, short-term let risk)
+
+qaStatus options: "Benchmark/Included" | "Watchlist" | "Exclude — reason"
+
+Return a clean table. Flag any outliers (>20% above or below the other comps for that type) with notes: "Outlier — verify before benchmarking"`,
+R2:`You are the Rental QA & Grader Agent for PropIntel — Scottish Residential BTL Intelligence Terminal.
+
+You receive raw rental comp output from the Rental Comp Collector (Agent R1) and apply strict quality grading before any record touches the benchmark engine.
+
+INPUT: Paste Agent R1 output table below this prompt.
+
+Your job:
+1. Grade every record A, B, or C
+2. Calculate the rent anchor for each property type
+3. Flag any records for exclusion
+4. Output a clean graded table + anchor summary
+
+GRADING RULES:
+
+Grade A — Benchmark quality:
+- Active listing with clear asking rent
+- Full address or street name visible
+- Property type confirmed (1BF / 2BF / 2BH)
+- Source is Rightmove, Zoopla, OnTheMarket or verified agent site
+- No quality flags
+
+Grade B — Usable with caution:
+- Let agreed (demand signal but rent may be slightly stale)
+- Partial address only (street name but no number)
+- Source is SpareRoom or less-verified portal
+- Minor quality flag noted (e.g. furnished premium possible)
+
+Grade C — Research lead only, never benchmark:
+- Bills inclusive suspected
+- Short-term let / holiday let risk
+- Ambiguous property type
+- POA or price withheld
+- Outlier >25% from median without explanation
+
+ANCHOR CALCULATION:
+- Use Grade A + Grade B records only
+- Where 3+ records exist: use median
+- Where 1–2 records exist: use average, flag as "Limited evidence — anchor indicative only"
+- Where 0 records: flag as "Awaiting evidence"
+- Round to nearest £5 pcm
+
+OUTPUT FORMAT:
+Section 1 — Graded evidence table:
+town | propertyType | address | priceRent | grade | qaStatus | gradeReason
+
+Section 2 — Rent anchor summary:
+town | propertyType | rentAnchor | evidenceCount | anchorBasis | confidenceFlag
+
+Section 3 — Exclusions log:
+Any Grade C records with reason for exclusion
+
+Never promote a Grade C record to the benchmark. Never average across property types. Keep 1BF / 2BF / 2BH anchors strictly separate.`,
+R3:`You are the Rental Watchlist Monitor Agent for PropIntel — Scottish Residential BTL Intelligence Terminal.
+
+Your job is to track listing lifecycle signals for any town where rental comps have been collected.
+
+TARGET TOWN: [INSERT TOWN]
+INPUT: Paste the current watchlist records for this town from evidence.json (all records where qaStatus = "Watchlist")
+
+For each watchlist record:
+1. Search the sourceUrl or re-search the portal for the address
+2. Determine current listing status
+
+Status options:
+- Still live — no change
+- Price reduced — note new price and reduction amount
+- Let agreed — confirm and note date
+- Removed — note removal date (strong demand signal)
+- Re-listed — note new price vs original
+
+Output one row per record:
+town | propertyType | address | originalRent | currentStatus | currentPrice | priceMovement | demandSignal | dateChecked | action
+
+demandSignal options:
+- Strong (removed within 14 days)
+- Moderate (removed within 30 days)
+- Weak (still live >60 days)
+- Unknown
+
+action options:
+- No action required
+- Update priceRent to [new figure]
+- Promote to Benchmark/Included — let agreed confirmed
+- Remove from watchlist — listing gone >90 days
+
+Output Section 2 — Market Activity Summary:
+- Average days to let for this town based on watchlist data
+- Demand signal rating: Hot / Active / Balanced / Slow
+- Rent trend vs existing anchors: Rising / Stable / Softening
+
+This feeds the Market Activity tab directly. Never invent status. If listing cannot be found, write "Cannot verify — manual check required"`,
+S1:`You are the Sold Price Collector Agent for PropIntel — Scottish Residential BTL Intelligence Terminal.
+
+Your job is to collect verified sold price evidence for a single target town across three property types.
+
+TARGET TOWN: [INSERT TOWN]
+TARGET TYPES: 1 Bed Flat | 2 Bed Flat | 2 Bed House
+EVIDENCE TYPE: Sold
+DATE RANGE: Last 24 months only (from today's date)
+
+Sources to check in this order:
+1. Rightmove Sold Prices (rightmove.co.uk/house-prices)
+2. Zoopla House Prices (zoopla.co.uk/house-prices)
+3. ESPC Sold Prices (espc.com) — Scottish towns, especially Edinburgh / Lothians
+4. ScotLIS / Registers of Scotland where accessible (ros.gov.uk)
+5. Local agent "recently sold" pages if visible
+
+Rules:
+- Scottish residential only. No commercial, no land, no mixed-use
+- Must have confirmed sold price — not asking price, not guide price, not offers over
+- Must be within last 24 months — note exact sold date where visible
+- Must be clearly 1 bed flat, 2 bed flat, or 2 bed house
+- Exclude obvious distressed sales (below £15,000 for any type — flag separately for review)
+- Exclude bulk portfolio / developer sales where identifiable
+- Exclude properties with clear structural/condition issues noted in listing
+- Target minimum: 5 sold comps per type. Collect up to 8 if available
+- If fewer than 3 exist, collect all available and flag gap
+
+Output one row per record in this exact schema:
+town | propertyType | evidenceType | address | priceRent | valueType | source | sourceUrl | dateChecked | notes | qaStatus
+
+valueType options:
+- "Sold Price" — confirmed transaction
+- "Offers Over Achieved" — where portal confirms final sale above asking
+- "Under Offer" — include as research lead only, mark qaStatus as "Watchlist"
+
+notes field must include:
+- Sold date (month/year minimum)
+- Property sub-type where visible (upper flat, ground floor, mid-terrace etc)
+- Any flags (below threshold, possible distressed, new build premium)
+
+qaStatus options: "Benchmark/Included" | "Watchlist" | "Exclude — reason"
+
+Flag any sold price >40% above or below the median for that type as: "Outlier — verify title and condition before benchmarking"`,
+S2:`You are the Sold Price QA & Grader Agent for PropIntel — Scottish Residential BTL Intelligence Terminal.
+
+You receive raw sold price output from the Sold Price Collector (Agent S1) and apply strict quality grading before any record touches the price anchor engine.
+
+INPUT: Paste Agent S1 output table below this prompt.
+
+Your job:
+1. Grade every record A, B, or C
+2. Calculate the price anchor for each property type
+3. Flag distressed sales, outliers, and data quality issues
+4. Output a clean graded table + anchor summary
+
+GRADING RULES:
+
+Grade A — Benchmark quality:
+- Confirmed sold price from Rightmove, Zoopla, ESPC or RoS
+- Sold within last 18 months
+- Full or near-full address visible
+- Property type confirmed
+- No condition or title flags
+
+Grade B — Usable with caution:
+- Sold 18–24 months ago (slightly dated but usable)
+- Partial address only
+- Source is agent "recently sold" page rather than official register
+- Minor flag (e.g. possible light refurb premium)
+
+Grade C — Research lead only, never benchmark:
+- Possible distressed sale (below £15,000 any type, or >40% below median)
+- New build — premium may not reflect resale market
+- Bulk / portfolio transaction
+- Sold >24 months ago
+- Unclear property type
+- Confirmed structural / condition issue noted
+
+ANCHOR CALCULATION:
+- Use Grade A + Grade B records only
+- Where 3+ records: use median
+- Where 1–2 records: use average, flag as "Limited evidence — anchor indicative only"
+- Where 0 records: flag as "Awaiting evidence"
+- Round to nearest £500
+
+DISTRESSED SALE PROTOCOL:
+Any sub-£20,000 sold price must be flagged as: "Low value — title and condition check required before excluding or including"
+Do not auto-exclude — flag for human review.
+
+OUTPUT FORMAT:
+Section 1 — Graded evidence table:
+town | propertyType | address | priceRent | soldDate | grade | qaStatus | gradeReason
+
+Section 2 — Price anchor summary:
+town | propertyType | priceAnchor | evidenceCount | anchorBasis | confidenceFlag | impliedYield (if rent anchor available)
+
+Section 3 — Distressed / outlier log:
+Records flagged for human review with reason
+
+Never auto-exclude distressed sales — always flag for human decision. Keep 1BF / 2BF / 2BH anchors strictly separate. Never average across property types.`,
+S3:`You are the Price Trend Spotter Agent for PropIntel — Scottish Residential BTL Intelligence Terminal.
+
+Your job is to compare newly collected sold price evidence against existing price anchors in evidence.json and flag any towns where the market has materially moved.
+
+INPUT:
+- New sold price data from Agent S2 (graded, with anchor summary)
+- Existing price anchors for the same town from evidence.json
+
+For each property type where both old and new anchor exist:
+
+1. Calculate price movement:
+   movement % = (new anchor - old anchor) / old anchor × 100
+
+2. Classify movement:
+   - Rising: new anchor >5% above old
+   - Stable: within ±5%
+   - Softening: new anchor >5% below old
+   - Significant shift: >15% in either direction — flag for immediate human review
+
+3. Calculate implied yield impact:
+   Using existing rent anchor: new implied yield = (rent anchor × 12) / new price anchor × 100
+   Compare to current platform yield — flag if yield changes by >1 percentage point
+
+OUTPUT FORMAT:
+Section 1 — Town price movement report:
+town | propertyType | oldAnchor | newAnchor | movement% | trend | yieldImpact | action
+
+Section 2 — Priority re-anchor list:
+Towns where movement >10% — recommend full re-anchor run with fresh S1 batch
+
+Section 3 — Yield drift alerts:
+Any town/type where implied yield has dropped below 7% or risen above 14% — flag as anomaly requiring human review
+
+action options:
+- No action — anchor confirmed stable
+- Soft update recommended — minor drift, refresh at next scheduled run
+- Immediate re-anchor required — significant movement detected
+- Human review required — outlier or data conflict
+
+Never auto-update anchors in evidence.json. This agent recommends only. All anchor updates require human confirmation.`,
+M1:`You are the Research Supervisor Agent for PropIntel — Scottish Residential BTL Intelligence Terminal.
+
+You orchestrate evidence collection campaigns across all 63 towns for both rental and sold price streams.
+
+YOUR TOWN LIST (63 towns):
+[INSERT YOUR FULL 63-TOWN LIST HERE]
+
+YOUR JOB:
+1. Assess current evidence health per town per type
+2. Prioritise which towns need urgent collection runs
+3. Assign and brief the correct agents
+4. Track batch progress
+5. Produce weekly evidence health report
+
+EVIDENCE HEALTH SCORING (per town):
+Score each town 0–100 based on:
+- Rental comps: 1BF / 2BF / 2BH (max 15 points each = 45 points)
+  - 5+ Grade A comps = 15 pts | 3–4 = 10 pts | 1–2 = 5 pts | 0 = 0 pts
+- Sold comps: 1BF / 2BF / 2BH (max 15 points each = 45 points)
+  - Same scoring as above
+- Data freshness (max 10 points)
+  - All checked within 30 days = 10 pts | 31–60 days = 7 pts | 61–90 days = 4 pts | >90 days = 0 pts
+
+PRIORITY TIERS:
+- Tier 1 (score 0–40): Urgent — assign full R1+R2+S1+S2 batch immediately
+- Tier 2 (score 41–65): Active gap — assign missing stream only (rent or sold)
+- Tier 3 (score 66–80): Maintenance — schedule refresh within 30 days
+- Tier 4 (score 81–100): Healthy — monitor only, trigger S3 trend check
+
+BATCH ASSIGNMENT RULES:
+- Never run more than 5 towns in a single batch (quality degrades)
+- Always run R1 before R2 for the same town
+- Always run S1 before S2 for the same town
+- S3 runs after S2 only when existing anchors are present to compare against
+- R3 runs weekly across all towns with watchlist records regardless of tier
+
+WEEKLY REPORT FORMAT:
+Section 1 — Evidence health scoreboard (all 63 towns, ranked by score)
+Section 2 — This week's priority batch (top 5 Tier 1 towns + assigned agents)
+Section 3 — Gap summary (how many towns lack each comp type)
+Section 4 — Anchor freshness alert (any anchor >60 days old)
+Section 5 — Yield drift summary (from S3 — towns where yield has moved)
+
+You coordinate only. You do not collect evidence yourself.
+All final anchor updates require human confirmation.
+All qaStatus promotions to "Benchmark/Included" require human sign-off.`
+  };
+
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
+  function toast(msg){
+    var t=document.getElementById('rra-toast-v1');
+    if(!t){t=document.createElement('div');t.id='rra-toast-v1';document.body.appendChild(t);}
+    t.textContent=msg;t.classList.add('rra-toast-on');
+    clearTimeout(t.__rraT);t.__rraT=setTimeout(function(){t.classList.remove('rra-toast-on');},2400);
+  }
+
+  function copyText(s){
+    if(navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard.writeText(s);
+    var ta=document.createElement('textarea');ta.value=s;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();return Promise.resolve();
+  }
+
+  window.rraCopyPrompt=function(id){
+    var p=PROMPTS[id];if(!p){toast('Prompt not found.');return;}
+    copyText(p).then(function(){toast('Agent '+id+' prompt copied');});
+  };
+
+  window.rraCopyAll=function(){
+    var all=Object.keys(PROMPTS).map(function(k){return '=== Agent '+k+' ===\n\n'+PROMPTS[k];}).join('\n\n\n');
+    copyText(all).then(function(){toast('All 7 agent prompts copied to clipboard');});
+  };
+
+  function card(id,ico,title,desc,focus){
+    return '<div class="rra-card">'+
+      '<div class="rra-card-top">'+
+        '<div class="rra-card-title-row"><span class="rra-card-ico">'+ico+'</span><h3 class="rra-card-title">'+esc(title)+'</h3></div>'+
+        '<button class="rra-prompt-btn" onclick="window.rraCopyPrompt(\''+id+'\')">&#128203; Prompt</button>'+
+      '</div>'+
+      '<span class="rra-ready">FRAMEWORK READY</span>'+
+      '<p class="rra-card-desc">'+desc+'</p>'+
+      '<p class="rra-card-focus"><span class="rra-agent-id">'+id+'</span>'+focus+'</p>'+
+    '</div>';
+  }
+
+  function stream(label,cards,single){
+    return '<div class="rra-stream">'+
+      '<div class="rra-stream-hd"><span class="rra-stream-lbl">'+esc(label)+'</span><div class="rra-stream-hr"></div></div>'+
+      '<div class="'+(single?'rra-grid-1':'rra-grid-3')+'">'+cards.join('')+'</div>'+
+    '</div>';
+  }
+
+  function panelHtml(){
+    return '<div class="rra-shell">'+
+      '<div class="rra-hero">'+
+        '<div class="rra-hero-left">'+
+          '<div class="rra-hero-top"><h1 class="rra-h1">Residential Research Agents</h1><span class="rra-fw-pill">FRAMEWORK v9.0</span></div>'+
+          '<p class="rra-sub">Controlled residential evidence collection operating system &bull; No data invented &bull; Manual gates enforced</p>'+
+        '</div>'+
+        '<button class="rra-copy-all" onclick="window.rraCopyAll()">&#128203; Copy All Agent Prompts</button>'+
+      '</div>'+
+      '<div class="rra-master">'+
+        '<div class="rra-master-head"><div class="rra-master-icon">&#127891;</div><h2 class="rra-master-title">Master Research Skill — Permanent Rules</h2></div>'+
+        '<div class="rra-rules-grid">'+
+          '<div class="rra-rule"><span class="rra-rule-check">&#10003;</span>Only official/source-linked public evidence</div>'+
+          '<div class="rra-rule"><span class="rra-rule-check">&#10003;</span>Accepted evidence ONLY feeds anchors &amp; underwriting</div>'+
+          '<div class="rra-rule"><span class="rra-rule-check">&#10003;</span>Never invent, estimate, or fabricate missing values</div>'+
+          '<div class="rra-rule"><span class="rra-rule-check">&#10003;</span>Pending = research leads only. Never in medians</div>'+
+          '<div class="rra-rule"><span class="rra-rule-check">&#10003;</span>Every record must include source + date checked</div>'+
+          '<div class="rra-rule"><span class="rra-rule-check">&#10003;</span>No HMO / serviced / holiday lets in benchmarks</div>'+
+          '<div class="rra-rule"><span class="rra-rule-check">&#10003;</span>Separate accepted-ready from pending clearly</div>'+
+          '<div class="rra-rule"><span class="rra-rule-check">&#10003;</span>POA / missing price rows excluded from all anchors</div>'+
+        '</div>'+
+        '<div class="rra-master-note">Final promotion to Benchmark/Included is always manual. Agents recommend only.</div>'+
+      '</div>'+
+      stream('RENTAL STREAM',[
+        card('R1','&#128269;','Rental Comp Collector','Hits Rightmove, Zoopla, OnTheMarket, SpareRoom and PrimeLocation for each target town. Collects asking rents for 1BF, 2BF and 2BH. Target 3–5 comps per type. Let-agreed marked Watchlist.','Key output: town · priceRent · valueType · source · sourceUrl · dateChecked · qaStatus'),
+        card('R2','&#128202;','Rental QA &amp; Grader','Reviews R1 output. Grades each record A/B/C. Flags let-agreed (watchlist), POA and outliers. Calculates rent anchor using median of Grade A+B records only. Rounds to nearest £5 pcm.','Output: graded table · rent anchor summary · exclusions log'),
+        card('R3','&#128337;','Rental Watchlist Monitor','Tracks let-agreed and recently removed listings. Flags lifecycle changes as demand signals. Produces Market Activity summary: avg days to let, Hot/Active/Balanced/Slow rating, rent trend vs anchors.','Output: lifecycle status · demand signal rating · rent trend vs anchors'),
+      ],false)+
+      stream('SOLD STREAM',[
+        card('S1','&#127968;','Sold Price Collector','Hits Rightmove Sold Prices, Zoopla, ESPC and Registers of Scotland. Last 24 months only. Target 5–8 confirmed transactions per type. Distressed sales flagged separately for human review.','Key output: town · priceRent · soldDate · valueType · source · qaStatus'),
+        card('S2','&#9998;','Sold Price QA &amp; Grader','Reviews S1 output. Grades A/B/C. Flags sub-£20k sales for human review (never auto-excluded), bulk portfolio and non-arms-length. Price anchor rounds to nearest £500.','Output: graded table · price anchor summary · distressed/outlier log'),
+        card('S3','&#128200;','Price Trend Spotter','Compares new sold data against existing evidence.json anchors. Flags &gt;10% price drift. Calculates implied yield impact. Triggers re-anchor recommendation. Never auto-updates anchors.','Output: price movement report · priority re-anchor list · yield drift alerts'),
+      ],false)+
+      stream('MASTER COORDINATOR',[
+        card('M1','&#127775;','Research Supervisor','Orchestrates campaigns across all 63 towns. Scores each 0–100 on evidence health. Prioritises by tier. Max 5 towns per batch. Weekly gap report, anchor freshness alerts and yield drift summary.','Output: health scoreboard · priority batch · gap summary · freshness alerts · yield drift summary'),
+      ],true)+
+    '</div>';
+  }
+
+  function buildPanel(){
+    if(document.getElementById('view-res-agents'))return;
+    var panel=document.createElement('div');
+    panel.id='view-res-agents';
+    panel.style.display='none';
+    panel.innerHTML=panelHtml();
+    var ca=document.getElementById('content-area');
+    if(ca)ca.appendChild(panel);else document.body.appendChild(panel);
+  }
+
+  function installNav(){
+    if(document.querySelector('[data-nav-key="res-agents"]'))return;
+    var group=document.querySelector('[data-v59-group="comparator-evidence"] .v59-group-body')||document.querySelector('.v59-sidebar-os');
+    if(!group)return;
+    var item=document.createElement('div');
+    item.className='sidebar-item';
+    item.setAttribute('data-nav-key','res-agents');
+    item.setAttribute('data-default-view','res-agents');
+    item.setAttribute('onclick',"v59OpenView('res-agents','res-agents')");
+    item.innerHTML='<span class="si-icon">&#8962;</span>Residential Agents';
+    var ref=group.querySelector('[data-nav-key="agent-helper"]')||group.querySelector('[data-nav-key="research-control"]');
+    if(ref&&ref.parentNode)ref.parentNode.insertBefore(item,ref.nextSibling);
+    else group.appendChild(item);
+  }
+
+  function overrideSwitch(){
+    if(window.__rraSwitchWrapped)return;
+    window.__rraSwitchWrapped=true;
+    var orig=window.switchView;
+    window.switchView=function(view){
+      var panel=document.getElementById('view-res-agents');
+      if(view===VIEW_ID){
+        document.querySelectorAll('#content-area [id^="view-"]').forEach(function(el){el.style.display='none';});
+        buildPanel();
+        var p=document.getElementById('view-res-agents');
+        if(p)p.style.display='block';
+        document.querySelectorAll('.sidebar-item').forEach(function(el){el.classList.remove('active');});
+        var nav=document.querySelector('[data-nav-key="res-agents"]');
+        if(nav)nav.classList.add('active');
+        var g=nav&&nav.closest?nav.closest('.v59-nav-group'):null;
+        if(g){g.classList.add('v59-open');var hd=g.querySelector('.v59-group-head');if(hd)hd.setAttribute('aria-expanded','true');}
+        try{if(typeof window.closeDrawer==='function')window.closeDrawer();}catch(e){}
+        var logo=document.querySelector('.logo-sub');
+        if(logo)logo.textContent='Residential Agents · Rental & Sold Streams · 7 Agent Framework';
+        return;
+      }
+      if(panel)panel.style.display='none';
+      if(typeof orig==='function')return orig.apply(this,arguments);
+    };
+  }
+
+  function tryInstallRRA(){
+    if(document.getElementById('rra-v1-init'))return;
+    buildPanel();
+    installNav();
+    overrideSwitch();
+    var m=document.createElement('span');
+    m.id='rra-v1-init';
+    m.style.display='none';
+    document.body.appendChild(m);
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(tryInstallRRA,700);});
+  else setTimeout(tryInstallRRA,700);
+})();
+</script>
 </body>
 </html>
