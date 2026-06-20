@@ -34893,5 +34893,77 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
   });
 })();
 </script>
+<script id="r1-blantyre-jun26-script">
+(function(){
+  'use strict';
+  if(window.__R1_BLANTYRE_JUN26__)return;
+  window.__R1_BLANTYRE_JUN26__=true;
+  var D='Jun-26 (R1 live collection)';
+  var COMPS={
+    '1bf':[],
+    '2bf':[
+      {addr:'Blantyre G72 (OpenRent)',pc:'G72',rent:'£725 pcm',status:'Active — Benchmark',agent:'OpenRent',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Blantyre, Glasgow G72 (OpenRent)',pc:'G72',rent:'£780 pcm',status:'Active — Benchmark',agent:'OpenRent',period:D,src:'Rightmove',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Kirkton Avenue, Blantyre',pc:'G72',rent:'£925 pcm',status:'Active — Watchlist (outlier)',agent:'Countrywide Scotland',period:D,src:'Rightmove',sig:'verdict-watch',sigLabel:'WATCHLIST'}
+    ],
+    '2bh':[
+      {addr:'Village Gardens, Blantyre',pc:'G72',rent:'£895 pcm',status:'Let Agreed — Watchlist',agent:'Lets Let',period:D,src:'Rightmove',sig:'verdict-watch',sigLabel:'WATCHLIST'}
+    ]
+  };
+  var NOTES={
+    '1bf':{warn:false,text:'R1 Jun-26: No new active 1BF listings found. Main Street G72 0XG £595 (Clyde Property) confirmed Let Agreed via Rightmove — existing workbook comps stand.'},
+    '2bf':{warn:false,text:'R1 Jun-26: 4 active comps. Median £765 pcm. Range £725–£780 active core; Kirkton Ave £925 flagged Watchlist (20.9% above median). Ballantrae Road £750 confirms existing entry.'},
+    '2bh':{warn:true,text:'R1 Jun-26: 1 let-agreed comp only — Village Gardens £895 pcm (Lets Let). No active 2BH listings found. Single Watchlist comp — M1 priority gap for active evidence.'}
+  };
+  function rk(r){return String((r.addr||'')+'|'+(r.rent||r.value||'')+'|'+(r.period||r.date||'')).toLowerCase().replace(/[^a-z0-9£]+/g,'');}
+  ['1bf','2bf','2bh'].forEach(function(t){
+    var node=((window.LIVE_DATA||{}).blantyre||{})[t];
+    if(!node)return;
+    if(!Array.isArray(node.rental))node.rental=[];
+    var ex=new Set(node.rental.map(rk));
+    (COMPS[t]||[]).forEach(function(r){var k=rk(r);if(!ex.has(k)){node.rental.push(r);ex.add(k);}});
+    if(!Array.isArray(node.notes))node.notes=[];
+    var hasNote=node.notes.some(function(n){return String(n&&n.text||'').indexOf('R1 Jun-26')>=0;});
+    if(!hasNote&&NOTES[t])node.notes.push(NOTES[t]);
+  });
+})();
+</script>
+<script id="r1-coatbridge-jun26-script">
+(function(){
+  'use strict';
+  if(window.__R1_COATBRIDGE_JUN26__)return;
+  window.__R1_COATBRIDGE_JUN26__=true;
+  var D='Jun-26 (R1 live collection)';
+  var COMPS={
+    '1bf':[
+      {addr:'37B Laird Street, Coatbridge',pc:'ML5 3LW',rent:'£725 pcm',status:'Active — Benchmark',agent:'Baillie & Baillie',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ],
+    '2bf':[
+      {addr:'Langloan Crescent, Coatbridge',pc:'ML5 1HW',rent:'£625 pcm',status:'Active — Watchlist (outlier)',agent:'ritehome',period:D,src:'Rightmove',sig:'verdict-watch',sigLabel:'WATCHLIST'},
+      {addr:'Laird Street, Coatbridge',pc:'ML5',rent:'£795 pcm',status:'Active — Benchmark',agent:'HC2M Properties',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Clyde Street, Coatbridge',pc:'ML5',rent:'£875 pcm',status:'Active — Benchmark',agent:'OpenRent',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ],
+    '2bh':[
+      {addr:'Bank Street, Coatbridge',pc:'ML5',rent:'£750 pcm',status:'Active — Benchmark',agent:'Aquila Management Services',period:D,src:'Rightmove',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ]
+  };
+  var NOTES={
+    '1bf':{warn:false,text:'R1 Jun-26: 4 active 1BF comps inc. existing workbook entries. Median £710 pcm. Range £650–£795. 37B Laird Street £725 confirmed active (Baillie & Baillie, OTM).'},
+    '2bf':{warn:false,text:'R1 Jun-26: 6 active comps. Median £795 pcm. Langloan Crescent £625 flagged Watchlist (21.4% below median). Albion St £825 and Clyde St £875 confirm top of range. Muiryhall St £725 confirms existing entry.'},
+    '2bh':{warn:false,text:'R1 Jun-26: 1 active 2BH comp — Bank Street £750 pcm (Aquila, Rightmove). Single-listing median — treat with caution pending more comps.'}
+  };
+  function rk(r){return String((r.addr||'')+'|'+(r.rent||r.value||'')+'|'+(r.period||r.date||'')).toLowerCase().replace(/[^a-z0-9£]+/g,'');}
+  ['1bf','2bf','2bh'].forEach(function(t){
+    var node=((window.LIVE_DATA||{}).coatbridge||{})[t];
+    if(!node)return;
+    if(!Array.isArray(node.rental))node.rental=[];
+    var ex=new Set(node.rental.map(rk));
+    (COMPS[t]||[]).forEach(function(r){var k=rk(r);if(!ex.has(k)){node.rental.push(r);ex.add(k);}});
+    if(!Array.isArray(node.notes))node.notes=[];
+    var hasNote=node.notes.some(function(n){return String(n&&n.text||'').indexOf('R1 Jun-26')>=0;});
+    if(!hasNote&&NOTES[t])node.notes.push(NOTES[t]);
+  });
+})();
+</script>
 </body>
 </html>
