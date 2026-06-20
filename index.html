@@ -34713,5 +34713,81 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
   });
 })();
 </script>
+<script id="r1-livingston-jun26-script">
+(function(){
+  'use strict';
+  if(window.__R1_LIVINGSTON_JUN26__)return;
+  window.__R1_LIVINGSTON_JUN26__=true;
+  var D='Jun-26 (R1 live collection)';
+  var COMPS={
+    '1bf':[],
+    '2bf':[
+      {addr:'Oldwood Place, Livingston EH54',pc:'EH54',rent:'£875 pcm',status:'Active — Benchmark',agent:'Castlebrae Sales & Letting',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Leven Walk, Livingston EH54',pc:'EH54',rent:'£950 pcm',status:'Active — Benchmark',agent:'Re/Max Property Livingston',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Waverley Crescent, Livingston EH54',pc:'EH54',rent:'£975 pcm',status:'Active — Benchmark',agent:'Castlebrae Sales & Letting',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Queens Crescent, Livingston EH54',pc:'EH54',rent:'£1,050 pcm',status:'Active — Benchmark',agent:'OpenRent',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Eagles View, Livingston EH54',pc:'EH54',rent:'£1,050 pcm',status:'Active — Benchmark',agent:'Castlebrae Sales & Letting',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ],
+    '2bh':[]
+  };
+  var NOTES={
+    '1bf':{warn:true,text:'R1 Jun-26: Zero active 1BF flat listings in Livingston on any portal (Zoopla, OnTheMarket). Only student terraced houses found — not BTL-relevant 1BF stock. M1 priority gap.'},
+    '2bf':{warn:false,text:'R1 Jun-26: 6 active 2BF listings. Median £975 pcm (range £875–£1,050). Strong cluster at £1,050 (Queens Crescent, Eagles View, Waverley Crescent). Workbook Oldwood Place £875 and Leven Walk £950 portal-confirmed active.'},
+    '2bh':{warn:true,text:'R1 Jun-26: Zero active 2BH listings found in Livingston on Zoopla or OnTheMarket. Very thin house rental market — Livingston skews strongly toward flat stock. Workbook Inglewood St £1,000 not found active. M1 priority gap.'}
+  };
+  function rk(r){return String((r.addr||'')+'|'+(r.rent||r.value||'')+'|'+(r.period||r.date||'')).toLowerCase().replace(/[^a-z0-9£]+/g,'');}
+  ['1bf','2bf','2bh'].forEach(function(t){
+    var node=((window.LIVE_DATA||{}).livingston||{})[t];
+    if(!node)return;
+    if(!Array.isArray(node.rental))node.rental=[];
+    var ex=new Set(node.rental.map(rk));
+    (COMPS[t]||[]).forEach(function(r){var k=rk(r);if(!ex.has(k)){node.rental.push(r);ex.add(k);}});
+    if(!Array.isArray(node.notes))node.notes=[];
+    var hasNote=node.notes.some(function(n){return String(n&&n.text||'').indexOf('R1 Jun-26')>=0;});
+    if(!hasNote&&NOTES[t])node.notes.push(NOTES[t]);
+  });
+})();
+</script>
+<script id="r1-greenock-jun26-script">
+(function(){
+  'use strict';
+  if(window.__R1_GREENOCK_JUN26__)return;
+  window.__R1_GREENOCK_JUN26__=true;
+  var D='Jun-26 (R1 live collection)';
+  var COMPS={
+    '1bf':[
+      {addr:'Mount Pleasant Street, Greenock PA15',pc:'PA15',rent:'£450 pcm',status:'Active — Benchmark',agent:'CS Properties',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'West Blackhall Street, Greenock PA15',pc:'PA15',rent:'£450 pcm',status:'Active — Benchmark',agent:'Corbett & Shields',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Wellington Street, Greenock PA15',pc:'PA15',rent:'£495 pcm',status:'Active — Benchmark',agent:'Neill Clerk',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Dempster Street, Greenock PA15',pc:'PA15',rent:'£495 pcm',status:'Active — Benchmark',agent:'Neill Clerk',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Sir Michael Street, Greenock PA15',pc:'PA15',rent:'£550 pcm',status:'Active — Watchlist',agent:'McArthur Scott',period:D,src:'OnTheMarket',sig:'verdict-watch',sigLabel:'OUTLIER WATCH',note:'22% above median £450 — outlier flag'}
+    ],
+    '2bf':[
+      {addr:'Brachelston Street, Greenock PA16',pc:'PA16',rent:'£450 pcm',status:'Active — Watchlist',agent:'McArthur Scott',period:D,src:'OnTheMarket',sig:'verdict-watch',sigLabel:'OUTLIER WATCH',note:'25% below 2BF median £600 — low outlier flag'},
+      {addr:'St Lawrence Street, Greenock PA15',pc:'PA15',rent:'£550 pcm',status:'Active — Benchmark',agent:'CS Properties',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Hope Street, Greenock PA15',pc:'PA15',rent:'£575 pcm',status:'Active — Benchmark',agent:'CS Properties',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Sir Michael Street, Greenock PA15',pc:'PA15',rent:'£595 pcm',status:'Active — Benchmark',agent:'CS Properties',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Lemmon Street, Greenock PA16',pc:'PA16',rent:'£600 pcm',status:'Active — Benchmark',agent:'Neill Clerk',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ],
+    '2bh':[]
+  };
+  var NOTES={
+    '1bf':{warn:false,text:'R1 Jun-26: 5 active 1BF listings. Median £450 pcm (range £450–£550). Strong £450 floor — 3 listings at that price. Sir Michael Street £550 flagged outlier (22% above median). Workbook anchors £450–£495 portal-confirmed.'},
+    '2bf':{warn:false,text:'R1 Jun-26: 8 active 2BF listings in Greenock proper (excl. Gourock). Median £600 pcm (range £450–£750). Brachelston Street £450 low outlier (25% below). Rankin Court £750 high outlier (25% above) — excluded from benchmarks. St Lawrence Street £550 workbook import portal-confirmed.'},
+    '2bh':{warn:true,text:'R1 Jun-26: Zero active 2BH listings found in Greenock proper. Kirn Drive Gourock PA19 £900 (McArthur Scott) excluded — different postcode area. No BTL 2BH rental market visible in Greenock town. M1 priority gap.'}
+  };
+  function rk(r){return String((r.addr||'')+'|'+(r.rent||r.value||'')+'|'+(r.period||r.date||'')).toLowerCase().replace(/[^a-z0-9£]+/g,'');}
+  ['1bf','2bf','2bh'].forEach(function(t){
+    var node=((window.LIVE_DATA||{}).greenock||{})[t];
+    if(!node)return;
+    if(!Array.isArray(node.rental))node.rental=[];
+    var ex=new Set(node.rental.map(rk));
+    (COMPS[t]||[]).forEach(function(r){var k=rk(r);if(!ex.has(k)){node.rental.push(r);ex.add(k);}});
+    if(!Array.isArray(node.notes))node.notes=[];
+    var hasNote=node.notes.some(function(n){return String(n&&n.text||'').indexOf('R1 Jun-26')>=0;});
+    if(!hasNote&&NOTES[t])node.notes.push(NOTES[t]);
+  });
+})();
+</script>
 </body>
 </html>
