@@ -34965,5 +34965,69 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
   });
 })();
 </script>
+<script id="r1-bellshill-jun26-script">
+(function(){
+  'use strict';
+  if(window.__R1_BELLSHILL_JUN26__)return;
+  window.__R1_BELLSHILL_JUN26__=true;
+  var D='Jun-26 (R1 live collection)';
+  var COMPS={
+    '1bf':[
+      {addr:'Rosegreen Crescent, Bellshill',pc:'ML4',rent:'£650 pcm',status:'Active — Benchmark (reduced)',agent:'OpenRent',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ],
+    '2bf':[
+      {addr:'Burte Court, Bellshill',pc:'ML4',rent:'£775 pcm',status:'Active — Benchmark',agent:'Igloo Lettings',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ],
+    '2bh':[]
+  };
+  var NOTES={
+    '1bf':{warn:false,text:'R1 Jun-26: 2 active 1BF comps confirmed. Kirklee Rd Mossend £525 (Independent Mortgage, OTM) and Rosegreen Crescent £650 (OpenRent, reduced). Median £588 pcm. Note: Rosegreen Crescent workbook had £695 — price has dropped.'},
+    '2bf':{warn:true,text:'R1 Jun-26: Thin market — 1 confirmed active listing (Burte Court £775, Igloo). McCourt Gardens £850 (workbook, unconfirmed this run). Median estimate £812 pcm if both active. Do not rely on median until more direct comps confirmed.'},
+    '2bh':{warn:true,text:'R1 Jun-26: Zero active 2BH listings found on OTM (Rightmove blocked). M1 priority gap — no active rental comps available.'}
+  };
+  function rk(r){return String((r.addr||'')+'|'+(r.rent||r.value||'')+'|'+(r.period||r.date||'')).toLowerCase().replace(/[^a-z0-9£]+/g,'');}
+  ['1bf','2bf','2bh'].forEach(function(t){
+    var node=((window.LIVE_DATA||{}).bellshill||{})[t];
+    if(!node)return;
+    if(!Array.isArray(node.rental))node.rental=[];
+    var ex=new Set(node.rental.map(rk));
+    (COMPS[t]||[]).forEach(function(r){var k=rk(r);if(!ex.has(k)){node.rental.push(r);ex.add(k);}});
+    if(!Array.isArray(node.notes))node.notes=[];
+    var hasNote=node.notes.some(function(n){return String(n&&n.text||'').indexOf('R1 Jun-26')>=0;});
+    if(!hasNote&&NOTES[t])node.notes.push(NOTES[t]);
+  });
+})();
+</script>
+<script id="r1-larkhall-jun26-script">
+(function(){
+  'use strict';
+  if(window.__R1_LARKHALL_JUN26__)return;
+  window.__R1_LARKHALL_JUN26__=true;
+  var D='Jun-26 (R1 live collection)';
+  var COMPS={
+    '1bf':[],
+    '2bf':[],
+    '2bh':[
+      {addr:'Nevison Street, Larkhall',pc:'ML9',rent:'£710 pcm',status:'Active — Benchmark (reduced)',agent:'Affitto Estate Agents',period:D,src:'Rightmove',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ]
+  };
+  var NOTES={
+    '1bf':{warn:false,text:'R1 Jun-26: Broomhill Court £650 (Lets Let, Rightmove 8 Jun) confirmed active — existing workbook comps stand. Rosslyn Road, Ashgill ML9 £525 found (1-bed terraced bungalow, adjacent Ashgill village) — excluded from standard comps as house type / non-Larkhall-core.'},
+    '2bf':{warn:false,text:'R1 Jun-26: Union Street £595 (Let Link) and McMillan Street £650 (Munro Property) both confirmed active on OTM. Median £622 pcm. Existing workbook comps validated.'},
+    '2bh':{warn:false,text:'R1 Jun-26: Nevison Street £710 (Affitto, semi-detached, reduced 17 Jun) — only active 2BH comp. Prior Brown Street £880 was let. Single-listing median — treat with caution.'}
+  };
+  function rk(r){return String((r.addr||'')+'|'+(r.rent||r.value||'')+'|'+(r.period||r.date||'')).toLowerCase().replace(/[^a-z0-9£]+/g,'');}
+  ['1bf','2bf','2bh'].forEach(function(t){
+    var node=((window.LIVE_DATA||{}).larkhall||{})[t];
+    if(!node)return;
+    if(!Array.isArray(node.rental))node.rental=[];
+    var ex=new Set(node.rental.map(rk));
+    (COMPS[t]||[]).forEach(function(r){var k=rk(r);if(!ex.has(k)){node.rental.push(r);ex.add(k);}});
+    if(!Array.isArray(node.notes))node.notes=[];
+    var hasNote=node.notes.some(function(n){return String(n&&n.text||'').indexOf('R1 Jun-26')>=0;});
+    if(!hasNote&&NOTES[t])node.notes.push(NOTES[t]);
+  });
+})();
+</script>
 </body>
 </html>
