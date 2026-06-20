@@ -34435,6 +34435,59 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
 })();
 </script>
 
+<!-- R1 Rental Comps — Largs KA30 · Jun-26 · additive merge into LIVE_DATA · no overwrite -->
+<script id="r1-largs-jun26-script">
+(function(){
+  'use strict';
+  if(window.__R1_LARGS_JUN26__)return;
+  window.__R1_LARGS_JUN26__=true;
+
+  var D='Jun-26 (R1 live collection)';
+
+  var COMPS={
+    '1bf':[
+      {addr:'Kelburn Court, Largs (£550)',pc:'KA30',rent:'£550',status:'ACTIVE — available early Jul 2026',agent:'Rightmove / Slater Hogg & Howison Greenock',period:D,src:'Rightmove',sig:'verdict-buy',sigLabel:'ACTIVE — BENCHMARK',note:'R1 Jun-26. 1-bed top floor flat, part furnished. Slater Hogg & Howison. Available early July 2026.',source_version:'R1-jun26'},
+      {addr:'Union Street, Largs',pc:'KA30',rent:'£575',status:'ACTIVE — added 09/06/2026',agent:'Rightmove / Lox Property Prestwick',period:D,src:'Rightmove',sig:'verdict-buy',sigLabel:'ACTIVE — BENCHMARK',note:'R1 Jun-26. Top floor 1-bed, quiet street, close to town centre. GCH, DG, secure entry, furnished.',source_version:'R1-jun26'},
+      {addr:'Main Street, Largs',pc:'KA30',rent:'£700',status:'ACTIVE — added < 7 days',agent:'OnTheMarket / OpenRent',period:D,src:'OnTheMarket',sig:'verdict-buy',sigLabel:'ACTIVE — UPPER BAND',note:'R1 Jun-26. 1-bed flat Main Street Largs. OpenRent. Active listing added < 7 days at time of R1 run. Upper 1BF band for Largs.',source_version:'R1-jun26'},
+      {addr:'Hollywood, Largs (1BF)',pc:'KA30',rent:'£450',status:'NOW LET — Citylets',agent:'Citylets / Ross & Liddell',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. 1-bed furnished flat, balcony with sea views, Hollywood Largs. NOW LET. Lower-band demand signal.',source_version:'R1-jun26'}
+    ],
+    '2bf':[
+      {addr:'Nelson Street, Largs',pc:'KA30',rent:'£750',status:'ACTIVE — reduced < 14 days',agent:'OnTheMarket / Indigo Square Ayrshire',period:D,src:'OnTheMarket',sig:'verdict-buy',sigLabel:'ACTIVE — BENCHMARK',note:'R1 Jun-26. 2-bed flat, partial seaview, Nelson Street. Indigo Square. Reduced — active standard BTL.',source_version:'R1-jun26'},
+      {addr:'Sandringham (Bath Street), Largs',pc:'KA30',rent:'£775',status:'ACTIVE — added yesterday',agent:'OnTheMarket / Indigo Square Ayrshire',period:D,src:'OnTheMarket',sig:'verdict-buy',sigLabel:'ACTIVE — BENCHMARK',note:'R1 Jun-26. 2-bed flat, 37 Bath Street, panoramic sea views. Indigo Square. Added < 24hrs at time of R1 run.',source_version:'R1-jun26'},
+      {addr:'Hollywood, Largs (2BF)',pc:'KA30',rent:'£850',status:'ACTIVE — reduced 12/06/2026',agent:'Rightmove / Glow Homes Saltcoats',period:D,src:'Rightmove',sig:'verdict-buy',sigLabel:'ACTIVE — UPPER BAND',note:'R1 Jun-26. 2-bed first floor flat, private residential area. Glow Homes. Reduced 12/06/2026.',source_version:'R1-jun26'},
+      {addr:'Fort Street, Largs',pc:'KA30',rent:'£495',status:'NOW LET — Citylets',agent:'Citylets / Acre Lettings',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. 2-bed top floor flat, spectacular views from lounge. NOW LET — Acre Lettings. Lower-band demand signal.',source_version:'R1-jun26'},
+      {addr:'The Moorings, Largs',pc:'KA30',rent:'£600',status:'NOW LET — Citylets',agent:'Citylets / Indigo Square',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. 2-bed apartment, Firth of Clyde views. NOW LET — Indigo Square. Demand signal only.',source_version:'R1-jun26'},
+      {addr:'Silverae Court, Largs',pc:'KA30',rent:'£650',status:'NOW LET — Citylets',agent:'Citylets / Indigo Square',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. Bright top floor 2-bed flat, quiet pocket of Largs. Unfurnished, long-term let confirmed. NOW LET.',source_version:'R1-jun26'},
+      {addr:'Charles Street, Largs',pc:'KA30',rent:'£650',status:'NOW LET — Citylets',agent:'Citylets / Indigo Square',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. 2-bed flat, close to sea and town centre, corner bay windows, Firth of Clyde views. NOW LET.',source_version:'R1-jun26'}
+    ],
+    '2bh':[
+      {addr:'Boyd Street, Largs',pc:'KA30',rent:'£635',status:'ACTIVE — Acre Lettings',agent:'Citylets / Acre Lettings',period:D,src:'Citylets',sig:'verdict-buy',sigLabel:'ACTIVE — BENCHMARK',note:'R1 Jun-26. End-terrace unfurnished 2-bed house, small gated development, 2 double bedrooms. Long-term let confirmed (not holiday/STL). EPC C. First confirmed active 2BH comp for Largs.',source_version:'R1-jun26'},
+      {addr:'Greeto Falls Avenue, Largs',pc:'KA30',rent:'£900',status:'ACTIVE — OnTheMarket',agent:'OnTheMarket',period:D,src:'OnTheMarket',sig:'verdict-buy',sigLabel:'ACTIVE — UPPER BAND',note:'R1 Jun-26. 2-bed terraced house, unfurnished, with study, available now, move-in condition. Active listing at time of R1 run.',source_version:'R1-jun26'},
+      {addr:'Noddleburn Meadow, Largs',pc:'KA30',rent:'£895',status:'NOW LET — Citylets',agent:'Citylets / Indigo Square',period:D,src:'Citylets',sig:'verdict-watch',sigLabel:'NOW LET',note:'R1 Jun-26. 2-bed semi-detached house, unfurnished, long-term let. NOW LET — Indigo Square. Demand signal. Note: Ayrshire Letting & Sales lists same street at £2,800 (holiday/STL — excluded from BTL modelling).',source_version:'R1-jun26'}
+    ]
+  };
+
+  var NOTES={
+    '1bf':{warn:false,text:'R1 Jun-26: 6 active 1BF listings confirmed — Kelburn Court £550, Union Street £575, Gateside Street £595, Boyd Street £600, Kelburn Court £675, Main Street £700. Range £550–£700, median £600 pcm. Ayrshire Letting & Sales Gateside Street £1,200 excluded (holiday/STL). Strong market depth.'},
+    '2bf':{warn:true, text:'R1 Jun-26: 4 active 2BF listings — Morris Street £530 (outlier — 30% below median, verify spec/management type), Nelson Street £750, Bath Street £775, Hollywood £850. Median ex-outlier: £762 pcm. 4 Citylets NOW LET demand signals £495–£650. George Street £2,200 excluded (Ayrshire Letting & Sales holiday/STL). Indigo Square is dominant BTL agent.'},
+    '2bh':{warn:false,text:'R1 Jun-26: 2 active 2BH rentals — Boyd Street £635 (end-terrace, confirmed long-term let, Acre Lettings) and Greeto Falls Avenue £900 (terraced, unfurnished, available now). Average of 2 actives: £767 pcm (limited evidence). Noddleburn Meadow £895 NOW LET demand signal. Ayrshire Letting & Sales Noddleburn Meadow £2,800 excluded (holiday/STL).'}
+  };
+
+  function rk(r){return String((r.addr||'')+'|'+(r.rent||r.value||'')+'|'+(r.period||r.date||'')).toLowerCase().replace(/[^a-z0-9£]+/g,'');}
+
+  ['1bf','2bf','2bh'].forEach(function(t){
+    var node=((window.LIVE_DATA||{}).largs||{})[t];
+    if(!node)return;
+    if(!Array.isArray(node.rental))node.rental=[];
+    var ex=new Set(node.rental.map(rk));
+    (COMPS[t]||[]).forEach(function(r){var k=rk(r);if(!ex.has(k)){node.rental.push(r);ex.add(k);}});
+    if(!Array.isArray(node.notes))node.notes=[];
+    var hasNote=node.notes.some(function(n){return String(n&&n.text||'').indexOf('R1 Jun-26')>=0;});
+    if(!hasNote&&NOTES[t])node.notes.push(NOTES[t]);
+  });
+})();
+</script>
+
 <!-- R1 Rental Comps — Troon KA10 · Jun-26 · additive merge into LIVE_DATA · no overwrite -->
 <script id="r1-troon-jun26-script">
 (function(){
