@@ -34594,5 +34594,43 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
   });
 })();
 </script>
+<script id="r1-wishaw-jun26-script">
+(function(){
+  'use strict';
+  if(window.__R1_WISHAW_JUN26__)return;
+  window.__R1_WISHAW_JUN26__=true;
+  var D='Jun-26 (R1 live collection)';
+  var COMPS={
+    '1bf':[],
+    '2bf':[
+      {addr:'Stenton Crescent, Netherton, Wishaw ML2',pc:'ML2',rent:'£695 pcm',status:'Active — Benchmark',agent:'Empire Property & Lettings',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Goldcrest Court, Wishaw ML2',pc:'ML2',rent:'£695 pcm',status:'Active — Benchmark',agent:'Empire Property & Lettings',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Waverly Drive, Wishaw ML2',pc:'ML2',rent:'£695 pcm',status:'Active — Benchmark',agent:'Empire Property & Lettings',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Goldcrest Court, Wishaw ML2',pc:'ML2',rent:'£700 pcm',status:'Active — Benchmark',agent:'Pacitti Jones',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ],
+    '2bh':[
+      {addr:'Kirkhill Place, Wishaw ML2',pc:'ML2',rent:'£895 pcm',status:'Active — Benchmark',agent:'Quicklister Property',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Dunnotar Walk, Wishaw ML2',pc:'ML2',rent:'£895 pcm',status:'Active — Benchmark',agent:'Quicklister Property',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Baillie Gardens, Wishaw ML2',pc:'ML2',rent:'£795 pcm',status:'Active — Benchmark',agent:'OpenRent',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ]
+  };
+  var NOTES={
+    '1bf':{warn:true,text:'R1 Jun-26: Zero active 1BF listings found on Zoopla, OnTheMarket and Rightmove. Workbook anchors £550 pcm (Glasgow Road, Shieldmuir Street) remain unverified. Thin 1BF market — M1 priority gap.'},
+    '2bf':{warn:false,text:'R1 Jun-26: 4 active 2BF listings. Median £695 pcm (range £695–£700). Tight cluster — Goldcrest Court, Waverly Drive, Stenton Crescent all at £695. Workbook Kirk Road £895 appears as outlier vs current active market.'},
+    '2bh':{warn:false,text:'R1 Jun-26: 3 active 2BH listings. Median £895 pcm (range £795–£895). Baillie Gardens £795 (OpenRent, verified active) sits 11% below median — within normal range. Good coverage for 2BH.'}
+  };
+  function rk(r){return String((r.addr||'')+'|'+(r.rent||r.value||'')+'|'+(r.period||r.date||'')).toLowerCase().replace(/[^a-z0-9£]+/g,'');}
+  ['1bf','2bf','2bh'].forEach(function(t){
+    var node=((window.LIVE_DATA||{}).wishaw||{})[t];
+    if(!node)return;
+    if(!Array.isArray(node.rental))node.rental=[];
+    var ex=new Set(node.rental.map(rk));
+    (COMPS[t]||[]).forEach(function(r){var k=rk(r);if(!ex.has(k)){node.rental.push(r);ex.add(k);}});
+    if(!Array.isArray(node.notes))node.notes=[];
+    var hasNote=node.notes.some(function(n){return String(n&&n.text||'').indexOf('R1 Jun-26')>=0;});
+    if(!hasNote&&NOTES[t])node.notes.push(NOTES[t]);
+  });
+})();
+</script>
 </body>
 </html>
