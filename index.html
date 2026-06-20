@@ -34789,5 +34789,42 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
   });
 })();
 </script>
+<script id="r1-hamilton-jun26-script">
+(function(){
+  'use strict';
+  if(window.__R1_HAMILTON_JUN26__)return;
+  window.__R1_HAMILTON_JUN26__=true;
+  var D='Jun-26 (R1 live collection)';
+  var COMPS={
+    '1bf':[],
+    '2bf':[
+      {addr:'Mayfield Road, Hamilton ML3',pc:'ML3',rent:'£650 pcm',status:'Active — Benchmark',agent:'Violet Property Services',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Brankholm Brae, Hamilton ML3',pc:'ML3',rent:'£750 pcm',status:'Active — Benchmark',agent:'Let Us Glasgow',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Bent Road, Hamilton ML3',pc:'ML3',rent:'£800 pcm',status:'Active — Benchmark',agent:'Munro Property',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Mill Grove, Hamilton ML3',pc:'ML3',rent:'£800 pcm',status:'Active — Benchmark',agent:'OpenRent',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Avonbridge Drive, Hamilton ML3',pc:'ML3',rent:'£1,050 pcm',status:'Active — Watchlist',agent:'Love Letts',period:D,src:'OnTheMarket',sig:'verdict-watch',sigLabel:'OUTLIER WATCH',note:'31% above 2BF median £800 — outlier flag'}
+    ],
+    '2bh':[
+      {addr:'Lismore Hill, Hamilton ML3',pc:'ML3',rent:'£900 pcm',status:'Active — Benchmark',agent:'Let Property Lettings',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ]
+  };
+  var NOTES={
+    '1bf':{warn:true,text:'R1 Jun-26: Zero active 1BF listings in Hamilton on Zoopla and OnTheMarket. Workbook anchors £500–£650 (Quarry Street, Morgan Street, Cadzow House) all unverified — none found active on portals. Thin 1BF market. M1 priority gap.'},
+    '2bf':{warn:false,text:'R1 Jun-26: 6 active 2BF listings. Median £800 pcm (range £650–£1,100). 4 clean benchmarks £650–£800. Avonbridge Drive £1,050 (31% above) and Kemp Street £1,100 (37.5% above) excluded as outliers. Workbook Brankholm Brae £750 portal-confirmed. Workbook Townhead Street £850 not found active this cycle.'},
+    '2bh':{warn:true,text:'R1 Jun-26: Only 1 active 2BH listing — Lismore Hill ML3 £900 pcm (Let Property Lettings, semi-detached). Very thin 2BH rental market in Hamilton. Single-listing median — treat with caution. First portal-verified 2BH evidence for Hamilton.'}
+  };
+  function rk(r){return String((r.addr||'')+'|'+(r.rent||r.value||'')+'|'+(r.period||r.date||'')).toLowerCase().replace(/[^a-z0-9£]+/g,'');}
+  ['1bf','2bf','2bh'].forEach(function(t){
+    var node=((window.LIVE_DATA||{}).hamilton||{})[t];
+    if(!node)return;
+    if(!Array.isArray(node.rental))node.rental=[];
+    var ex=new Set(node.rental.map(rk));
+    (COMPS[t]||[]).forEach(function(r){var k=rk(r);if(!ex.has(k)){node.rental.push(r);ex.add(k);}});
+    if(!Array.isArray(node.notes))node.notes=[];
+    var hasNote=node.notes.some(function(n){return String(n&&n.text||'').indexOf('R1 Jun-26')>=0;});
+    if(!hasNote&&NOTES[t])node.notes.push(NOTES[t]);
+  });
+})();
+</script>
 </body>
 </html>
