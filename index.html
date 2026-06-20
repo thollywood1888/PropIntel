@@ -34632,5 +34632,42 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
   });
 })();
 </script>
+<script id="r1-motherwell-jun26-script">
+(function(){
+  'use strict';
+  if(window.__R1_MOTHERWELL_JUN26__)return;
+  window.__R1_MOTHERWELL_JUN26__=true;
+  var D='Jun-26 (R1 live collection)';
+  var COMPS={
+    '1bf':[
+      {addr:'Manse View, Motherwell ML1',pc:'ML1',rent:'£650 pcm',status:'Active — Benchmark',agent:'Countrywide Scotland',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ],
+    '2bf':[
+      {addr:'Albion Street, Motherwell ML1',pc:'ML1',rent:'£700 pcm',status:'Active — Benchmark',agent:'The Property Experts',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Glenhead Drive, Motherwell ML1',pc:'ML1',rent:'£850 pcm',status:'Active — Benchmark',agent:'Lanarkshire Letting & Sales',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Broad Cairn Court, Motherwell ML1',pc:'ML1',rent:'£895 pcm',status:'Active — Benchmark',agent:'Empire Property & Lettings',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ],
+    '2bh':[
+      {addr:'Boyd Drive, Motherwell ML1',pc:'ML1',rent:'£875 pcm',status:'Active — Benchmark',agent:'OpenRent',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ]
+  };
+  var NOTES={
+    '1bf':{warn:true,text:'R1 Jun-26: Only 1 active 1BF listing in Motherwell proper — Manse View £650 pcm (Countrywide Scotland). Thin 1BF market. Workbook anchors Jerviston St £695 and John Muir Way £550 remain unverified. M1 priority gap.'},
+    '2bf':{warn:false,text:'R1 Jun-26: 3 active 2BF listings. Median £850 pcm (range £700–£895). Albion Street £700 is 17.6% below median — borderline watch. Broad Cairn Court £895 portal-verified (confirms workbook import). Workbook St Vincent Place £725 not found active.'},
+    '2bh':{warn:true,text:'R1 Jun-26: Only 1 active 2BH listing — Boyd Drive £875 pcm (OpenRent, semi-detached). Thin 2BH market. Workbook Reid Grove £850 not found active. Single-listing median — treat with caution.'}
+  };
+  function rk(r){return String((r.addr||'')+'|'+(r.rent||r.value||'')+'|'+(r.period||r.date||'')).toLowerCase().replace(/[^a-z0-9£]+/g,'');}
+  ['1bf','2bf','2bh'].forEach(function(t){
+    var node=((window.LIVE_DATA||{}).motherwell||{})[t];
+    if(!node)return;
+    if(!Array.isArray(node.rental))node.rental=[];
+    var ex=new Set(node.rental.map(rk));
+    (COMPS[t]||[]).forEach(function(r){var k=rk(r);if(!ex.has(k)){node.rental.push(r);ex.add(k);}});
+    if(!Array.isArray(node.notes))node.notes=[];
+    var hasNote=node.notes.some(function(n){return String(n&&n.text||'').indexOf('R1 Jun-26')>=0;});
+    if(!hasNote&&NOTES[t])node.notes.push(NOTES[t]);
+  });
+})();
+</script>
 </body>
 </html>
