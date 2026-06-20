@@ -34669,5 +34669,49 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
   });
 })();
 </script>
+<script id="r1-stirling-jun26-script">
+(function(){
+  'use strict';
+  if(window.__R1_STIRLING_JUN26__)return;
+  window.__R1_STIRLING_JUN26__=true;
+  var D='Jun-26 (R1 live collection)';
+  var COMPS={
+    '1bf':[
+      {addr:'Spittal Street, Stirling FK8',pc:'FK8',rent:'£795 pcm',status:'Active — Benchmark',agent:'Clyde Property',period:D,src:'Zoopla',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Bannockburn Road, Bannockburn, Stirling FK7',pc:'FK7',rent:'£800 pcm',status:'Active — Benchmark',agent:'Property 4 U',period:D,src:'Zoopla',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Upper Bridge Street, Stirling FK8',pc:'FK8',rent:'£850 pcm',status:'Active — Benchmark',agent:'Golden Tree Estates',period:D,src:'Zoopla',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Bruce Street, Stirling FK8 1PB',pc:'FK8 1PB',rent:'£850 pcm',status:'Active — Benchmark',agent:'Clyde Property',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'King Street, Stirling FK8',pc:'FK8',rent:'£900 pcm',status:'Active — Benchmark',agent:'Martin & Co Stirling',period:D,src:'Zoopla',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ],
+    '2bf':[
+      {addr:'Cowane Street, Stirling FK8 1JW',pc:'FK8 1JW',rent:'£900 pcm',status:'Active — Benchmark',agent:'Clyde Property',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'The Firs, Stirling FK7',pc:'FK7',rent:'£950 pcm',status:'Active — Benchmark',agent:'Slater Hogg & Howison',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Cowane Street, Stirling FK8',pc:'FK8',rent:'£995 pcm',status:'Active — Benchmark',agent:'DJ Alexander',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Upper Craigs, Stirling FK8',pc:'FK8',rent:'£1,100 pcm',status:'Active — Benchmark',agent:'Martin & Co Stirling',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Spittal Street, Stirling FK8',pc:'FK8',rent:'£1,200 pcm',status:'Active — Benchmark',agent:'B-Spoke Property',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ],
+    '2bh':[
+      {addr:'East Coldoch, Stirling FK9',pc:'FK9',rent:'£950 pcm',status:'Active — Benchmark',agent:'Halliday Homes',period:D,src:'Zoopla',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Cultenhove Road, Stirling FK7',pc:'FK7',rent:'£1,300 pcm',status:'Active — Benchmark',agent:'OpenRent',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ]
+  };
+  var NOTES={
+    '1bf':{warn:false,text:'R1 Jun-26: 5 active 1BF listings. Median £850 pcm (range £795–£900, ex-student/HMO). Student/HMO stock excluded. Workbook Wishart Drive FK7 £750 not found active — likely expired. Good 1BF coverage for Stirling.'},
+    '2bf':{warn:false,text:'R1 Jun-26: 11 active 2BF listings — strong market depth. Median £1,100 pcm (range £900–£1,350). Murray Place FK8 £1,350 flagged outlier (23% above median). 5 benchmarks selected. Workbook Cowane Street £1,195 now listing at £995–£1,200 range — market has softened slightly from prior evidence.'},
+    '2bh':{warn:true,text:'R1 Jun-26: Only 2 active 2BH listings found — thin house rental market in Stirling. East Coldoch FK9 £950 (semi-detached bungalow) and Cultenhove Road FK7 £1,300 (terraced). Wide range; treat median £1,125 pcm with caution. Workbook Erskine Street FK7 £1,050 not found active.'}
+  };
+  function rk(r){return String((r.addr||'')+'|'+(r.rent||r.value||'')+'|'+(r.period||r.date||'')).toLowerCase().replace(/[^a-z0-9£]+/g,'');}
+  ['1bf','2bf','2bh'].forEach(function(t){
+    var node=((window.LIVE_DATA||{}).stirling||{})[t];
+    if(!node)return;
+    if(!Array.isArray(node.rental))node.rental=[];
+    var ex=new Set(node.rental.map(rk));
+    (COMPS[t]||[]).forEach(function(r){var k=rk(r);if(!ex.has(k)){node.rental.push(r);ex.add(k);}});
+    if(!Array.isArray(node.notes))node.notes=[];
+    var hasNote=node.notes.some(function(n){return String(n&&n.text||'').indexOf('R1 Jun-26')>=0;});
+    if(!hasNote&&NOTES[t])node.notes.push(NOTES[t]);
+  });
+})();
+</script>
 </body>
 </html>
