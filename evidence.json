@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-06-20 13:08",
+    "generated": "2026-06-20 13:24",
     "source": "Master excel Propintel.xlsx",
     "sheet": "DASHBOARD_IMPORT_CLEAN",
     "totalRows": 847,
@@ -10,7 +10,7 @@
   },
   "rows": [
     {
-      "id": "XLSX-E4CECA7CD0",
+      "id": "XLSX-28207D911B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Airdrie",
       "propertyType": "1 Bed Flat",
@@ -27,7 +27,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CC9D5A3F12",
+      "id": "XLSX-FB9EF671FC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Airdrie",
       "propertyType": "2 Bed Flat",
@@ -44,7 +44,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5DA75D8707",
+      "id": "XLSX-57E7B7FE96",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Airdrie",
       "propertyType": "2 Bed House",
@@ -61,7 +61,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D9B36A5656",
+      "id": "XLSX-A0763BAC2B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Airdrie",
       "propertyType": "2 Bed House",
@@ -78,7 +78,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-14EEE5C20A",
+      "id": "XLSX-5183875741",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "1 Bed Flat",
@@ -95,7 +95,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-81F220C91C",
+      "id": "XLSX-27F020671A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "1 Bed Flat",
@@ -112,7 +112,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-96198775AE",
+      "id": "XLSX-F7B42B318D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "1 Bed Flat",
@@ -129,7 +129,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FF0CBFDB1E",
+      "id": "XLSX-5170E2023C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "1 Bed Flat",
@@ -146,7 +146,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D930C60987",
+      "id": "XLSX-29A96F709C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -163,7 +163,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B84BF01223",
+      "id": "XLSX-A8333CDF92",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -180,7 +180,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9AB4E0626D",
+      "id": "XLSX-72008713A8",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -197,7 +197,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8D1DA8E929",
+      "id": "XLSX-B7771BFB0A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -214,7 +214,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-876DE8D572",
+      "id": "XLSX-AC6DD9E127",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -231,7 +231,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-69CC114E8B",
+      "id": "XLSX-5C315E09A8",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -248,7 +248,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2EB91CD28E",
+      "id": "XLSX-647C975E3A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -265,7 +265,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B176950C8D",
+      "id": "XLSX-5FDFD0AE0E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -282,7 +282,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AD7CAC6B5E",
+      "id": "XLSX-6503B645B0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -299,7 +299,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-55197D0660",
+      "id": "XLSX-0ECD92284E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -316,7 +316,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7DD889D2FB",
+      "id": "XLSX-30CAA98B19",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -333,7 +333,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6DDF96238F",
+      "id": "XLSX-1B502A48E9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -350,7 +350,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3C24EAD45C",
+      "id": "XLSX-485B3AA71E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -367,7 +367,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C766BCCD74",
+      "id": "XLSX-C358D91AD7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -384,7 +384,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CA5557CDDC",
+      "id": "XLSX-A90BED685B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -401,7 +401,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-17FE1E3B32",
+      "id": "XLSX-289C6942E9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -418,7 +418,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BE6AEAC712",
+      "id": "XLSX-16BF9649E0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -435,7 +435,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-EB5ED6C280",
+      "id": "XLSX-9DC9723164",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -452,7 +452,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FBE9B46F01",
+      "id": "XLSX-0892016CEC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -469,7 +469,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2431798EC0",
+      "id": "XLSX-19739FE082",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -486,7 +486,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D30BE6F5AB",
+      "id": "XLSX-FCED0FC3CC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -503,7 +503,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1682AAFD47",
+      "id": "XLSX-F5B02CB427",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed Flat",
@@ -520,7 +520,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A1D95CF06F",
+      "id": "XLSX-78F4C76693",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed House",
@@ -537,7 +537,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-283C74478B",
+      "id": "XLSX-0BEBC46D91",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed House",
@@ -554,7 +554,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-49929079F4",
+      "id": "XLSX-654D3813B6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed House",
@@ -571,7 +571,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F5BDCEE233",
+      "id": "XLSX-9162E42970",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed House",
@@ -588,7 +588,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F162CF3642",
+      "id": "XLSX-9718015186",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed House",
@@ -605,7 +605,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BDD1634ADC",
+      "id": "XLSX-B6F13E362D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed House",
@@ -622,7 +622,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B2B804D05E",
+      "id": "XLSX-51511788FC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed House",
@@ -639,7 +639,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F04F65E1F3",
+      "id": "XLSX-3743877EF7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed House",
@@ -656,7 +656,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2A71EDE81D",
+      "id": "XLSX-F9123D4599",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed House",
@@ -673,7 +673,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B6DCC5E1C2",
+      "id": "XLSX-FEB34532FF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ardrossan",
       "propertyType": "2 Bed House",
@@ -690,7 +690,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C183BA01BA",
+      "id": "XLSX-E60E1E406B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "1 Bed Flat",
@@ -707,7 +707,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-77A1BBFC09",
+      "id": "XLSX-4B94E3565D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "1 Bed Flat",
@@ -724,7 +724,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7A7FE4B910",
+      "id": "XLSX-0D92E44EDA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "1 Bed Flat",
@@ -741,7 +741,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2CCD336DE5",
+      "id": "XLSX-0F18F905C3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "1 Bed Flat",
@@ -758,7 +758,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4BBC7C4D89",
+      "id": "XLSX-DCAFAA467D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "1 Bed Flat",
@@ -775,7 +775,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6D7791F3F1",
+      "id": "XLSX-6EB68112AF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "1 Bed Flat",
@@ -792,7 +792,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3FBA3E576D",
+      "id": "XLSX-DAD71AE370",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "1 Bed Flat",
@@ -809,7 +809,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8F2F4BFBDC",
+      "id": "XLSX-E756381364",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "1 Bed Flat",
@@ -826,7 +826,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9B50A568BE",
+      "id": "XLSX-7DBDCE5233",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -843,7 +843,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8CF55B77B8",
+      "id": "XLSX-673C8AA175",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -860,7 +860,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E17A9519BB",
+      "id": "XLSX-506D07C098",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -877,7 +877,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-733B3DFF91",
+      "id": "XLSX-72C2B12A86",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -894,7 +894,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9DA1920F86",
+      "id": "XLSX-EB60F6812E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -911,7 +911,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A30634F73B",
+      "id": "XLSX-EBFED9E729",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -928,7 +928,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F298A46811",
+      "id": "XLSX-D8B553C207",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -945,7 +945,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-31AB7B946A",
+      "id": "XLSX-4ACFAF6A80",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -962,7 +962,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7FC466588E",
+      "id": "XLSX-394A96A740",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -979,7 +979,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F50656AD93",
+      "id": "XLSX-1EBCB2B780",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -996,7 +996,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6DA3FFA8FF",
+      "id": "XLSX-7B786D50EF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -1013,7 +1013,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-21BE756057",
+      "id": "XLSX-BD72D29821",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -1030,7 +1030,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-75B92C5AC1",
+      "id": "XLSX-764B0D31B9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -1047,7 +1047,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D9ED608028",
+      "id": "XLSX-43B31C9AFC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -1064,7 +1064,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-93F8FDBE6D",
+      "id": "XLSX-CF3889127A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -1081,7 +1081,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-55AA39BF0B",
+      "id": "XLSX-8D59A5F952",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -1098,7 +1098,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3F481996F5",
+      "id": "XLSX-CDDDA35CDC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -1115,7 +1115,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F59D40E638",
+      "id": "XLSX-41C0B5809B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed Flat",
@@ -1132,7 +1132,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8F861BD449",
+      "id": "XLSX-A2ACAE949E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed House",
@@ -1149,7 +1149,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A92EA5263D",
+      "id": "XLSX-40E80F29D0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed House",
@@ -1166,7 +1166,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-65997E0EDC",
+      "id": "XLSX-7F27A1CCFB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed House",
@@ -1183,7 +1183,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-078A79A2A1",
+      "id": "XLSX-20FFD95B36",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Ayr",
       "propertyType": "2 Bed House",
@@ -1200,7 +1200,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-95683F3728",
+      "id": "XLSX-8933AEC67A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Barrhead",
       "propertyType": "2 Bed Flat",
@@ -1217,7 +1217,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F3F54E5C0E",
+      "id": "XLSX-2BB721095A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Barrhead",
       "propertyType": "2 Bed Flat",
@@ -1234,7 +1234,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-280DD745D7",
+      "id": "XLSX-DA2A3CA959",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "1 Bed Flat",
@@ -1251,7 +1251,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AA0E7B4700",
+      "id": "XLSX-698CAC5A0F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "1 Bed Flat",
@@ -1268,7 +1268,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B7F469B86F",
+      "id": "XLSX-5F4F07BB96",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed Flat",
@@ -1285,7 +1285,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-022026AC98",
+      "id": "XLSX-7C02ECEE44",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed Flat",
@@ -1302,7 +1302,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2FD80D5154",
+      "id": "XLSX-83255E042B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed Flat",
@@ -1319,7 +1319,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4812474F0D",
+      "id": "XLSX-59BD9D5C42",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed Flat",
@@ -1336,7 +1336,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E4FAA96506",
+      "id": "XLSX-6FCA0FD583",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed Flat",
@@ -1353,7 +1353,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6C2163E9DB",
+      "id": "XLSX-B86BD5AB71",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed Flat",
@@ -1370,7 +1370,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-45AA1B18A9",
+      "id": "XLSX-C94A23A1CA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed Flat",
@@ -1387,7 +1387,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AB19F131F4",
+      "id": "XLSX-16DFE15CF7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed Flat",
@@ -1404,7 +1404,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C24D5B6B38",
+      "id": "XLSX-D7F70549EC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed Flat",
@@ -1421,7 +1421,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B576D4AF79",
+      "id": "XLSX-AB7141BED9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed Flat",
@@ -1438,7 +1438,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BBF2A43F94",
+      "id": "XLSX-F1D0D77B18",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed Flat",
@@ -1455,7 +1455,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FBF4BCCEA5",
+      "id": "XLSX-FC5B59C70C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed Flat",
@@ -1472,7 +1472,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1C10AD882C",
+      "id": "XLSX-D8CD69A60A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed House",
@@ -1489,7 +1489,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B4938FB299",
+      "id": "XLSX-E145BCE0FC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed House",
@@ -1506,7 +1506,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-DBB0884618",
+      "id": "XLSX-278C8A1EA7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed House",
@@ -1523,7 +1523,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CF3D493235",
+      "id": "XLSX-AA522D7AEE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed House",
@@ -1540,7 +1540,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8010956DAF",
+      "id": "XLSX-EC59ED8C34",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bearsden",
       "propertyType": "2 Bed House",
@@ -1557,7 +1557,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0ECF3E72D5",
+      "id": "XLSX-3AF38960AC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Beith",
       "propertyType": "1 Bed Flat",
@@ -1574,7 +1574,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3E3013441A",
+      "id": "XLSX-A232F107FE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Beith",
       "propertyType": "1 Bed Flat",
@@ -1591,7 +1591,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-49A4E7A51D",
+      "id": "XLSX-1E4A8659AF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Beith",
       "propertyType": "2 Bed Flat",
@@ -1608,7 +1608,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D62CA1C4A6",
+      "id": "XLSX-0B9B6001AB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Beith",
       "propertyType": "2 Bed Flat",
@@ -1625,7 +1625,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C6FA56B869",
+      "id": "XLSX-51DA2E6E43",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Beith",
       "propertyType": "2 Bed Flat",
@@ -1642,7 +1642,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5382CF5772",
+      "id": "XLSX-89A7883D36",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Beith",
       "propertyType": "2 Bed House",
@@ -1659,7 +1659,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A44602C337",
+      "id": "XLSX-DA5C4B9522",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Beith",
       "propertyType": "2 Bed House",
@@ -1676,7 +1676,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5890CC02D1",
+      "id": "XLSX-14F39A4D73",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bellshill",
       "propertyType": "1 Bed Flat",
@@ -1693,7 +1693,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9DC2D9F2B6",
+      "id": "XLSX-0A73E2403C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bellshill",
       "propertyType": "2 Bed Flat",
@@ -1710,7 +1710,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-EB81EFA87D",
+      "id": "XLSX-420FE95F59",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bellshill",
       "propertyType": "2 Bed Flat",
@@ -1727,7 +1727,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-20613E04F3",
+      "id": "XLSX-619616118F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bellshill",
       "propertyType": "2 Bed Flat",
@@ -1744,7 +1744,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2FDC6B9BCD",
+      "id": "XLSX-13F50039A1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bishopbriggs",
       "propertyType": "2 Bed Flat",
@@ -1761,7 +1761,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-81B9006913",
+      "id": "XLSX-99887D80E0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Blantyre",
       "propertyType": "1 Bed Flat",
@@ -1778,7 +1778,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-785C484F56",
+      "id": "XLSX-5EDEED4B76",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Blantyre",
       "propertyType": "1 Bed Flat",
@@ -1795,7 +1795,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-12609F744B",
+      "id": "XLSX-EEC4D914B0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Blantyre",
       "propertyType": "1 Bed Flat",
@@ -1812,7 +1812,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AF3690A26A",
+      "id": "XLSX-A3C1CA679F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Blantyre",
       "propertyType": "2 Bed Flat",
@@ -1829,7 +1829,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-DA96409FE6",
+      "id": "XLSX-DC11A8B583",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Blantyre",
       "propertyType": "2 Bed Flat",
@@ -1846,7 +1846,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E6413FD7EB",
+      "id": "XLSX-33D544C0B1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "1 Bed Flat",
@@ -1863,7 +1863,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C27CDD10CD",
+      "id": "XLSX-6A89CAE7DA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "1 Bed Flat",
@@ -1880,7 +1880,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FEFF2F7389",
+      "id": "XLSX-491AC465A9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "1 Bed Flat",
@@ -1897,7 +1897,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9DBD9EF7B0",
+      "id": "XLSX-FE85904B23",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "1 Bed Flat",
@@ -1914,7 +1914,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9B5B7A659F",
+      "id": "XLSX-5304CFBCF3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "1 Bed Flat",
@@ -1931,7 +1931,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5336FF9BA2",
+      "id": "XLSX-93681FAA69",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "1 Bed Flat",
@@ -1948,7 +1948,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F1928C789A",
+      "id": "XLSX-A1BC3A4BCF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "1 Bed Flat",
@@ -1965,7 +1965,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F833C222F4",
+      "id": "XLSX-6CC6536160",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "1 Bed Flat",
@@ -1982,7 +1982,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-DB813305CD",
+      "id": "XLSX-35FAB6D1C2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "1 Bed Flat",
@@ -1999,7 +1999,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-73B8B29253",
+      "id": "XLSX-820DAB1407",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "1 Bed Flat",
@@ -2016,7 +2016,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5AF82DC445",
+      "id": "XLSX-63B54DA5E9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "1 Bed Flat",
@@ -2033,7 +2033,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-541D647B4B",
+      "id": "XLSX-D3F75CD8AA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed Flat",
@@ -2050,7 +2050,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-85D2D3AB66",
+      "id": "XLSX-813BE9E76A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed Flat",
@@ -2067,7 +2067,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7DA4487214",
+      "id": "XLSX-DBBDD0F533",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed Flat",
@@ -2084,7 +2084,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7CCC19263D",
+      "id": "XLSX-B6455F47B8",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed Flat",
@@ -2101,7 +2101,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-05E898C484",
+      "id": "XLSX-317FAB0A4D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed Flat",
@@ -2118,7 +2118,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8C8F27FC9C",
+      "id": "XLSX-5E5D3D7653",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed Flat",
@@ -2135,7 +2135,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AF9C59DE0B",
+      "id": "XLSX-AA6D99746C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed Flat",
@@ -2152,7 +2152,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-417FD891CE",
+      "id": "XLSX-65BD9888E7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed Flat",
@@ -2169,7 +2169,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8BC006F3A8",
+      "id": "XLSX-58D04595E6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed Flat",
@@ -2186,7 +2186,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BA4B08CBDD",
+      "id": "XLSX-3BE07D1E12",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed Flat",
@@ -2203,7 +2203,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C7269E4F30",
+      "id": "XLSX-42C4DB4792",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed Flat",
@@ -2220,7 +2220,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-41B25C85E6",
+      "id": "XLSX-2A74274C82",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed Flat",
@@ -2237,7 +2237,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-96811A487B",
+      "id": "XLSX-0AAB265D74",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed Flat",
@@ -2254,7 +2254,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5F63EB1944",
+      "id": "XLSX-BC54D4B349",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed Flat",
@@ -2271,7 +2271,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5949259749",
+      "id": "XLSX-05F560FE3A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Bridgeton",
       "propertyType": "2 Bed House",
@@ -2288,7 +2288,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C3D03BE7B5",
+      "id": "XLSX-AB3EB5543E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cambuslang",
       "propertyType": "1 Bed Flat",
@@ -2305,7 +2305,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9DBDE6D31E",
+      "id": "XLSX-0E2FC842E0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cambuslang",
       "propertyType": "2 Bed Flat",
@@ -2322,7 +2322,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C6100B5E11",
+      "id": "XLSX-4045BCE82B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cambuslang",
       "propertyType": "2 Bed Flat",
@@ -2339,7 +2339,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-EB965AF27A",
+      "id": "XLSX-FF74A1F46B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cambuslang",
       "propertyType": "2 Bed Flat",
@@ -2356,7 +2356,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-83519C1BEC",
+      "id": "XLSX-C162608AAB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cambuslang",
       "propertyType": "2 Bed Flat",
@@ -2373,7 +2373,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-67C654A170",
+      "id": "XLSX-C8250D6846",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cambuslang",
       "propertyType": "2 Bed Flat",
@@ -2390,7 +2390,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-038DDCAC2D",
+      "id": "XLSX-0B8E438FDA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cambuslang",
       "propertyType": "2 Bed Flat",
@@ -2407,7 +2407,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D8A872CD90",
+      "id": "XLSX-BCD815E6C9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cambuslang",
       "propertyType": "2 Bed Flat",
@@ -2424,7 +2424,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A8400E36ED",
+      "id": "XLSX-CAE487D851",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cambuslang",
       "propertyType": "2 Bed Flat",
@@ -2441,7 +2441,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-47B9170CF9",
+      "id": "XLSX-B5B01D1D3E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cambuslang",
       "propertyType": "2 Bed Flat",
@@ -2458,7 +2458,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BA960DB8B1",
+      "id": "XLSX-4763F1D614",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cambuslang",
       "propertyType": "2 Bed Flat",
@@ -2475,7 +2475,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-493E05CECE",
+      "id": "XLSX-D469BCDF94",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cambuslang",
       "propertyType": "2 Bed House",
@@ -2492,7 +2492,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A94D9790E9",
+      "id": "XLSX-5CBBC958E3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cambuslang",
       "propertyType": "2 Bed House",
@@ -2509,7 +2509,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1AE7A2E3DD",
+      "id": "XLSX-0ACDE5A4CD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Carluke",
       "propertyType": "1 Bed Flat",
@@ -2526,7 +2526,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A7DEDF6878",
+      "id": "XLSX-96CCECCE97",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Carluke",
       "propertyType": "2 Bed Flat",
@@ -2543,7 +2543,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-EBD7BE2A53",
+      "id": "XLSX-CB6197BF40",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Carluke",
       "propertyType": "2 Bed Flat",
@@ -2560,7 +2560,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3DE6687EEE",
+      "id": "XLSX-5FA70BDB4C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Carluke",
       "propertyType": "2 Bed Flat",
@@ -2577,7 +2577,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9BB8D3CF83",
+      "id": "XLSX-425980EB4B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Castlemilk",
       "propertyType": "2 Bed Flat",
@@ -2594,7 +2594,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5C8A9DE9CC",
+      "id": "XLSX-643B2D7A52",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Castlemilk",
       "propertyType": "2 Bed Flat",
@@ -2611,7 +2611,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A65C855127",
+      "id": "XLSX-CC06D4291B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Castlemilk",
       "propertyType": "2 Bed Flat",
@@ -2628,7 +2628,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CF080A994D",
+      "id": "XLSX-B633CDFD96",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Castlemilk",
       "propertyType": "2 Bed Flat",
@@ -2645,7 +2645,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-650A67A61B",
+      "id": "XLSX-666E3EFCF6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Castlemilk",
       "propertyType": "2 Bed Flat",
@@ -2662,7 +2662,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4E14CC3BE0",
+      "id": "XLSX-4006628C70",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "1 Bed Flat",
@@ -2679,7 +2679,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F3C38452E6",
+      "id": "XLSX-8E4BB056E4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "1 Bed Flat",
@@ -2696,7 +2696,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A9909377A1",
+      "id": "XLSX-42265C9C60",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "1 Bed Flat",
@@ -2713,7 +2713,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-869E3E51CE",
+      "id": "XLSX-51476CF3DA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "1 Bed Flat",
@@ -2730,7 +2730,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C876E03803",
+      "id": "XLSX-BBFD764B41",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "1 Bed Flat",
@@ -2747,7 +2747,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-31F3415C9C",
+      "id": "XLSX-A82B8F51E1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "1 Bed Flat",
@@ -2764,7 +2764,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B2F4B422FB",
+      "id": "XLSX-34B3C5C4CC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "1 Bed Flat",
@@ -2781,7 +2781,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1953CA5318",
+      "id": "XLSX-A6E801D1E9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "1 Bed Flat",
@@ -2798,7 +2798,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FA5B2CB2EF",
+      "id": "XLSX-3C7835022F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "1 Bed Flat",
@@ -2815,7 +2815,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8095D169AB",
+      "id": "XLSX-38DEFB8491",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "1 Bed Flat",
@@ -2832,7 +2832,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9F80FB5C46",
+      "id": "XLSX-8D052FA3F2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed Flat",
@@ -2849,7 +2849,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-02DE812F57",
+      "id": "XLSX-57AFDE107F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed Flat",
@@ -2866,7 +2866,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4A637EF694",
+      "id": "XLSX-BD92DCE501",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed Flat",
@@ -2883,7 +2883,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7A7BCE0AB3",
+      "id": "XLSX-79C2A0D612",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed Flat",
@@ -2900,7 +2900,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-86B55B0EAB",
+      "id": "XLSX-851AD355E2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed Flat",
@@ -2917,7 +2917,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-93D8AEDF70",
+      "id": "XLSX-1ED0866643",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed Flat",
@@ -2934,7 +2934,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CCE4E6C472",
+      "id": "XLSX-4161318404",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed Flat",
@@ -2951,7 +2951,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C370C51A4D",
+      "id": "XLSX-AB168C490A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed Flat",
@@ -2968,7 +2968,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4E914FD29C",
+      "id": "XLSX-85FE71E696",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed Flat",
@@ -2985,7 +2985,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-17030FEDB7",
+      "id": "XLSX-E17668BA32",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed Flat",
@@ -3002,7 +3002,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-010FC34B23",
+      "id": "XLSX-8B6C5EE9D6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed Flat",
@@ -3019,7 +3019,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F928A986C1",
+      "id": "XLSX-350BB9F1EE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed Flat",
@@ -3036,7 +3036,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0A9E5C8FE6",
+      "id": "XLSX-A06C9FD83F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed Flat",
@@ -3053,7 +3053,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FB1745A653",
+      "id": "XLSX-52F361EAC7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed House",
@@ -3070,7 +3070,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D8154E76B4",
+      "id": "XLSX-A8758914D0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed House",
@@ -3087,7 +3087,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-01A676973B",
+      "id": "XLSX-6DA489230C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed House",
@@ -3104,7 +3104,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-DF669BD6FE",
+      "id": "XLSX-78DBEA93FD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed House",
@@ -3121,7 +3121,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F305E61126",
+      "id": "XLSX-FF4D8050AC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed House",
@@ -3138,7 +3138,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D43390E236",
+      "id": "XLSX-8D306A440C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cathcart",
       "propertyType": "2 Bed House",
@@ -3155,7 +3155,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D59DBFEA0B",
+      "id": "XLSX-32FD1F85CB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "1 Bed Flat",
@@ -3172,7 +3172,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9F67BA1161",
+      "id": "XLSX-DA712B8951",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "1 Bed Flat",
@@ -3189,7 +3189,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7862508913",
+      "id": "XLSX-97CDF8F1BA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "1 Bed Flat",
@@ -3206,7 +3206,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D910E0CA2C",
+      "id": "XLSX-667E2DC23F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "1 Bed Flat",
@@ -3223,7 +3223,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-DEFCF62312",
+      "id": "XLSX-336BC0D5D7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "2 Bed Flat",
@@ -3240,7 +3240,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4B6E9281B2",
+      "id": "XLSX-6DCC1CC85C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "2 Bed Flat",
@@ -3257,7 +3257,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A50DA43561",
+      "id": "XLSX-E7E0B5DFD6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "2 Bed Flat",
@@ -3274,7 +3274,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-426A040D9C",
+      "id": "XLSX-1C84AFDFF0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "2 Bed Flat",
@@ -3291,7 +3291,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BB94D6077D",
+      "id": "XLSX-BDA279EC86",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "2 Bed Flat",
@@ -3308,7 +3308,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D78ACE55E8",
+      "id": "XLSX-62079A06D1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "2 Bed Flat",
@@ -3325,7 +3325,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-EBD6E6757D",
+      "id": "XLSX-2DCFCBA442",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "2 Bed Flat",
@@ -3342,7 +3342,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2E2BABEB0B",
+      "id": "XLSX-40D4A8B341",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "2 Bed Flat",
@@ -3359,7 +3359,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-244D982E83",
+      "id": "XLSX-5871661E44",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "2 Bed Flat",
@@ -3376,7 +3376,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F2D034A4CD",
+      "id": "XLSX-D5D72A0FB1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "2 Bed House",
@@ -3393,7 +3393,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-65A902BD6E",
+      "id": "XLSX-C2D34B1038",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Clydebank",
       "propertyType": "2 Bed House",
@@ -3410,7 +3410,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D2A77B926A",
+      "id": "XLSX-C921CEE0B1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Coatbridge",
       "propertyType": "1 Bed Flat",
@@ -3427,7 +3427,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0ACB5DC981",
+      "id": "XLSX-C0F87B02C8",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Coatbridge",
       "propertyType": "2 Bed Flat",
@@ -3444,7 +3444,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CD5898D726",
+      "id": "XLSX-88FAB75825",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Coatbridge",
       "propertyType": "2 Bed Flat",
@@ -3461,7 +3461,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-16BF1AB9F9",
+      "id": "XLSX-3556204968",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Coylton",
       "propertyType": "2 Bed Flat",
@@ -3478,7 +3478,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E1E5E9FDF8",
+      "id": "XLSX-931A179455",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Coylton",
       "propertyType": "2 Bed House",
@@ -3495,7 +3495,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A740787805",
+      "id": "XLSX-2887DB9661",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Coylton",
       "propertyType": "2 Bed House",
@@ -3512,7 +3512,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F0DAC8FCB1",
+      "id": "XLSX-C3FF48CDCF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Coylton",
       "propertyType": "2 Bed House",
@@ -3529,7 +3529,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6918A1CC7C",
+      "id": "XLSX-5CBBDFA25F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "1 Bed Flat",
@@ -3546,7 +3546,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-48688D8B80",
+      "id": "XLSX-D21144CB1A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "1 Bed Flat",
@@ -3563,7 +3563,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-414DE0ED50",
+      "id": "XLSX-A46ECDC8D3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed Flat",
@@ -3580,7 +3580,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-99D02DEFAF",
+      "id": "XLSX-A7155D5AEF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed Flat",
@@ -3597,7 +3597,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7BFA45E3CD",
+      "id": "XLSX-F709B960FC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed Flat",
@@ -3614,7 +3614,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A091BA0E44",
+      "id": "XLSX-8D66157C7C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed Flat",
@@ -3631,7 +3631,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C70D71787B",
+      "id": "XLSX-3CF25DFAC0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed Flat",
@@ -3648,7 +3648,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8DD44F3356",
+      "id": "XLSX-BEFD9FBF83",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed Flat",
@@ -3665,7 +3665,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7B2B9B9445",
+      "id": "XLSX-CCA72BF7EE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed Flat",
@@ -3682,7 +3682,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-12DC6A3F0F",
+      "id": "XLSX-F01C0019C5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3699,7 +3699,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-44603CF2B9",
+      "id": "XLSX-DC52DD63A1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3716,7 +3716,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-430D60F490",
+      "id": "XLSX-DF59107BD1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3733,7 +3733,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-35197552AC",
+      "id": "XLSX-9D9B9CAE15",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3750,7 +3750,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1726836167",
+      "id": "XLSX-F5706544F2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3767,7 +3767,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AFC0475384",
+      "id": "XLSX-F6052DADF7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3784,7 +3784,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-54E7392DB5",
+      "id": "XLSX-B0BBE28923",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3801,7 +3801,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-ED8A012E90",
+      "id": "XLSX-9B16CD59B4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3818,7 +3818,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-93253081A4",
+      "id": "XLSX-E848046888",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3835,7 +3835,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FBF7032A8D",
+      "id": "XLSX-397E4E1012",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3852,7 +3852,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2BD81DB04B",
+      "id": "XLSX-667DC0A7F3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3869,7 +3869,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3327BD4093",
+      "id": "XLSX-41F9B7A05A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3886,7 +3886,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BE64297D67",
+      "id": "XLSX-793B0C193D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3903,7 +3903,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B9BE1AB0BE",
+      "id": "XLSX-04373FFFA4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3920,7 +3920,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-DB5D487ACF",
+      "id": "XLSX-BC065DDC78",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3937,7 +3937,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A255CDBFEE",
+      "id": "XLSX-759B15E5B0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Cumnock",
       "propertyType": "2 Bed House",
@@ -3954,7 +3954,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7D9E69C8A9",
+      "id": "XLSX-0B72E73213",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Dalry",
       "propertyType": "1 Bed Flat",
@@ -3971,7 +3971,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-58D2C9E335",
+      "id": "XLSX-2286180443",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Dalry",
       "propertyType": "1 Bed Flat",
@@ -3988,7 +3988,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-465A58454E",
+      "id": "XLSX-877B00BB22",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Dalry",
       "propertyType": "1 Bed Flat",
@@ -4005,7 +4005,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-44C81CE108",
+      "id": "XLSX-008D393296",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Dalry",
       "propertyType": "1 Bed Flat",
@@ -4022,7 +4022,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-89B6CE446D",
+      "id": "XLSX-A7B1B78071",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Dalry",
       "propertyType": "2 Bed Flat",
@@ -4039,7 +4039,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6D5FACFE89",
+      "id": "XLSX-C521CD6F2A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Dalry",
       "propertyType": "2 Bed Flat",
@@ -4056,7 +4056,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5CF7CBE29E",
+      "id": "XLSX-9D4F403864",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Dalry",
       "propertyType": "2 Bed Flat",
@@ -4073,7 +4073,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BF42E2A277",
+      "id": "XLSX-A88EE21C08",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Dalry",
       "propertyType": "2 Bed Flat",
@@ -4090,7 +4090,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A78AE1CB3E",
+      "id": "XLSX-CB832A683E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Dalry",
       "propertyType": "2 Bed Flat",
@@ -4107,7 +4107,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-85DFEA674E",
+      "id": "XLSX-F3CD0D116A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Dalry",
       "propertyType": "2 Bed Flat",
@@ -4124,7 +4124,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-41D7CE448C",
+      "id": "XLSX-6FB4AC10BF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Dalry",
       "propertyType": "2 Bed House",
@@ -4141,7 +4141,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-ACF0856C0C",
+      "id": "XLSX-D07247836A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Dalry",
       "propertyType": "2 Bed House",
@@ -4158,7 +4158,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5A8DE4F4B4",
+      "id": "XLSX-99708926B3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Dumbarton",
       "propertyType": "1 Bed Flat",
@@ -4175,7 +4175,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5FEEB53F61",
+      "id": "XLSX-D025833E19",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Dumbarton",
       "propertyType": "1 Bed Flat",
@@ -4192,7 +4192,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-946719CA9E",
+      "id": "XLSX-0B4F55B58D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Easterhouse",
       "propertyType": "1 Bed Flat",
@@ -4209,7 +4209,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AEC9ED9D7E",
+      "id": "XLSX-F564F4A8F0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Easterhouse",
       "propertyType": "1 Bed Flat",
@@ -4226,7 +4226,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-16667242BB",
+      "id": "XLSX-319C5B055B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Easterhouse",
       "propertyType": "2 Bed Flat",
@@ -4243,7 +4243,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-48C32808F7",
+      "id": "XLSX-9294912E95",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Easterhouse",
       "propertyType": "2 Bed Flat",
@@ -4260,7 +4260,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3D2A937495",
+      "id": "XLSX-E9C8C896E9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Easterhouse",
       "propertyType": "2 Bed Flat",
@@ -4277,7 +4277,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-801FBA799D",
+      "id": "XLSX-2CB832AE70",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Easterhouse",
       "propertyType": "2 Bed Flat",
@@ -4294,7 +4294,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BB0B9882CE",
+      "id": "XLSX-86F170DEBC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Easterhouse",
       "propertyType": "2 Bed Flat",
@@ -4311,7 +4311,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-02892DDB3C",
+      "id": "XLSX-0354210133",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Easterhouse",
       "propertyType": "2 Bed Flat",
@@ -4328,7 +4328,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0858586DFD",
+      "id": "XLSX-7E1D990287",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Easterhouse",
       "propertyType": "2 Bed House",
@@ -4345,7 +4345,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1006C30325",
+      "id": "XLSX-1CF53AE5A9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "1 Bed Flat",
@@ -4362,7 +4362,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6F8C739D8F",
+      "id": "XLSX-967EEEFF24",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "1 Bed Flat",
@@ -4379,7 +4379,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7B62CF6329",
+      "id": "XLSX-164A67B48C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "1 Bed Flat",
@@ -4396,7 +4396,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-10C47DCBD2",
+      "id": "XLSX-6ED056D2BF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "1 Bed Flat",
@@ -4413,7 +4413,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A4893558DE",
+      "id": "XLSX-8E95215D7C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "1 Bed Flat",
@@ -4430,7 +4430,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0B19BF5838",
+      "id": "XLSX-32CB59B352",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "1 Bed Flat",
@@ -4447,7 +4447,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-10B63639FC",
+      "id": "XLSX-689BDAB537",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "1 Bed Flat",
@@ -4464,7 +4464,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C57F9320A9",
+      "id": "XLSX-BF4DE7BE56",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "1 Bed Flat",
@@ -4481,7 +4481,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7782C924A0",
+      "id": "XLSX-BDD1F7FFE1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "1 Bed Flat",
@@ -4498,7 +4498,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0586619F43",
+      "id": "XLSX-37FBF99645",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed Flat",
@@ -4515,7 +4515,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6CFDE5D6FD",
+      "id": "XLSX-E51816E62A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed Flat",
@@ -4532,7 +4532,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-168A1ADCF5",
+      "id": "XLSX-3C2F3F6E5C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed Flat",
@@ -4549,7 +4549,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-20BE4B94D7",
+      "id": "XLSX-BB7160BF92",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed Flat",
@@ -4566,7 +4566,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7EFA8688D2",
+      "id": "XLSX-0A15C813C0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed Flat",
@@ -4583,7 +4583,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-01F72E7A88",
+      "id": "XLSX-C586D8928C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed Flat",
@@ -4600,7 +4600,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-99266F403E",
+      "id": "XLSX-EAB8A0817F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed Flat",
@@ -4617,7 +4617,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-95F95EB3FE",
+      "id": "XLSX-C051129ECB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed Flat",
@@ -4634,7 +4634,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4F37AC9F39",
+      "id": "XLSX-712A940F9C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed Flat",
@@ -4651,7 +4651,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F1FEA828A9",
+      "id": "XLSX-F0BB2744D9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed Flat",
@@ -4668,7 +4668,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A0EF9F4343",
+      "id": "XLSX-B9C2BDC5E2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed Flat",
@@ -4685,7 +4685,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AE7DF25672",
+      "id": "XLSX-DA89F4CEF6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed Flat",
@@ -4702,7 +4702,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-DA67D071C5",
+      "id": "XLSX-A66550AE1E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed Flat",
@@ -4719,7 +4719,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-284E3D21CF",
+      "id": "XLSX-380CA91231",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed House",
@@ -4736,7 +4736,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-214445EF15",
+      "id": "XLSX-D3D0BBE0B4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed House",
@@ -4753,7 +4753,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B7B9BB9987",
+      "id": "XLSX-E68D025AB2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed House",
@@ -4770,7 +4770,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-945F33EBB1",
+      "id": "XLSX-B8905A8A44",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Eastkilbride",
       "propertyType": "2 Bed House",
@@ -4787,7 +4787,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-87EDD6F194",
+      "id": "XLSX-BE60C11926",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Galston",
       "propertyType": "1 Bed Flat",
@@ -4804,7 +4804,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-248F07985A",
+      "id": "XLSX-871FD8E346",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Galston",
       "propertyType": "1 Bed Flat",
@@ -4821,7 +4821,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6413DC8176",
+      "id": "XLSX-FA4956DA1F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Galston",
       "propertyType": "1 Bed Flat",
@@ -4838,7 +4838,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2935838476",
+      "id": "XLSX-F964463ED2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Galston",
       "propertyType": "1 Bed Flat",
@@ -4855,7 +4855,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C1EF03ED9E",
+      "id": "XLSX-6ADB036868",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Galston",
       "propertyType": "2 Bed Flat",
@@ -4872,7 +4872,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E5F79184F8",
+      "id": "XLSX-5A9E04F571",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Galston",
       "propertyType": "2 Bed Flat",
@@ -4889,7 +4889,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D250EDF24B",
+      "id": "XLSX-4E4313C124",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Galston",
       "propertyType": "2 Bed Flat",
@@ -4906,7 +4906,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B6E861CE85",
+      "id": "XLSX-97C0FDA78C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Galston",
       "propertyType": "2 Bed Flat",
@@ -4923,7 +4923,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-51F6ED4F4C",
+      "id": "XLSX-96889CCCEA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Galston",
       "propertyType": "2 Bed Flat",
@@ -4940,7 +4940,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-386FB361BF",
+      "id": "XLSX-49E6F6C2B8",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Galston",
       "propertyType": "2 Bed House",
@@ -4957,7 +4957,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A0440643D7",
+      "id": "XLSX-21FAE52490",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "1 Bed Flat",
@@ -4974,7 +4974,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-30E17EC2C8",
+      "id": "XLSX-AC3979EF9A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "1 Bed Flat",
@@ -4991,7 +4991,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F81C229172",
+      "id": "XLSX-A223CBD30E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "1 Bed Flat",
@@ -5008,7 +5008,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7CF65E55DF",
+      "id": "XLSX-C4FEC8C848",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "1 Bed Flat",
@@ -5025,7 +5025,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E0908B81D6",
+      "id": "XLSX-9BD4E1F359",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "1 Bed Flat",
@@ -5042,7 +5042,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C43A8651EF",
+      "id": "XLSX-833E06044A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "1 Bed Flat",
@@ -5059,7 +5059,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B469636012",
+      "id": "XLSX-C210AF43C8",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "1 Bed Flat",
@@ -5076,7 +5076,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1BBFCEB8C8",
+      "id": "XLSX-304B2EE80B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "1 Bed Flat",
@@ -5093,7 +5093,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8DC08BFFE4",
+      "id": "XLSX-D724C37E48",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "1 Bed Flat",
@@ -5110,7 +5110,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5E39BC40C0",
+      "id": "XLSX-1F543458D4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "1 Bed Flat",
@@ -5127,7 +5127,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4D1E91F3B5",
+      "id": "XLSX-CC87476084",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed Flat",
@@ -5144,7 +5144,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-75E7435289",
+      "id": "XLSX-9444C3EA2E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed Flat",
@@ -5161,7 +5161,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-30D6B78B73",
+      "id": "XLSX-216AC9C4E9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed Flat",
@@ -5178,7 +5178,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A24AA7FF49",
+      "id": "XLSX-B6225FA323",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed Flat",
@@ -5195,7 +5195,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E6EBC60DAE",
+      "id": "XLSX-60C60E0BC4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed Flat",
@@ -5212,7 +5212,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-83966001C2",
+      "id": "XLSX-D33B385083",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed Flat",
@@ -5229,7 +5229,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C5C8E82D14",
+      "id": "XLSX-3840CBC604",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed Flat",
@@ -5246,7 +5246,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7B46E72347",
+      "id": "XLSX-AA0DCFB1A6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed Flat",
@@ -5263,7 +5263,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B19C3CBDFB",
+      "id": "XLSX-5C84430039",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed Flat",
@@ -5280,7 +5280,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BE05E86D16",
+      "id": "XLSX-EB4ECC7140",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed Flat",
@@ -5297,7 +5297,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FBA04704B6",
+      "id": "XLSX-5329461EE7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed Flat",
@@ -5314,7 +5314,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C58FF3CE2D",
+      "id": "XLSX-3BCB1E118C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed Flat",
@@ -5331,7 +5331,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-31A4D8B820",
+      "id": "XLSX-1C9B273ED0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed House",
@@ -5348,7 +5348,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-52EC6B58CF",
+      "id": "XLSX-6FC2ECEB8C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed House",
@@ -5365,7 +5365,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-15FCDE9FB8",
+      "id": "XLSX-6019C4239C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Govan",
       "propertyType": "2 Bed House",
@@ -5382,7 +5382,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F8C72EF63D",
+      "id": "XLSX-ECB1C812D7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Greenock",
       "propertyType": "1 Bed Flat",
@@ -5399,7 +5399,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BC7CE550B5",
+      "id": "XLSX-236AB573C1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Greenock",
       "propertyType": "1 Bed Flat",
@@ -5416,7 +5416,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7B7AD0929E",
+      "id": "XLSX-662522F29D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Greenock",
       "propertyType": "1 Bed Flat",
@@ -5433,7 +5433,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8AEDE1748E",
+      "id": "XLSX-2C3E6EF292",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Greenock",
       "propertyType": "1 Bed Flat",
@@ -5450,7 +5450,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0B463D065F",
+      "id": "XLSX-5EB1BDFA81",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Greenock",
       "propertyType": "1 Bed Flat",
@@ -5467,7 +5467,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C3514A92AB",
+      "id": "XLSX-2DE1203762",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Greenock",
       "propertyType": "2 Bed Flat",
@@ -5484,7 +5484,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-703A319BEC",
+      "id": "XLSX-6776345CC9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Greenock",
       "propertyType": "2 Bed Flat",
@@ -5501,7 +5501,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C32CBFCCDD",
+      "id": "XLSX-3B3E3644A9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Greenock",
       "propertyType": "2 Bed Flat",
@@ -5518,7 +5518,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-33E5D573A7",
+      "id": "XLSX-D41BF7176A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Greenock",
       "propertyType": "2 Bed Flat",
@@ -5535,7 +5535,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-39287FF2DC",
+      "id": "XLSX-81D27F478C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Greenock",
       "propertyType": "2 Bed Flat",
@@ -5552,7 +5552,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3DEE279BB9",
+      "id": "XLSX-56BAF40D81",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Greenock",
       "propertyType": "2 Bed House",
@@ -5569,7 +5569,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-76CB69493F",
+      "id": "XLSX-1A7D5FD23A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hamilton",
       "propertyType": "1 Bed Flat",
@@ -5586,7 +5586,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0B00534C9C",
+      "id": "XLSX-03C40564DB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hamilton",
       "propertyType": "1 Bed Flat",
@@ -5603,7 +5603,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-850D00C877",
+      "id": "XLSX-D00BC71A2F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hamilton",
       "propertyType": "1 Bed Flat",
@@ -5620,7 +5620,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FB55FC01F6",
+      "id": "XLSX-3870B5A603",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hamilton",
       "propertyType": "2 Bed Flat",
@@ -5637,7 +5637,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-70C82428F0",
+      "id": "XLSX-178177BE62",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hamilton",
       "propertyType": "2 Bed Flat",
@@ -5654,7 +5654,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5FA56C3908",
+      "id": "XLSX-7B46CB1A05",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hamilton",
       "propertyType": "2 Bed Flat",
@@ -5671,7 +5671,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8060869FA0",
+      "id": "XLSX-A598B7C2F3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "1 Bed Flat",
@@ -5688,7 +5688,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A085C045D2",
+      "id": "XLSX-484D2FB1A0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "1 Bed Flat",
@@ -5705,7 +5705,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-05A26F0919",
+      "id": "XLSX-EAC43EA524",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "1 Bed Flat",
@@ -5722,7 +5722,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7BD41959DA",
+      "id": "XLSX-A0A4924105",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "1 Bed Flat",
@@ -5739,7 +5739,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F287460728",
+      "id": "XLSX-529AFE025D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "1 Bed Flat",
@@ -5756,7 +5756,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F2067D825C",
+      "id": "XLSX-BC224E1F9D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "1 Bed Flat",
@@ -5773,7 +5773,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-76B4E874C4",
+      "id": "XLSX-32592559D7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "1 Bed Flat",
@@ -5790,7 +5790,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5E93C35DC4",
+      "id": "XLSX-51B24F177F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "1 Bed Flat",
@@ -5807,7 +5807,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8D17CF2DA0",
+      "id": "XLSX-36EEC80BB3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "1 Bed Flat",
@@ -5824,7 +5824,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-296C3825B7",
+      "id": "XLSX-D2F62B0838",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "1 Bed Flat",
@@ -5841,7 +5841,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AEBA967EB4",
+      "id": "XLSX-7163806CCB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "1 Bed Flat",
@@ -5858,7 +5858,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-356ADD2477",
+      "id": "XLSX-2776E39F8C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "1 Bed Flat",
@@ -5875,7 +5875,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F510E61545",
+      "id": "XLSX-03DD5E7DB5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "1 Bed Flat",
@@ -5892,7 +5892,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7557239420",
+      "id": "XLSX-21EFF9FD1B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -5909,7 +5909,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A01CF5B452",
+      "id": "XLSX-1C87EFD78D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -5926,7 +5926,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BFC1C1569C",
+      "id": "XLSX-8CA009E83F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -5943,7 +5943,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-33787E2C76",
+      "id": "XLSX-2D934AE918",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -5960,7 +5960,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-95D62975D7",
+      "id": "XLSX-2CB6965D69",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -5977,7 +5977,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9C087AB626",
+      "id": "XLSX-A7253A9AE5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -5994,7 +5994,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C7058736A6",
+      "id": "XLSX-2A53341098",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -6011,7 +6011,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0771BBA911",
+      "id": "XLSX-DDB6CA2AB2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -6028,7 +6028,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-74ABB70031",
+      "id": "XLSX-B2C3EF1F0E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -6045,7 +6045,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3C6EDDDC1C",
+      "id": "XLSX-47F5AD7BCD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -6062,7 +6062,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D7A8FB8B15",
+      "id": "XLSX-6584B7F19A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -6079,7 +6079,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-EDD10E8FC1",
+      "id": "XLSX-C83FE64C97",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -6096,7 +6096,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-56EE04ECAE",
+      "id": "XLSX-D685E5630B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -6113,7 +6113,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-104A8C51A1",
+      "id": "XLSX-CC68CDE8BA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -6130,7 +6130,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-13ABCC162A",
+      "id": "XLSX-ECE99CFD1F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -6147,7 +6147,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-580EB2D2F9",
+      "id": "XLSX-4A0D570223",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed Flat",
@@ -6164,7 +6164,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F04615E43D",
+      "id": "XLSX-A8DB4BD88C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Hillhead",
       "propertyType": "2 Bed House",
@@ -6181,7 +6181,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B61D58D4A7",
+      "id": "XLSX-FD809EC3FE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Johnstone",
       "propertyType": "1 Bed Flat",
@@ -6198,7 +6198,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-61C7C67BC9",
+      "id": "XLSX-C23E95FD76",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Johnstone",
       "propertyType": "1 Bed Flat",
@@ -6215,7 +6215,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-41D9E9BACB",
+      "id": "XLSX-88CF102292",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Johnstone",
       "propertyType": "1 Bed Flat",
@@ -6232,7 +6232,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-347549929F",
+      "id": "XLSX-2DBE910B35",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Johnstone",
       "propertyType": "1 Bed Flat",
@@ -6249,7 +6249,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3722E09CFD",
+      "id": "XLSX-7D870FDCB4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Johnstone",
       "propertyType": "1 Bed Flat",
@@ -6266,7 +6266,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-176C397C88",
+      "id": "XLSX-9019340F8D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Johnstone",
       "propertyType": "2 Bed Flat",
@@ -6283,7 +6283,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AAF7A6010D",
+      "id": "XLSX-30F864C8CF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Johnstone",
       "propertyType": "2 Bed Flat",
@@ -6300,7 +6300,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-22DE133F46",
+      "id": "XLSX-9B51E11F1B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Johnstone",
       "propertyType": "2 Bed Flat",
@@ -6317,7 +6317,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-12606D539F",
+      "id": "XLSX-8910FFE0F0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Johnstone",
       "propertyType": "2 Bed Flat",
@@ -6334,7 +6334,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-04039E532C",
+      "id": "XLSX-781843BB94",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Johnstone",
       "propertyType": "2 Bed Flat",
@@ -6351,7 +6351,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-120494E05F",
+      "id": "XLSX-37FA9C3C78",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Johnstone",
       "propertyType": "2 Bed House",
@@ -6368,7 +6368,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-302927E93A",
+      "id": "XLSX-BD5A0E1E15",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Johnstone",
       "propertyType": "2 Bed House",
@@ -6385,7 +6385,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E7141DC489",
+      "id": "XLSX-268E6EB2BF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Johnstone",
       "propertyType": "2 Bed House",
@@ -6402,7 +6402,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A964320B90",
+      "id": "XLSX-678C64B16F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Johnstone",
       "propertyType": "2 Bed House",
@@ -6419,7 +6419,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-90E73E43E1",
+      "id": "XLSX-33A39DC745",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "1 Bed Flat",
@@ -6436,7 +6436,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-246106FAE9",
+      "id": "XLSX-E1BCB41F53",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "1 Bed Flat",
@@ -6453,7 +6453,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8400CF3D3D",
+      "id": "XLSX-911E6BDBF5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "1 Bed Flat",
@@ -6470,7 +6470,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6681809782",
+      "id": "XLSX-7E3396B4AB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "1 Bed Flat",
@@ -6487,7 +6487,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E00A946D53",
+      "id": "XLSX-11BCB240E0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "1 Bed Flat",
@@ -6504,7 +6504,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1F78AA8FF9",
+      "id": "XLSX-D9CF140CDF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "1 Bed Flat",
@@ -6521,7 +6521,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7C28E68228",
+      "id": "XLSX-58170D20E2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "1 Bed Flat",
@@ -6538,7 +6538,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2A07895F0F",
+      "id": "XLSX-F60F230D06",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "1 Bed Flat",
@@ -6555,7 +6555,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-45BC76E7E2",
+      "id": "XLSX-80602D665E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "1 Bed Flat",
@@ -6572,7 +6572,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A0564E5FDB",
+      "id": "XLSX-0E76FCC7F4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "1 Bed Flat",
@@ -6589,7 +6589,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-17E198DAF3",
+      "id": "XLSX-DAF2C3A0DC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "2 Bed Flat",
@@ -6606,7 +6606,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-54D2448F66",
+      "id": "XLSX-671A618647",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "2 Bed Flat",
@@ -6623,7 +6623,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-993FE2CACD",
+      "id": "XLSX-77C286D404",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "2 Bed Flat",
@@ -6640,7 +6640,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C56C31224A",
+      "id": "XLSX-AC40F23DE7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "2 Bed Flat",
@@ -6657,7 +6657,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BDD37F9873",
+      "id": "XLSX-5D05B846B3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "2 Bed Flat",
@@ -6674,7 +6674,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-134A3895AB",
+      "id": "XLSX-6B9A2B5D1E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "2 Bed Flat",
@@ -6691,7 +6691,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B1EB1C7F38",
+      "id": "XLSX-FC5A076A6E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "2 Bed Flat",
@@ -6708,7 +6708,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5ADA233A49",
+      "id": "XLSX-FA6D2B8C58",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "2 Bed Flat",
@@ -6725,7 +6725,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E5CE981B41",
+      "id": "XLSX-DFC4965611",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "2 Bed Flat",
@@ -6742,7 +6742,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-69D5396BD7",
+      "id": "XLSX-5EBAD076CF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kelvinside",
       "propertyType": "2 Bed Flat",
@@ -6759,7 +6759,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-779230BF26",
+      "id": "XLSX-79F417ADEF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilbirnie",
       "propertyType": "1 Bed Flat",
@@ -6776,7 +6776,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0029AAD705",
+      "id": "XLSX-381C413662",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilbirnie",
       "propertyType": "2 Bed Flat",
@@ -6793,7 +6793,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C1A6600648",
+      "id": "XLSX-8CA009CCC6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilbirnie",
       "propertyType": "2 Bed Flat",
@@ -6810,7 +6810,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B1C12EFD9A",
+      "id": "XLSX-988627612D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilbirnie",
       "propertyType": "2 Bed Flat",
@@ -6827,7 +6827,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-81270321FD",
+      "id": "XLSX-2B59E10C3B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilbirnie",
       "propertyType": "2 Bed Flat",
@@ -6844,7 +6844,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FD575CC2AB",
+      "id": "XLSX-A3F7EE471E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilbirnie",
       "propertyType": "2 Bed Flat",
@@ -6861,7 +6861,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-EC980814FF",
+      "id": "XLSX-2F5C9C11E2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilbirnie",
       "propertyType": "2 Bed House",
@@ -6878,7 +6878,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5145681C29",
+      "id": "XLSX-1F72E92FF3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilbirnie",
       "propertyType": "2 Bed House",
@@ -6895,7 +6895,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5A3B8CDCEB",
+      "id": "XLSX-485700AF93",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "1 Bed Flat",
@@ -6912,7 +6912,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-EBF55FDE0A",
+      "id": "XLSX-B391711FE7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "1 Bed Flat",
@@ -6929,7 +6929,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-95E969A52F",
+      "id": "XLSX-03CC0C0252",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "1 Bed Flat",
@@ -6946,7 +6946,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-38BB4EE152",
+      "id": "XLSX-23A39A09F0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "1 Bed Flat",
@@ -6963,7 +6963,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0C80C18FD2",
+      "id": "XLSX-21CD32EAA4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "1 Bed Flat",
@@ -6980,7 +6980,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7621FF488F",
+      "id": "XLSX-F87A30C84B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "1 Bed Flat",
@@ -6997,7 +6997,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AE61745E02",
+      "id": "XLSX-5D3939873E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "1 Bed Flat",
@@ -7014,7 +7014,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E62234B731",
+      "id": "XLSX-760763F78A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "1 Bed Flat",
@@ -7031,7 +7031,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6BD7C5F24A",
+      "id": "XLSX-92E24D9985",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "1 Bed Flat",
@@ -7048,7 +7048,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7EFC1F4237",
+      "id": "XLSX-5AD532FCA9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "1 Bed Flat",
@@ -7065,7 +7065,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3F9BBA49AE",
+      "id": "XLSX-1420CF900B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "1 Bed Flat",
@@ -7082,7 +7082,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1222A25C98",
+      "id": "XLSX-B23AE205BB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed Flat",
@@ -7099,7 +7099,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-91D7A12EB7",
+      "id": "XLSX-3FAE298BEC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed Flat",
@@ -7116,7 +7116,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A930BDE6D5",
+      "id": "XLSX-E8C0956C69",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed Flat",
@@ -7133,7 +7133,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-524B32083B",
+      "id": "XLSX-FC0ACB267C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed Flat",
@@ -7150,7 +7150,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-55C944AA18",
+      "id": "XLSX-08DC6C0ABD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed Flat",
@@ -7167,7 +7167,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0F3467CCEA",
+      "id": "XLSX-6B5F21EBA5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed Flat",
@@ -7184,7 +7184,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-29E984480A",
+      "id": "XLSX-3C9C5EB459",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed Flat",
@@ -7201,7 +7201,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-41FDA20663",
+      "id": "XLSX-476F95F58B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed Flat",
@@ -7218,7 +7218,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-99D92E296B",
+      "id": "XLSX-52996F74BE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed House",
@@ -7235,7 +7235,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-736067DC1F",
+      "id": "XLSX-9FD71933E6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed House",
@@ -7252,7 +7252,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B3DB567113",
+      "id": "XLSX-B0404FE3BC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed House",
@@ -7269,7 +7269,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-00244D719A",
+      "id": "XLSX-8C0CFC3C3E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed House",
@@ -7286,7 +7286,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C8B0C93985",
+      "id": "XLSX-4F8C59A192",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed Flat",
@@ -7303,7 +7303,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-773C4FE73D",
+      "id": "XLSX-A441DCE2DE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed Flat",
@@ -7320,7 +7320,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0F88463914",
+      "id": "XLSX-5231FCD5C5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed Flat",
@@ -7337,7 +7337,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-094D467DB4",
+      "id": "XLSX-6B25AEDFD2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed Flat",
@@ -7354,7 +7354,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-DA6F2CDF6B",
+      "id": "XLSX-B7F2E9D0C4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed Flat",
@@ -7371,7 +7371,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C8F24BE592",
+      "id": "XLSX-E426A37C14",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed Flat",
@@ -7388,7 +7388,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-81527F435F",
+      "id": "XLSX-EE67796113",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed Flat",
@@ -7405,7 +7405,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CD2E4F18F9",
+      "id": "XLSX-9BAF23B6F6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed Flat",
@@ -7422,7 +7422,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E379C17BFB",
+      "id": "XLSX-D603657FEE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed Flat",
@@ -7439,7 +7439,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-04807C33A9",
+      "id": "XLSX-B1222A2B17",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed Flat",
@@ -7456,7 +7456,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FC2981AA50",
+      "id": "XLSX-E2ECAB0DFE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed Flat",
@@ -7473,7 +7473,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-445191419A",
+      "id": "XLSX-53B643D507",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed Flat",
@@ -7490,7 +7490,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-406712305E",
+      "id": "XLSX-BEA625F861",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed Flat",
@@ -7507,7 +7507,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E7C29C6EAD",
+      "id": "XLSX-046D270AD0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed Flat",
@@ -7524,7 +7524,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BA68D3D979",
+      "id": "XLSX-B8509DB51D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed House",
@@ -7541,7 +7541,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F7F73C6AB6",
+      "id": "XLSX-7A584A118C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed House",
@@ -7558,7 +7558,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F5EC424EBC",
+      "id": "XLSX-75E7631790",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed House",
@@ -7575,7 +7575,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-89CFAB296C",
+      "id": "XLSX-B4E993B290",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilwinning",
       "propertyType": "2 Bed House",
@@ -7592,7 +7592,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-189312221C",
+      "id": "XLSX-D5DA3EB636",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7609,7 +7609,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5DC6A8E968",
+      "id": "XLSX-81B3792BFB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7626,7 +7626,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-34E9681517",
+      "id": "XLSX-C324635AE5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7643,7 +7643,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-711559AEDC",
+      "id": "XLSX-5001B86B97",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7660,7 +7660,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9AA8616CBF",
+      "id": "XLSX-20ABDB08A5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7677,7 +7677,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B9DA650AAB",
+      "id": "XLSX-622D842DA6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7694,7 +7694,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-46B8D98694",
+      "id": "XLSX-3BE1441865",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7711,7 +7711,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-93FC7F50AD",
+      "id": "XLSX-22DB74C250",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7728,7 +7728,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-EC0C6377CC",
+      "id": "XLSX-1E0CC960E8",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7745,7 +7745,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A8311C3B60",
+      "id": "XLSX-9E33D14935",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7762,7 +7762,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D1590C9760",
+      "id": "XLSX-BFA19F1537",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7779,7 +7779,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-16400814D4",
+      "id": "XLSX-7254EECCC7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7796,7 +7796,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-78E67AF2A6",
+      "id": "XLSX-01309CDFEC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7813,7 +7813,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-43C03A29CF",
+      "id": "XLSX-EFBC85F0BF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7830,7 +7830,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-23231A3511",
+      "id": "XLSX-38725C9E04",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7847,7 +7847,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AA10977D38",
+      "id": "XLSX-BD99BE16D2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7864,7 +7864,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6AD8AF909F",
+      "id": "XLSX-106F52371D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -7881,7 +7881,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-09C9CA43B5",
+      "id": "XLSX-0DB52016FD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -7898,7 +7898,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0A7A3491E1",
+      "id": "XLSX-ED1F65DC7F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -7915,7 +7915,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E00108CEF9",
+      "id": "XLSX-EEE380FA48",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -7932,7 +7932,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CE526A02BA",
+      "id": "XLSX-0B2253B564",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -7949,7 +7949,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-94BCE904B4",
+      "id": "XLSX-2A470E3F3B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -7966,7 +7966,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-570F478E3A",
+      "id": "XLSX-AAD5451A10",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -7983,7 +7983,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4364DE9410",
+      "id": "XLSX-48DB509BEF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -8000,7 +8000,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BA841042B5",
+      "id": "XLSX-9957199D52",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -8017,7 +8017,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-70EB80F6B3",
+      "id": "XLSX-BEBFE00B18",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -8034,7 +8034,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-66544AA7C5",
+      "id": "XLSX-E05C11E96C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -8051,7 +8051,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3F5A721B96",
+      "id": "XLSX-F265972984",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -8068,7 +8068,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BCD231344A",
+      "id": "XLSX-FFB2B0E6E5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -8085,7 +8085,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FB96AC8C67",
+      "id": "XLSX-7EFE41DC31",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed House",
@@ -8102,7 +8102,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4900F98E61",
+      "id": "XLSX-2CC48C2F4F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed House",
@@ -8119,7 +8119,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AE51DBE9C9",
+      "id": "XLSX-8A0CD076A3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed House",
@@ -8136,7 +8136,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A7461470D8",
+      "id": "XLSX-0A26B9ED10",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed House",
@@ -8153,7 +8153,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3481CFB5F5",
+      "id": "XLSX-F16A8E4857",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed House",
@@ -8170,7 +8170,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0897A71BA1",
+      "id": "XLSX-319A1BF79C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed House",
@@ -8187,7 +8187,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4F5C957C1C",
+      "id": "XLSX-498F458A78",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Larkhall",
       "propertyType": "1 Bed Flat",
@@ -8204,7 +8204,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-145BD2FB8D",
+      "id": "XLSX-50DD716611",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Larkhall",
       "propertyType": "1 Bed Flat",
@@ -8221,7 +8221,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E2097511F3",
+      "id": "XLSX-53DFF869FA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Larkhall",
       "propertyType": "1 Bed Flat",
@@ -8238,7 +8238,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B74216823E",
+      "id": "XLSX-2AED616EAA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "1 Bed Flat",
@@ -8255,7 +8255,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F51B1F31BC",
+      "id": "XLSX-709D08DD5A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "1 Bed Flat",
@@ -8272,7 +8272,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1AD4B3BF2A",
+      "id": "XLSX-05C1E4E364",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "1 Bed Flat",
@@ -8289,7 +8289,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7AABD096A5",
+      "id": "XLSX-DD350F5FA2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "1 Bed Flat",
@@ -8306,7 +8306,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8ACFFC88BA",
+      "id": "XLSX-A26C8E2965",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "1 Bed Flat",
@@ -8323,7 +8323,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B4BC80578A",
+      "id": "XLSX-8D14041F40",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "1 Bed Flat",
@@ -8340,7 +8340,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4D9466EE27",
+      "id": "XLSX-1A3AA4F098",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "1 Bed Flat",
@@ -8357,7 +8357,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5B1875AEF0",
+      "id": "XLSX-2AAF781C0C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "1 Bed Flat",
@@ -8374,7 +8374,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8B7FE1824F",
+      "id": "XLSX-50E282DA75",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "1 Bed Flat",
@@ -8391,7 +8391,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1A86AC7253",
+      "id": "XLSX-2A6E49FC2C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "1 Bed Flat",
@@ -8408,7 +8408,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F21ACD38C2",
+      "id": "XLSX-DA0E1A0E6B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "2 Bed Flat",
@@ -8425,7 +8425,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1FF5FD2C85",
+      "id": "XLSX-61EBA6335A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "2 Bed Flat",
@@ -8442,7 +8442,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7AD8336C7F",
+      "id": "XLSX-676BAA045B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "2 Bed Flat",
@@ -8459,7 +8459,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-67F3813233",
+      "id": "XLSX-FA99A5F93C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "2 Bed House",
@@ -8476,7 +8476,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6AADDD03EF",
+      "id": "XLSX-9AE30CC23C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "2 Bed House",
@@ -8493,7 +8493,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-16AD17D850",
+      "id": "XLSX-EF3922D144",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "2 Bed House",
@@ -8510,7 +8510,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CE12A26ABE",
+      "id": "XLSX-C8D5CAA3EC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "2 Bed House",
@@ -8527,7 +8527,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-85C58318E8",
+      "id": "XLSX-5D445FB146",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "2 Bed House",
@@ -8544,7 +8544,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5BDF5164A0",
+      "id": "XLSX-E9BCEC98B8",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Maybole",
       "propertyType": "2 Bed House",
@@ -8561,7 +8561,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D283F1E20E",
+      "id": "XLSX-B78BBB17D2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Motherwell",
       "propertyType": "2 Bed Flat",
@@ -8578,7 +8578,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6FBE8E7895",
+      "id": "XLSX-F960333A8B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Motherwell",
       "propertyType": "2 Bed Flat",
@@ -8595,7 +8595,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-88949666C9",
+      "id": "XLSX-07BC92E915",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Motherwell",
       "propertyType": "2 Bed House",
@@ -8612,7 +8612,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2F14E86335",
+      "id": "XLSX-6C03F94617",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "New Cumnock",
       "propertyType": "2 Bed Flat",
@@ -8629,7 +8629,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-ACFD7446BA",
+      "id": "XLSX-5A8554C662",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "New Cumnock",
       "propertyType": "2 Bed Flat",
@@ -8646,7 +8646,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B8151639D8",
+      "id": "XLSX-3DA8B1B8C2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "New Cumnock",
       "propertyType": "2 Bed House",
@@ -8663,7 +8663,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-46AB20D2A8",
+      "id": "XLSX-CB0A5CF6DA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Newmilns",
       "propertyType": "1 Bed Flat",
@@ -8680,7 +8680,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9DC606BD3B",
+      "id": "XLSX-1B31259019",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Newmilns",
       "propertyType": "1 Bed Flat",
@@ -8697,7 +8697,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D2A6FB623C",
+      "id": "XLSX-8A9E6C9E20",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Newmilns",
       "propertyType": "1 Bed Flat",
@@ -8714,7 +8714,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1B1D99E80C",
+      "id": "XLSX-CB798F99A9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Newmilns",
       "propertyType": "1 Bed Flat",
@@ -8731,7 +8731,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E8CC713710",
+      "id": "XLSX-CA5F5499FB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Newmilns",
       "propertyType": "1 Bed Flat",
@@ -8748,7 +8748,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-78BB6C2D56",
+      "id": "XLSX-A9805F49F3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Newmilns",
       "propertyType": "1 Bed Flat",
@@ -8765,7 +8765,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F6C7496FBF",
+      "id": "XLSX-C488E7EF67",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Newmilns",
       "propertyType": "2 Bed Flat",
@@ -8782,7 +8782,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6098B429D4",
+      "id": "XLSX-D45DE0225B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Newmilns",
       "propertyType": "2 Bed House",
@@ -8799,7 +8799,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2418BF6A5B",
+      "id": "XLSX-6D2EB041F3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -8816,7 +8816,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6E69776E25",
+      "id": "XLSX-BDB57F01A1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -8833,7 +8833,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D7645C57BB",
+      "id": "XLSX-A5471F162E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -8850,7 +8850,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-61BD0CF5A4",
+      "id": "XLSX-C51C000C76",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -8867,7 +8867,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5B16DED671",
+      "id": "XLSX-3ED7622890",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -8884,7 +8884,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5DA60DB49B",
+      "id": "XLSX-9F09D0EACA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -8901,7 +8901,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9C80C2ADFF",
+      "id": "XLSX-24C3D47F74",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -8918,7 +8918,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5C0D4EA960",
+      "id": "XLSX-841483B540",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -8935,7 +8935,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4EB33A86C2",
+      "id": "XLSX-5C15388779",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -8952,7 +8952,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E8B68A646D",
+      "id": "XLSX-D27BCB6794",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -8969,7 +8969,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5069537C00",
+      "id": "XLSX-0A825422C4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed Flat",
@@ -8986,7 +8986,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A0B7710BCA",
+      "id": "XLSX-06F1AEA2B4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed Flat",
@@ -9003,7 +9003,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-09AFF8D847",
+      "id": "XLSX-C977DD0546",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed Flat",
@@ -9020,7 +9020,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C1C4604604",
+      "id": "XLSX-6B4F8002C2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed Flat",
@@ -9037,7 +9037,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F6E0425843",
+      "id": "XLSX-397E1B2884",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed Flat",
@@ -9054,7 +9054,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-86F8FB09A2",
+      "id": "XLSX-14716354AD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed Flat",
@@ -9071,7 +9071,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F37056F096",
+      "id": "XLSX-85B9B789B4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed House",
@@ -9088,7 +9088,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2B77ABB1EF",
+      "id": "XLSX-FE0D95E004",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed House",
@@ -9105,7 +9105,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-08A7198F60",
+      "id": "XLSX-1AA229F5E2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed House",
@@ -9122,7 +9122,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2BEF604DED",
+      "id": "XLSX-79CCDBE4F4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed House",
@@ -9139,7 +9139,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CE3B76574D",
+      "id": "XLSX-2460D51579",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed House",
@@ -9156,7 +9156,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AABE28E98E",
+      "id": "XLSX-17E3114931",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed House",
@@ -9173,7 +9173,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-91B785684B",
+      "id": "XLSX-BEE93403DF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Parkhead",
       "propertyType": "1 Bed Flat",
@@ -9190,7 +9190,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C6C7A6C6B9",
+      "id": "XLSX-1B030B57EE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Parkhead",
       "propertyType": "1 Bed Flat",
@@ -9207,7 +9207,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-DD789883AE",
+      "id": "XLSX-81591B4D3F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Parkhead",
       "propertyType": "1 Bed Flat",
@@ -9224,7 +9224,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1ACBE23475",
+      "id": "XLSX-6FA9464DBC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Parkhead",
       "propertyType": "1 Bed Flat",
@@ -9241,7 +9241,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8E2ED91B16",
+      "id": "XLSX-D35381155E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Parkhead",
       "propertyType": "2 Bed Flat",
@@ -9258,7 +9258,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A135950180",
+      "id": "XLSX-6201ACAE3F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Parkhead",
       "propertyType": "2 Bed Flat",
@@ -9275,7 +9275,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8C58855F4D",
+      "id": "XLSX-554B5C0FD3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Parkhead",
       "propertyType": "2 Bed Flat",
@@ -9292,7 +9292,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-44204C1E1D",
+      "id": "XLSX-D06524DF3D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Parkhead",
       "propertyType": "2 Bed Flat",
@@ -9309,7 +9309,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E641942004",
+      "id": "XLSX-20C012CEC6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Parkhead",
       "propertyType": "2 Bed Flat",
@@ -9326,7 +9326,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-EBED340CA7",
+      "id": "XLSX-EA43143227",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Parkhead",
       "propertyType": "2 Bed House",
@@ -9343,7 +9343,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7DF8483447",
+      "id": "XLSX-609BD7B6CE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Parkhead",
       "propertyType": "2 Bed House",
@@ -9360,7 +9360,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-360D89CDE4",
+      "id": "XLSX-C552092C0F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Parkhead",
       "propertyType": "2 Bed House",
@@ -9377,7 +9377,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-126B0915E9",
+      "id": "XLSX-796C21CE61",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Parkhead",
       "propertyType": "2 Bed House",
@@ -9394,7 +9394,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4C7B672EFB",
+      "id": "XLSX-FB44D06DFA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "1 Bed Flat",
@@ -9411,7 +9411,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-01FF8C61E2",
+      "id": "XLSX-D16E41C365",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "1 Bed Flat",
@@ -9428,7 +9428,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8E770587FA",
+      "id": "XLSX-C969B87AE0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "1 Bed Flat",
@@ -9445,7 +9445,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-55143544D2",
+      "id": "XLSX-412B58F5D2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "1 Bed Flat",
@@ -9462,7 +9462,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-16E0FAD410",
+      "id": "XLSX-E78A10AA2D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "1 Bed Flat",
@@ -9479,7 +9479,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-ABCF254B3B",
+      "id": "XLSX-096B017F13",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "1 Bed Flat",
@@ -9496,7 +9496,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F9C1E8C363",
+      "id": "XLSX-107509A8B2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "1 Bed Flat",
@@ -9513,7 +9513,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-777A3BAB70",
+      "id": "XLSX-76C0F29E82",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "1 Bed Flat",
@@ -9530,7 +9530,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E005F158DF",
+      "id": "XLSX-DD469E45B1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "1 Bed Flat",
@@ -9547,7 +9547,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7DFD889AC8",
+      "id": "XLSX-9E7E0F0B56",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "1 Bed Flat",
@@ -9564,7 +9564,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1D2CE6878E",
+      "id": "XLSX-686FEE73C4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "2 Bed Flat",
@@ -9581,7 +9581,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2B714A9D5D",
+      "id": "XLSX-8DEE2E0DED",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "2 Bed Flat",
@@ -9598,7 +9598,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E3C1473384",
+      "id": "XLSX-A7C899543E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "2 Bed Flat",
@@ -9615,7 +9615,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A18F6B1E0A",
+      "id": "XLSX-AA53B3734C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "2 Bed Flat",
@@ -9632,7 +9632,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1CE8AD9875",
+      "id": "XLSX-F3348B9E35",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "2 Bed Flat",
@@ -9649,7 +9649,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-185D8E7B67",
+      "id": "XLSX-3A4E59DEC5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "2 Bed Flat",
@@ -9666,7 +9666,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-01950CC954",
+      "id": "XLSX-9A7D1534AD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "2 Bed Flat",
@@ -9683,7 +9683,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-37F58851A2",
+      "id": "XLSX-8D3F889FB5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "2 Bed Flat",
@@ -9700,7 +9700,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5A69E1046C",
+      "id": "XLSX-8FA80F4511",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "2 Bed Flat",
@@ -9717,7 +9717,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5694E75D79",
+      "id": "XLSX-417B430433",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Partick",
       "propertyType": "2 Bed Flat",
@@ -9734,7 +9734,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-38123110DA",
+      "id": "XLSX-FB96963E9E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Patna",
       "propertyType": "2 Bed Flat",
@@ -9751,7 +9751,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6FFADADC55",
+      "id": "XLSX-12420339EA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Patna",
       "propertyType": "2 Bed Flat",
@@ -9768,7 +9768,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BF2C517F91",
+      "id": "XLSX-62B54167C3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Patna",
       "propertyType": "2 Bed House",
@@ -9785,7 +9785,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2A340B78FF",
+      "id": "XLSX-198C6DA37F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Patna",
       "propertyType": "2 Bed House",
@@ -9802,7 +9802,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7331718397",
+      "id": "XLSX-4891015DF1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "1 Bed Flat",
@@ -9819,7 +9819,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-859966D943",
+      "id": "XLSX-099F778075",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "1 Bed Flat",
@@ -9836,7 +9836,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-01FC2846A8",
+      "id": "XLSX-04062A7277",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "1 Bed Flat",
@@ -9853,7 +9853,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5015A3E16C",
+      "id": "XLSX-8525948F36",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "1 Bed Flat",
@@ -9870,7 +9870,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-68B87753FA",
+      "id": "XLSX-2F59EB392F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "1 Bed Flat",
@@ -9887,7 +9887,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-679DCD579F",
+      "id": "XLSX-FED4B3DE8A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "1 Bed Flat",
@@ -9904,7 +9904,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9AF3DD066F",
+      "id": "XLSX-FA693EC5C8",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "1 Bed Flat",
@@ -9921,7 +9921,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1E17BAC8BE",
+      "id": "XLSX-71E28DEC3B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "2 Bed Flat",
@@ -9938,7 +9938,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E28408A558",
+      "id": "XLSX-E147E18739",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "2 Bed Flat",
@@ -9955,7 +9955,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2785468C03",
+      "id": "XLSX-A062DF45D9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "2 Bed Flat",
@@ -9972,7 +9972,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-80795685CE",
+      "id": "XLSX-7A70FAA1BC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "2 Bed Flat",
@@ -9989,7 +9989,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-706A87597D",
+      "id": "XLSX-01B0CA959C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "2 Bed Flat",
@@ -10006,7 +10006,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-34652CAEEB",
+      "id": "XLSX-33086292F4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "2 Bed Flat",
@@ -10023,7 +10023,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-200D404BAF",
+      "id": "XLSX-09DD8EF9F2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "2 Bed Flat",
@@ -10040,7 +10040,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-88F4A23689",
+      "id": "XLSX-220D5D7B75",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "2 Bed Flat",
@@ -10057,7 +10057,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BEEE976B48",
+      "id": "XLSX-25263D8B39",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "2 Bed Flat",
@@ -10074,7 +10074,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-93D053FA59",
+      "id": "XLSX-670FCDA308",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "2 Bed House",
@@ -10091,7 +10091,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5E4861F888",
+      "id": "XLSX-43169BE1A6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Pollokshields",
       "propertyType": "2 Bed House",
@@ -10108,7 +10108,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-90548C3427",
+      "id": "XLSX-FB2C647DA1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Port Glasgow",
       "propertyType": "1 Bed Flat",
@@ -10125,7 +10125,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9E3740D2BC",
+      "id": "XLSX-6023A9FD02",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Port Glasgow",
       "propertyType": "1 Bed Flat",
@@ -10142,7 +10142,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7170B702D2",
+      "id": "XLSX-0701921349",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Port Glasgow",
       "propertyType": "1 Bed Flat",
@@ -10159,7 +10159,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A0F0049AEB",
+      "id": "XLSX-C596DC0C22",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Port Glasgow",
       "propertyType": "1 Bed Flat",
@@ -10176,7 +10176,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A6AA08449D",
+      "id": "XLSX-D4DE950656",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Port Glasgow",
       "propertyType": "2 Bed Flat",
@@ -10193,7 +10193,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C30693BCE1",
+      "id": "XLSX-B0F47EA72B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Port Glasgow",
       "propertyType": "2 Bed Flat",
@@ -10210,7 +10210,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-90026990C7",
+      "id": "XLSX-361DBF436C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Port Glasgow",
       "propertyType": "2 Bed Flat",
@@ -10227,7 +10227,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-880FF99963",
+      "id": "XLSX-B16E95ACE0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Port Glasgow",
       "propertyType": "2 Bed Flat",
@@ -10244,7 +10244,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3557E0E24B",
+      "id": "XLSX-D543E25AC5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Port Glasgow",
       "propertyType": "2 Bed Flat",
@@ -10261,7 +10261,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-EC28C2B8D5",
+      "id": "XLSX-F7DA6CCFDE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Port Glasgow",
       "propertyType": "2 Bed House",
@@ -10278,7 +10278,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3BEB671B47",
+      "id": "XLSX-B8FB507B56",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Port Glasgow",
       "propertyType": "2 Bed House",
@@ -10295,7 +10295,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D3D1C0650F",
+      "id": "XLSX-D0A16E4267",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Port Glasgow",
       "propertyType": "2 Bed House",
@@ -10312,7 +10312,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C064927B1A",
+      "id": "XLSX-2E4E7A89DA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "1 Bed Flat",
@@ -10329,7 +10329,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-536F436CA8",
+      "id": "XLSX-2F9BC05998",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "1 Bed Flat",
@@ -10346,7 +10346,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CA2DBC3BF6",
+      "id": "XLSX-6592E32125",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "1 Bed Flat",
@@ -10363,7 +10363,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A8C2C5C709",
+      "id": "XLSX-4A69D0E44D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "1 Bed Flat",
@@ -10380,7 +10380,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3A6902ACDF",
+      "id": "XLSX-8844B4B033",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "2 Bed Flat",
@@ -10397,7 +10397,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F8D35B4F1C",
+      "id": "XLSX-DDE0604E0A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "2 Bed Flat",
@@ -10414,7 +10414,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6488F098BD",
+      "id": "XLSX-C680ABE82D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "2 Bed Flat",
@@ -10431,7 +10431,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B8D11CBCDD",
+      "id": "XLSX-3B27AD2EA7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "2 Bed Flat",
@@ -10448,7 +10448,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-998DB64DB3",
+      "id": "XLSX-00FDEC3F4B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "2 Bed Flat",
@@ -10465,7 +10465,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-EE02526F81",
+      "id": "XLSX-EB23131E7A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "2 Bed Flat",
@@ -10482,7 +10482,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E90B2D91F0",
+      "id": "XLSX-F14DBBF433",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "2 Bed Flat",
@@ -10499,7 +10499,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7F428EA56B",
+      "id": "XLSX-31A1EA73C0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "2 Bed House",
@@ -10516,7 +10516,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-DA41F1E36C",
+      "id": "XLSX-BEE6F01768",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "2 Bed House",
@@ -10533,7 +10533,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9217BD9672",
+      "id": "XLSX-1EDCC51EEF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "2 Bed House",
@@ -10550,7 +10550,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-666E4D6604",
+      "id": "XLSX-84A0439FB4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "2 Bed House",
@@ -10567,7 +10567,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D30EC11528",
+      "id": "XLSX-2F24C78673",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "2 Bed House",
@@ -10584,7 +10584,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-87461B89ED",
+      "id": "XLSX-3CD130B302",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "2 Bed House",
@@ -10601,7 +10601,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9E5EEA454D",
+      "id": "XLSX-DB353B9C39",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Prestwick",
       "propertyType": "2 Bed House",
@@ -10618,7 +10618,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-DF89FEE62B",
+      "id": "XLSX-487A31F7CC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "1 Bed Flat",
@@ -10635,7 +10635,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-78A91A695E",
+      "id": "XLSX-F20C48A03D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "1 Bed Flat",
@@ -10652,7 +10652,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9FA3A26244",
+      "id": "XLSX-DFCCF46CFB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "1 Bed Flat",
@@ -10669,7 +10669,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C05F20D9D6",
+      "id": "XLSX-32EDA931DA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "1 Bed Flat",
@@ -10686,7 +10686,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9377D932C2",
+      "id": "XLSX-FC7F983E52",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "1 Bed Flat",
@@ -10703,7 +10703,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-DDE6D4F3A8",
+      "id": "XLSX-14C7497B89",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "1 Bed Flat",
@@ -10720,7 +10720,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-81EA733D12",
+      "id": "XLSX-BEAADE1D3B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "2 Bed Flat",
@@ -10737,7 +10737,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D658C9BC84",
+      "id": "XLSX-760019EDE5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "2 Bed Flat",
@@ -10754,7 +10754,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D4B3700A37",
+      "id": "XLSX-F2786C12DE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "2 Bed Flat",
@@ -10771,7 +10771,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-28DF5C9489",
+      "id": "XLSX-58D63D0D3D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "2 Bed Flat",
@@ -10788,7 +10788,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E4455765ED",
+      "id": "XLSX-FE47A737EE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "2 Bed Flat",
@@ -10805,7 +10805,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7591C8FF7D",
+      "id": "XLSX-655A879184",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "2 Bed Flat",
@@ -10822,7 +10822,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0D3956D5A0",
+      "id": "XLSX-007302A812",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "2 Bed Flat",
@@ -10839,7 +10839,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E4A6F3A2BA",
+      "id": "XLSX-B08DDF05ED",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "2 Bed Flat",
@@ -10856,7 +10856,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-BB8B91036F",
+      "id": "XLSX-D59DCB2C37",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "2 Bed Flat",
@@ -10873,7 +10873,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-921ACABB57",
+      "id": "XLSX-6E278843F8",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "2 Bed Flat",
@@ -10890,7 +10890,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-68C046E6A0",
+      "id": "XLSX-286E6499D1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "2 Bed Flat",
@@ -10907,7 +10907,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-00F51C588F",
+      "id": "XLSX-B3BD297074",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Renfrew",
       "propertyType": "2 Bed House",
@@ -10924,7 +10924,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8B791EFA0A",
+      "id": "XLSX-C63A3A6239",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "1 Bed Flat",
@@ -10941,7 +10941,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4B1898BFFB",
+      "id": "XLSX-ADFC3CAA2D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "1 Bed Flat",
@@ -10958,7 +10958,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AE81D64043",
+      "id": "XLSX-B85FEB782D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "1 Bed Flat",
@@ -10975,7 +10975,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-92162D8F07",
+      "id": "XLSX-DAC1A31DDD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "1 Bed Flat",
@@ -10992,7 +10992,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-445F436639",
+      "id": "XLSX-2EBEF17BDB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "1 Bed Flat",
@@ -11009,7 +11009,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D716E3E85D",
+      "id": "XLSX-D45248E3B4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "1 Bed Flat",
@@ -11026,7 +11026,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AC5D7FF882",
+      "id": "XLSX-6E1159F05E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "2 Bed Flat",
@@ -11043,7 +11043,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B665FF3B06",
+      "id": "XLSX-814BBD6BB5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "2 Bed Flat",
@@ -11060,7 +11060,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-953C44F379",
+      "id": "XLSX-3EF4086732",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "2 Bed Flat",
@@ -11077,7 +11077,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-162DD884C0",
+      "id": "XLSX-1672D11A84",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "2 Bed Flat",
@@ -11094,7 +11094,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CD6DFBE41A",
+      "id": "XLSX-BFCF7F4DE6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "2 Bed Flat",
@@ -11111,7 +11111,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FCFCC8F39E",
+      "id": "XLSX-F505D9DDC0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "2 Bed Flat",
@@ -11128,7 +11128,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AD3BD69F79",
+      "id": "XLSX-852A4F00E0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "2 Bed Flat",
@@ -11145,7 +11145,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-86B2524CD8",
+      "id": "XLSX-82F934ECBA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "2 Bed House",
@@ -11162,7 +11162,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A4DB76A921",
+      "id": "XLSX-7127BA8FC3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Rutherglen",
       "propertyType": "2 Bed House",
@@ -11179,7 +11179,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-91AB1759A9",
+      "id": "XLSX-4DC173D2B8",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Saltcoats",
       "propertyType": "1 Bed Flat",
@@ -11196,7 +11196,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5AE7F2B235",
+      "id": "XLSX-B6B0636297",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Saltcoats",
       "propertyType": "2 Bed Flat",
@@ -11213,7 +11213,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A7F0F72A50",
+      "id": "XLSX-621FAD49A0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Shawlands",
       "propertyType": "1 Bed Flat",
@@ -11230,7 +11230,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F7B30964C2",
+      "id": "XLSX-53C2AB53CE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Shawlands",
       "propertyType": "1 Bed Flat",
@@ -11247,7 +11247,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A0DB9B482D",
+      "id": "XLSX-59BA556E53",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Shawlands",
       "propertyType": "1 Bed Flat",
@@ -11264,7 +11264,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F73062939D",
+      "id": "XLSX-9C08B09859",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Shawlands",
       "propertyType": "1 Bed Flat",
@@ -11281,7 +11281,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9E04C910D4",
+      "id": "XLSX-CD34080145",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Shawlands",
       "propertyType": "1 Bed Flat",
@@ -11298,7 +11298,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2218F13663",
+      "id": "XLSX-F604744B26",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Shawlands",
       "propertyType": "2 Bed Flat",
@@ -11315,7 +11315,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F169FD65DA",
+      "id": "XLSX-C70505D0FD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Shawlands",
       "propertyType": "2 Bed Flat",
@@ -11332,7 +11332,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A5188B3073",
+      "id": "XLSX-F94652C3C2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Shawlands",
       "propertyType": "2 Bed Flat",
@@ -11349,7 +11349,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CFC568D3DE",
+      "id": "XLSX-0FAC5BF525",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Shawlands",
       "propertyType": "2 Bed Flat",
@@ -11366,7 +11366,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7B9D38917F",
+      "id": "XLSX-F2DCAFFD7B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Shawlands",
       "propertyType": "2 Bed Flat",
@@ -11383,7 +11383,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D86E7459B1",
+      "id": "XLSX-57D3685360",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stepps",
       "propertyType": "2 Bed Flat",
@@ -11400,7 +11400,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FFFDECFF4C",
+      "id": "XLSX-10A23CD63F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stepps",
       "propertyType": "2 Bed Flat",
@@ -11417,7 +11417,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AD612EFED1",
+      "id": "XLSX-4FAE7CC42E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stepps",
       "propertyType": "2 Bed Flat",
@@ -11434,7 +11434,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-81DFA59E51",
+      "id": "XLSX-2685A98268",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stepps",
       "propertyType": "2 Bed Flat",
@@ -11451,7 +11451,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F990B406E4",
+      "id": "XLSX-D3D43FA503",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stepps",
       "propertyType": "2 Bed Flat",
@@ -11468,7 +11468,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-25A609699C",
+      "id": "XLSX-8383F370D1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stepps",
       "propertyType": "2 Bed Flat",
@@ -11485,7 +11485,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8BCFED8295",
+      "id": "XLSX-5BC3714A36",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stepps",
       "propertyType": "2 Bed House",
@@ -11502,7 +11502,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A43A57A067",
+      "id": "XLSX-5CC84AFA17",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stepps",
       "propertyType": "2 Bed House",
@@ -11519,7 +11519,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-146BDAF8B0",
+      "id": "XLSX-792CA54715",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stevenston",
       "propertyType": "1 Bed Flat",
@@ -11536,7 +11536,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4C852D3988",
+      "id": "XLSX-D1FAE760A3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stevenston",
       "propertyType": "1 Bed Flat",
@@ -11553,7 +11553,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7B667E5A82",
+      "id": "XLSX-D5B844F7AD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stevenston",
       "propertyType": "1 Bed Flat",
@@ -11570,7 +11570,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B002EB8AD5",
+      "id": "XLSX-1D2ADA0F10",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stevenston",
       "propertyType": "2 Bed Flat",
@@ -11587,7 +11587,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5EE3565A8D",
+      "id": "XLSX-7C03652BDD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stevenston",
       "propertyType": "2 Bed Flat",
@@ -11604,7 +11604,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-195CEC0C79",
+      "id": "XLSX-7628C12955",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stevenston",
       "propertyType": "2 Bed House",
@@ -11621,7 +11621,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E796BB628C",
+      "id": "XLSX-0F2137B020",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stevenston",
       "propertyType": "2 Bed House",
@@ -11638,7 +11638,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FA9090FB2A",
+      "id": "XLSX-0469FDC408",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stevenston",
       "propertyType": "2 Bed House",
@@ -11655,7 +11655,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-194B4FA183",
+      "id": "XLSX-C0EB99F382",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stevenston",
       "propertyType": "2 Bed House",
@@ -11672,7 +11672,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-632A748ECC",
+      "id": "XLSX-EE509C675E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "1 Bed Flat",
@@ -11689,7 +11689,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FE5CAC06E0",
+      "id": "XLSX-E1256637E7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "1 Bed Flat",
@@ -11706,7 +11706,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-99E01E487B",
+      "id": "XLSX-44A0EF0A03",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "1 Bed Flat",
@@ -11723,7 +11723,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-18AF064CB6",
+      "id": "XLSX-2AABBDCB0B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "1 Bed Flat",
@@ -11740,7 +11740,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A8C5E67ACB",
+      "id": "XLSX-E3AEA50328",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "1 Bed Flat",
@@ -11757,7 +11757,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0709A8370E",
+      "id": "XLSX-8B1A790EA1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "1 Bed Flat",
@@ -11774,7 +11774,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4835997E30",
+      "id": "XLSX-D539F37497",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "1 Bed Flat",
@@ -11791,7 +11791,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-46CE7C3A71",
+      "id": "XLSX-292C2C8D05",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "1 Bed Flat",
@@ -11808,7 +11808,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AF2AF5D7B8",
+      "id": "XLSX-90302AD808",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -11825,7 +11825,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FC9F55144F",
+      "id": "XLSX-3249B5D188",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -11842,7 +11842,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E6446240D4",
+      "id": "XLSX-BDB1154C9C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -11859,7 +11859,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4EB93A82C4",
+      "id": "XLSX-6DB04F1A14",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -11876,7 +11876,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4C1C8E885B",
+      "id": "XLSX-EBDB3CBACF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -11893,7 +11893,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3B228FABA1",
+      "id": "XLSX-CFF8D13839",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -11910,7 +11910,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2D3D578E0E",
+      "id": "XLSX-25648ADE7C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -11927,7 +11927,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4627220866",
+      "id": "XLSX-E31298EB60",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -11944,7 +11944,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-34D09F0A8B",
+      "id": "XLSX-9B7E26A093",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -11961,7 +11961,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5221DED1DB",
+      "id": "XLSX-6F81F343F0",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed House",
@@ -11978,7 +11978,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-837FD94C9B",
+      "id": "XLSX-C8432DF47B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed House",
@@ -11995,7 +11995,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4DD254588B",
+      "id": "XLSX-559FE355B4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed House",
@@ -12012,7 +12012,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-46DB632BB3",
+      "id": "XLSX-09E05142E3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed House",
@@ -12029,7 +12029,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1AC1568580",
+      "id": "XLSX-02F0995122",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Wishaw",
       "propertyType": "1 Bed Flat",
@@ -12046,7 +12046,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-94353D37F4",
+      "id": "XLSX-DF054744FF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Wishaw",
       "propertyType": "2 Bed Flat",
@@ -12063,7 +12063,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-55779D7248",
+      "id": "XLSX-03DC85DBE2",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Wishaw",
       "propertyType": "2 Bed House",
@@ -12080,7 +12080,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A5A2592CC5",
+      "id": "XLSX-2FEF0ABDF3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Irvine",
       "propertyType": "1 Bed Flat",
@@ -12097,7 +12097,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B25DDBFA20",
+      "id": "XLSX-D09FE5EF6B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Irvine",
       "propertyType": "1 Bed Flat",
@@ -12114,7 +12114,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-38FF89EC9A",
+      "id": "XLSX-EB76F54A36",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Irvine",
       "propertyType": "2 Bed Flat",
@@ -12131,7 +12131,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-66932A34F6",
+      "id": "XLSX-C26CA29E11",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Irvine",
       "propertyType": "2 Bed Flat",
@@ -12148,7 +12148,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3CE0A3D11D",
+      "id": "XLSX-7848D700E3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Irvine",
       "propertyType": "2 Bed Flat",
@@ -12165,7 +12165,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-806519D1E6",
+      "id": "XLSX-F345D24D6A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Irvine",
       "propertyType": "2 Bed Flat",
@@ -12182,7 +12182,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7F0F012476",
+      "id": "XLSX-6D19EC19C3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Irvine",
       "propertyType": "2 Bed House",
@@ -12199,7 +12199,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E52AE16DC1",
+      "id": "XLSX-90D5FE4985",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Irvine",
       "propertyType": "2 Bed House",
@@ -12216,7 +12216,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-DF939E4587",
+      "id": "XLSX-2DE584EEFD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Irvine",
       "propertyType": "2 Bed House",
@@ -12233,7 +12233,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-113B81B6C0",
+      "id": "XLSX-D78C0BF9C9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Irvine",
       "propertyType": "2 Bed House",
@@ -12250,7 +12250,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5622E6D34B",
+      "id": "XLSX-70EA60C5EE",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Patna",
       "propertyType": "2 Bed House",
@@ -12267,7 +12267,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5849A78C0C",
+      "id": "XLSX-E20E6B8FE8",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Patna",
       "propertyType": "2 Bed House",
@@ -12284,7 +12284,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-94E92A0090",
+      "id": "XLSX-9625DB4574",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Patna",
       "propertyType": "2 Bed House",
@@ -12301,7 +12301,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3E005BE685",
+      "id": "XLSX-98BF8ECFC5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Patna",
       "propertyType": "1 Bed Flat",
@@ -12318,7 +12318,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-76007E658D",
+      "id": "XLSX-45BE551ADD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Patna",
       "propertyType": "2 Bed Flat",
@@ -12335,7 +12335,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4914C6AD4B",
+      "id": "XLSX-9370D0D3BD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "New Cumnock",
       "propertyType": "2 Bed Flat",
@@ -12352,7 +12352,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-83AD2D5424",
+      "id": "XLSX-05873C933B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "New Cumnock",
       "propertyType": "2 Bed Flat",
@@ -12369,7 +12369,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-FFC0DA6432",
+      "id": "XLSX-66CE89A826",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "New Cumnock",
       "propertyType": "2 Bed Flat",
@@ -12386,7 +12386,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A960431AE4",
+      "id": "XLSX-A6459DE11B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "New Cumnock",
       "propertyType": "1 Bed Flat",
@@ -12403,7 +12403,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1A8E882F5B",
+      "id": "XLSX-D63C7D7E12",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Mauchline",
       "propertyType": "1 Bed Flat",
@@ -12420,7 +12420,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-EF8C2BEA16",
+      "id": "XLSX-9212F01D61",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Mauchline",
       "propertyType": "2 Bed Flat",
@@ -12437,7 +12437,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-449EF9732E",
+      "id": "XLSX-49398CBCF4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Mauchline",
       "propertyType": "2 Bed Flat",
@@ -12454,7 +12454,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C02A7E13D3",
+      "id": "XLSX-76C5339DFD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Mauchline",
       "propertyType": "2 Bed Flat",
@@ -12471,7 +12471,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C224481019",
+      "id": "XLSX-2BF2AAF5FD",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Mauchline",
       "propertyType": "2 Bed House",
@@ -12488,7 +12488,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5361652A3F",
+      "id": "XLSX-6FD2865978",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stewarton",
       "propertyType": "2 Bed Flat",
@@ -12505,7 +12505,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-F69F21D759",
+      "id": "XLSX-1FBAE59004",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stewarton",
       "propertyType": "2 Bed Flat",
@@ -12522,7 +12522,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1EE8E59BE8",
+      "id": "XLSX-9FE82D0B06",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stewarton",
       "propertyType": "2 Bed Flat",
@@ -12539,7 +12539,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7538C4C234",
+      "id": "XLSX-5F6D4E1167",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stewarton",
       "propertyType": "2 Bed Flat",
@@ -12556,7 +12556,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5E3C66F534",
+      "id": "XLSX-B730C79556",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stewarton",
       "propertyType": "1 Bed Flat",
@@ -12573,7 +12573,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-054DA4CE38",
+      "id": "XLSX-45947BC8FB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stewarton",
       "propertyType": "2 Bed Flat",
@@ -12590,7 +12590,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D4042EC67A",
+      "id": "XLSX-FCD7458153",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stewarton",
       "propertyType": "2 Bed Flat",
@@ -12607,7 +12607,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AF2758A65A",
+      "id": "XLSX-9019D8367C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stewarton",
       "propertyType": "2 Bed House",
@@ -12624,7 +12624,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-54446CCEA2",
+      "id": "XLSX-8D633C1CD3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stewarton",
       "propertyType": "2 Bed House",
@@ -12641,7 +12641,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CC979B2F3D",
+      "id": "XLSX-38636CF261",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Stewarton",
       "propertyType": "2 Bed House",
@@ -12658,7 +12658,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D5662B016B",
+      "id": "XLSX-394C693F9E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Airdrie",
       "propertyType": "1 Bed Flat",
@@ -12675,7 +12675,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A00531F24F",
+      "id": "XLSX-D2B89A7D45",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Airdrie",
       "propertyType": "1 Bed Flat",
@@ -12692,7 +12692,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-92D16E24F2",
+      "id": "XLSX-F59A21A4DB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Airdrie",
       "propertyType": "1 Bed Flat",
@@ -12709,7 +12709,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-2FBF47A798",
+      "id": "XLSX-0BFFA92178",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Airdrie",
       "propertyType": "2 Bed Flat",
@@ -12726,7 +12726,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8AC7A426AD",
+      "id": "XLSX-9A5A1710D4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Airdrie",
       "propertyType": "2 Bed Flat",
@@ -12743,7 +12743,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A978ECDB1C",
+      "id": "XLSX-221D0DADED",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Airdrie",
       "propertyType": "2 Bed Flat",
@@ -12760,7 +12760,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B63794729B",
+      "id": "XLSX-13CDE0DCC4",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Airdrie",
       "propertyType": "2 Bed Flat",
@@ -12777,7 +12777,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A4BF782E08",
+      "id": "XLSX-9186584717",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Airdrie",
       "propertyType": "2 Bed House",
@@ -12794,7 +12794,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-803D22B57D",
+      "id": "XLSX-F2FF7AC655",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Airdrie",
       "propertyType": "2 Bed House",
@@ -12811,7 +12811,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7B51E32E1D",
+      "id": "XLSX-75B0DA5CC1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Airdrie",
       "propertyType": "2 Bed House",
@@ -12828,7 +12828,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-46C75BF829",
+      "id": "XLSX-7DB45AA3E5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Mauchline",
       "propertyType": "2 Bed Flat",
@@ -12845,7 +12845,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-94D5D9F03E",
+      "id": "XLSX-107DB2DE79",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Mauchline",
       "propertyType": "2 Bed House",
@@ -12862,7 +12862,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-57AF37ABD1",
+      "id": "XLSX-B40E79393A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "1 Bed Flat",
@@ -12879,7 +12879,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3E74CBAE51",
+      "id": "XLSX-422F83AF6E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "1 Bed Flat",
@@ -12896,7 +12896,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E7A093EC1E",
+      "id": "XLSX-2CB497694A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed Flat",
@@ -12913,7 +12913,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0E20D65189",
+      "id": "XLSX-EC4C37D9B6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed Flat",
@@ -12930,7 +12930,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6AE4D79281",
+      "id": "XLSX-3693F989DA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed Flat",
@@ -12947,7 +12947,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0380F07522",
+      "id": "XLSX-957536F520",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed House",
@@ -12964,7 +12964,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-00E913A0D4",
+      "id": "XLSX-7E0653C40C",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Kilmarnock",
       "propertyType": "2 Bed House",
@@ -12981,7 +12981,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B04D3C10CA",
+      "id": "XLSX-886A1EBD91",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "1 Bed Flat",
@@ -12998,7 +12998,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-35F92AFE0F",
+      "id": "XLSX-B5C3C25FD6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "1 Bed Flat",
@@ -13015,7 +13015,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-A69FE0CA9E",
+      "id": "XLSX-8B1E90DAAC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -13032,7 +13032,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-EEEB03C8CC",
+      "id": "XLSX-D4042E5B36",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -13049,7 +13049,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3EBAE8DC8E",
+      "id": "XLSX-061B4D71B9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -13066,7 +13066,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7DC8DFF61D",
+      "id": "XLSX-9675C70013",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -13083,7 +13083,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4827320873",
+      "id": "XLSX-729D66F452",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -13100,7 +13100,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-3DF96AB5F0",
+      "id": "XLSX-2F1B0BD9BC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed Flat",
@@ -13117,7 +13117,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B080523C46",
+      "id": "XLSX-080DE03251",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed House",
@@ -13134,7 +13134,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-4D2BB6425D",
+      "id": "XLSX-A7EF922B86",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed House",
@@ -13151,7 +13151,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-336B890992",
+      "id": "XLSX-15ED34F408",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed House",
@@ -13168,7 +13168,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-08B1E94F81",
+      "id": "XLSX-DE960966A1",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Troon",
       "propertyType": "2 Bed House",
@@ -13185,7 +13185,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D61CE97E5B",
+      "id": "XLSX-A336D8F326",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -13202,7 +13202,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-16F9788556",
+      "id": "XLSX-9EC2D0E972",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -13219,7 +13219,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-05CCA19847",
+      "id": "XLSX-E795462609",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -13236,7 +13236,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0DCF1FEF88",
+      "id": "XLSX-CF099C6BAC",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -13253,7 +13253,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-27FC817415",
+      "id": "XLSX-B962526775",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "1 Bed Flat",
@@ -13270,7 +13270,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-6DA81CAE6C",
+      "id": "XLSX-F6389DDB26",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -13287,7 +13287,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C943275275",
+      "id": "XLSX-4033F25769",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -13304,7 +13304,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AE5948B99E",
+      "id": "XLSX-E9C5C7E672",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -13321,7 +13321,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-8038017391",
+      "id": "XLSX-ADE8D4FE78",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -13338,7 +13338,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-DC81838DF2",
+      "id": "XLSX-C9D6D7E3CA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -13355,7 +13355,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CF75B95AA1",
+      "id": "XLSX-26E6CA5303",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -13372,7 +13372,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-74268A1D35",
+      "id": "XLSX-11E38B767B",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -13389,7 +13389,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-46C8804216",
+      "id": "XLSX-1DD03F0E69",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed Flat",
@@ -13406,7 +13406,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-AA4F9AF45B",
+      "id": "XLSX-39FF1B0583",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed House",
@@ -13423,7 +13423,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-52457BEC26",
+      "id": "XLSX-3BEB38B9A3",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed House",
@@ -13440,7 +13440,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-0E6D11D923",
+      "id": "XLSX-407D862CC9",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Largs",
       "propertyType": "2 Bed House",
@@ -13457,7 +13457,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-63E25DB976",
+      "id": "XLSX-BD8975DF6D",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -13474,7 +13474,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-63D553F2B8",
+      "id": "XLSX-5B74E294E5",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -13491,7 +13491,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-13DE950828",
+      "id": "XLSX-2EE9BCBB59",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -13508,7 +13508,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-C8FAF3713B",
+      "id": "XLSX-51EA49CE2F",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -13525,7 +13525,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-ACB8E5CB23",
+      "id": "XLSX-5092CD42EF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -13542,7 +13542,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-50FD41D803",
+      "id": "XLSX-31630A9D68",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "1 Bed Flat",
@@ -13559,7 +13559,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D9C753A59D",
+      "id": "XLSX-9D00948B58",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed Flat",
@@ -13576,7 +13576,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9E6E52BFD0",
+      "id": "XLSX-CE0BF5EB0E",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed Flat",
@@ -13593,7 +13593,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-9D6B3FEBD7",
+      "id": "XLSX-33D69422DB",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed Flat",
@@ -13610,7 +13610,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-D9065F91AB",
+      "id": "XLSX-1969975EDA",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed Flat",
@@ -13627,7 +13627,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-CD29DABC62",
+      "id": "XLSX-1E8243AAF7",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed Flat",
@@ -13644,7 +13644,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-7374B174FB",
+      "id": "XLSX-92140EDF48",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed Flat",
@@ -13661,7 +13661,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-E0FA50ECD6",
+      "id": "XLSX-869650B4E6",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed House",
@@ -13678,7 +13678,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-11D061E38D",
+      "id": "XLSX-F5128CE171",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed House",
@@ -13695,7 +13695,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-1F4D763888",
+      "id": "XLSX-519D067E67",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed House",
@@ -13712,7 +13712,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-5AA272DFD8",
+      "id": "XLSX-5552CDD8CF",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed House",
@@ -13729,7 +13729,7 @@
       "_fromExcel": true
     },
     {
-      "id": "XLSX-B8569A25AA",
+      "id": "XLSX-37DE5F830A",
       "batchRef": "MASTER-IMPORT-2026",
       "town": "Paisley",
       "propertyType": "2 Bed House",
