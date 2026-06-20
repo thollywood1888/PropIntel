@@ -34826,5 +34826,72 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
   });
 })();
 </script>
+<script id="r1-castlemilk-jun26-script">
+(function(){
+  'use strict';
+  if(window.__R1_CASTLEMILK_JUN26__)return;
+  window.__R1_CASTLEMILK_JUN26__=true;
+  var D='Jun-26 (R1 live collection)';
+  var COMPS={
+    '1bf':[],
+    '2bf':[
+      {addr:'Castlemilk Drive, Castlemilk',pc:'G45',rent:'£825 pcm',status:'Active — Benchmark',agent:'The Property Store',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Carmunnock Road, Castlemilk',pc:'G45',rent:'£850 pcm',status:'Active — Benchmark',agent:'Happy Lets',period:D,src:'OnTheMarket',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ],
+    '2bh':[]
+  };
+  var NOTES={
+    '1bf':{warn:true,text:'R1 Jun-26: Zero active 1BF listings found (OTM + Rightmove). M1 priority gap — no rental comps available.'},
+    '2bf':{warn:false,text:'R1 Jun-26: 5 active comps. Median £820 pcm. Range £725–£850. No outliers. (Castlemilk Drive £825, Carmunnock Road £850 added this run; Raithburn Ave £725/£820, Glenacre St £785 existing.)'},
+    '2bh':{warn:true,text:'R1 Jun-26: Zero active 2BH listings found (OTM + Rightmove). M1 priority gap — no rental comps available.'}
+  };
+  function rk(r){return String((r.addr||'')+'|'+(r.rent||r.value||'')+'|'+(r.period||r.date||'')).toLowerCase().replace(/[^a-z0-9£]+/g,'');}
+  ['1bf','2bf','2bh'].forEach(function(t){
+    var node=((window.LIVE_DATA||{}).castlemilk||{})[t];
+    if(!node)return;
+    if(!Array.isArray(node.rental))node.rental=[];
+    var ex=new Set(node.rental.map(rk));
+    (COMPS[t]||[]).forEach(function(r){var k=rk(r);if(!ex.has(k)){node.rental.push(r);ex.add(k);}});
+    if(!Array.isArray(node.notes))node.notes=[];
+    var hasNote=node.notes.some(function(n){return String(n&&n.text||'').indexOf('R1 Jun-26')>=0;});
+    if(!hasNote&&NOTES[t])node.notes.push(NOTES[t]);
+  });
+})();
+</script>
+<script id="r1-barrhead-jun26-script">
+(function(){
+  'use strict';
+  if(window.__R1_BARRHEAD_JUN26__)return;
+  window.__R1_BARRHEAD_JUN26__=true;
+  var D='Jun-26 (R1 live collection)';
+  var COMPS={
+    '1bf':[
+      {addr:'Carlibar Road, Barrhead',pc:'G78',rent:'£695 pcm',status:'Active — Benchmark',agent:'ProBrook Properties',period:D,src:'Rightmove',sig:'verdict-benchmark',sigLabel:'BENCHMARK'}
+    ],
+    '2bf':[
+      {addr:'Cogan Place, Barrhead',pc:'G78',rent:'£695 pcm',status:'Active — Benchmark',agent:'Premier Properties',period:D,src:'Rightmove',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Cogan Place, Barrhead',pc:'G78',rent:'£750 pcm',status:'Active — Benchmark',agent:'Castle Residential',period:D,src:'Rightmove',sig:'verdict-benchmark',sigLabel:'BENCHMARK'},
+      {addr:'Henry Street, Barrhead',pc:'G78',rent:'£895 pcm',status:'Active — Watchlist (outlier)',agent:'Allison Residential Lettings',period:D,src:'Rightmove / OTM',sig:'verdict-watch',sigLabel:'WATCHLIST'}
+    ],
+    '2bh':[]
+  };
+  var NOTES={
+    '1bf':{warn:false,text:'R1 Jun-26: 1 active 1BF listing — Carlibar Road £695 pcm (ProBrook, Rightmove). Single-listing median — treat with caution pending more comps.'},
+    '2bf':{warn:false,text:'R1 Jun-26: 4 listings inc. existing Divernia Way £650. Median £722 pcm. Henry Street £895 flagged Watchlist (23.9% above median).'},
+    '2bh':{warn:true,text:'R1 Jun-26: Zero active 2BH listings found (OTM + Rightmove). M1 priority gap.'}
+  };
+  function rk(r){return String((r.addr||'')+'|'+(r.rent||r.value||'')+'|'+(r.period||r.date||'')).toLowerCase().replace(/[^a-z0-9£]+/g,'');}
+  ['1bf','2bf','2bh'].forEach(function(t){
+    var node=((window.LIVE_DATA||{}).barrhead||{})[t];
+    if(!node)return;
+    if(!Array.isArray(node.rental))node.rental=[];
+    var ex=new Set(node.rental.map(rk));
+    (COMPS[t]||[]).forEach(function(r){var k=rk(r);if(!ex.has(k)){node.rental.push(r);ex.add(k);}});
+    if(!Array.isArray(node.notes))node.notes=[];
+    var hasNote=node.notes.some(function(n){return String(n&&n.text||'').indexOf('R1 Jun-26')>=0;});
+    if(!hasNote&&NOTES[t])node.notes.push(NOTES[t]);
+  });
+})();
+</script>
 </body>
 </html>
