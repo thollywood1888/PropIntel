@@ -35107,5 +35107,147 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
   </div>
 </div>
 <!-- PI-STR-V1 STEP 2 END -->
+<!-- =========================================================
+   PATCH 1: Backend API Stubs
+   Priority: CRITICAL — fixes silently broken /api/rightmove
+   and /api/analyse endpoints (both 404 on GitHub Pages).
+   Overrides importRightmoveListing() and runDealAnalysis()
+   with clear user-facing notices.
+   Paste immediately before </body>
+   ========================================================= -->
+<script id="patch-api-stubs-v1">
+(function () {
+  'use strict';
+  function esc(v) {
+    return String(v == null ? '' : v)
+      .replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+  }
+
+  // ── Stub: importRightmoveListing() ──────────────────────────────────────
+  // Overrides Module 35. /api/rightmove requires a backend server.
+  // GitHub Pages is static-only — this endpoint will never exist here.
+  window.importRightmoveListing = function () {
+    var statusEl = document.getElementById('rm-status');
+    if (statusEl) {
+      statusEl.textContent = '⚠ Rightmove importer requires a backend server (not available on GitHub Pages). Enter deal data manually.';
+      statusEl.style.color = 'var(--amber, #B68D40)';
+      statusEl.style.fontWeight = '600';
+    }
+    // Also clear any spinner/loading state
+    var btn = document.getElementById('rm-import-btn');
+    if (btn) btn.disabled = false;
+    console.warn('[PropIntel] importRightmoveListing: /api/rightmove not available on static host. Backend server required.');
+  };
+
+  // ── Stub: runDealAnalysis() ──────────────────────────────────────────────
+  // Overrides Module 34. /api/analyse (Netlify Edge Function) is not
+  // deployed — GitHub Pages serves no serverless functions.
+  window.runDealAnalysis = function (payload) {
+    var outputEl = document.getElementById('ai-output-panel');
+    if (outputEl) {
+      outputEl.innerHTML =
+        '<div style="padding:20px;border:1.5px solid var(--amber,#B68D40);border-radius:12px;background:rgba(182,141,64,.08);color:var(--text-primary,#102016);">' +
+        '<strong style="color:var(--amber,#B68D40);">⚠ AI Analysis Unavailable</strong>' +
+        '<p style="margin:8px 0 0;font-size:.95em;">The AI Deal Analyser requires the <code>/api/analyse</code> backend endpoint which is not deployed to GitHub Pages.</p>' +
+        '<p style="margin:6px 0 0;font-size:.9em;color:var(--text-muted,#4a6055);">To enable: deploy the Netlify Edge Function or a Cloudflare Worker proxy to your domain, then remove this stub.</p>' +
+        '</div>';
+    }
+    // Reject the promise so callers don't wait indefinitely
+    return Promise.reject(new Error('[PropIntel] runDealAnalysis: /api/analyse backend not deployed.'));
+  };
+
+  // ── Stub: runAIAnalysis() ────────────────────────────────────────────────
+  // Belt-and-braces: catches any path that skips runDealAnalysis and calls
+  // the original Anthropic endpoint directly (CORS-blocked on GitHub Pages).
+  var _origRunAI = window.runAIAnalysis;
+  window.runAIAnalysis = function (isRetry) {
+    // runDealAnalysis is already stubbed — calling it will show the notice.
+    // Just ensure the output panel exists before delegating.
+    if (typeof window.runDealAnalysis === 'function') {
+      return window.runDealAnalysis({});
+    }
+  };
+
+  console.info('[PropIntel] patch-api-stubs-v1 loaded: /api/rightmove and /api/analyse stubbed.');
+})();
+</script>
+
+<!-- =========================================================
+   PATCH 2: Thin Evidence Warning
+   Priority: MEDIUM — shows amber badge on evidence panels
+   where a town has fewer than 5 rows in evidence.json.
+   Runs after the evidence bridge has populated LIVE_DATA.
+   Paste immediately after PATCH 1 (still before </body>)
+   ========================================================= -->
+<script id="patch-thin-evidence-warning-v1">
+(function () {
+  'use strict';
+  var THIN_THRESHOLD = 5;
+  var STORAGE_KEY    = 'residential_agent_helper_v71_rows';
+
+  function countEvidenceByTown(rows) {
+    var counts = {};
+    rows.forEach(function (r) {
+      var k = (r.town || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      counts[k] = (counts[k] || 0) + 1;
+    });
+    return counts;
+  }
+
+  function injectWarnings(counts) {
+    // Find all town-panel wrappers — they carry data-town-id or id matching town IDs
+    var panels = document.querySelectorAll('[data-town-id]');
+    panels.forEach(function (panel) {
+      var tid = (panel.getAttribute('data-town-id') || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (!tid) return;
+      var count = counts[tid] || 0;
+      if (count > 0 && count < THIN_THRESHOLD) {
+        // Only inject once
+        if (panel.querySelector('.pi-thin-evidence-badge')) return;
+        var badge = document.createElement('div');
+        badge.className = 'pi-thin-evidence-badge';
+        badge.title = count + ' evidence rows — directional only. Add more data via the Master Excel.';
+        badge.style.cssText = [
+          'display:inline-flex',
+          'align-items:center',
+          'gap:4px',
+          'margin:4px 0',
+          'padding:3px 10px',
+          'border-radius:999px',
+          'background:rgba(182,141,64,.15)',
+          'border:1px solid rgba(182,141,64,.4)',
+          'color:#7a5a10',
+          'font-size:.75em',
+          'font-family:\'DM Mono\',monospace',
+          'font-weight:600',
+        ].join(';');
+        badge.textContent = '⚠ Thin data · ' + count + ' row' + (count === 1 ? '' : 's') + ' · directional only';
+        panel.prepend(badge);
+      }
+    });
+  }
+
+  function tryInstall_ThinWarning() {
+    var raw = null;
+    try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+    if (!raw) return false;
+    var rows = [];
+    try { rows = JSON.parse(raw) || []; } catch (e) { return false; }
+    if (!rows.length) return false;
+    var counts = countEvidenceByTown(rows);
+    injectWarnings(counts);
+    return true;
+  }
+
+  // Evidence loads asynchronously — retry for up to 6 seconds
+  var _tries = 0;
+  var _timer = setInterval(function () {
+    _tries++;
+    if (tryInstall_ThinWarning() || _tries > 30) clearInterval(_timer);
+  }, 200);
+})();
+</script>
 </body>
 </html>
