@@ -35717,5 +35717,517 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
   }, 200);
 })();
 </script>
+
+<!-- =========================================================
+   PATCH: Q1 Value-Buyer Yield Toggle
+   Priority: HIGH — adds 25th-percentile entry-point mode to
+   the Gross Yield League Table. Extends window.YieldLeague
+   with setMode('mean'|'q1'). Min 4 sold comps for Q1.
+   Paste immediately before </body>
+   ========================================================= -->
+<script id="patch-yield-league-q1-v1">
+(function () {
+  'use strict';
+
+  var KEY         = 'residential_agent_helper_v71_rows';
+  var _q1Data     = [];
+  var _mode       = 'mean';
+  var _lastFilter = 'All';
+  var _origFilter = null;
+  var PTYPES      = ['All', '1 Bed Flat', '2 Bed Flat', '2 Bed House'];
+
+  function esc(v) {
+    return String(v == null ? '' : v)
+      .replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+  }
+
+  function parsePrice(v) {
+    var s = String(v || '').replace(/[£,\s]/g, '');
+    var m = s.match(/(\d+)/);
+    return m ? parseInt(m[1], 10) : null;
+  }
+
+  function fmt(n) { return '£' + Math.round(n).toLocaleString('en-GB'); }
+
+  function yColor(y) {
+    if (y >= 10) return '#14532d';
+    if (y >= 8)  return '#1a6b35';
+    if (y >= 7)  return '#B68D40';
+    if (y >= 6)  return '#92400e';
+    return '#991b1b';
+  }
+
+  function calcQ1Yields(rows) {
+    var sold = {}, rent = {};
+    rows.forEach(function (r) {
+      if (!r._fromExcel) return;
+      var k = (r.town || '') + '|||' + (r.propertyType || '');
+      var p = parsePrice(r.priceRent);
+      if (r.evidenceType === 'Sold' && p && p > 10000) {
+        (sold[k] = sold[k] || []).push(p);
+      } else if (r.evidenceType === 'Rent' && p && p > 100 && p < 5000) {
+        (rent[k] = rent[k] || []).push(p);
+      }
+    });
+    var out = [];
+    Object.keys(sold).forEach(function (k) {
+      if (!rent[k]) return;
+      var s = sold[k].slice().sort(function (a, b) { return a - b; });
+      if (s.length < 4) return;
+      var q1idx   = Math.floor(s.length * 0.25);
+      var q1Price = s[q1idx];
+      var avgSold = s.reduce(function (a, b) { return a + b; }, 0) / s.length;
+      var avgRent = rent[k].reduce(function (a, b) { return a + b; }, 0) / rent[k].length;
+      var q1Yield   = (avgRent * 12) / q1Price * 100;
+      var meanYield = (avgRent * 12) / avgSold * 100;
+      var parts = k.split('|||');
+      out.push({
+        town:      parts[0],
+        ptype:     parts[1],
+        q1Price:   q1Price,
+        avgSold:   avgSold,
+        avgRent:   avgRent,
+        yield:     q1Yield,
+        meanYield: meanYield,
+        delta:     q1Yield - meanYield,
+        nSold:     s.length,
+        nRent:     rent[k].length,
+        conf:      Math.min(s.length, rent[k].length)
+      });
+    });
+    return out.sort(function (a, b) { return b.yield - a.yield; });
+  }
+
+  function updateFilterBtns(t) {
+    PTYPES.forEach(function (pt) {
+      var b = document.getElementById('yl-f-' + pt.replace(/\s/g, '-'));
+      if (!b) return;
+      var on = pt === t;
+      b.style.background  = on ? 'rgba(182,141,64,.25)' : 'transparent';
+      b.style.borderColor = on ? 'rgba(182,141,64,.8)'  : 'rgba(182,141,64,.3)';
+      b.style.fontWeight  = on ? '800' : '600';
+    });
+  }
+
+  function renderQ1Rows() {
+    var body = document.getElementById('yl-tbody');
+    var info = document.getElementById('yl-info');
+    if (!body) return;
+    var rows = _lastFilter === 'All' ? _q1Data :
+      _q1Data.filter(function (r) { return r.ptype === _lastFilter; });
+    if (info) {
+      info.textContent = rows.length + ' combinations · Value Entry Q1 mode · sorted by Q1 gross yield';
+    }
+    if (!rows.length) {
+      body.innerHTML = '<tr><td colspan="7" style="padding:20px;text-align:center;color:#4a6055;font-size:.9em;">No data for this filter — minimum 4 sold comps required for Q1 calculation.</td></tr>';
+      return;
+    }
+    body.innerHTML = rows.map(function (r, i) {
+      var thin  = r.conf < 3;
+      var delta = '+' + r.delta.toFixed(1) + ' pp';
+      return '<tr style="border-bottom:1px solid rgba(31,59,44,.07);' + (i % 2 === 0 ? '' : 'background:rgba(245,242,236,.6);') + '">' +
+        '<td style="padding:9px 12px;font:700 12px \'DM Mono\',monospace;color:#4a6055;">' + (i + 1) + '</td>' +
+        '<td style="padding:9px 12px;font-weight:700;color:#102016;">' + esc(r.town) + '</td>' +
+        '<td style="padding:9px 12px;font:600 11px \'DM Mono\',monospace;color:#4a6055;">' + esc(r.ptype) + '</td>' +
+        '<td style="padding:9px 12px;">' +
+          '<span style="font:600 12px \'DM Mono\',monospace;color:#102016;">' + fmt(r.q1Price) + '</span>' +
+          '<span style="font:600 9px \'DM Mono\',monospace;color:rgba(182,141,64,.9);margin-left:5px;text-transform:uppercase;letter-spacing:.5px;">Q1</span>' +
+        '</td>' +
+        '<td style="padding:9px 12px;font:600 12px \'DM Mono\',monospace;color:#102016;">' + fmt(r.avgRent) + '/mo</td>' +
+        '<td style="padding:9px 12px;">' +
+          '<span style="font:900 15px \'DM Mono\',monospace;color:' + yColor(r.yield) + ';">' + r.yield.toFixed(1) + '%</span>' +
+          '<span style="display:inline-block;margin-left:6px;padding:1px 6px;border-radius:999px;background:rgba(182,141,64,.18);border:1px solid rgba(182,141,64,.4);font:700 9px \'DM Mono\',monospace;color:#7a5a10;vertical-align:middle;">' + delta + '</span>' +
+        '</td>' +
+        '<td style="padding:9px 12px;font:600 10px \'DM Mono\',monospace;color:' + (thin ? '#B68D40' : '#4a6055') + ';">' +
+          r.nSold + 's · ' + r.nRent + 'r' + (thin ? ' ⚠' : '') +
+        '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  function setModeStyle(mode) {
+    var bM = document.getElementById('yl-m-mean');
+    var bQ = document.getElementById('yl-m-q1');
+    if (!bM || !bQ) return;
+    var onM = mode === 'mean';
+    bM.style.background  = onM  ? 'rgba(182,141,64,.25)' : 'transparent';
+    bM.style.borderColor = onM  ? 'rgba(182,141,64,.8)'  : 'rgba(182,141,64,.3)';
+    bM.style.fontWeight  = onM  ? '800' : '600';
+    bQ.style.background  = !onM ? 'rgba(182,141,64,.25)' : 'transparent';
+    bQ.style.borderColor = !onM ? 'rgba(182,141,64,.8)'  : 'rgba(182,141,64,.3)';
+    bQ.style.fontWeight  = !onM ? '800' : '600';
+  }
+
+  function tryInstall_Q1Toggle() {
+    if (!document.getElementById('pi-yield-league-panel')) return false;
+    if (!window.YieldLeague) return false;
+    if (document.getElementById('yl-mode-bar')) return true;
+
+    var raw = null;
+    try { raw = localStorage.getItem(KEY); } catch (e) {}
+    if (!raw) return false;
+    var rows = [];
+    try { rows = JSON.parse(raw) || []; } catch (e) { return false; }
+    if (!rows.length) return false;
+
+    _q1Data = calcQ1Yields(rows);
+
+    var filterBarRef = document.getElementById('yl-f-All');
+    if (!filterBarRef) return false;
+    filterBarRef.parentElement.insertAdjacentHTML('beforeend',
+      '<div id="yl-mode-bar" style="margin-left:auto;display:flex;gap:4px;align-items:center;">' +
+        '<span style="font:600 9px \'DM Mono\',monospace;color:rgba(255,233,161,.5);letter-spacing:.5px;text-transform:uppercase;margin-right:2px;">Mode</span>' +
+        '<button id="yl-m-mean" onclick="window.YieldLeague.setMode(\'mean\')" style="padding:4px 12px;border-radius:999px;cursor:pointer;border:1px solid rgba(182,141,64,.8);background:rgba(182,141,64,.25);color:#ffe9a1;font:800 10px \'Outfit\',sans-serif;">Market Rate</button>' +
+        '<button id="yl-m-q1" onclick="window.YieldLeague.setMode(\'q1\')" style="padding:4px 12px;border-radius:999px;cursor:pointer;border:1px solid rgba(182,141,64,.3);background:transparent;color:#ffe9a1;font:600 10px \'Outfit\',sans-serif;">Value Entry Q1</button>' +
+      '</div>'
+    );
+
+    _origFilter = window.YieldLeague.filter;
+    window.YieldLeague.filter = function (t) {
+      _lastFilter = t;
+      updateFilterBtns(t);
+      if (_mode === 'q1') {
+        renderQ1Rows();
+      } else {
+        _origFilter(t);
+      }
+    };
+
+    window.YieldLeague.setMode = function (mode) {
+      _mode = mode;
+      setModeStyle(mode);
+      if (mode === 'q1') {
+        renderQ1Rows();
+      } else if (_origFilter) {
+        _origFilter(_lastFilter);
+      }
+    };
+
+    console.info('[PropIntel] patch-yield-league-q1-v1: ' + _q1Data.length + ' Q1 combinations ready.');
+    return true;
+  }
+
+  var _tries = 0;
+  var _timer = setInterval(function () {
+    _tries++;
+    if (tryInstall_Q1Toggle() || _tries > 30) clearInterval(_timer);
+  }, 200);
+
+  console.info('[PropIntel] patch-yield-league-q1-v1 loaded.');
+})();
+</script>
+
+<!-- =========================================================
+   PATCH: Coverage Gap Heatmap
+   Priority: HIGH — shows all towns x 6 type/tenure combos.
+   Complete >= 5 (dark green), Partial 1-4 (amber),
+   Missing 0 (red). All Towns / Gaps Only toggle.
+   Paste immediately after Q1 toggle patch.
+   ========================================================= -->
+<script id="patch-coverage-heatmap-v1">
+(function () {
+  'use strict';
+  if (document.getElementById('pi-coverage-heatmap-panel')) return;
+
+  var KEY    = 'residential_agent_helper_v71_rows';
+  var COMBOS = [
+    { key: '1 Bed Flat|||Rent',  label: '1BF-R' },
+    { key: '1 Bed Flat|||Sold',  label: '1BF-S' },
+    { key: '2 Bed Flat|||Rent',  label: '2BF-R' },
+    { key: '2 Bed Flat|||Sold',  label: '2BF-S' },
+    { key: '2 Bed House|||Rent', label: '2BH-R' },
+    { key: '2 Bed House|||Sold', label: '2BH-S' }
+  ];
+
+  var _coverage = {};
+  var _chFilter = 'all';
+
+  function esc(v) {
+    return String(v == null ? '' : v)
+      .replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+  }
+
+  function buildCoverage(rows) {
+    var counts = {};
+    rows.forEach(function (r) {
+      if (!r._fromExcel) return;
+      var town = (r.town || '').trim();
+      if (!town) return;
+      var k = (r.propertyType || '') + '|||' + (r.evidenceType || '');
+      if (!counts[town]) counts[town] = {};
+      counts[town][k] = (counts[town][k] || 0) + 1;
+    });
+    return counts;
+  }
+
+  function gapCount(town) {
+    var d = _coverage[town] || {};
+    return COMBOS.filter(function (c) { return (d[c.key] || 0) === 0; }).length;
+  }
+
+  function cellHtml(n) {
+    var bg, fg, label;
+    if (n >= 5)      { bg = '#14532d'; fg = '#ffe9a1'; label = '✓ ' + n; }
+    else if (n >= 1) { bg = '#78350f'; fg = '#fef3c7'; label = '△ ' + n; }
+    else             { bg = '#7f1d1d'; fg = '#fee2e2'; label = '✕'; }
+    return '<td style="padding:5px 6px;text-align:center;">' +
+      '<span style="display:inline-block;min-width:36px;padding:3px 5px;border-radius:6px;background:' + bg + ';color:' + fg + ';font:700 10px \'DM Mono\',monospace;">' +
+      label + '</span></td>';
+  }
+
+  function renderHeatmap() {
+    var body  = document.getElementById('ch-tbody');
+    var info  = document.getElementById('ch-info');
+    var sumEl = document.getElementById('ch-summary');
+    if (!body) return;
+
+    var allTowns = Object.keys(_coverage).sort(function (a, b) {
+      var gA = gapCount(a), gB = gapCount(b);
+      return gB !== gA ? gB - gA : a.localeCompare(b);
+    });
+
+    var complete   = allTowns.filter(function (t) { return gapCount(t) === 0; }).length;
+    var withGaps   = allTowns.filter(function (t) { return gapCount(t) > 0; }).length;
+    var totalGaps  = allTowns.reduce(function (s, t) { return s + gapCount(t); }, 0);
+
+    if (sumEl) {
+      sumEl.innerHTML =
+        '<span style="padding:3px 10px;border-radius:999px;background:rgba(20,83,45,.2);border:1px solid rgba(20,83,45,.4);font:700 10px \'DM Mono\',monospace;color:#ffe9a1;">' + complete + ' complete</span> ' +
+        '<span style="padding:3px 10px;border-radius:999px;background:rgba(182,141,64,.2);border:1px solid rgba(182,141,64,.4);font:700 10px \'DM Mono\',monospace;color:#fef3c7;">' + withGaps + ' with gaps</span> ' +
+        '<span style="padding:3px 10px;border-radius:999px;background:rgba(127,29,29,.2);border:1px solid rgba(127,29,29,.4);font:700 10px \'DM Mono\',monospace;color:#fee2e2;">' + totalGaps + ' missing cells</span>';
+    }
+
+    var towns = _chFilter === 'gaps'
+      ? allTowns.filter(function (t) { return gapCount(t) > 0; })
+      : allTowns;
+
+    if (info) info.textContent = 'Showing ' + towns.length + ' of ' + allTowns.length + ' towns';
+
+    if (!towns.length) {
+      body.innerHTML = '<tr><td colspan="8" style="padding:20px;text-align:center;color:#4a6055;font-size:.9em;">No gaps — all towns have full coverage.</td></tr>';
+      return;
+    }
+
+    body.innerHTML = towns.map(function (town, i) {
+      var d     = _coverage[town] || {};
+      var cells = COMBOS.map(function (c) { return cellHtml(d[c.key] || 0); }).join('');
+      var gaps  = gapCount(town);
+      var statusC = gaps === 0 ? '#14532d' : gaps <= 2 ? '#B68D40' : '#991b1b';
+      var statusT = gaps === 0 ? 'Complete' : gaps + ' gap' + (gaps === 1 ? '' : 's');
+      return '<tr style="border-bottom:1px solid rgba(31,59,44,.07);' + (i % 2 === 0 ? '' : 'background:rgba(245,242,236,.6);') + '">' +
+        '<td style="padding:7px 12px;font-weight:700;color:#102016;white-space:nowrap;">' + esc(town) + '</td>' +
+        cells +
+        '<td style="padding:7px 10px;text-align:center;font:700 10px \'DM Mono\',monospace;color:' + statusC + ';">' + statusT + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  function setChFilter(f) {
+    _chFilter = f;
+    var bA = document.getElementById('ch-f-all');
+    var bG = document.getElementById('ch-f-gaps');
+    if (bA) {
+      bA.style.background  = f === 'all' ? 'rgba(182,141,64,.25)' : 'transparent';
+      bA.style.borderColor = f === 'all' ? 'rgba(182,141,64,.8)'  : 'rgba(182,141,64,.3)';
+      bA.style.fontWeight  = f === 'all' ? '800' : '600';
+    }
+    if (bG) {
+      bG.style.background  = f === 'gaps' ? 'rgba(182,141,64,.25)' : 'transparent';
+      bG.style.borderColor = f === 'gaps' ? 'rgba(182,141,64,.8)'  : 'rgba(182,141,64,.3)';
+      bG.style.fontWeight  = f === 'gaps' ? '800' : '600';
+    }
+    renderHeatmap();
+  }
+
+  window.CoverageHeatmap = { filter: setChFilter };
+
+  function panelHtml() {
+    var headers = COMBOS.map(function (c) {
+      return '<th style="padding:7px 6px;text-align:center;font:700 9px \'DM Mono\',monospace;color:#4a6055;letter-spacing:.3px;">' + c.label + '</th>';
+    }).join('');
+
+    return '<section id="pi-coverage-heatmap-panel" style="margin:28px 0 0;font-family:\'Outfit\',system-ui,sans-serif;">' +
+      '<div style="background:#0f3d2e;border-radius:18px 18px 0 0;padding:20px 24px 14px;">' +
+        '<div style="font:900 9px/1 \'DM Mono\',monospace;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,233,161,.55);margin-bottom:6px;">Research Quality · Evidence Coverage by Town</div>' +
+        '<h2 style="margin:0 0 10px;color:#ffe9a1;font:900 19px/1.1 \'Outfit\',sans-serif;">Coverage Gap Heatmap</h2>' +
+        '<div id="ch-summary" style="display:flex;gap:6px;flex-wrap:wrap;"></div>' +
+      '</div>' +
+      '<div style="background:#1b4332;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;">' +
+        '<button id="ch-f-all" onclick="window.CoverageHeatmap.filter(\'all\')" style="padding:5px 14px;border-radius:999px;cursor:pointer;border:1px solid rgba(182,141,64,.8);background:rgba(182,141,64,.25);color:#ffe9a1;font:800 11px \'Outfit\',sans-serif;">All Towns</button>' +
+        '<button id="ch-f-gaps" onclick="window.CoverageHeatmap.filter(\'gaps\')" style="padding:5px 14px;border-radius:999px;cursor:pointer;border:1px solid rgba(182,141,64,.3);background:transparent;color:#ffe9a1;font:600 11px \'Outfit\',sans-serif;">Gaps Only</button>' +
+        '<span id="ch-info" style="margin-left:auto;font:500 10px \'DM Mono\',monospace;color:rgba(255,233,161,.55);"></span>' +
+      '</div>' +
+      '<div style="background:#fff;border-radius:0 0 18px 18px;overflow-x:auto;border:1px solid rgba(31,59,44,.1);border-top:none;">' +
+        '<table style="width:100%;border-collapse:collapse;">' +
+          '<thead><tr style="background:#F5F2EC;border-bottom:2px solid rgba(31,59,44,.1);">' +
+            '<th style="padding:7px 12px;text-align:left;font:700 9px \'DM Mono\',monospace;color:#4a6055;letter-spacing:.5px;">TOWN</th>' +
+            headers +
+            '<th style="padding:7px 10px;text-align:center;font:700 9px \'DM Mono\',monospace;color:#4a6055;letter-spacing:.5px;">STATUS</th>' +
+          '</tr></thead>' +
+          '<tbody id="ch-tbody"></tbody>' +
+        '</table>' +
+        '<div style="padding:10px 16px;background:#f8f5ee;border-top:1px solid rgba(31,59,44,.07);font:500 10px \'DM Mono\',monospace;color:#6a7c6e;display:flex;gap:16px;flex-wrap:wrap;">' +
+          '<span style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#14532d;"></span>≥ 5 rows</span>' +
+          '<span style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#78350f;"></span>1–4 rows</span>' +
+          '<span style="display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#7f1d1d;"></span>0 rows — research needed</span>' +
+        '</div>' +
+      '</div>' +
+    '</section>';
+  }
+
+  function tryInstall_CoverageHeatmap() {
+    if (document.getElementById('pi-coverage-heatmap-panel')) return true;
+    var raw = null;
+    try { raw = localStorage.getItem(KEY); } catch (e) {}
+    if (!raw) return false;
+    var rows = [];
+    try { rows = JSON.parse(raw) || []; } catch (e) { return false; }
+    if (!rows.length) return false;
+    var content = document.getElementById('content-area') || document.querySelector('.content');
+    if (!content) return false;
+    _coverage = buildCoverage(rows);
+    if (!Object.keys(_coverage).length) return false;
+    content.insertAdjacentHTML('beforeend', panelHtml());
+    renderHeatmap();
+    console.info('[PropIntel] coverage-heatmap-v1: ' + Object.keys(_coverage).length + ' towns mapped.');
+    return true;
+  }
+
+  var _tries = 0;
+  var _timer = setInterval(function () {
+    _tries++;
+    if (tryInstall_CoverageHeatmap() || _tries > 30) clearInterval(_timer);
+  }, 200);
+
+  console.info('[PropIntel] patch-coverage-heatmap-v1 loaded.');
+})();
+</script>
+
+<!-- =========================================================
+   PATCH: Watchlist Digest Panel
+   Priority: MEDIUM — surfaces all qaStatus='Watchlist' rows
+   as actionable cards grouped by town, sorted by date.
+   Paste immediately after Coverage Gap Heatmap patch.
+   ========================================================= -->
+<script id="patch-watchlist-digest-v1">
+(function () {
+  'use strict';
+  if (document.getElementById('pi-watchlist-digest-panel')) return;
+
+  var KEY       = 'residential_agent_helper_v71_rows';
+  var _wlGroups = [];
+
+  function esc(v) {
+    return String(v == null ? '' : v)
+      .replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+  }
+
+  function buildWatchlist(rows) {
+    var groups = {};
+    rows.forEach(function (r) {
+      if ((r.qaStatus || '').toLowerCase().trim() !== 'watchlist') return;
+      var t = (r.town || 'Unknown').trim();
+      if (!groups[t]) groups[t] = [];
+      groups[t].push(r);
+    });
+    return Object.keys(groups)
+      .sort(function (a, b) { return groups[b].length - groups[a].length; })
+      .map(function (town) {
+        return {
+          town:  town,
+          items: groups[town].slice().sort(function (a, b) {
+            return (b.dateChecked || '').localeCompare(a.dateChecked || '');
+          })
+        };
+      });
+  }
+
+  function renderWatchlist() {
+    var list = document.getElementById('pi-wl-list');
+    if (!list) return;
+    if (!_wlGroups.length) {
+      list.innerHTML = '<p style="padding:24px 20px;text-align:center;color:#4a6055;font-size:.9em;">No watchlist items found. Set <strong>QA / Benchmark Status</strong> to <em>Watchlist</em> in the Master Excel to surface rows here.</p>';
+      return;
+    }
+    list.innerHTML = _wlGroups.map(function (g) {
+      var cards = g.items.map(function (r) {
+        var eBg = r.evidenceType === 'Sold' ? 'rgba(20,83,45,.1)'  : 'rgba(12,74,110,.1)';
+        var eC  = r.evidenceType === 'Sold' ? '#14532d'            : '#0c4a6e';
+        return '<div style="padding:12px 16px;border:1px solid rgba(31,59,44,.1);border-radius:12px;margin-bottom:8px;background:#fff;">' +
+          '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:6px;">' +
+            '<span style="font-weight:700;color:#102016;flex:1;min-width:0;">' + esc(r.address) + '</span>' +
+            '<div style="display:flex;gap:4px;flex-shrink:0;">' +
+              '<span style="padding:2px 8px;border-radius:999px;font:600 9px \'DM Mono\',monospace;background:rgba(31,59,44,.1);color:#4a6055;">' + esc(r.propertyType) + '</span>' +
+              '<span style="padding:2px 8px;border-radius:999px;font:600 9px \'DM Mono\',monospace;background:' + eBg + ';color:' + eC + ';">' + esc(r.evidenceType) + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">' +
+            (r.priceRent   ? '<span style="font:700 13px \'DM Mono\',monospace;color:#102016;">' + esc(r.priceRent) + '</span>' : '') +
+            (r.dateChecked ? '<span style="font:500 10px \'DM Mono\',monospace;color:#4a6055;">' + esc(r.dateChecked) + '</span>' : '') +
+            (r.source      ? '<span style="font:500 10px \'DM Mono\',monospace;color:#6a7c6e;">' + esc(r.source) + '</span>' : '') +
+          '</div>' +
+          (r.notes ? '<p style="margin:6px 0 0;font-size:.82em;color:#4a6055;line-height:1.45;">' + esc(r.notes) + '</p>' : '') +
+        '</div>';
+      }).join('');
+
+      return '<div style="margin-bottom:24px;">' +
+        '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">' +
+          '<h3 style="margin:0;font:700 15px \'Outfit\',sans-serif;color:#102016;">' + esc(g.town) + '</h3>' +
+          '<span style="padding:2px 8px;border-radius:999px;background:rgba(182,141,64,.15);border:1px solid rgba(182,141,64,.3);font:700 9px \'DM Mono\',monospace;color:#7a5a10;">' + g.items.length + ' item' + (g.items.length === 1 ? '' : 's') + '</span>' +
+        '</div>' +
+        cards +
+      '</div>';
+    }).join('');
+  }
+
+  function panelHtml(total, townCount) {
+    return '<section id="pi-watchlist-digest-panel" style="margin:28px 0 0;font-family:\'Outfit\',system-ui,sans-serif;">' +
+      '<div style="background:#0f3d2e;border-radius:18px 18px 0 0;padding:20px 24px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">' +
+        '<div>' +
+          '<div style="font:900 9px/1 \'DM Mono\',monospace;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,233,161,.55);margin-bottom:6px;">Deal Pipeline · QA Flagged for Review</div>' +
+          '<h2 style="margin:0 0 3px;color:#ffe9a1;font:900 19px/1.1 \'Outfit\',sans-serif;">Watchlist Digest</h2>' +
+          '<p style="margin:0;color:rgba(255,233,161,.65);font-size:.82em;font-family:\'DM Mono\',monospace;">' + total + ' item' + (total === 1 ? '' : 's') + ' across ' + townCount + ' town' + (townCount === 1 ? '' : 's') + '</p>' +
+        '</div>' +
+        '<span style="background:rgba(182,141,64,.18);border:1px solid rgba(182,141,64,.4);color:#ffe9a1;border-radius:999px;padding:5px 12px;font:900 9px/1 \'DM Mono\',monospace;letter-spacing:.7px;text-transform:uppercase;white-space:nowrap;align-self:flex-start;">Verify Before Acquisition</span>' +
+      '</div>' +
+      '<div style="background:#fff;border-radius:0 0 18px 18px;padding:20px 24px;border:1px solid rgba(31,59,44,.1);border-top:none;">' +
+        '<div id="pi-wl-list"></div>' +
+      '</div>' +
+    '</section>';
+  }
+
+  function tryInstall_WatchlistDigest() {
+    if (document.getElementById('pi-watchlist-digest-panel')) return true;
+    var raw = null;
+    try { raw = localStorage.getItem(KEY); } catch (e) {}
+    if (!raw) return false;
+    var rows = [];
+    try { rows = JSON.parse(raw) || []; } catch (e) { return false; }
+    if (!rows.length) return false;
+    var content = document.getElementById('content-area') || document.querySelector('.content');
+    if (!content) return false;
+    _wlGroups = buildWatchlist(rows);
+    var total = _wlGroups.reduce(function (s, g) { return s + g.items.length; }, 0);
+    content.insertAdjacentHTML('beforeend', panelHtml(total, _wlGroups.length));
+    renderWatchlist();
+    console.info('[PropIntel] watchlist-digest-v1: ' + total + ' items across ' + _wlGroups.length + ' towns.');
+    return true;
+  }
+
+  var _tries = 0;
+  var _timer = setInterval(function () {
+    _tries++;
+    if (tryInstall_WatchlistDigest() || _tries > 30) clearInterval(_timer);
+  }, 200);
+
+  console.info('[PropIntel] patch-watchlist-digest-v1 loaded.');
+})();
+</script>
 </body>
 </html>
