@@ -36229,5 +36229,301 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
   console.info('[PropIntel] patch-watchlist-digest-v1 loaded.');
 })();
 </script>
+
+<!-- =========================================================
+   PATCH: Live Evidence Board Pack
+   Priority: CRITICAL UPGRADE — overrides v54GenerateBoardPack
+   to produce a fully evidence-driven investment brief from
+   localStorage data (870 rows) instead of hardcoded LIVE_DATA.
+   Outputs: KPI strip, yield analysis, Q1 entry, sensitivity
+   table, top comparables, risk register. Print-ready PDF.
+   ========================================================= -->
+<script id="patch-board-pack-live-v1">
+(function () {
+  'use strict';
+
+  var KEY    = 'residential_agent_helper_v71_rows';
+  var PTYPES = ['1 Bed Flat', '2 Bed Flat', '2 Bed House'];
+
+  function esc(v) {
+    return String(v == null ? '' : v)
+      .replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+  }
+
+  function parsePrice(v) {
+    var s = String(v || '').replace(/[£,\s]/g, '');
+    var m = s.match(/(\d+)/);
+    return m ? parseInt(m[1], 10) : null;
+  }
+
+  function avg(arr) {
+    return arr.reduce(function (a, b) { return a + b; }, 0) / arr.length;
+  }
+
+  function q1p(arr) {
+    if (!arr || arr.length < 4) return null;
+    var s = arr.slice().sort(function (a, b) { return a - b; });
+    return s[Math.floor(s.length * 0.25)];
+  }
+
+  function fmtN(n) {
+    return n == null ? '—' : '£' + Math.round(n).toLocaleString('en-GB');
+  }
+
+  function yc(y) {
+    if (!y) return '#4a6055';
+    if (y >= 9)  return '#0c4a2e';
+    if (y >= 8)  return '#14532d';
+    if (y >= 7)  return '#1a6b35';
+    if (y >= 6)  return '#B68D40';
+    return '#991b1b';
+  }
+
+  function loadTownData(townId) {
+    var raw = null;
+    try { raw = localStorage.getItem(KEY); } catch (e) {}
+    if (!raw) return null;
+    var rows = [];
+    try { rows = JSON.parse(raw) || []; } catch (e) { return null; }
+    if (!rows.length) return null;
+
+    var norm = function (s) { return (s || '').toLowerCase().replace(/[^a-z0-9]/g, ''); };
+    var nid  = norm(townId);
+    var tr   = rows.filter(function (r) { return norm(r.town) === nid; });
+    if (!tr.length) return null;
+
+    var town = { name: tr[0].town };
+    try {
+      var ld = window.townById && window.townById(townId);
+      if (ld) { town.score = ld.score; town.postcode = ld.postcode; }
+    } catch (e) {}
+
+    var sortDesc = function (arr) {
+      return arr.slice().sort(function (a, b) {
+        return (b.dateChecked || '').localeCompare(a.dateChecked || '');
+      });
+    };
+
+    town.types = PTYPES.map(function (pt) {
+      var sold = tr.filter(function (r) { return r.propertyType === pt && r.evidenceType === 'Sold'; });
+      var rent = tr.filter(function (r) { return r.propertyType === pt && r.evidenceType === 'Rent'; });
+      var sp   = sold.map(function (r) { return parsePrice(r.priceRent); }).filter(function (v) { return v && v > 10000; });
+      var rp   = rent.map(function (r) { return parsePrice(r.priceRent); }).filter(function (v) { return v && v > 100 && v < 5000; });
+
+      var avgS = sp.length ? avg(sp) : null;
+      var avgR = rp.length ? avg(rp) : null;
+      var q1S  = q1p(sp);
+
+      var scenarios = (avgS && avgR) ? [-20, -15, -10, -5, 0, 5, 10, 15, 20].map(function (d) {
+        var p = avgS * (1 + d / 100);
+        return { delta: d, price: p, yld: avgR * 12 / p * 100 };
+      }) : null;
+
+      return {
+        label:      pt,
+        nSold:      sp.length,
+        nRent:      rp.length,
+        avgSold:    avgS,
+        minSold:    sp.length ? Math.min.apply(null, sp) : null,
+        maxSold:    sp.length ? Math.max.apply(null, sp) : null,
+        avgRent:    avgR,
+        minRent:    rp.length ? Math.min.apply(null, rp) : null,
+        maxRent:    rp.length ? Math.max.apply(null, rp) : null,
+        q1Sold:     q1S,
+        grossYield: (avgS && avgR) ? (avgR * 12 / avgS * 100) : null,
+        q1Yield:    (q1S && avgR)  ? (avgR * 12 / q1S * 100)  : null,
+        soldComps:  sortDesc(sold).slice(0, 5),
+        rentComps:  sortDesc(rent).slice(0, 5),
+        scenarios:  scenarios
+      };
+    });
+
+    town.totalSold = tr.filter(function (r) { return r.evidenceType === 'Sold'; }).length;
+    town.totalRent = tr.filter(function (r) { return r.evidenceType === 'Rent'; }).length;
+    town.total     = tr.length;
+
+    var dates = tr.map(function (r) { return r.dateChecked || ''; }).filter(Boolean).sort().reverse();
+    town.latestDate = dates[0] || '—';
+
+    var srcs = {};
+    tr.forEach(function (r) { if (r.source) srcs[r.source] = 1; });
+    town.sourceCount = Object.keys(srcs).length;
+
+    var best = null;
+    town.types.forEach(function (t) { if (t.grossYield && (!best || t.grossYield > best)) best = t.grossYield; });
+    town.bestYield = best;
+
+    return town;
+  }
+
+  function buildPackHtml(town) {
+    var d = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+
+    var css = [
+      '@page{size:A4;margin:14mm}',
+      '*{box-sizing:border-box;margin:0;padding:0}',
+      'body{font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#0f1f16;background:#fff}',
+      '.printbar{position:fixed;top:10px;right:10px;display:flex;gap:6px;z-index:99}',
+      'button{background:#0f3d2e;color:#ffe9a1;border:none;border-radius:999px;padding:7px 14px;font-weight:700;font-size:10px;cursor:pointer}',
+      '@media print{.printbar{display:none}}',
+      '.hdr{background:#0f3d2e;padding:16px 20px 12px;border-radius:10px;margin-bottom:12px}',
+      '.hdr-eye{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,233,161,.55);margin-bottom:4px}',
+      '.hdr h1{font-family:Georgia,serif;font-size:24px;color:#ffe9a1;font-weight:normal}',
+      '.hdr-sub{font-size:9px;color:rgba(255,233,161,.55);margin-top:3px}',
+      '.ks{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-bottom:12px}',
+      '.kpi{border:1px solid #d4dbd4;border-radius:7px;padding:8px 10px}',
+      '.kpi b{display:block;font-size:15px;font-weight:900;color:#0f1f16;margin-bottom:1px}',
+      '.kpi span{display:block;font-size:8px;text-transform:uppercase;letter-spacing:.5px;color:#4a6055}',
+      '.kpi.g b{color:#7a5a10}',
+      'h2{font-family:Georgia,serif;font-size:14px;color:#0f3d2e;border-bottom:1.5px solid #c5b68a;padding-bottom:4px;margin:12px 0 7px}',
+      'h3{font-size:8.5px;text-transform:uppercase;letter-spacing:.5px;color:#4a6055;margin:8px 0 4px}',
+      '.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}',
+      '.tc{border:1px solid #d4dbd4;border-radius:7px;padding:10px}',
+      '.tc-eye{font-size:8px;text-transform:uppercase;letter-spacing:.5px;color:#4a6055;margin-bottom:2px}',
+      '.tc-y{font-size:19px;font-weight:900;line-height:1;margin:3px 0}',
+      '.tc-m{font-size:8.5px;color:#4a6055;line-height:1.65}',
+      '.q1{display:inline-block;padding:1px 6px;border-radius:999px;background:rgba(182,141,64,.15);border:1px solid rgba(182,141,64,.35);font-size:8px;font-weight:700;color:#7a5a10;margin-top:4px}',
+      'table{width:100%;border-collapse:collapse;margin:3px 0 9px;font-size:9px}',
+      'th{background:#0f3d2e;color:#ffe9a1;padding:5px 7px;text-align:left;font-size:8px;letter-spacing:.3px;white-space:nowrap}',
+      'td{border-bottom:1px solid #e8ede8;padding:5px 7px;vertical-align:top}',
+      'tr:nth-child(even) td{background:#f8f5ee}',
+      '.hl td{background:rgba(20,83,45,.07)!important;font-weight:700}',
+      '.rb{border:1px solid #f0c555;background:#fffbef;border-radius:7px;padding:9px 11px;margin-bottom:9px}',
+      '.ri{font-size:9.5px;color:#7a5a10;padding:1.5px 0}',
+      '.ri:before{content:"⚠ "}',
+      '.ok{color:#14532d;font-size:9.5px}',
+      '.foot{font-size:8px;color:#6a7c6e;line-height:1.5;padding-top:8px;border-top:1px solid #d4dbd4;margin-top:14px}'
+    ].join('');
+
+    var hdr = '<div class="hdr">' +
+      '<div class="hdr-eye">PropIntel · Investment Intelligence Brief · ' + esc(d) + '</div>' +
+      '<h1>' + esc(town.name) + (town.postcode ? ' · ' + esc(town.postcode) : '') + '</h1>' +
+      '<div class="hdr-sub">' + town.total + ' comparable rows loaded · Evidence-driven · Research only · Verify before acquisition</div>' +
+    '</div>';
+
+    var kstrip = '<div class="ks">' +
+      '<div class="kpi"><b>' + town.total + '</b><span>Total Comps</span></div>' +
+      '<div class="kpi"><b>' + town.totalSold + '</b><span>Sold</span></div>' +
+      '<div class="kpi"><b>' + town.totalRent + '</b><span>Rental</span></div>' +
+      '<div class="kpi"><b>' + town.sourceCount + '</b><span>Sources</span></div>' +
+      '<div class="kpi"><b>' + esc(town.latestDate) + '</b><span>Latest Checked</span></div>' +
+      '<div class="kpi g"><b>' + (town.bestYield ? town.bestYield.toFixed(1) + '%' : '—') + '</b><span>Best Yield</span></div>' +
+    '</div>';
+
+    var typeCards = '<h2>Property Type Analysis</h2><div class="tg">' +
+      town.types.map(function (t) {
+        return '<div class="tc">' +
+          '<div class="tc-eye">' + esc(t.label) + '</div>' +
+          '<div class="tc-y" style="color:' + yc(t.grossYield) + '">' + (t.grossYield ? t.grossYield.toFixed(1) + '%' : '—') + '</div>' +
+          '<div class="tc-m">' +
+            (t.avgSold ? fmtN(t.avgSold) + ' avg sold<br>' : 'No sold data<br>') +
+            (t.avgRent ? fmtN(t.avgRent) + '/mo avg rent<br>' : 'No rent data<br>') +
+            (t.minSold ? 'Range: ' + fmtN(t.minSold) + '–' + fmtN(t.maxSold) + '<br>' : '') +
+            t.nSold + ' sold comp' + (t.nSold !== 1 ? 's' : '') + ' · ' +
+            t.nRent + ' rent comp' + (t.nRent !== 1 ? 's' : '') +
+          '</div>' +
+          (t.q1Yield ? '<div class="q1">Q1 entry: ' + t.q1Yield.toFixed(1) + '% · ' + fmtN(t.q1Sold) + '</div>' : '') +
+        '</div>';
+      }).join('') +
+    '</div>';
+
+    var sensHtml = town.types.filter(function (t) { return t.scenarios; }).map(function (t) {
+      return '<h3>' + esc(t.label) + ' · Acquisition Price Scenarios</h3>' +
+        '<table><thead><tr><th>Acquisition Price</th><th>vs Market</th><th>Gross Yield</th><th>Net Yield est.</th></tr></thead><tbody>' +
+        t.scenarios.map(function (s) {
+          var isBase = s.delta === 0;
+          return '<tr' + (isBase ? ' class="hl"' : '') + '>' +
+            '<td>' + fmtN(s.price) + '</td>' +
+            '<td>' + (s.delta === 0 ? 'Market avg' : (s.delta > 0 ? '+' : '') + s.delta + '%') + '</td>' +
+            '<td style="color:' + yc(s.yld) + ';font-weight:' + (isBase ? '900' : '700') + '">' + s.yld.toFixed(1) + '%</td>' +
+            '<td style="color:#4a6055">' + (s.yld * 0.75).toFixed(1) + '%</td>' +
+          '</tr>';
+        }).join('') + '</tbody></table>';
+    }).join('');
+
+    function compTable(rows, mode) {
+      if (!rows.length) return '<p style="color:#999;font-size:9px;margin-bottom:8px;">No ' + mode + ' comparables loaded for this property type.</p>';
+      return '<table><thead><tr><th>Address</th><th>' + (mode === 'sold' ? 'Sold Price' : 'PCM Rent') + '</th><th>Source</th><th>Date</th><th>QA Status</th></tr></thead><tbody>' +
+        rows.map(function (r) {
+          return '<tr><td>' + esc(r.address || '—') + '</td>' +
+            '<td style="font-weight:700">' + esc(r.priceRent || '—') + '</td>' +
+            '<td>' + esc(r.source || '—') + '</td>' +
+            '<td style="white-space:nowrap">' + esc(r.dateChecked || '—') + '</td>' +
+            '<td style="color:' + (r.qaStatus === 'Watchlist' ? '#B68D40' : '#4a6055') + '">' + esc(r.qaStatus || '—') + '</td></tr>';
+        }).join('') + '</tbody></table>';
+    }
+
+    var compHtml = town.types.map(function (t) {
+      return '<h3>' + esc(t.label) + ' · Sold Comparables (latest ' + t.soldComps.length + ' of ' + t.nSold + ')</h3>' +
+        compTable(t.soldComps, 'sold') +
+        '<h3>' + esc(t.label) + ' · Rental Comparables (latest ' + t.rentComps.length + ' of ' + t.nRent + ')</h3>' +
+        compTable(t.rentComps, 'rent');
+    }).join('');
+
+    var risks = [];
+    town.types.forEach(function (t) {
+      if (t.nSold === 0) risks.push(t.label + ': no sold evidence — gross yield cannot be calculated.');
+      else if (t.nSold < 4) risks.push(t.label + ': ' + t.nSold + ' sold comp' + (t.nSold === 1 ? '' : 's') + ' — Q1 entry price requires minimum 4.');
+      if (t.nRent === 0) risks.push(t.label + ': no rental evidence — gross yield cannot be calculated.');
+      else if (t.nRent < 3) risks.push(t.label + ': ' + t.nRent + ' rental comp' + (t.nRent === 1 ? '' : 's') + ' — directional only.');
+    });
+
+    var riskHtml = '<h2>Risk Register</h2>' +
+      (risks.length
+        ? '<div class="rb">' + risks.map(function (r) { return '<div class="ri">' + esc(r) + '</div>'; }).join('') + '</div>'
+        : '<p class="ok">✓ All tracked property types meet minimum evidence thresholds.</p>');
+
+    var foot = '<div class="foot">PropIntel · Wood Property Group Ltd · ' + esc(d) + ' · Research only. Generated from loaded comparable evidence. Not a valuation or investment recommendation. Verify all sources, prices and dates independently before any acquisition decision.</div>';
+
+    return '<!doctype html><html><head><meta charset="utf-8">' +
+      '<title>' + esc(town.name) + ' · Investment Brief</title>' +
+      '<style>' + css + '</style></head><body>' +
+      '<div class="printbar"><button onclick="window.print()">Print / Save PDF</button></div>' +
+      hdr + kstrip + typeCards +
+      '<h2>Yield Sensitivity Analysis</h2>' + sensHtml +
+      '<h2>Comparable Evidence</h2>' + compHtml +
+      riskHtml + foot +
+      '</body></html>';
+  }
+
+  function tryInstall_BoardPackLive() {
+    if (!window.v54GenerateBoardPack) return false;
+    if (window.v54GenerateBoardPack.__livePatch) return true;
+
+    var orig = window.v54GenerateBoardPack;
+
+    window.v54GenerateBoardPack = function (townId) {
+      var town = loadTownData(townId);
+      orig(townId);
+      if (!town) {
+        console.warn('[PropIntel] board-pack-live-v1: no localStorage evidence for "' + townId + '" — showing legacy pack.');
+        return;
+      }
+      var frame = document.getElementById('v54-boardpack-frame');
+      if (!frame) return;
+      try {
+        var doc = frame.contentDocument || frame.contentWindow.document;
+        doc.open(); doc.write(buildPackHtml(town)); doc.close();
+      } catch (e) {
+        console.warn('[PropIntel] board-pack-live-v1: iframe write failed.', e);
+      }
+    };
+    window.v54GenerateBoardPack.__livePatch = true;
+
+    console.info('[PropIntel] patch-board-pack-live-v1: v54GenerateBoardPack overridden with live evidence pack.');
+    return true;
+  }
+
+  var _tries = 0;
+  var _timer = setInterval(function () {
+    _tries++;
+    if (tryInstall_BoardPackLive() || _tries > 50) clearInterval(_timer);
+  }, 200);
+
+  console.info('[PropIntel] patch-board-pack-live-v1 loaded.');
+})();
+</script>
 </body>
 </html>
