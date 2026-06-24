@@ -35108,6 +35108,199 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
 </div>
 <!-- PI-STR-V1 STEP 2 END -->
 <!-- =========================================================
+   PATCH 6: Yield League Table
+   Priority: HIGH — ranks all town/property-type combinations
+   by gross yield calculated live from evidence comps.
+   Reads: residential_agent_helper_v71_rows (localStorage)
+   Calculates: (avg monthly rent × 12) ÷ avg sold price
+   Filters: by property type. Flags thin data (< 3 comps).
+   Mounts: appended to #content-area.
+   ========================================================= -->
+<script id="patch-yield-league-v1">
+(function () {
+  'use strict';
+  if (document.getElementById('pi-yield-league-panel')) return;
+
+  function esc(v) {
+    return String(v == null ? '' : v)
+      .replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+  }
+
+  var KEY        = 'residential_agent_helper_v71_rows';
+  var PTYPES     = ['All', '1 Bed Flat', '2 Bed Flat', '2 Bed House'];
+  var _data      = [];
+  var _filter    = 'All';
+
+  function parsePrice(v) {
+    var s = String(v || '').replace(/[£,\s]/g, '');
+    var m = s.match(/(\d+)/);
+    return m ? parseInt(m[1], 10) : null;
+  }
+
+  function avg(arr) {
+    return arr.reduce(function (a, b) { return a + b; }, 0) / arr.length;
+  }
+
+  function calcYields(rows) {
+    var sold = {}, rent = {};
+    rows.forEach(function (r) {
+      if (!r._fromExcel) return;
+      var k = (r.town || '') + '|||' + (r.propertyType || '');
+      var p = parsePrice(r.priceRent);
+      if (r.evidenceType === 'Sold' && p && p > 10000) {
+        (sold[k] = sold[k] || []).push(p);
+      } else if (r.evidenceType === 'Rent' && p && p > 100 && p < 5000) {
+        (rent[k] = rent[k] || []).push(p);
+      }
+    });
+    var out = [];
+    Object.keys(sold).forEach(function (k) {
+      if (!rent[k]) return;
+      var parts  = k.split('|||');
+      var aS     = avg(sold[k]);
+      var aR     = avg(rent[k]);
+      out.push({
+        town:      parts[0],
+        ptype:     parts[1],
+        avgSold:   aS,
+        avgRent:   aR,
+        yield:     (aR * 12) / aS * 100,
+        nSold:     sold[k].length,
+        nRent:     rent[k].length,
+        conf:      Math.min(sold[k].length, rent[k].length)
+      });
+    });
+    return out.sort(function (a, b) { return b.yield - a.yield; });
+  }
+
+  function yColor(y) {
+    if (y >= 10) return '#14532d';
+    if (y >= 8)  return '#1a6b35';
+    if (y >= 7)  return '#B68D40';
+    if (y >= 6)  return '#92400e';
+    return '#991b1b';
+  }
+
+  function fmt(n) {
+    return '£' + Math.round(n).toLocaleString('en-GB');
+  }
+
+  function renderRows() {
+    var body = document.getElementById('yl-tbody');
+    var info = document.getElementById('yl-info');
+    if (!body) return;
+    var rows = _filter === 'All' ? _data : _data.filter(function (r) { return r.ptype === _filter; });
+    if (info) info.textContent = rows.length + ' combinations · sorted by gross yield';
+    if (!rows.length) {
+      body.innerHTML = '<tr><td colspan="7" style="padding:20px;text-align:center;color:#4a6055;font-size:.9em;">No data for this filter.</td></tr>';
+      return;
+    }
+    body.innerHTML = rows.map(function (r, i) {
+      var thin = r.conf < 3;
+      return '<tr style="border-bottom:1px solid rgba(31,59,44,.07);' + (i % 2 === 0 ? '' : 'background:rgba(245,242,236,.6);') + '">' +
+        '<td style="padding:9px 12px;font:700 12px \'DM Mono\',monospace;color:#4a6055;">' + (i + 1) + '</td>' +
+        '<td style="padding:9px 12px;font-weight:700;color:#102016;">' + esc(r.town) + '</td>' +
+        '<td style="padding:9px 12px;font:600 11px \'DM Mono\',monospace;color:#4a6055;">' + esc(r.ptype) + '</td>' +
+        '<td style="padding:9px 12px;font:600 12px \'DM Mono\',monospace;color:#102016;">' + fmt(r.avgSold) + '</td>' +
+        '<td style="padding:9px 12px;font:600 12px \'DM Mono\',monospace;color:#102016;">' + fmt(r.avgRent) + '/mo</td>' +
+        '<td style="padding:9px 12px;">' +
+          '<span style="font:900 15px \'DM Mono\',monospace;color:' + yColor(r.yield) + ';">' + r.yield.toFixed(1) + '%</span>' +
+        '</td>' +
+        '<td style="padding:9px 12px;font:600 10px \'DM Mono\',monospace;color:' + (thin ? '#B68D40' : '#4a6055') + ';">' +
+          r.nSold + 's · ' + r.nRent + 'r' + (thin ? ' ⚠' : '') +
+        '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  function setFilter(t) {
+    _filter = t;
+    PTYPES.forEach(function (pt) {
+      var b = document.getElementById('yl-f-' + pt.replace(/\s/g, '-'));
+      if (!b) return;
+      var on = pt === t;
+      b.style.background    = on ? 'rgba(182,141,64,.25)' : 'transparent';
+      b.style.borderColor   = on ? 'rgba(182,141,64,.8)'  : 'rgba(182,141,64,.3)';
+      b.style.fontWeight    = on ? '800' : '600';
+    });
+    renderRows();
+  }
+
+  window.YieldLeague = { filter: setFilter };
+
+  function panelHtml() {
+    var filters = PTYPES.map(function (t) {
+      var on = t === 'All';
+      return '<button id="yl-f-' + esc(t.replace(/\s/g, '-')) + '" ' +
+        'onclick="window.YieldLeague.filter(\'' + esc(t) + '\')" ' +
+        'style="padding:5px 14px;border-radius:999px;cursor:pointer;' +
+        'border:1px solid rgba(182,141,64,' + (on ? '.8' : '.3') + ');' +
+        'background:' + (on ? 'rgba(182,141,64,.25)' : 'transparent') + ';' +
+        'color:#ffe9a1;font:' + (on ? '800' : '600') + ' 11px \'Outfit\',sans-serif;">' +
+        esc(t) + '</button>';
+    }).join('');
+
+    return '<section id="pi-yield-league-panel" style="margin:28px 0 0;font-family:\'Outfit\',system-ui,sans-serif;">' +
+      '<div style="background:#0f3d2e;border-radius:18px 18px 0 0;padding:20px 24px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">' +
+        '<div>' +
+          '<div style="font:900 9px/1 \'DM Mono\',monospace;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,233,161,.55);margin-bottom:6px;">Investment Intelligence · Calculated from Evidence Comps</div>' +
+          '<h2 style="margin:0 0 3px;color:#ffe9a1;font:900 19px/1.1 \'Outfit\',sans-serif;">Gross Yield League Table</h2>' +
+          '<p id="yl-info" style="margin:0;color:rgba(255,233,161,.65);font-size:.82em;font-family:\'DM Mono\',monospace;"></p>' +
+        '</div>' +
+        '<span style="background:rgba(182,141,64,.18);border:1px solid rgba(182,141,64,.4);color:#ffe9a1;border-radius:999px;padding:5px 12px;font:900 9px/1 \'DM Mono\',monospace;letter-spacing:.7px;text-transform:uppercase;white-space:nowrap;align-self:flex-start;">Research Only · Verify Before Acquisition</span>' +
+      '</div>' +
+      '<div style="background:#1b4332;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap;">' + filters + '</div>' +
+      '<div style="background:#fff;border-radius:0 0 18px 18px;overflow:hidden;border:1px solid rgba(31,59,44,.1);border-top:none;">' +
+        '<table style="width:100%;border-collapse:collapse;">' +
+          '<thead><tr style="background:#F5F2EC;border-bottom:2px solid rgba(31,59,44,.1);">' +
+            '<th style="padding:9px 12px;text-align:left;font:700 9px \'DM Mono\',monospace;color:#4a6055;letter-spacing:.5px;">#</th>' +
+            '<th style="padding:9px 12px;text-align:left;font:700 9px \'DM Mono\',monospace;color:#4a6055;letter-spacing:.5px;">TOWN</th>' +
+            '<th style="padding:9px 12px;text-align:left;font:700 9px \'DM Mono\',monospace;color:#4a6055;letter-spacing:.5px;">PROPERTY TYPE</th>' +
+            '<th style="padding:9px 12px;text-align:left;font:700 9px \'DM Mono\',monospace;color:#4a6055;letter-spacing:.5px;">AVG SOLD</th>' +
+            '<th style="padding:9px 12px;text-align:left;font:700 9px \'DM Mono\',monospace;color:#4a6055;letter-spacing:.5px;">AVG RENT/MO</th>' +
+            '<th style="padding:9px 12px;text-align:left;font:700 9px \'DM Mono\',monospace;color:#4a6055;letter-spacing:.5px;">GROSS YIELD</th>' +
+            '<th style="padding:9px 12px;text-align:left;font:700 9px \'DM Mono\',monospace;color:#4a6055;letter-spacing:.5px;">COMPS</th>' +
+          '</tr></thead>' +
+          '<tbody id="yl-tbody"></tbody>' +
+        '</table>' +
+        '<div style="padding:10px 16px;background:#f8f5ee;border-top:1px solid rgba(31,59,44,.07);font:500 10px \'DM Mono\',monospace;color:#6a7c6e;line-height:1.5;">' +
+          'Gross yield = (avg monthly rent × 12) ÷ avg sold price · Evidence-only · Directional · ⚠ = fewer than 3 sold or rent comps · Verify all figures before acquisition.' +
+        '</div>' +
+      '</div>' +
+    '</section>';
+  }
+
+  function tryInstall_YieldLeague() {
+    if (document.getElementById('pi-yield-league-panel')) return true;
+    var raw = null;
+    try { raw = localStorage.getItem(KEY); } catch (e) {}
+    if (!raw) return false;
+    var rows = [];
+    try { rows = JSON.parse(raw) || []; } catch (e) { return false; }
+    if (!rows.length) return false;
+    var content = document.getElementById('content-area') || document.querySelector('.content');
+    if (!content) return false;
+    _data = calcYields(rows);
+    content.insertAdjacentHTML('beforeend', panelHtml());
+    renderRows();
+    console.info('[PropIntel] yield-league-v1: ' + _data.length + ' combinations. Top yield: ' +
+      (_data[0] ? _data[0].town + ' ' + _data[0].ptype + ' ' + _data[0].yield.toFixed(1) + '%' : 'n/a'));
+    return true;
+  }
+
+  var _tries = 0;
+  var _timer = setInterval(function () {
+    _tries++;
+    if (tryInstall_YieldLeague() || _tries > 30) clearInterval(_timer);
+  }, 200);
+
+  console.info('[PropIntel] patch-yield-league-v1 loaded.');
+})();
+</script>
+
+<!-- =========================================================
    PATCH 5: Excel Row Sync Replacement
    Priority: CRITICAL — on every page load, replaces ALL
    _fromExcel rows in localStorage with fresh evidence.json.
