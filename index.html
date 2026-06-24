@@ -35108,6 +35108,101 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
 </div>
 <!-- PI-STR-V1 STEP 2 END -->
 <!-- =========================================================
+   PATCH 5: Excel Row Sync Replacement
+   Priority: CRITICAL — on every page load, replaces ALL
+   _fromExcel rows in localStorage with fresh evidence.json.
+   Preserves manual rows (AH-, V80-, non-fromExcel).
+   Prevents accumulation permanently. Runs once per TTL (15m).
+   Sets propintel_last_sync so legacy merge-sync skips.
+   ========================================================= -->
+<script id="patch-excel-replace-v1">
+(function () {
+  'use strict';
+  if (document.getElementById('pi-excel-replace-init')) return;
+  var _s = document.createElement('span');
+  _s.id = 'pi-excel-replace-init';
+  _s.style.display = 'none';
+  document.body.appendChild(_s);
+
+  function esc(v) {
+    return String(v == null ? '' : v)
+      .replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+  }
+
+  var KEY       = 'residential_agent_helper_v71_rows';
+  var AUDIT     = 'residential_agent_helper_v71_audit';
+  var SYNC_KEY  = 'propintel_last_sync';
+  var OWN_KEY   = 'propintel_excel_replace_ts';
+  var JSON_URL  = 'https://thollywood1888.github.io/PropIntel/evidence.json';
+  var TTL       = 15 * 60 * 1000;
+
+  function needsRun() {
+    try { return (Date.now() - parseInt(localStorage.getItem(OWN_KEY) || '0', 10)) > TTL; }
+    catch (e) { return true; }
+  }
+
+  function markDone() {
+    var now = String(Date.now());
+    try { localStorage.setItem(OWN_KEY, now); }  catch (e) {}
+    try { localStorage.setItem(SYNC_KEY, now); } catch (e) {}
+  }
+
+  function writeAudit(msg) {
+    try {
+      var log = JSON.parse(localStorage.getItem(AUDIT) || '[]') || [];
+      log.push({ ts: new Date().toLocaleString('en-GB'), msg: msg });
+      localStorage.setItem(AUDIT, JSON.stringify(log.slice(-80)));
+    } catch (e) {}
+  }
+
+  function tryInstall_ExcelReplace() {
+    if (!needsRun()) return true;
+
+    fetch(JSON_URL + '?t=' + Date.now())
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        var fresh = (data && Array.isArray(data.rows)) ? data.rows : [];
+        if (!fresh.length) return;
+
+        var existing = [];
+        try { existing = JSON.parse(localStorage.getItem(KEY) || '[]') || []; } catch (e) {}
+
+        var manual   = existing.filter(function (r) { return !r._fromExcel; });
+        var combined = manual.concat(fresh);
+
+        try { localStorage.setItem(KEY, JSON.stringify(combined)); } catch (e) { return; }
+
+        markDone();
+
+        var msg = 'excel-replace-v1: ' + existing.length + ' → ' + combined.length +
+                  ' (' + manual.length + ' manual kept + ' + fresh.length + ' Excel fresh)';
+        writeAudit(msg);
+        console.info('[PropIntel] ' + msg);
+
+        try {
+          if (window.AgentHelperV71 && typeof window.AgentHelperV71.refresh === 'function') {
+            window.AgentHelperV71.refresh();
+          }
+        } catch (e) {}
+      })
+      .catch(function (e) {
+        console.warn('[PropIntel] excel-replace-v1 fetch failed:', e.message);
+      });
+
+    return true;
+  }
+
+  setTimeout(tryInstall_ExcelReplace, 500);
+  console.info('[PropIntel] patch-excel-replace-v1 loaded.');
+})();
+</script>
+
+<!-- =========================================================
    PATCH 4: Evidence localStorage Deduplicator
    Priority: HIGH — removes duplicate rows from
    residential_agent_helper_v71_rows on every page load.
