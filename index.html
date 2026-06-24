@@ -35108,6 +35108,102 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
 </div>
 <!-- PI-STR-V1 STEP 2 END -->
 <!-- =========================================================
+   PATCH 3: Zero-Evidence Town Stubs
+   Priority: MEDIUM — prepends amber notice on any town card
+   (article[data-town-id]) that has zero rows in evidence.json.
+   Currently affects: Girvan, Milngavie, Falkirk, Bathgate,
+   Broxburn, Linlithgow.
+   Paste immediately before </body>
+   ========================================================= -->
+<script id="patch-zero-evidence-stubs-v1">
+(function () {
+  'use strict';
+  if (document.getElementById('pi-zero-evidence-init')) return;
+  var _sentinel = document.createElement('span');
+  _sentinel.id = 'pi-zero-evidence-init';
+  _sentinel.style.display = 'none';
+  document.body.appendChild(_sentinel);
+
+  function esc(v) {
+    return String(v == null ? '' : v)
+      .replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+  }
+
+  var STORAGE_KEY = 'residential_agent_helper_v71_rows';
+
+  function getEvidenceCounts() {
+    var raw = null;
+    try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+    if (!raw) return null;
+    var rows = [];
+    try { rows = JSON.parse(raw) || []; } catch (e) { return null; }
+    if (!rows.length) return null;
+    var counts = {};
+    rows.forEach(function (r) {
+      var k = (r.town || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      counts[k] = (counts[k] || 0) + 1;
+    });
+    return counts;
+  }
+
+  function toTitleCase(s) {
+    return s.replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
+
+  function injectZeroStubs(counts) {
+    // Target article cards only — avoids injecting divs into TR rows
+    var cards = document.querySelectorAll('article[data-town-id]');
+    cards.forEach(function (card) {
+      var tid = (card.getAttribute('data-town-id') || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (!tid) return;
+      if ((counts[tid] || 0) > 0) return;
+      if (card.querySelector('.pi-zero-evidence-notice')) return;
+      var rawName = card.getAttribute('data-town-name') || tid;
+      var displayName = esc(toTitleCase(rawName));
+      var notice = document.createElement('div');
+      notice.className = 'pi-zero-evidence-notice';
+      notice.style.cssText = [
+        'display:inline-flex',
+        'align-items:center',
+        'gap:4px',
+        'margin:4px 0 2px',
+        'padding:3px 10px',
+        'border-radius:999px',
+        'background:rgba(182,141,64,.1)',
+        'border:1px solid rgba(182,141,64,.35)',
+        'color:#7a5a10',
+        'font-size:.75em',
+        'font-family:\'DM Mono\',monospace',
+        'font-weight:600',
+      ].join(';');
+      notice.textContent = '⚠ No evidence data yet — add rows via the Master Excel';
+      notice.title = displayName + ': 0 evidence rows in dataset. Add data via Master Excel then run syncprop.';
+      card.prepend(notice);
+    });
+  }
+
+  function tryInstall_ZeroEvidenceStubs() {
+    var cards = document.querySelectorAll('article[data-town-id]');
+    if (!cards.length) return false;
+    var counts = getEvidenceCounts();
+    if (!counts) return false;
+    injectZeroStubs(counts);
+    return true;
+  }
+
+  var _tries = 0;
+  var _timer = setInterval(function () {
+    _tries++;
+    if (tryInstall_ZeroEvidenceStubs() || _tries > 30) clearInterval(_timer);
+  }, 200);
+
+  console.info('[PropIntel] patch-zero-evidence-stubs-v1 loaded.');
+})();
+</script>
+
+<!-- =========================================================
    PATCH 1: Backend API Stubs
    Priority: CRITICAL — fixes silently broken /api/rightmove
    and /api/analyse endpoints (both 404 on GitHub Pages).
