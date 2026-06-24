@@ -36525,5 +36525,231 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
   console.info('[PropIntel] patch-board-pack-live-v1 loaded.');
 })();
 </script>
+
+<!-- =========================================================
+   PATCH: Phase 4 — LIVE_DATA Runtime Wire
+   Priority: ARCHITECTURE — injects all 870 localStorage rows
+   into window.LIVE_DATA at boot. Every downstream display
+   function (town workspace tabs, evidence cards, confidence
+   badges, dashboard KPIs) automatically reads live evidence
+   without any further changes.
+   Single boot-time injection. No DOM modification required.
+   ========================================================= -->
+<script id="patch-phase4-live-wire-v1">
+(function () {
+  'use strict';
+
+  var KEY = 'residential_agent_helper_v71_rows';
+
+  var TYPE_MAP = {
+    '1 Bed Flat':  '1bf',
+    '2 Bed Flat':  '2bf',
+    '2 Bed House': '2bh'
+  };
+
+  function normId(name) {
+    return (name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  }
+
+  function parseP(v) {
+    var s = String(v || '').replace(/[£,\s]/g, '');
+    var m = s.match(/(\d+)/);
+    return m ? parseInt(m[1], 10) : null;
+  }
+
+  function mean(arr) {
+    return arr.reduce(function (a, b) { return a + b; }, 0) / arr.length;
+  }
+
+  function q1p(arr) {
+    if (!arr || arr.length < 4) return null;
+    var s = arr.slice().sort(function (a, b) { return a - b; });
+    return s[Math.floor(s.length * 0.25)];
+  }
+
+  function fmtM(n) {
+    return n ? '£' + Math.round(n).toLocaleString('en-GB') : null;
+  }
+
+  // ── Step 1: Build evidence map from localStorage ──────────────────
+  function buildMap(rows) {
+    var map = {};
+    rows.forEach(function (r) {
+      if (!r._fromExcel) return;
+      var tid   = normId(r.town);
+      var typId = TYPE_MAP[r.propertyType];
+      if (!tid || !typId) return;
+      if (!map[tid])        map[tid] = {};
+      if (!map[tid][typId]) map[tid][typId] = { sold: [], rent: [], sp: [], rp: [] };
+
+      var p    = parseP(r.priceRent);
+      var item = {
+        addr:     r.address     || '—',
+        date:     r.dateChecked || '—',
+        src:      r.source      || '—',
+        note:     r.notes       || '',
+        sigLabel: r.qaStatus    || r.status || 'Loaded',
+        _liveWired: true
+      };
+
+      if (r.evidenceType === 'Sold') {
+        item.price = r.priceRent || '—';
+        map[tid][typId].sold.push(item);
+        if (p && p > 10000) map[tid][typId].sp.push(p);
+      } else if (r.evidenceType === 'Rent') {
+        item.rent = r.priceRent || '—';
+        map[tid][typId].rent.push(item);
+        if (p && p > 100 && p < 5000) map[tid][typId].rp.push(p);
+      }
+    });
+    return map;
+  }
+
+  // ── Step 2: Inject map into window.LIVE_DATA ──────────────────────
+  function injectLiveData(map) {
+    if (!window.LIVE_DATA) window.LIVE_DATA = {};
+    var towns = 0, combos = 0;
+
+    Object.keys(map).forEach(function (tid) {
+      if (!window.LIVE_DATA[tid]) window.LIVE_DATA[tid] = {};
+      towns++;
+
+      Object.keys(map[tid]).forEach(function (typId) {
+        var d   = map[tid][typId];
+        var ex  = window.LIVE_DATA[tid][typId] || {};
+        var avgS = d.sp.length ? mean(d.sp) : null;
+        var avgR = d.rp.length ? mean(d.rp) : null;
+        var q1S  = q1p(d.sp);
+        var gY   = (avgS && avgR) ? (avgR * 12 / avgS * 100) : null;
+        var q1Y  = (q1S && avgR)  ? (avgR * 12 / q1S * 100)  : null;
+
+        window.LIVE_DATA[tid][typId] = {
+          verdict:      ex.verdict      || '',
+          verdictLabel: ex.verdictLabel || '',
+          strategy: ex.strategy || ('Live evidence · ' + d.sold.length + ' sold · ' + d.rent.length + ' rent'),
+          kpis: {
+            entry: q1S
+              ? fmtM(q1S) + ' Q1 · ' + fmtM(avgS) + ' avg'
+              : (fmtM(avgS) || (ex.kpis && ex.kpis.entry) || '—'),
+            yield: gY
+              ? gY.toFixed(1) + '%' + (q1Y ? ' · Q1 ' + q1Y.toFixed(1) + '%' : '')
+              : ((ex.kpis && ex.kpis.yield) || '—'),
+            rent:  avgR
+              ? fmtM(avgR) + ' pcm'
+              : ((ex.kpis && ex.kpis.rent) || '—'),
+            comps: d.sold.length + ' sold · ' + d.rent.length + ' rent'
+          },
+          sold:   d.sold,
+          rental: d.rent,
+          btl:    ex.btl   || [],
+          notes:  ex.notes || [],
+          _liveWired: true
+        };
+        combos++;
+      });
+    });
+
+    return { towns: towns, combos: combos };
+  }
+
+  // ── Step 3: Collect global yields for KPI strip ───────────────────
+  function globalYields() {
+    var ys = [];
+    Object.keys(window.LIVE_DATA || {}).forEach(function (tid) {
+      var td = window.LIVE_DATA[tid] || {};
+      Object.keys(td).forEach(function (typId) {
+        var t = td[typId];
+        if (!t || !t._liveWired) return;
+        var m = String(t.kpis && t.kpis.yield || '').match(/^(\d+\.?\d*)/);
+        if (m) ys.push(parseFloat(m[1]));
+      });
+    });
+    return ys;
+  }
+
+  // ── Step 4: Refresh executive dashboard ──────────────────────────
+  function refreshDashboard(rows) {
+    if (typeof window.renderExecDashboard === 'function') {
+      try { window.renderExecDashboard(); } catch (e) {}
+    }
+
+    function setEl(id, v) { var e = document.getElementById(id); if (e) e.textContent = v; }
+
+    var ys = globalYields();
+    if (ys.length) {
+      setEl('ei-kpi-avg-yield', (ys.reduce(function (a, b) { return a + b; }, 0) / ys.length).toFixed(1) + '%');
+      setEl('ei-kpi-top-yield', Math.max.apply(null, ys).toFixed(1) + '%');
+    }
+
+    var uniqueTowns = Object.keys(
+      rows.filter(function (r) { return r._fromExcel; })
+          .reduce(function (m, r) { m[normId(r.town)] = 1; return m; }, {})
+    ).length;
+    if (uniqueTowns > 0) {
+      setEl('ei-kpi-towns', uniqueTowns);
+      var totalRows = rows.filter(function (r) { return r._fromExcel; }).length;
+      setEl('ei-kpi-records', totalRows.toLocaleString('en-GB'));
+    }
+  }
+
+  // ── Step 5: Soft-update already-rendered town cards ───────────────
+  function softUpdateCards(map) {
+    Object.keys(map).forEach(function (tid) {
+      var totalComps = 0;
+      var totalSold  = 0;
+      var totalRent  = 0;
+      Object.keys(map[tid]).forEach(function (typId) {
+        var d = map[tid][typId];
+        totalComps += d.sold.length + d.rent.length;
+        totalSold  += d.sold.length;
+        totalRent  += d.rent.length;
+      });
+      if (!totalComps) return;
+
+      var cards = document.querySelectorAll('[data-town-id="' + tid + '"]');
+      cards.forEach(function (card) {
+        card.setAttribute('data-evidence', totalComps);
+        card.setAttribute('data-sold',     totalSold);
+        card.setAttribute('data-rent',     totalRent);
+        var sig = card.querySelector('.town-card-signal b');
+        if (sig) sig.textContent = totalComps;
+      });
+    });
+  }
+
+  // ── Orchestrator ──────────────────────────────────────────────────
+  function tryInstall_Phase4Wire() {
+    if (window.__phase4LiveWire) return true;
+    if (typeof window.LIVE_DATA === 'undefined') return false;
+
+    var raw = null;
+    try { raw = localStorage.getItem(KEY); } catch (e) {}
+    if (!raw) return false;
+    var rows = [];
+    try { rows = JSON.parse(raw) || []; } catch (e) { return false; }
+    if (!rows.length) return false;
+
+    window.__phase4LiveWire = true;
+
+    var map   = buildMap(rows);
+    var stats = injectLiveData(map);
+    refreshDashboard(rows);
+    softUpdateCards(map);
+
+    console.info('[PropIntel] patch-phase4-live-wire-v1: ✓ ' +
+      rows.length + ' rows → ' + stats.towns + ' towns · ' +
+      stats.combos + ' combos injected into LIVE_DATA.');
+    return true;
+  }
+
+  var _tries = 0;
+  var _timer = setInterval(function () {
+    _tries++;
+    if (tryInstall_Phase4Wire() || _tries > 50) clearInterval(_timer);
+  }, 200);
+
+  console.info('[PropIntel] patch-phase4-live-wire-v1 loaded.');
+})();
+</script>
 </body>
 </html>
