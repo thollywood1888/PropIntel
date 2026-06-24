@@ -36571,6 +36571,15 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
     return n ? '£' + Math.round(n).toLocaleString('en-GB') : null;
   }
 
+  function normaliseDate(v) {
+    var s = String(v || '');
+    var ddmm = s.match(/^(\d{1,2})\/(\d{1,2})\/(20\d{2})$/);
+    if (ddmm) return ddmm[3] + '-' + ('0' + ddmm[2]).slice(-2) + '-' + ('0' + ddmm[1]).slice(-2);
+    var monyy = s.match(/^([A-Za-z]{3})-(\d{2})$/);
+    if (monyy) return monyy[1] + ' 20' + monyy[2];
+    return s;
+  }
+
   // ── Step 1: Build evidence map from localStorage ──────────────────
   function buildMap(rows) {
     var map = {};
@@ -36584,9 +36593,9 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
 
       var p    = parseP(r.priceRent);
       var item = {
-        addr:     r.address     || '—',
-        date:     r.dateChecked || '—',
-        src:      r.source      || '—',
+        addr:     r.address                      || '—',
+        date:     normaliseDate(r.dateChecked)   || '—',
+        src:      r.source                       || '—',
         note:     r.notes       || '',
         sigLabel: r.qaStatus    || r.status || 'Loaded',
         _liveWired: true
@@ -36669,27 +36678,33 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
 
   // ── Step 4: Refresh executive dashboard ──────────────────────────
   function refreshDashboard(rows) {
+    function setEl(id, v) { var e = document.getElementById(id); if (e) e.textContent = v; }
+
+    var fromExcel   = rows.filter(function (r) { return r._fromExcel; });
+    var total       = fromExcel.length;
+    var uniqueTowns = Object.keys(
+      fromExcel.reduce(function (m, r) { m[normId(r.town)] = 1; return m; }, {})
+    ).length;
+    var ys  = globalYields();
+    var avgY = ys.length ? (ys.reduce(function (a, b) { return a + b; }, 0) / ys.length).toFixed(1) + '%' : null;
+    var topY = ys.length ? Math.max.apply(null, ys).toFixed(1) + '%' : null;
+
+    // Assert BEFORE renderExecDashboard so any DOM already present gets correct values
+    if (uniqueTowns > 0) setEl('ei-kpi-towns', uniqueTowns);
+    setEl('ei-kpi-records', total.toLocaleString('en-GB'));
+    if (avgY) setEl('ei-kpi-avg-yield', avgY);
+    if (topY) setEl('ei-kpi-top-yield', topY);
+
+    // Run full dashboard render (may re-inject stale btl +775 to records)
     if (typeof window.renderExecDashboard === 'function') {
       try { window.renderExecDashboard(); } catch (e) {}
     }
 
-    function setEl(id, v) { var e = document.getElementById(id); if (e) e.textContent = v; }
-
-    var ys = globalYields();
-    if (ys.length) {
-      setEl('ei-kpi-avg-yield', (ys.reduce(function (a, b) { return a + b; }, 0) / ys.length).toFixed(1) + '%');
-      setEl('ei-kpi-top-yield', Math.max.apply(null, ys).toFixed(1) + '%');
-    }
-
-    var uniqueTowns = Object.keys(
-      rows.filter(function (r) { return r._fromExcel; })
-          .reduce(function (m, r) { m[normId(r.town)] = 1; return m; }, {})
-    ).length;
-    if (uniqueTowns > 0) {
-      setEl('ei-kpi-towns', uniqueTowns);
-      var totalRows = rows.filter(function (r) { return r._fromExcel; }).length;
-      setEl('ei-kpi-records', totalRows.toLocaleString('en-GB'));
-    }
+    // Re-assert: overwrite whatever renderExecDashboard wrote
+    if (uniqueTowns > 0) setEl('ei-kpi-towns', uniqueTowns);
+    setEl('ei-kpi-records', total.toLocaleString('en-GB'));
+    if (avgY) setEl('ei-kpi-avg-yield', avgY);
+    if (topY) setEl('ei-kpi-top-yield', topY);
   }
 
   // ── Step 5: Soft-update already-rendered town cards ───────────────
