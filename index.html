@@ -36767,5 +36767,114 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
   console.info('[PropIntel] patch-phase4-live-wire-v1 loaded.');
 })();
 </script>
+<style id="patch-nav-condense-v1-style">
+/* ── Badge removal ─────────────────────────────────────── */
+#v69-stable-badge-inline,
+.v69-stable-preview-badge,
+.live-badge,
+.eicc-badge { display: none !important; }
+body.redesign-v69 .version-pill::before { content: '' !important; }
+
+/* ── Remove Flip Calculator ────────────────────────────── */
+[data-nav-key="flip-calculator"] { display: none !important; }
+
+/* ── Condensed sidebar: group heads as primary tabs ─────── */
+.v59-group-head {
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  padding: 9px 14px !important;
+  color: rgba(255,255,255,0.45) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+  transition: color 120ms, background 120ms !important;
+}
+.v59-group-head:hover {
+  color: rgba(255,255,255,0.75) !important;
+  background: rgba(255,255,255,0.04) !important;
+}
+.v59-nav-group.v59-open > .v59-group-head {
+  color: #ffe9a1 !important;
+  background: rgba(182,141,64,0.10) !important;
+  border-left: 2px solid #B68D40 !important;
+}
+.v59-nav-group.v59-open > .v59-group-head .v59-chevron {
+  transform: rotate(180deg) !important;
+}
+
+/* Compact sidebar items */
+body.redesign-v59 .sidebar-item,
+body.redesign-v74 .sidebar-item {
+  padding: 7px 14px 7px 18px !important;
+  font-size: 12px !important;
+}
+/* Remove dividers — group heads serve as visual breaks */
+.sidebar-divider { display: none !important; }
+/* Tighter group body spacing */
+.v59-group-body { padding: 2px 0 4px !important; }
+/* Reduce sidebar tool note clutter */
+.v591-tool-note { display: none !important; }
+</style>
+
+<script id="patch-nav-condense-v1-js">
+(function () {
+  'use strict';
+
+  // ── Accordion: opening one group closes all others ─────
+  var _orig = window.v59ToggleSidebarGroup;
+  window.v59ToggleSidebarGroup = function (btn) {
+    var group = btn && btn.closest ? btn.closest('.v59-nav-group') : null;
+    if (!group) return;
+    var wasOpen = group.classList.contains('v59-open');
+    document.querySelectorAll('.v59-nav-group').forEach(function (g) {
+      g.classList.remove('v59-open');
+      var h = g.querySelector('.v59-group-head');
+      if (h) h.setAttribute('aria-expanded', 'false');
+    });
+    if (!wasOpen) {
+      group.classList.add('v59-open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  };
+
+  // ── Clean "01 · " numeric prefixes from group labels ──
+  function cleanLabels() {
+    document.querySelectorAll('.v59-group-head > span:first-child').forEach(function (s) {
+      s.textContent = s.textContent.replace(/^\d+[a-z]?\s*[·•]\s*/i, '');
+    });
+  }
+
+  // ── On load: collapse all groups except active one ─────
+  function initAccordion() {
+    var active  = document.querySelector('.sidebar-item.active');
+    var current = active ? active.closest('.v59-nav-group') : null;
+    document.querySelectorAll('.v59-nav-group').forEach(function (g) {
+      if (g === current) return;
+      g.classList.remove('v59-open');
+      var h = g.querySelector('.v59-group-head');
+      if (h) h.setAttribute('aria-expanded', 'false');
+    });
+    if (!current) {
+      var first = document.querySelector('.v59-nav-group');
+      if (first) {
+        first.classList.add('v59-open');
+        var fh = first.querySelector('.v59-group-head');
+        if (fh) fh.setAttribute('aria-expanded', 'true');
+      }
+    }
+  }
+
+  function install() {
+    cleanLabels();
+    initAccordion();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
 </body>
 </html>
