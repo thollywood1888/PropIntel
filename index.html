@@ -36867,5 +36867,61 @@ body.redesign-v74 .sidebar-item {
   }
 })();
 </script>
+
+<script id="patch-towndir-live-counts-v1">
+(function () {
+  'use strict';
+  if (window.__tdLiveCountsInstalled) return;
+  window.__tdLiveCountsInstalled = true;
+
+  var TYPES = ['1bf', '2bf', '2bh'];
+
+  function getTownCount(townId) {
+    var ld = window.LIVE_DATA;
+    if (!ld || !ld[townId]) return 0;
+    var total = 0;
+    TYPES.forEach(function (t) {
+      var d = ld[townId][t] || {};
+      total += Array.isArray(d.sold)   ? d.sold.length   : 0;
+      total += Array.isArray(d.rental) ? d.rental.length : 0;
+    });
+    return total;
+  }
+
+  function updateBadges() {
+    document.querySelectorAll('.v621-sidebar-town-btn').forEach(function (btn) {
+      var tid = btn.dataset.v621TownId;
+      if (!tid) return;
+      var el = btn.querySelector('.v621-town-btn-score');
+      if (!el) return;
+      el.textContent = getTownCount(tid);
+    });
+  }
+
+  function patchRender() {
+    var orig = window.v621RenderTownDirectory;
+    if (typeof orig !== 'function') return false;
+    window.v621RenderTownDirectory = function () {
+      orig.apply(this, arguments);
+      setTimeout(updateBadges, 60);
+    };
+    return true;
+  }
+
+  function init() {
+    if (!patchRender()) { setTimeout(init, 100); return; }
+    // Run at 600ms, 2s, 5s to catch Phase 4 injection completing after EJ fetch
+    setTimeout(updateBadges, 600);
+    setTimeout(updateBadges, 2000);
+    setTimeout(updateBadges, 5000);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 </body>
 </html>
