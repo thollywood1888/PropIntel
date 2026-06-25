@@ -36868,6 +36868,48 @@ body.redesign-v74 .sidebar-item {
 })();
 </script>
 
+<script id="patch-str-intel-nav-fix-v1">
+(function () {
+  'use strict';
+  if (window.__strIntelNavFixed) return;
+  window.__strIntelNavFixed = true;
+
+  function install() {
+    var orig = window.switchView;
+    if (typeof orig !== 'function') { setTimeout(install, 100); return; }
+
+    window.switchView = function (view) {
+      var panel = document.getElementById('view-str-intel');
+      // Intercept the broken call ('view-str-intel') and the correct form ('str-intel')
+      if (view === 'view-str-intel' || view === 'str-intel') {
+        document.querySelectorAll('[id^="view-"]').forEach(function (el) {
+          el.style.display = 'none';
+        });
+        if (panel) panel.style.display = 'block';
+        if (typeof window.v59SetSidebarActive === 'function') window.v59SetSidebarActive('str-intel');
+        return;
+      }
+      // Navigating elsewhere — hide STR panel
+      if (panel) panel.style.display = 'none';
+      return orig.apply(this, arguments);
+    };
+
+    // Fix the button: use v59OpenView so active state works, add nav-key
+    function fixBtn() {
+      var btn = document.querySelector('.v59-item[onclick*="str-intel"]');
+      if (!btn) return;
+      btn.setAttribute('onclick', "v59OpenView('str-intel','str-intel')");
+      btn.setAttribute('data-nav-key', 'str-intel');
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fixBtn);
+    else fixBtn();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', install);
+  else install();
+})();
+</script>
+
 <script id="patch-towndir-live-counts-v1">
 (function () {
   'use strict';
