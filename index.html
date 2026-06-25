@@ -36807,6 +36807,7 @@ body.redesign-v59 .sidebar-item,
 body.redesign-v74 .sidebar-item {
   padding: 7px 14px 7px 18px !important;
   font-size: 12px !important;
+  cursor: pointer !important;
 }
 /* Remove dividers — group heads serve as visual breaks */
 .sidebar-divider { display: none !important; }
@@ -36820,21 +36821,19 @@ body.redesign-v74 .sidebar-item {
 (function () {
   'use strict';
 
-  // ── Accordion: opening one group closes all others ─────
-  var _orig = window.v59ToggleSidebarGroup;
+  // ── Accordion: clicking a closed group opens it and closes others ──
+  // Clicking an already-open group does nothing (keeps it open).
   window.v59ToggleSidebarGroup = function (btn) {
     var group = btn && btn.closest ? btn.closest('.v59-nav-group') : null;
     if (!group) return;
-    var wasOpen = group.classList.contains('v59-open');
+    if (group.classList.contains('v59-open')) return; // already open — do nothing
     document.querySelectorAll('.v59-nav-group').forEach(function (g) {
       g.classList.remove('v59-open');
       var h = g.querySelector('.v59-group-head');
       if (h) h.setAttribute('aria-expanded', 'false');
     });
-    if (!wasOpen) {
-      group.classList.add('v59-open');
-      btn.setAttribute('aria-expanded', 'true');
-    }
+    group.classList.add('v59-open');
+    btn.setAttribute('aria-expanded', 'true');
   };
 
   // ── Clean "01 · " numeric prefixes from group labels ──
@@ -36844,29 +36843,21 @@ body.redesign-v74 .sidebar-item {
     });
   }
 
-  // ── On load: collapse all groups except active one ─────
-  function initAccordion() {
-    var active  = document.querySelector('.sidebar-item.active');
-    var current = active ? active.closest('.v59-nav-group') : null;
-    document.querySelectorAll('.v59-nav-group').forEach(function (g) {
-      if (g === current) return;
-      g.classList.remove('v59-open');
-      var h = g.querySelector('.v59-group-head');
-      if (h) h.setAttribute('aria-expanded', 'false');
-    });
-    if (!current) {
-      var first = document.querySelector('.v59-nav-group');
-      if (first) {
-        first.classList.add('v59-open');
-        var fh = first.querySelector('.v59-group-head');
-        if (fh) fh.setAttribute('aria-expanded', 'true');
-      }
+  // ── Ensure the tool-tabs group is open on load ──────────
+  // comparator-evidence (Watchlist, Portfolio, Agent Helper, DQC, ResAgents)
+  // starts closed in the static HTML — open it so these tabs are accessible.
+  function openToolTabs() {
+    var group = document.querySelector('[data-v59-group="comparator-evidence"]');
+    if (group && !group.classList.contains('v59-open')) {
+      group.classList.add('v59-open');
+      var h = group.querySelector('.v59-group-head');
+      if (h) h.setAttribute('aria-expanded', 'true');
     }
   }
 
   function install() {
     cleanLabels();
-    initAccordion();
+    openToolTabs();
   }
 
   if (document.readyState === 'loading') {
