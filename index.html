@@ -36629,8 +36629,9 @@ All qaStatus promotions to "Benchmark/Included" require human sign-off.`
         var avgS = d.sp.length ? mean(d.sp) : null;
         var avgR = d.rp.length ? mean(d.rp) : null;
         var q1S  = q1p(d.sp);
-        var gY   = (avgS && avgR) ? (avgR * 12 / avgS * 100) : null;
-        var q1Y  = (q1S && avgR)  ? (avgR * 12 / q1S * 100)  : null;
+        var enoughS = d.sp.length >= 5;
+        var gY   = (avgS && avgR && enoughS) ? (avgR * 12 / avgS * 100) : null;
+        var q1Y  = (q1S && avgR && enoughS)  ? (avgR * 12 / q1S * 100)  : null;
 
         window.LIVE_DATA[tid][typId] = {
           verdict:      ex.verdict      || '',
