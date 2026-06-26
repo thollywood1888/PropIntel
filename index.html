@@ -36965,5 +36965,82 @@ body.redesign-v74 .sidebar-item {
   }
 })();
 </script>
+<!-- ═══════════════════════════════════════════════════════
+     PATCH: Score Circle Colour Coding v1
+     Colours v60-score-ring, v63-score-ring, and sidebar
+     score chips by verdict band. Additive only.
+     ═══════════════════════════════════════════════════ -->
+<script id="patch-score-colours-v1">
+(function () {
+  'use strict';
+  if (document.getElementById('patch-score-colours-v1-init')) return true;
+
+  var BANDS = [
+    { min: 80, arc: '#2a6b4a', inner: '#0d2e1e', text: '#d4f5e2', chip: '#1b4332' },
+    { min: 65, arc: '#B68D40', inner: '#10261A', text: '#FFF8E8', chip: '#4a3010' },
+    { min: 0,  arc: '#7a3030', inner: '#2a0c0c', text: '#ffe8e8', chip: '#4a1010' }
+  ];
+
+  function getBand(score) {
+    for (var i = 0; i < BANDS.length; i++) {
+      if (score >= BANDS[i].min) return BANDS[i];
+    }
+    return BANDS[BANDS.length - 1];
+  }
+
+  function colourRing(el, ver) {
+    var score = parseInt((el.textContent || '').trim(), 10);
+    if (isNaN(score)) return;
+    var band = getBand(score);
+    var i1 = (ver === 'v60') ? '67%' : '66%';
+    var i2 = (ver === 'v60') ? '69%' : '68%';
+    el.style.background = [
+      'radial-gradient(circle closest-side, ' + band.inner + ' ' + i1 + ', transparent ' + i2 + ')',
+      'conic-gradient(' + band.arc + ' var(--' + ver + '-score, 0deg), rgba(255,255,255,.10) 0deg)'
+    ].join(', ');
+    el.style.color = band.text;
+  }
+
+  function colourChip(el) {
+    var score = parseInt((el.textContent || '').trim(), 10);
+    if (isNaN(score)) return;
+    var band = getBand(score);
+    el.style.background  = band.chip;
+    el.style.color       = band.text;
+    el.style.borderColor = band.arc;
+  }
+
+  function applyAll() {
+    document.querySelectorAll('.v60-score-ring').forEach(function (el) { colourRing(el, 'v60'); });
+    document.querySelectorAll('.v63-score-ring').forEach(function (el) { colourRing(el, 'v63'); });
+    document.querySelectorAll('.v621-town-btn-score').forEach(colourChip);
+  }
+
+  var _tries = 0;
+  var _timer = setInterval(function () {
+    _tries++;
+    applyAll();
+    if (_tries > 40) clearInterval(_timer);
+  }, 250);
+
+  var _obs = new MutationObserver(function () { applyAll(); });
+  _obs.observe(document.body, { childList: true, subtree: true });
+
+  (function () {
+    var K = 'residential_agent_helper_v71_audit';
+    var items = [];
+    try { items = JSON.parse(localStorage.getItem(K) || '[]') || []; } catch (e) {}
+    items.push({ ts: new Date().toLocaleString('en-GB'), msg: 'patch-score-colours-v1 applied' });
+    try { localStorage.setItem(K, JSON.stringify(items.slice(-80))); } catch (e) {}
+  })();
+
+  var m = document.createElement('span');
+  m.id = 'patch-score-colours-v1-init';
+  m.style.display = 'none';
+  document.body.appendChild(m);
+
+  console.info('[PropIntel] patch-score-colours-v1 loaded. Bands: 80+ green · 65-79 gold · <65 red.');
+})();
+</script>
 </body>
 </html>
