@@ -37133,5 +37133,266 @@ body.redesign-v74 .sidebar-item {
   console.info('[PropIntel] patch-data-gap-style-v1 loaded.');
 })();
 </script>
+<script id="patch-yield-engine-v1">
+(function(){
+  'use strict';
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function slugify(s){return String(s||'').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');}
+  function parseRent(p){var m=String(p||'').match(/£([\d,]+)\s*pcm/i);if(!m)return null;var v=parseFloat(m[1].replace(/,/g,''));return isNaN(v)?null:v*12;}
+  function parseSold(p){var s=String(p||'').replace(/£/g,'').replace(/,/g,'').trim();var v=parseFloat(s);return(isNaN(v)||v<=0)?null:v;}
+  function percentile(arr,p){if(!arr.length)return null;var s=arr.slice().sort(function(a,b){return a-b;});var idx=(p/100)*(s.length-1);var lo=Math.floor(idx),hi=Math.ceil(idx);return lo===hi?s[lo]:s[lo]+(s[hi]-s[lo])*(idx-lo);}
+  function computeBand(townName){
+    var rows=[];try{rows=JSON.parse(localStorage.getItem('residential_agent_helper_v71_rows')||'[]')||[];}catch(e){}
+    var tl=String(townName).toLowerCase();
+    var tr=rows.filter(function(r){return String(r.town||'').toLowerCase()===tl&&(r.evidenceType==='Rent'||r.evidenceType==='Sold');});
+    var rent=tr.filter(function(r){return r.evidenceType==='Rent';});
+    var sold=tr.filter(function(r){return r.evidenceType==='Sold';});
+    var yields=[];
+    sold.forEach(function(s){var sp=parseSold(s.priceRent);if(sp===null)return;var st=String(s.propertyType||'').toLowerCase();rent.filter(function(r){return String(r.propertyType||'').toLowerCase()===st;}).forEach(function(r){var ar=parseRent(r.priceRent);if(ar!==null)yields.push((ar/sp)*100);});});
+    return{n:yields.length,rc:rent.length,sc:sold.length,low:yields.length>=2?percentile(yields,10):null,mid:yields.length>=2?percentile(yields,50):null,high:yields.length>=2?percentile(yields,90):null};
+  }
+  function inject(header){
+    var titleRow=header.querySelector('.v54-drawer-title-row');var h3=titleRow&&titleRow.querySelector('h3');if(!h3)return;
+    var town=h3.textContent.trim();var slug=slugify(town);var bid='pi-yield-engine-'+slug;if(document.getElementById(bid))return;
+    var grid=header.querySelector('.v54-drawer-grid');if(!grid)return;
+    var band=computeBand(town);var inner;
+    if(band.n<2){inner='<span class="pi-gap-cell">Insufficient paired data ('+esc(band.rc)+' rent / '+esc(band.sc)+' sold rows).</span>';}
+    else{inner='<div class="pi-yield-engine-label">LIVE YIELD BAND · '+esc(band.n)+' pairs</div><div class="pi-yield-engine-range"><span class="pi-yield-low">'+esc(band.low.toFixed(1))+'%</span><span class="pi-yield-sep">→</span><span class="pi-yield-mid">'+esc(band.mid.toFixed(1))+'%</span><span class="pi-yield-sep">→</span><span class="pi-yield-high">'+esc(band.high.toFixed(1))+'%</span></div><div class="pi-yield-engine-sub">low · mid · high  ·  gross, unlevered</div>';}
+    var wrap=document.createElement('div');wrap.id=bid;wrap.className='pi-yield-engine-block';wrap.innerHTML=inner;
+    grid.parentNode.insertBefore(wrap,grid.nextSibling);
+  }
+  if(!document.getElementById('pi-yield-engine-css')){var st=document.createElement('style');st.id='pi-yield-engine-css';st.textContent='.pi-yield-engine-block{margin:12px 16px 0;padding:10px 14px;background:rgba(182,141,64,0.06);border:1px solid rgba(182,141,64,0.18);border-radius:10px;}.pi-yield-engine-label{font-family:"DM Mono",monospace;font-size:9px;font-weight:700;letter-spacing:1.4px;color:#B68D40;margin-bottom:6px;}.pi-yield-engine-range{display:flex;align-items:baseline;gap:6px;}.pi-yield-low{font-family:"DM Mono",monospace;font-size:15px;font-weight:500;color:#7a9080;}.pi-yield-mid{font-family:"DM Mono",monospace;font-size:22px;font-weight:700;color:#B68D40;}.pi-yield-high{font-family:"DM Mono",monospace;font-size:15px;font-weight:500;color:#1b4332;}.pi-yield-sep{color:rgba(182,141,64,0.4);font-size:12px;}.pi-yield-engine-sub{font-size:9px;color:#4a6055;margin-top:4px;font-family:"DM Mono",monospace;letter-spacing:0.5px;}';document.head.appendChild(st);}
+  var obs=new MutationObserver(function(muts){muts.forEach(function(mut){mut.addedNodes.forEach(function(node){if(node.nodeType!==1)return;var headers=[];if(node.classList&&node.classList.contains('v54-drawer-header'))headers.push(node);if(node.querySelectorAll)Array.prototype.push.apply(headers,node.querySelectorAll('.v54-drawer-header'));headers.forEach(function(h){setTimeout(function(){inject(h);},80);});});});});
+  obs.observe(document.body,{childList:true,subtree:true});
+  var m=document.createElement('span');m.id='patch-yield-engine-v1-init';m.style.display='none';document.body.appendChild(m);
+  console.info('[PropIntel] patch-yield-engine-v1 loaded.');
+})();
+</script>
+<script id="patch-deal-radar-v1">
+(function(){
+  'use strict';
+  if(document.getElementById('pi-deal-radar-strip'))return;
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function parseRent(p){var m=String(p||'').match(/£([\d,]+)\s*pcm/i);if(!m)return null;var v=parseFloat(m[1].replace(/,/g,''));return isNaN(v)?null:v*12;}
+  function parseSold(p){var s=String(p||'').replace(/£/g,'').replace(/,/g,'').trim();var v=parseFloat(s);return(isNaN(v)||v<=0)?null:v;}
+  function percentile(arr,p){if(!arr.length)return null;var s=arr.slice().sort(function(a,b){return a-b;});var idx=(p/100)*(s.length-1);var lo=Math.floor(idx),hi=Math.ceil(idx);return lo===hi?s[lo]:s[lo]+(s[hi]-s[lo])*(idx-lo);}
+  function getTownId(townName){
+    if(!window.TOWNS)return '';
+    var tl=String(townName||'').toLowerCase();
+    for(var i=0;i<window.TOWNS.length;i++){if(window.TOWNS[i].name.toLowerCase()===tl)return window.TOWNS[i].id;}
+    return '';
+  }
+  function computeAllYields(){
+    var rows=[];try{rows=JSON.parse(localStorage.getItem('residential_agent_helper_v71_rows')||'[]')||[];}catch(e){}
+    var map={};
+    rows.forEach(function(r){
+      if(r.evidenceType!=='Rent'&&r.evidenceType!=='Sold')return;
+      var tname=String(r.town||'').trim();var ptype=String(r.propertyType||'').trim();if(!tname||!ptype)return;
+      var key=tname.toLowerCase()+'||'+ptype.toLowerCase();
+      if(!map[key])map[key]={town:tname,type:ptype,rent:[],sold:[]};
+      if(r.evidenceType==='Rent')map[key].rent.push(r);else map[key].sold.push(r);
+    });
+    var results=[];
+    Object.keys(map).forEach(function(k){
+      var g=map[k];var yields=[];
+      g.sold.forEach(function(s){var sp=parseSold(s.priceRent);if(sp===null)return;g.rent.forEach(function(r){var ar=parseRent(r.priceRent);if(ar!==null)yields.push((ar/sp)*100);});});
+      if(yields.length>=2)results.push({town:g.town,type:g.type,n:yields.length,low:percentile(yields,10),mid:percentile(yields,50),high:percentile(yields,90)});
+    });
+    results.sort(function(a,b){return b.mid-a.mid;});
+    return results.slice(0,6);
+  }
+  if(!document.getElementById('pi-deal-radar-css')){var st=document.createElement('style');st.id='pi-deal-radar-css';st.textContent='#pi-deal-radar-strip{background:rgba(15,61,46,0.04);padding:16px 20px;margin:0 0 12px;}'+'.pi-radar-header{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;}'+'.pi-radar-title{font-family:"DM Mono",monospace;font-size:10px;font-weight:700;letter-spacing:1.4px;color:#0f3d2e;}'+'.pi-radar-sub{font-family:"DM Mono",monospace;font-size:9px;color:#4a6055;}'+'.pi-radar-cards{display:flex;flex-direction:row;gap:10px;overflow-x:auto;padding-bottom:4px;}'+'.pi-radar-card{min-width:130px;background:#fff;border-radius:12px;padding:12px;cursor:pointer;border:1px solid rgba(31,59,44,0.1);flex-shrink:0;}'+'.pi-radar-card:hover{border-color:rgba(182,141,64,0.4);background:rgba(182,141,64,0.04);}'+'.pi-radar-town{font-family:"Playfair Display",Georgia,serif;font-size:13px;font-weight:600;color:#0f3d2e;margin-bottom:2px;}'+'.pi-radar-type{font-family:"DM Mono",monospace;font-size:9px;color:#4a6055;margin-bottom:6px;}'+'.pi-radar-yield{font-family:"DM Mono",monospace;font-size:28px;font-weight:700;color:#B68D40;line-height:1;}'+'.pi-radar-range{font-family:"DM Mono",monospace;font-size:9px;color:#7a9080;margin-top:2px;}'+'.pi-radar-n{font-family:"DM Mono",monospace;font-size:8px;color:#7a9080;margin-top:4px;}';document.head.appendChild(st);}
+  function tryInstall_DealRadar(){
+    if(document.getElementById('pi-deal-radar-strip'))return true;
+    var anchor=document.getElementById('v60-workspace')||document.querySelector('.town-top-matrix')||document.getElementById('town-top-matrix-root');
+    if(!anchor)return false;
+    var top=computeAllYields();
+    var section=document.createElement('section');section.id='pi-deal-radar-strip';
+    if(top.length<3){
+      section.innerHTML='<div class="pi-radar-header"><span class="pi-radar-title">DEAL RADAR</span><span class="pi-radar-sub">building evidence pairs…</span></div>';
+    } else {
+      var cards=top.map(function(t){
+        var tid=getTownId(t.town);
+        var onclick=tid?'if(window.openTownIntelDrawer)window.openTownIntelDrawer(\''+esc(tid)+'\')':'';
+        return '<div class="pi-radar-card" data-town="'+esc(tid)+'" onclick="'+onclick+'">'+
+               '<div class="pi-radar-town">'+esc(t.town)+'</div>'+
+               '<div class="pi-radar-type">'+esc(t.type)+'</div>'+
+               '<div class="pi-radar-yield">'+esc(t.mid.toFixed(1))+'%</div>'+
+               '<div class="pi-radar-range">'+esc(t.low.toFixed(1))+'–'+esc(t.high.toFixed(1))+'%</div>'+
+               '<div class="pi-radar-n">'+esc(t.n)+' pairs</div>'+
+               '</div>';
+      }).join('');
+      section.innerHTML='<div class="pi-radar-header"><span class="pi-radar-title">DEAL RADAR</span><span class="pi-radar-sub">top live yields · computed from evidence</span></div><div class="pi-radar-cards">'+cards+'</div>';
+    }
+    anchor.parentNode.insertBefore(section,anchor.nextSibling);
+    return true;
+  }
+  var _tries=0;var _t=setInterval(function(){_tries++;if(tryInstall_DealRadar()||_tries>60)clearInterval(_t);},200);
+  var m=document.createElement('span');m.id='patch-deal-radar-v1-init';m.style.display='none';document.body.appendChild(m);
+  console.info('[PropIntel] patch-deal-radar-v1 loaded.');
+})();
+</script>
+<script id="patch-evidence-age-v1">
+(function(){
+  'use strict';
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function parseDate(s){
+    var str=String(s||'').trim();
+    var m1=str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);if(m1)return new Date(parseInt(m1[3]),parseInt(m1[2])-1,parseInt(m1[1]));
+    var m2=str.match(/^(\d{4})-(\d{2})-(\d{2})/);if(m2)return new Date(parseInt(m2[1]),parseInt(m2[2])-1,parseInt(m2[3]));
+    var MONTHS={jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+    var m3=str.match(/^([A-Za-z]{3})-(\d{2})$/);if(m3){var mo=MONTHS[m3[1].toLowerCase()];if(mo!==undefined)return new Date(2000+parseInt(m3[2]),mo,1);}
+    var d=new Date(str);return isNaN(d.getTime())?null:d;
+  }
+  function ageDays(d){var ms=new Date()-d;return ms<0?0:Math.floor(ms/(1000*60*60*24));}
+  function bandFor(days){if(days<=7)return'fresh';if(days<=30)return'recent';if(days<=89)return'ageing';return'stale';}
+  function labelFor(days){if(days===0)return'today';if(days<=30)return days+'d';if(days<=89)return Math.floor(days/7)+'w';return Math.floor(days/30)+' mo';}
+  function buildAgeMap(){
+    var rows=[];try{rows=JSON.parse(localStorage.getItem('residential_agent_helper_v71_rows')||'[]')||[];}catch(e){}
+    var map={};
+    rows.forEach(function(r){var tl=String(r.town||'').toLowerCase().trim();if(!tl)return;var d=parseDate(r.dateChecked);if(!d)return;if(!map[tl]||d>map[tl])map[tl]=d;});
+    return map;
+  }
+  function applyBadges(){
+    var ageMap=buildAgeMap();
+    var cards=document.querySelectorAll('.town-top-card');
+    cards.forEach(function(card){
+      if(card.querySelector('.pi-age-badge'))return;
+      var cs=window.getComputedStyle(card);if(cs.position==='static'||!cs.position)card.style.position='relative';
+      var tname=(card.getAttribute('data-town-name')||'').toLowerCase().trim();
+      if(!tname){var h=card.querySelector('h3,h4');tname=h?h.textContent.toLowerCase().trim():'';}
+      var badge=document.createElement('span');
+      if(tname&&ageMap[tname]!==undefined){var days=ageDays(ageMap[tname]);badge.className='pi-age-badge pi-age-'+bandFor(days);badge.textContent=labelFor(days);}
+      else{badge.className='pi-age-badge pi-age-none';badge.textContent='–';}
+      card.appendChild(badge);
+    });
+  }
+  if(!document.getElementById('pi-age-badge-css')){var st=document.createElement('style');st.id='pi-age-badge-css';st.textContent='.pi-age-badge{position:absolute;top:8px;right:8px;font-family:"DM Mono",monospace;font-size:8px;font-weight:700;letter-spacing:0.8px;padding:2px 6px;border-radius:4px;pointer-events:none;}.pi-age-fresh{background:rgba(42,140,90,0.12);color:#15814B;}.pi-age-recent{background:rgba(182,141,64,0.10);color:#B68D40;}.pi-age-ageing{background:rgba(184,135,10,0.10);color:#9a7010;}.pi-age-stale{background:rgba(192,57,43,0.10);color:#c0392b;}.pi-age-none{background:rgba(120,140,130,0.08);color:#7a9080;}';document.head.appendChild(st);}
+  var _debTimer=null;
+  var obs=new MutationObserver(function(){clearTimeout(_debTimer);_debTimer=setTimeout(applyBadges,150);});
+  obs.observe(document.body,{childList:true,subtree:true});
+  function tryInstall_AgeBadges(){var cards=document.querySelectorAll('.town-top-card');if(cards.length){applyBadges();return true;}return false;}
+  var _tries=0;var _t=setInterval(function(){_tries++;if(tryInstall_AgeBadges()||_tries>60)clearInterval(_t);},200);
+  var m=document.createElement('span');m.id='patch-evidence-age-v1-init';m.style.display='none';document.body.appendChild(m);
+  console.info('[PropIntel] patch-evidence-age-v1 loaded.');
+})();
+</script>
+<script id="patch-comp-stack-v1">
+(function(){
+  'use strict';
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function slugify(s){return String(s||'').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');}
+  function parseSold(p){var s=String(p||'').replace(/£/g,'').replace(/,/g,'').trim();var v=parseFloat(s);return(isNaN(v)||v<=0)?null:v;}
+  function parseRentPcm(p){var m=String(p||'').match(/£([\d,]+)\s*pcm/i);if(!m)return null;var v=parseFloat(m[1].replace(/,/g,''));return isNaN(v)?null:v;}
+  function getRows(){try{return JSON.parse(localStorage.getItem('residential_agent_helper_v71_rows')||'[]')||[];}catch(e){return[];}}
+  function townStats(town,rows){
+    var tname=String(town.name||'').toLowerCase();
+    var tr=rows.filter(function(r){return String(r.town||'').toLowerCase()===tname;});
+    var sp=tr.filter(function(r){return r.evidenceType==='Sold';}).map(function(r){return parseSold(r.priceRent);}).filter(function(v){return v!==null;});
+    var rp=tr.filter(function(r){return r.evidenceType==='Rent';}).map(function(r){return parseRentPcm(r.priceRent);}).filter(function(v){return v!==null;});
+    return{avgSold:sp.length?Math.round(sp.reduce(function(a,b){return a+b;},0)/sp.length):null,avgRent:rp.length?Math.round(rp.reduce(function(a,b){return a+b;},0)/rp.length):null,coverage:tr.length};
+  }
+  function verdictBand(v){var b={'STRONG BUY':2,'BUY':1,'WATCH':0};return b[String(v||'').toUpperCase()];}
+  function verdictAdj(a,b){var ia=verdictBand(a),ib=verdictBand(b);return(ia!==undefined&&ib!==undefined&&Math.abs(ia-ib)<=1);}
+  function verdictClass(v){var u=String(v||'').toUpperCase();if(u==='STRONG BUY')return'verdict verdict-strong';if(u==='BUY')return'verdict verdict-buy';return'verdict verdict-watch';}
+  function fmtGBP(n){return n!==null?'£'+Number(n).toLocaleString('en-GB'):'—';}
+  function injectCompStack(townId){
+    if(!window.TOWNS||window.TOWNS.length<5)return;
+    if(!window.LIVE_DATA)return;
+    var town=null;for(var i=0;i<window.TOWNS.length;i++){if(window.TOWNS[i].id===townId){town=window.TOWNS[i];break;}}
+    if(!town)return;
+    var bid='pi-comp-stack-'+slugify(townId);
+    if(document.getElementById(bid))return;
+    var anchor=document.getElementById('pi-yield-engine-'+slugify(town.name));
+    if(!anchor){
+      var hdrs=document.querySelectorAll('.v54-drawer-header');
+      for(var j=0;j<hdrs.length;j++){var h3=hdrs[j].querySelector('.v54-drawer-title-row h3');if(h3&&h3.textContent.trim().toLowerCase()===town.name.toLowerCase()){anchor=hdrs[j].querySelector('.v54-drawer-grid');break;}}
+    }
+    if(!anchor)return;
+    var rows=getRows();var target=townStats(town,rows);
+    var others=window.TOWNS.filter(function(t){return t.id!==townId;});
+    var cands=others.filter(function(t){return verdictAdj(town.verdict,t.verdict);}).map(function(t){var st=townStats(t,rows);return{town:t,stats:st};});
+    cands.sort(function(a,b){
+      var ad=a.stats.avgSold!==null&&target.avgSold!==null?Math.abs(a.stats.avgSold-target.avgSold):999999;
+      var bd=b.stats.avgSold!==null&&target.avgSold!==null?Math.abs(b.stats.avgSold-target.avgSold):999999;
+      if(ad!==bd)return ad-bd;return b.stats.coverage-a.stats.coverage;
+    });
+    var top4=cands.slice(0,4);
+    var tbody=top4.map(function(x){var t=x.town;var st=x.stats;return'<tr onclick="if(window.openTownIntelDrawer)window.openTownIntelDrawer(\''+esc(t.id)+'\')"><td>'+esc(t.name)+'</td><td>'+esc(fmtGBP(st.avgSold))+'</td><td>'+(st.avgRent?esc('£'+st.avgRent+' pcm'):'—')+'</td><td>'+esc(st.coverage)+'</td><td><span class="'+esc(verdictClass(t.verdict))+'">'+esc(t.verdict)+'</span></td></tr>';}).join('');
+    var wrap=document.createElement('div');wrap.id=bid;wrap.className='pi-comp-stack';
+    wrap.innerHTML='<div class="pi-comp-stack-title">COMPARABLE TOWNS</div><table class="pi-comp-table"><thead><tr><th>Town</th><th>Avg Sold</th><th>Avg Rent</th><th>Coverage</th><th>Verdict</th></tr></thead><tbody>'+tbody+'</tbody></table>';
+    anchor.parentNode.insertBefore(wrap,anchor.nextSibling);
+  }
+  if(!document.getElementById('pi-comp-stack-css')){var st=document.createElement('style');st.id='pi-comp-stack-css';st.textContent='.pi-comp-stack{padding:16px 16px 0;border-top:1px solid rgba(31,59,44,0.08);}.pi-comp-stack-title{font-family:"DM Mono",monospace;font-size:8px;font-weight:700;letter-spacing:1px;color:#1b4332;margin-bottom:8px;}.pi-comp-table{width:100%;font-family:"DM Mono",monospace;font-size:10px;border-collapse:collapse;}.pi-comp-table thead th{font-size:8px;font-weight:700;letter-spacing:1px;color:#1b4332;text-align:left;padding:4px 6px;border-bottom:1px solid rgba(31,59,44,0.1);}.pi-comp-table tbody tr{cursor:pointer;}.pi-comp-table tbody tr:nth-child(even){background:rgba(15,61,46,0.025);}.pi-comp-table tbody tr:hover{background:rgba(182,141,64,0.06);}.pi-comp-table tbody td{padding:5px 6px;color:#102016;}';document.head.appendChild(st);}
+  function wrapOpenTown(){var prev=window.openTownIntelDrawer;if(typeof prev!=='function'||prev.__piCompStackWrapped)return;var wrapped=function(townId){var r=prev.apply(this,arguments);setTimeout(function(){injectCompStack(townId);},220);setTimeout(function(){injectCompStack(townId);},520);return r;};wrapped.__piCompStackWrapped=true;window.openTownIntelDrawer=wrapped;}
+  function tryInstall_CompStack(){if(typeof window.openTownIntelDrawer==='function'){wrapOpenTown();return true;}return false;}
+  var _tries=0;var _t=setInterval(function(){_tries++;if(tryInstall_CompStack()||_tries>60)clearInterval(_t);},200);
+  var m=document.createElement('span');m.id='patch-comp-stack-v1-init';m.style.display='none';document.body.appendChild(m);
+  console.info('[PropIntel] patch-comp-stack-v1 loaded.');
+})();
+</script>
+<script id="patch-portfolio-pulse-v1">
+(function(){
+  'use strict';
+  var BAR_ID='pi-portfolio-pulse';
+  var PORT_KEY='ayrshire_portfolio_v1';
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function parseRentPcm(p){var m=String(p||'').match(/£([\d,]+)\s*pcm/i);if(!m)return null;var v=parseFloat(m[1].replace(/,/g,''));return isNaN(v)?null:v*12;}
+  function parseSold(p){var s=String(p||'').replace(/£/g,'').replace(/,/g,'').trim();var v=parseFloat(s);return(isNaN(v)||v<=0)?null:v;}
+  function percentile(arr,p){if(!arr.length)return null;var s=arr.slice().sort(function(a,b){return a-b;});var idx=(p/100)*(s.length-1);var lo=Math.floor(idx),hi=Math.ceil(idx);return lo===hi?s[lo]:s[lo]+(s[hi]-s[lo])*(idx-lo);}
+  var TYPE_LABELS={'1bf':'1 Bed Flat','2bf':'2 Bed Flat','2bh':'2 Bed House'};
+  function getMidYield(townId,typeId,rows){
+    if(!window.TOWNS)return null;
+    var town=null;for(var i=0;i<window.TOWNS.length;i++){if(window.TOWNS[i].id===townId){town=window.TOWNS[i];break;}}
+    if(!town)return null;
+    var tname=town.name.toLowerCase();var typeLabel=(TYPE_LABELS[typeId]||typeId).toLowerCase();
+    var tr=rows.filter(function(r){return String(r.town||'').toLowerCase()===tname&&String(r.propertyType||'').toLowerCase()===typeLabel&&(r.evidenceType==='Rent'||r.evidenceType==='Sold');});
+    var rent=tr.filter(function(r){return r.evidenceType==='Rent';});var sold=tr.filter(function(r){return r.evidenceType==='Sold';});
+    var yields=[];
+    sold.forEach(function(s){var sp=parseSold(s.priceRent);if(sp===null)return;rent.forEach(function(r){var ar=parseRentPcm(r.priceRent);if(ar!==null)yields.push((ar/sp)*100);});});
+    if(yields.length>=2)return percentile(yields,50);
+    try{var ld=window.LIVE_DATA;if(ld&&ld[townId]&&ld[townId][typeId]){var mp=(ld[townId][typeId].kpis&&ld[townId][typeId].kpis.yield||'').match(/[\d.]+/);if(mp)return parseFloat(mp[0]);}}catch(e){}
+    return null;
+  }
+  function fmtGBP(n){return'£'+Number(n).toLocaleString('en-GB');}
+  function fmtTime(d){return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
+  function render(){
+    var bar=document.getElementById(BAR_ID);if(!bar)return;
+    var raw;try{raw=JSON.parse(localStorage.getItem(PORT_KEY)||'[]');}catch(e){raw=[];}
+    if(!Array.isArray(raw)||!raw.length){bar.style.display='none';return;}
+    var rows=[];try{rows=JSON.parse(localStorage.getItem('residential_agent_helper_v71_rows')||'[]')||[];}catch(e){}
+    var total=raw.length;
+    var totalCost=raw.reduce(function(a,p){return a+(Number(p.purchasePrice)||Number(p.cost)||0);},0);
+    var yields=[];
+    raw.forEach(function(p){var y=getMidYield(p.town,p.type,rows);if(y!==null&&y>0)yields.push(y);});
+    var avgYield=yields.length?yields.reduce(function(a,b){return a+b;},0)/yields.length:null;
+    var bands={strong:0,buy:0,watch:0};
+    raw.forEach(function(p){if(!window.TOWNS)return;var t=null;for(var i=0;i<window.TOWNS.length;i++){if(window.TOWNS[i].id===p.town){t=window.TOWNS[i];break;}}if(!t)return;var v=String(t.verdict||'').toUpperCase();if(v==='STRONG BUY')bands.strong++;else if(v==='BUY')bands.buy++;else bands.watch++;});
+    bar.style.display='flex';
+    bar.innerHTML='<span class="pi-pulse-label">PORTFOLIO</span>'+
+      '<span class="pi-pulse-stat">'+esc(total)+' unit'+(total===1?'':'s')+'</span>'+
+      '<span class="pi-pulse-divider">·</span>'+
+      '<span class="pi-pulse-stat">'+esc(fmtGBP(totalCost))+'</span>'+
+      '<span class="pi-pulse-divider">·</span>'+
+      '<span class="pi-pulse-stat pi-pulse-yield">'+(avgYield!==null?esc(avgYield.toFixed(1))+'% est. gross':'—')+'</span>'+
+      '<span class="pi-pulse-divider">·</span>'+
+      '<span class="pi-pulse-bands"><span class="pi-pulse-strong">'+esc(bands.strong)+' strong</span><span class="pi-pulse-buy">'+esc(bands.buy)+' buy</span><span class="pi-pulse-watch">'+esc(bands.watch)+' watch</span></span>'+
+      '<span class="pi-pulse-ts">updated '+esc(fmtTime(new Date()))+'</span>';
+  }
+  if(!document.getElementById('pi-portfolio-pulse-css')){var st=document.createElement('style');st.id='pi-portfolio-pulse-css';st.textContent='#pi-portfolio-pulse{position:fixed;top:0;left:0;right:0;width:100%;z-index:900;background:rgba(15,61,46,0.96);height:32px;display:none;align-items:center;gap:10px;padding:0 20px;box-sizing:border-box;}'+'.pi-pulse-label{font-family:"DM Mono",monospace;font-size:10px;font-weight:700;letter-spacing:1.4px;color:#F5F2EC;}'+'.pi-pulse-stat{font-family:"DM Mono",monospace;font-size:10px;color:#F5F2EC;}'+'.pi-pulse-divider{font-family:"DM Mono",monospace;font-size:10px;color:rgba(245,242,236,0.4);}'+'.pi-pulse-yield{font-weight:700!important;color:#B68D40!important;}'+'.pi-pulse-bands{display:flex;gap:8px;}'+'.pi-pulse-strong{font-family:"DM Mono",monospace;font-size:10px;color:#15814B;}'+'.pi-pulse-buy{font-family:"DM Mono",monospace;font-size:10px;color:#B68D40;}'+'.pi-pulse-watch{font-family:"DM Mono",monospace;font-size:10px;color:#9a7010;}'+'.pi-pulse-ts{font-family:"DM Mono",monospace;font-size:9px;color:rgba(245,242,236,0.5);margin-left:auto;}';document.head.appendChild(st);}
+  window.addEventListener('storage',function(e){if(e.key===PORT_KEY)render();});
+  function tryInstall_PortPulse(){
+    if(document.getElementById(BAR_ID))return true;
+    var anchor=document.getElementById('v60-topbar')||document.querySelector('.terminal-header');
+    if(!anchor)return false;
+    var bar=document.createElement('div');bar.id=BAR_ID;bar.style.display='none';
+    anchor.parentNode.insertBefore(bar,anchor.nextSibling);
+    render();return true;
+  }
+  var _tries=0;var _t=setInterval(function(){_tries++;if(tryInstall_PortPulse()||_tries>60)clearInterval(_t);},200);
+  var m=document.createElement('span');m.id='patch-portfolio-pulse-v1-init';m.style.display='none';document.body.appendChild(m);
+  console.info('[PropIntel] patch-portfolio-pulse-v1 loaded.');
+})();
+</script>
 </body>
 </html>
