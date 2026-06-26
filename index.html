@@ -37042,5 +37042,96 @@ body.redesign-v74 .sidebar-item {
   console.info('[PropIntel] patch-score-colours-v1 loaded. Bands: 80+ green · 65-79 gold · <65 red.');
 })();
 </script>
+<!-- ═══════════════════════════════════════════════════════
+     PATCH: Data Gap Styling v1
+     Dims "Not extracted" / "Not yet calculable" in KPI
+     strips, drawer stats, town card rows, and comp badges.
+     Real values unchanged. Additive only.
+     ═══════════════════════════════════════════════════ -->
+<style id="patch-data-gap-style-v1-css">
+.pi-gap-cell {
+  opacity: 0.45 !important;
+  border-color: rgba(120,140,130,0.10) !important;
+}
+.pi-gap-cell b,
+.pi-gap-cell strong {
+  color: #7a9080 !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  font-style: italic !important;
+  letter-spacing: 0 !important;
+  font-family: 'DM Mono', monospace !important;
+}
+.pi-gap-badge {
+  opacity: 0.40 !important;
+  color: #7a9080 !important;
+  background: rgba(100,120,110,0.07) !important;
+  border-color: rgba(100,120,110,0.12) !important;
+  font-style: italic !important;
+}
+</style>
+<script id="patch-data-gap-style-v1">
+(function () {
+  'use strict';
+  if (document.getElementById('patch-data-gap-style-v1-init')) return true;
+
+  var GAP = ['Not extracted', 'Not yet calculable'];
+
+  function isGap(el) {
+    return GAP.indexOf((el.textContent || '').trim()) !== -1;
+  }
+
+  function applyAll() {
+    document.querySelectorAll([
+      '.v60-kpi b',
+      '.v63-kpi b',
+      '.town-card-mini-quality b',
+      '.v54-drawer-stat b',
+      '.town-data-quality-metric b'
+    ].join(', ')).forEach(function (b) {
+      var p = b.parentElement;
+      if (!p) return;
+      if (isGap(b)) {
+        p.classList.add('pi-gap-cell');
+      } else {
+        p.classList.remove('pi-gap-cell');
+      }
+    });
+
+    document.querySelectorAll('.v65-badge').forEach(function (el) {
+      if (isGap(el)) {
+        el.classList.add('pi-gap-badge');
+      } else {
+        el.classList.remove('pi-gap-badge');
+      }
+    });
+  }
+
+  var _tries = 0;
+  var _timer = setInterval(function () {
+    _tries++;
+    applyAll();
+    if (_tries > 40) clearInterval(_timer);
+  }, 250);
+
+  var _obs = new MutationObserver(function () { applyAll(); });
+  _obs.observe(document.body, { childList: true, subtree: true });
+
+  (function () {
+    var K = 'residential_agent_helper_v71_audit';
+    var items = [];
+    try { items = JSON.parse(localStorage.getItem(K) || '[]') || []; } catch (e) {}
+    items.push({ ts: new Date().toLocaleString('en-GB'), msg: 'patch-data-gap-style-v1 applied' });
+    try { localStorage.setItem(K, JSON.stringify(items.slice(-80))); } catch (e) {}
+  })();
+
+  var m = document.createElement('span');
+  m.id = 'patch-data-gap-style-v1-init';
+  m.style.display = 'none';
+  document.body.appendChild(m);
+
+  console.info('[PropIntel] patch-data-gap-style-v1 loaded.');
+})();
+</script>
 </body>
 </html>
