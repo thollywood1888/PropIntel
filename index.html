@@ -38047,5 +38047,60 @@ body.redesign-v59 .sidebar-item[data-nav-key="research-control"],
 body.redesign-v59 .sidebar-item[data-nav-key="agent-helper"],
 body.redesign-v59 .sidebar-item[data-nav-key="data-quality-console"] { display: none !important; }
 </style>
+<script id="patch-comp-stack-score-filter-fix-v1">
+(function(){
+  'use strict';
+  if(document.getElementById('patch-comp-stack-score-filter-fix-v1-init'))return;
+
+  var HARD_MIN=40;
+
+  function slugify(s){return String(s||'').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');}
+
+  function getTownScore(name){
+    if(!window.TOWNS)return null;
+    var nl=String(name||'').toLowerCase();
+    for(var i=0;i<window.TOWNS.length;i++){
+      if(String(window.TOWNS[i].name||'').toLowerCase()===nl)return window.TOWNS[i].score;
+    }
+    return null;
+  }
+
+  function fixStack(stack){
+    var rows=stack.querySelectorAll('.pi-comp-table tbody tr');
+    if(!rows.length)return;
+    if(rows[0].hasAttribute('data-csf-score'))return;
+    rows.forEach(function(tr){
+      var td=tr.querySelector('td');if(!td)return;
+      var score=getTownScore((td.textContent||'').trim());
+      tr.setAttribute('data-csf-score',score===null?'':String(score));
+      tr.style.display=(score===null||score>=HARD_MIN)?'':'none';
+    });
+    console.info('[PropIntel] patch-comp-stack-score-filter-fix-v1: applied to',stack.id);
+  }
+
+  document.addEventListener('pi:town:open',function(e){
+    var tid=e.detail&&e.detail.townId;if(!tid)return;
+    [1000,1600,2600].forEach(function(d){
+      setTimeout(function(){
+        var s=document.getElementById('pi-comp-stack-'+slugify(tid));
+        if(s)fixStack(s);
+      },d);
+    });
+  });
+
+  new MutationObserver(function(muts){
+    muts.forEach(function(m){
+      m.addedNodes.forEach(function(n){
+        if(n.nodeType===1&&n.classList&&n.classList.contains('pi-comp-stack')){
+          setTimeout(function(){fixStack(n);},300);
+        }
+      });
+    });
+  }).observe(document.body,{childList:true,subtree:true});
+
+  var m=document.createElement('span');m.id='patch-comp-stack-score-filter-fix-v1-init';m.style.display='none';document.body.appendChild(m);
+  console.info('[PropIntel] patch-comp-stack-score-filter-fix-v1 loaded · hardMin='+HARD_MIN);
+})();
+</script>
 </body>
 </html>
