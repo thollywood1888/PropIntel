@@ -37972,21 +37972,28 @@ body.redesign-v59 .logo-sub::after {
     if (!raw) return null;
     var rows = [];
     try { rows = JSON.parse(raw) || []; } catch (e) { return null; }
-    var total = 0, sold = 0, rent = 0, latest = 0;
+    var total = 0, sold = 0, rent = 0, latest = '';
     rows.forEach(function (r) {
       if (!r._fromExcel) return;
       total++;
       var et = (r.evidenceType || '').toLowerCase();
       if (et === 'sold') sold++;
       else if (et === 'rent') rent++;
-      var d = r.dateChecked || '';
-      if (d) { var t = Date.parse(d); if (!isNaN(t)) latest = Math.max(latest, t); }
+      var d = (r.dateChecked || '').trim();
+      var iso = '';
+      if (/^\d{4}-\d{2}-\d{2}$/.test(d)) {
+        iso = d;
+      } else {
+        var bm = d.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+        if (bm) iso = bm[3] + '-' + ('0' + bm[2]).slice(-2) + '-' + ('0' + bm[1]).slice(-2);
+      }
+      if (iso && iso > latest) latest = iso;
     });
     return {
       total: total,
       sold: sold,
       rent: rent,
-      latestDate: latest ? new Date(latest).toISOString().slice(0, 10) : '—'
+      latestDate: latest || '—'
     };
   }
 
