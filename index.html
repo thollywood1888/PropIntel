@@ -37952,5 +37952,85 @@ body.redesign-v59 .logo-sub::after {
   console.info('[PropIntel] patch-version-governance-v1 · window.__piRelease + window.__piCanon declared');
 })();
 </script>
+<style id="patch-modebar-status-v1-css">
+#town-data-quality-panel { display: none !important; }
+</style>
+<script id="patch-modebar-status-v1">
+(function () {
+  'use strict';
+  if (document.getElementById('patch-modebar-status-v1-init')) return;
+
+  var KEY = 'residential_agent_helper_v71_rows';
+
+  function fmt(n) {
+    return Number(n).toLocaleString('en-GB');
+  }
+
+  function computeStats() {
+    var raw = null;
+    try { raw = localStorage.getItem(KEY); } catch (e) {}
+    if (!raw) return null;
+    var rows = [];
+    try { rows = JSON.parse(raw) || []; } catch (e) { return null; }
+    var total = 0, sold = 0, rent = 0, latest = 0;
+    rows.forEach(function (r) {
+      if (!r._fromExcel) return;
+      total++;
+      var et = (r.evidenceType || '').toLowerCase();
+      if (et === 'sold') sold++;
+      else if (et === 'rent') rent++;
+      var d = r.dateChecked || '';
+      if (d) { var t = Date.parse(d); if (!isNaN(t)) latest = Math.max(latest, t); }
+    });
+    return {
+      total: total,
+      sold: sold,
+      rent: rent,
+      latestDate: latest ? new Date(latest).toISOString().slice(0, 10) : '—'
+    };
+  }
+
+  function inject(stats) {
+    var bar = document.querySelector('.town-top-modebar');
+    if (!bar || bar.querySelector('#pi-dataset-status')) return;
+    var el = document.createElement('div');
+    el.id = 'pi-dataset-status';
+    el.style.cssText = 'margin-left:auto;display:flex;align-items:center;gap:4px;font:600 10px \'DM Mono\',monospace;color:#4a6055;letter-spacing:.2px;white-space:nowrap;padding-right:4px;flex-shrink:0;';
+    el.innerHTML =
+      '<span>' + fmt(stats.total) + ' rows</span>' +
+      '<span style="opacity:.35;">·</span>' +
+      '<span>' + fmt(stats.sold) + ' sold</span>' +
+      '<span style="opacity:.35;">·</span>' +
+      '<span>' + fmt(stats.rent) + ' rent</span>' +
+      '<span style="opacity:.35;">·</span>' +
+      '<span>' + stats.latestDate + '</span>';
+    bar.appendChild(el);
+  }
+
+  var _stats = computeStats();
+  if (!_stats) { console.info('[PropIntel] patch-modebar-status-v1: no data — skipping.'); return; }
+
+  var _tries = 0;
+  var _timer = setInterval(function () {
+    _tries++;
+    inject(_stats);
+    if (document.getElementById('pi-dataset-status') || _tries > 40) clearInterval(_timer);
+  }, 200);
+
+  var _debounce = null;
+  var _obs = new MutationObserver(function () {
+    if (document.getElementById('pi-dataset-status')) return;
+    clearTimeout(_debounce);
+    _debounce = setTimeout(function () { inject(_stats); }, 60);
+  });
+  _obs.observe(document.body, { childList: true, subtree: true });
+
+  var m = document.createElement('span');
+  m.id = 'patch-modebar-status-v1-init';
+  m.style.display = 'none';
+  document.body.appendChild(m);
+  console.info('[PropIntel] patch-modebar-status-v1 loaded · ' + fmt(_stats.total) + ' rows · ' + _stats.latestDate);
+})();
+</script>
 </body>
 </html>
