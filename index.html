@@ -37741,5 +37741,84 @@ body.redesign-v74 .sidebar-item {
   console.info('[PropIntel] patch-comp-stack-score-filter-v1 loaded · hardMin='+HARD_MIN);
 })();
 </script>
+<style id="patch-version-canon-v1-css">
+/* Kill the v5.9 CSS ::after bleed — redesign-v59 is added to body but never
+   removed, so this pseudo-element always fires without this override. */
+body.redesign-v59 .logo-sub::after {
+  content: none !important;
+  display: none !important;
+}
+</style>
+<script id="patch-version-canon-v1">
+(function(){
+  'use strict';
+  if(document.getElementById('patch-version-canon-v1-init'))return;
+
+  var TITLE = 'PropIntel Residential Intelligence v7.0 — Evidence Control Centre';
+  var NAME  = 'PropIntel Residential Intelligence';
+  var SUB   = 'v7.0 — Evidence Control Centre';
+  var PILL  = 'PropIntel v7.0';
+
+  var KICKER_MAP = {
+    'v7.0 · evidence control centre':       'Evidence Layer: live',
+    'v7.0 · confidence comparator':         'Comparator: v7.0',
+    'v7.0 evidence confidence layer':            'Evidence Layer: live',
+    'stable preview · v6.9 product polish': 'Stable Preview',
+    'v6.4 homepage hierarchy':                   'Platform Overview',
+  };
+
+  function setText(sel, txt) {
+    document.querySelectorAll(sel).forEach(function(el){ el.textContent = txt; });
+  }
+
+  function canonicalise() {
+    document.title = TITLE;
+    setText('.logo-name', NAME);
+    setText('.logo-sub', SUB);
+    setText('.version-pill', PILL);
+    var comp = document.querySelector('[data-nav-key="comparator"]');
+    if(comp) comp.innerHTML = '<span class="si-icon">⊞</span>Town Comparator';
+  }
+
+  function cleanKickers() {
+    ['.v70-kicker', '.v69-stable-kicker', '.v64-home-eyebrow', '.v70-strip-title span',
+     '.v63-eyebrow', '.v54-drawer-eyebrow'].forEach(function(sel) {
+      document.querySelectorAll(sel).forEach(function(el) {
+        var key = (el.textContent || '').trim().toLowerCase();
+        var mapped = KICKER_MAP[key];
+        if(mapped) el.textContent = mapped;
+      });
+    });
+  }
+
+  // Debounced observer — catches kickers injected on panel/tab render
+  var _obs_pending = null;
+  new MutationObserver(function() {
+    clearTimeout(_obs_pending);
+    _obs_pending = setTimeout(function() {
+      cleanKickers();
+      var p = document.querySelector('.version-pill');
+      if(p && p.textContent !== PILL) canonicalise();
+    }, 80);
+  }).observe(document.body, {childList: true, subtree: true});
+
+  // Apply immediately then beat any lazy setVersion() calls
+  canonicalise();
+  cleanKickers();
+  [80, 350, 750].forEach(function(d) {
+    setTimeout(function(){ canonicalise(); cleanKickers(); }, d);
+  });
+
+  (function(){
+    var K='residential_agent_helper_v71_audit'; var items=[];
+    try{items=JSON.parse(localStorage.getItem(K)||'[]')||[];}catch(e){}
+    items.push({ts:new Date().toLocaleString('en-GB'), msg:'patch-version-canon-v1 loaded'});
+    try{localStorage.setItem(K,JSON.stringify(items.slice(-80)));}catch(e){}
+  })();
+
+  var m=document.createElement('span');m.id='patch-version-canon-v1-init';m.style.display='none';document.body.appendChild(m);
+  console.info('[PropIntel] patch-version-canon-v1 loaded · canonical: '+PILL);
+})();
+</script>
 </body>
 </html>
