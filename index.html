@@ -37507,5 +37507,28 @@ body.redesign-v74 .sidebar-item {
   console.info('[PropIntel] patch-workspace-bridge-v1 loaded · event bus: pi:town:open · piCurrentTownId exposed.');
 })();
 </script>
+
+<style id="patch-nav-hide-v1-style">
+[data-nav-key="research-control"],
+[data-nav-key="agent-helper"],
+[data-nav-key="data-quality-console"] { display: none !important; }
+</style>
+<script id="patch-nav-hide-v1">
+(function(){
+  'use strict';
+  if(document.getElementById('patch-nav-hide-v1-init'))return;
+  var HIDE=['research-control','agent-helper','data-quality-console'];
+  function applyHide(){
+    HIDE.forEach(function(k){
+      var el=document.querySelector('[data-nav-key="'+k+'"]');
+      if(el)el.style.display='none';
+    });
+  }
+  applyHide();
+  new MutationObserver(applyHide).observe(document.body,{childList:true,subtree:true});
+  var m=document.createElement('span');m.id='patch-nav-hide-v1-init';m.style.display='none';document.body.appendChild(m);
+  console.info('[PropIntel] patch-nav-hide-v1 loaded · hidden: research-control, agent-helper, data-quality-console');
+})();
+</script>
 </body>
 </html>
