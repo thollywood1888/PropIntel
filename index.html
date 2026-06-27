@@ -38039,5 +38039,13 @@ body.redesign-v59 .logo-sub::after {
   console.info('[PropIntel] patch-modebar-status-v1 loaded · ' + fmt(_stats.total) + ' rows · ' + _stats.latestDate);
 })();
 </script>
+<style id="patch-nav-hide-v1-specificity-fix">
+/* body.redesign-v59 .sidebar-item{display:flex!important} at specificity(0,2,1)
+   was beating [data-nav-key]{display:none!important} at (0,1,0).
+   Raise to (0,3,1) to restore intended hide behaviour. */
+body.redesign-v59 .sidebar-item[data-nav-key="research-control"],
+body.redesign-v59 .sidebar-item[data-nav-key="agent-helper"],
+body.redesign-v59 .sidebar-item[data-nav-key="data-quality-console"] { display: none !important; }
+</style>
 </body>
 </html>
