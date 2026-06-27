@@ -37627,5 +37627,119 @@ body.redesign-v74 .sidebar-item {
   console.info('[PropIntel] patch-data-gap-style-v1 loaded.');
 })();
 </script>
+<script id="patch-comp-stack-score-filter-v1">
+(function(){
+  'use strict';
+  if(document.getElementById('patch-comp-stack-score-filter-v1-init'))return;
+
+  var HARD_MIN=40;
+  var CSS_ID='pi-csf-css';
+
+  function slugify(s){return String(s||'').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');}
+
+  function getTownScore(name){
+    if(!window.TOWNS)return null;
+    var nl=String(name||'').toLowerCase();
+    for(var i=0;i<window.TOWNS.length;i++){
+      if(String(window.TOWNS[i].name||'').toLowerCase()===nl)return window.TOWNS[i].score;
+    }
+    return null;
+  }
+
+  function applyFilter(stack,band){
+    var rows=stack.querySelectorAll('.pi-comp-table tbody tr[data-csf-score]');
+    var visible=0;
+    rows.forEach(function(tr){
+      var raw=tr.getAttribute('data-csf-score');
+      var score=raw===''?null:Number(raw);
+      var show;
+      if(band==='all')       {show=true;}
+      else if(band==='strong'){show=score!==null&&score>=80;}
+      else if(band==='mod')  {show=score!==null&&score>=65&&score<=79;}
+      else if(band==='weak') {show=score===null||score<65;}
+      else                   {show=score===null||score>=HARD_MIN;}
+      tr.style.display=show?'':'none';
+      if(show)visible++;
+    });
+    stack.querySelectorAll('.pi-csf-btn').forEach(function(b){
+      b.classList.toggle('pi-csf-active',b.getAttribute('data-band')===band);
+    });
+    var prev=stack.querySelector('.pi-csf-empty');
+    if(prev)prev.parentNode.removeChild(prev);
+    if(visible===0){
+      var tbody=stack.querySelector('.pi-comp-table tbody');
+      if(tbody){var em=document.createElement('tr');em.className='pi-csf-empty';
+        em.innerHTML='<td colspan="5" class="pi-csf-empty-cell">No comparables in this score band.</td>';
+        tbody.appendChild(em);}
+    }
+    stack.__piCsfActive=band;
+  }
+
+  function enhanceStack(stack){
+    if(stack.__piCsfEnhanced)return;
+    stack.__piCsfEnhanced=true;
+    var rows=stack.querySelectorAll('.pi-comp-table tbody tr');
+    if(!rows.length)return;
+    rows.forEach(function(tr){
+      var td=tr.querySelector('td');if(!td)return;
+      var score=getTownScore((td.textContent||'').trim());
+      tr.setAttribute('data-csf-score',score===null?'':String(score));
+    });
+    var title=stack.querySelector('.pi-comp-stack-title');if(!title)return;
+    var bar=document.createElement('div');bar.className='pi-csf-bar';
+    bar.innerHTML=
+      '<button class="pi-csf-btn" data-band="all">All</button>'+
+      '<button class="pi-csf-btn" data-band="strong">80+</button>'+
+      '<button class="pi-csf-btn" data-band="mod">65–79</button>'+
+      '<button class="pi-csf-btn" data-band="weak">&lt;65</button>';
+    title.appendChild(bar);
+    bar.addEventListener('click',function(e){
+      var btn=e.target.closest&&e.target.closest('.pi-csf-btn');if(!btn)return;
+      var band=btn.getAttribute('data-band');
+      applyFilter(stack,stack.__piCsfActive===band?null:band);
+    });
+    applyFilter(stack,null);
+  }
+
+  if(!document.getElementById(CSS_ID)){
+    var st=document.createElement('style');st.id=CSS_ID;
+    st.textContent=
+      '.pi-csf-bar{display:inline-flex;gap:4px;margin-left:8px;vertical-align:middle;}'+
+      '.pi-csf-btn{font-family:"DM Mono",monospace;font-size:7px;font-weight:700;letter-spacing:0.5px;'+
+      'padding:2px 7px;border-radius:3px;border:1px solid rgba(27,67,50,0.22);'+
+      'background:transparent;color:#4a6055;cursor:pointer;text-transform:uppercase;}'+
+      '.pi-csf-btn.pi-csf-active{background:#1b4332;color:#F5F2EC;border-color:#1b4332;}'+
+      '.pi-csf-empty-cell{padding:10px 6px;color:#7a9080;font-style:italic;font-size:10px;'+
+      'font-family:"DM Mono",monospace;}';
+    document.head.appendChild(st);
+  }
+
+  document.addEventListener('pi:town:open',function(e){
+    var tid=e.detail&&e.detail.townId;if(!tid)return;
+    setTimeout(function(){var s=document.getElementById('pi-comp-stack-'+slugify(tid));if(s)enhanceStack(s);},400);
+    setTimeout(function(){var s=document.getElementById('pi-comp-stack-'+slugify(tid));if(s)enhanceStack(s);},800);
+  });
+
+  new MutationObserver(function(muts){
+    muts.forEach(function(m){
+      m.addedNodes.forEach(function(n){
+        if(n.nodeType===1&&n.classList&&n.classList.contains('pi-comp-stack')){
+          setTimeout(function(){enhanceStack(n);},60);
+        }
+      });
+    });
+  }).observe(document.body,{childList:true,subtree:true});
+
+  (function(){
+    var K='residential_agent_helper_v71_audit';var items=[];
+    try{items=JSON.parse(localStorage.getItem(K)||'[]')||[];}catch(e){}
+    items.push({ts:new Date().toLocaleString('en-GB'),msg:'patch-comp-stack-score-filter-v1 loaded · hardMin='+HARD_MIN});
+    try{localStorage.setItem(K,JSON.stringify(items.slice(-80)));}catch(e){}
+  })();
+
+  var m=document.createElement('span');m.id='patch-comp-stack-score-filter-v1-init';m.style.display='none';document.body.appendChild(m);
+  console.info('[PropIntel] patch-comp-stack-score-filter-v1 loaded · hardMin='+HARD_MIN);
+})();
+</script>
 </body>
 </html>
