@@ -37820,5 +37820,146 @@ body.redesign-v59 .logo-sub::after {
   console.info('[PropIntel] patch-version-canon-v1 loaded · canonical: '+PILL);
 })();
 </script>
+<!-- ═══════════════════════════════════════════════════════════
+     PATCH: Version Governance Bridge v1
+     Declares window.__piRelease — single canonical release object.
+     All version logic reads from __piRelease, not local constants.
+     data-pi-kicker attribute support for new panels (no text matching).
+     Legacy text-match kept as temporary fallback only.
+     Preflight DOM audit at 1200ms: warns on stale version strings.
+     Cleanup sprint (later): remove old setVersion() calls + CSS pseudo.
+     ═══════════════════════════════════════════════════════ -->
+<script id="patch-version-governance-v1">
+(function(){
+  'use strict';
+  if(document.getElementById('patch-version-governance-v1-init'))return;
+
+  // ── Canonical release object — single source of truth ──────
+  window.__piRelease = Object.freeze({
+    product:  'PropIntel Residential Intelligence',
+    version:  '7.0',
+    codename: 'Evidence Control Centre',
+    pill:     'PropIntel v7.0',
+    sub:      'v7.0 — Evidence Control Centre',
+    title:    'PropIntel Residential Intelligence v7.0 — Evidence Control Centre'
+  });
+
+  // ── Module label registry ────────────────────────────────────
+  // New panels: use <div data-pi-kicker="evidence"> etc. — no text matching.
+  // Add keys here as modules are created.
+  window.__piModules = Object.freeze({
+    evidence:   'Evidence Layer: live',
+    comparator: 'Comparator: v7.0',
+    sidebar:    'Sidebar OS: active',
+    homepage:   'Platform Overview',
+    digest:     (function(){
+      var d=new Date();
+      var mo=['January','February','March','April','May','June',
+               'July','August','September','October','November','December'];
+      return 'Digest: generated '+d.getDate()+' '+mo[d.getMonth()]+' '+d.getFullYear();
+    })()
+  });
+
+  var R = window.__piRelease;
+  var M = window.__piModules;
+
+  // ── Legacy kicker → module key (temporary — remove when panels updated) ──
+  var LEGACY_TEXT = {
+    'v7.0 · evidence control centre':       'evidence',
+    'v7.0 · confidence comparator':         'comparator',
+    'v7.0 evidence confidence layer':       'evidence',
+    'stable preview · v6.9 product polish': 'sidebar',
+    'v6.4 homepage hierarchy':              'homepage'
+  };
+
+  // ── Stale patterns the preflight audit flags ─────────────────
+  var STALE = ['v5.9','v6.4 Homepage','v6.9','v7.0 ·','Control Centre · Comparator'];
+
+  function setText(sel,txt){
+    document.querySelectorAll(sel).forEach(function(el){ el.textContent=txt; });
+  }
+
+  function canonicalise(){
+    document.title = R.title;
+    setText('.logo-name', R.product);
+    setText('.logo-sub', R.sub);
+    setText('.version-pill', R.pill);
+    // Nav comparator — textNode only, preserves onclick + event delegation
+    var comp = document.querySelector('[data-nav-key="comparator"]');
+    if(comp){
+      var ns = comp.childNodes;
+      for(var i=0;i<ns.length;i++){
+        if(ns[i].nodeType===3){ ns[i].nodeValue='Town Comparator'; break; }
+      }
+    }
+  }
+
+  function hydrateKickers(){
+    // Authoritative path: data-pi-kicker attribute (new panels)
+    document.querySelectorAll('[data-pi-kicker]').forEach(function(el){
+      var label = M[el.dataset.piKicker];
+      if(label && el.textContent!==label) el.textContent = label;
+    });
+    // Temporary fallback: text-match existing kicker selectors
+    ['.v70-kicker','.v69-stable-kicker','.v64-home-eyebrow',
+     '.v70-strip-title span','.v63-eyebrow','.v54-drawer-eyebrow'].forEach(function(sel){
+      document.querySelectorAll(sel).forEach(function(el){
+        if(el.dataset.piKickerApplied) return;
+        var key = (el.textContent||'').trim().toLowerCase();
+        var mod = LEGACY_TEXT[key];
+        if(mod && M[mod]){ el.textContent=M[mod]; el.dataset.piKickerApplied='1'; }
+      });
+    });
+  }
+
+  // ── Public API for other patches ─────────────────────────────
+  window.__piCanon = { canonicalise: canonicalise, hydrateKickers: hydrateKickers };
+
+  // ── Debounced MutationObserver ────────────────────────────────
+  var _t = null;
+  new MutationObserver(function(){
+    clearTimeout(_t);
+    _t = setTimeout(function(){
+      hydrateKickers();
+      var p = document.querySelector('.version-pill');
+      if(p && p.textContent!==R.pill) canonicalise();
+    }, 80);
+  }).observe(document.body, {childList:true, subtree:true});
+
+  // ── Apply immediately then beat all lazy setVersion() calls ──
+  canonicalise(); hydrateKickers();
+  [100,400,800].forEach(function(d){
+    setTimeout(function(){ canonicalise(); hydrateKickers(); },d);
+  });
+
+  // ── Preflight DOM audit (developer console, 1200ms) ──────────
+  // By 1200ms all setVersion() calls have fired. Any stale string
+  // remaining in a visible label means a legacy writer is still winning.
+  // Fix: cleanup sprint — delete the legacy setVersion() call that owns it.
+  setTimeout(function(){
+    var sel='.logo-name,.logo-sub,.version-pill,[data-nav-key="comparator"]'+
+            ',.v70-kicker,.v69-stable-kicker,.v64-home-eyebrow,.v70-strip-title span';
+    var found=[];
+    document.querySelectorAll(sel).forEach(function(el){
+      var txt=(el.textContent||'').trim();
+      STALE.forEach(function(s){ if(txt.indexOf(s)!==-1) found.push({el:el.className||el.tagName,text:txt,stale:s}); });
+    });
+    if(found.length){
+      console.warn('[PropIntel] VERSION GOVERNANCE — stale strings in DOM after boot. These are targets for the cleanup sprint:',found);
+    } else {
+      console.info('[PropIntel] VERSION GOVERNANCE — all visible labels canonical. '+R.pill+' | __piRelease ready.');
+    }
+  },1200);
+
+  (function(){
+    var K='residential_agent_helper_v71_audit';var items=[];
+    try{items=JSON.parse(localStorage.getItem(K)||'[]')||[];}catch(e){}
+    items.push({ts:new Date().toLocaleString('en-GB'),msg:'patch-version-governance-v1 loaded · '+R.pill});
+    try{localStorage.setItem(K,JSON.stringify(items.slice(-80)));}catch(e){}
+  })();
+  var m=document.createElement('span');m.id='patch-version-governance-v1-init';m.style.display='none';document.body.appendChild(m);
+  console.info('[PropIntel] patch-version-governance-v1 · window.__piRelease + window.__piCanon declared');
+})();
+</script>
 </body>
 </html>
