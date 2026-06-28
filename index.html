@@ -38419,5 +38419,100 @@ var s=document.createElement('span');s.id='pi-idb-bridge-init';s.style.display='
 console.info('[PropIntel] patch-idb-evidence-bridge-v1-1 loaded — debug: window.__piEvidenceHealth()');
 })();
 </script>
+<script id="patch-csf-bar-fix-v1">(function(){
+'use strict';
+if(document.getElementById('patch-csf-bar-fix-v1-init'))return;
+
+// Root cause: patch-comp-stack-score-filter-v1's enhanceStack() sets __piCsfEnhanced=true
+// BEFORE checking rows.length. Any call with empty rows permanently locks the flag,
+// preventing the button bar from ever being injected on that element.
+// Fix: check for .pi-csf-bar physical presence, not the flag. Reuses existing CSS.
+
+var HARD_MIN=40;
+
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function slugify(s){return String(s||'').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');}
+
+function getTownScore(name){
+  if(!window.TOWNS)return null;
+  var nl=String(name||'').toLowerCase();
+  for(var i=0;i<window.TOWNS.length;i++){
+    if(String(window.TOWNS[i].name||'').toLowerCase()===nl)return window.TOWNS[i].score;
+  }
+  return null;
+}
+
+function ensureScored(stack){
+  stack.querySelectorAll('.pi-comp-table tbody tr').forEach(function(tr){
+    if(tr.hasAttribute('data-csf-score'))return;
+    var td=tr.querySelector('td');if(!td)return;
+    var score=getTownScore((td.textContent||'').trim());
+    tr.setAttribute('data-csf-score',score===null?'':String(score));
+  });
+}
+
+function applyBand(stack,band){
+  stack.querySelectorAll('.pi-comp-table tbody tr[data-csf-score]').forEach(function(tr){
+    var raw=tr.getAttribute('data-csf-score');
+    var score=raw===''?null:Number(raw);
+    var show;
+    if(band==='all')        {show=true;}
+    else if(band==='strong'){show=score!==null&&score>=80;}
+    else if(band==='mod')   {show=score!==null&&score>=65&&score<80;}
+    else if(band==='weak')  {show=score===null||score<65;}
+    else                    {show=score===null||score>=HARD_MIN;}
+    tr.style.display=show?'':'none';
+  });
+  stack.querySelectorAll('.pi-csf-btn').forEach(function(b){
+    b.classList.toggle('pi-csf-active',b.getAttribute('data-band')===band);
+  });
+  stack.__piCsfActive=band;
+}
+
+function injectBar(stack){
+  if(!stack||stack.querySelector('.pi-csf-bar'))return; // already present
+  var rows=stack.querySelectorAll('.pi-comp-table tbody tr');
+  if(!rows.length)return; // drawer not ready yet
+  var title=stack.querySelector('.pi-comp-stack-title');if(!title)return;
+  ensureScored(stack);
+  var bar=document.createElement('div');bar.className='pi-csf-bar';
+  bar.innerHTML=
+    '<button class="pi-csf-btn" data-band="all">All</button>'+
+    '<button class="pi-csf-btn" data-band="strong">80+</button>'+
+    '<button class="pi-csf-btn" data-band="mod">65–79</button>'+
+    '<button class="pi-csf-btn" data-band="weak">&lt;65</button>';
+  title.appendChild(bar);
+  bar.addEventListener('click',function(e){
+    var btn=e.target.closest&&e.target.closest('.pi-csf-btn');if(!btn)return;
+    var band=btn.getAttribute('data-band');
+    applyBand(stack,stack.__piCsfActive===band?null:band);
+  });
+  applyBand(stack,null);
+}
+
+// pi:town:open — multi-delay polling, beats the __piCsfEnhanced lock-out
+document.addEventListener('pi:town:open',function(e){
+  var tid=e.detail&&e.detail.townId;if(!tid)return;
+  var sid='pi-comp-stack-'+slugify(tid);
+  [200,500,900,1500].forEach(function(d){
+    setTimeout(function(){injectBar(document.getElementById(sid));},d);
+  });
+});
+
+// MutationObserver belt-and-suspenders — fires 100ms after stack is added to DOM
+new MutationObserver(function(muts){
+  muts.forEach(function(m){
+    m.addedNodes.forEach(function(n){
+      if(n.nodeType===1&&n.classList&&n.classList.contains('pi-comp-stack')){
+        setTimeout(function(){injectBar(n);},100);
+      }
+    });
+  });
+}).observe(document.body,{childList:true,subtree:true});
+
+var m=document.createElement('span');m.id='patch-csf-bar-fix-v1-init';m.style.display='none';document.body.appendChild(m);
+console.info('[PropIntel] patch-csf-bar-fix-v1 loaded');
+})();
+</script>
 </body>
 </html>
