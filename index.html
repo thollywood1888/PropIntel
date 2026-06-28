@@ -38172,5 +38172,252 @@ body.redesign-v59 .sidebar-item[data-nav-key="data-quality-console"] { display: 
   console.info('[PropIntel] patch-quota-guard-v1 loaded');
 })();
 </script>
+<script id="patch-idb-evidence-bridge-v1-1">(function(){
+'use strict';
+if(window.__piIDBBridgeV11)return true;
+window.__piIDBBridgeV11=true;
+
+var ROWS_KEY   ='residential_agent_helper_v71_rows';
+var AUDIT_KEY  ='residential_agent_helper_v71_audit';
+var DB_NAME    ='propintel-evidence-db';
+var STORE_NAME ='evidence';
+var RECORD_KEY ='rows';
+var SCHEMA_VER =1;
+var DEBOUNCE_MS=150;
+
+// Capture Storage refs BEFORE patching.
+// _nativeSet is the quota-guard wrapper — intentional; chain: IDB bridge → quota guard → browser native.
+var _nativeGet=Storage.prototype.getItem.bind(localStorage);
+var _nativeSet=Storage.prototype.setItem.bind(localStorage);
+var _nativeDel=Storage.prototype.removeItem.bind(localStorage);
+
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
+var __piCache=null; // null=not yet loaded, []=loaded empty
+var idbDb=null;
+var idbFailed=false;
+var txBusy=false;
+var pendingPayload=null;
+var debTimer=null;
+
+// --- Audit (always via _nativeGet/_nativeSet, never through intercepts) ---
+function auditLog(msg){
+  try{
+    var items=[];
+    try{items=JSON.parse(_nativeGet(AUDIT_KEY)||'[]')||[];}catch(e){}
+    items.push({ts:new Date().toLocaleString('en-GB'),msg:'[idb-bridge] '+msg});
+    _nativeSet(AUDIT_KEY,JSON.stringify(items.slice(-80)));
+  }catch(e){}
+}
+
+// --- IDB helpers ---
+function openDB(){
+  return new Promise(function(resolve,reject){
+    if(!window.indexedDB){reject(new Error('IndexedDB unavailable'));return;}
+    var req=indexedDB.open(DB_NAME,1);
+    req.onupgradeneeded=function(e){
+      var db=e.target.result;
+      if(!db.objectStoreNames.contains(STORE_NAME))db.createObjectStore(STORE_NAME);
+    };
+    req.onsuccess=function(e){resolve(e.target.result);};
+    req.onerror=function(e){reject(e.target.error);};
+  });
+}
+
+function idbRead(){
+  return new Promise(function(resolve,reject){
+    if(!idbDb){reject(new Error('DB not open'));return;}
+    var tx=idbDb.transaction(STORE_NAME,'readonly');
+    var req=tx.objectStore(STORE_NAME).get(RECORD_KEY);
+    req.onsuccess=function(e){resolve(e.target.result||null);};
+    req.onerror=function(e){reject(e.target.error);};
+  });
+}
+
+function runSave(payload,resolve,reject){
+  txBusy=true;
+  var tx=idbDb.transaction(STORE_NAME,'readwrite');
+  tx.objectStore(STORE_NAME).put(payload,RECORD_KEY);
+  tx.oncomplete=function(){
+    txBusy=false;
+    if(pendingPayload){var next=pendingPayload;pendingPayload=null;idbSave(next.rows);}
+    if(resolve)resolve();
+  };
+  tx.onerror=function(e){
+    txBusy=false;
+    auditLog('IDB save failed: '+String(e.target.error));
+    if(reject)reject(e.target.error);
+  };
+  tx.onabort=function(){
+    txBusy=false;
+    auditLog('IDB tx aborted: '+String(tx.error));
+    if(reject)reject(tx.error);
+  };
+}
+
+function idbSave(rows){
+  return new Promise(function(resolve,reject){
+    if(!idbDb){reject(new Error('DB not open'));return;}
+    var payload={schemaVersion:SCHEMA_VER,updatedAt:Date.now(),rowCount:rows.length,rows:rows};
+    if(txBusy){pendingPayload=payload;resolve();return;}
+    runSave(payload,resolve,reject);
+  });
+}
+
+function idbClear(){
+  return new Promise(function(resolve,reject){
+    if(!idbDb){resolve();return;}
+    var tx=idbDb.transaction(STORE_NAME,'readwrite');
+    tx.objectStore(STORE_NAME).delete(RECORD_KEY);
+    tx.oncomplete=function(){resolve();};
+    tx.onerror=function(e){reject(e.target.error);};
+  });
+}
+
+function scheduleIDBSave(){
+  clearTimeout(debTimer);
+  debTimer=setTimeout(function(){
+    if(idbFailed||!idbDb)return;
+    idbSave(__piCache||[]).catch(function(e){auditLog('IDB save failed: '+String(e));});
+  },DEBOUNCE_MS);
+}
+
+// --- Storage intercepts ---
+Storage.prototype.getItem=function(key){
+  if(key===ROWS_KEY){
+    if(__piCache!==null)return JSON.stringify(__piCache);
+    return _nativeGet(ROWS_KEY); // synchronous fallback while IDB opens
+  }
+  return _nativeGet(key);
+};
+
+Storage.prototype.setItem=function(key,value){
+  if(key===ROWS_KEY){
+    try{__piCache=JSON.parse(value)||[];}catch(e){__piCache=[];}
+    scheduleIDBSave();
+    return; // do NOT write ROWS_KEY to localStorage
+  }
+  _nativeSet(key,value);
+};
+
+Storage.prototype.removeItem=function(key){
+  if(key===ROWS_KEY){__piCache=[];idbClear().catch(function(){});return;}
+  _nativeDel(key);
+};
+
+// --- Migration ---
+function migrate(){
+  return new Promise(function(resolve){
+    var legacy=_nativeGet(ROWS_KEY);
+    if(!legacy){
+      idbRead().then(function(record){
+        __piCache=(record&&Array.isArray(record.rows))?record.rows:[];
+        resolve();
+      }).catch(function(e){
+        __piCache=[];
+        auditLog('IDB read error on boot: '+String(e));
+        resolve();
+      });
+      return;
+    }
+    var rows=[];
+    try{rows=JSON.parse(legacy)||[];}catch(e){rows=[];}
+    if(!rows.length){__piCache=[];_nativeDel(ROWS_KEY);resolve();return;}
+    auditLog('migration started — '+rows.length+' rows in legacy localStorage');
+    var payload={schemaVersion:SCHEMA_VER,updatedAt:Date.now(),rowCount:rows.length,rows:rows};
+    txBusy=true;
+    var mtx=idbDb.transaction(STORE_NAME,'readwrite');
+    mtx.objectStore(STORE_NAME).put(payload,RECORD_KEY);
+    mtx.oncomplete=function(){
+      txBusy=false;
+      idbRead().then(function(record){
+        if(record&&record.rowCount===rows.length){
+          __piCache=rows;
+          _nativeDel(ROWS_KEY);
+          auditLog('migration complete — '+rows.length+' rows verified in IDB, legacy key removed');
+        }else{
+          __piCache=rows;
+          auditLog('migration failed — count mismatch (expected '+rows.length+', got '+(record?record.rowCount:0)+') — legacy key preserved');
+        }
+        resolve();
+      }).catch(function(e){
+        __piCache=rows;
+        auditLog('migration failed — IDB verify error: '+String(e)+' — legacy key preserved');
+        resolve();
+      });
+    };
+    mtx.onerror=function(e){
+      txBusy=false;__piCache=rows;
+      auditLog('migration failed — write error: '+String(e.target.error)+' — legacy key preserved');
+      resolve();
+    };
+    mtx.onabort=function(){
+      txBusy=false;__piCache=rows;
+      auditLog('migration failed — tx aborted — legacy key preserved');
+      resolve();
+    };
+  });
+}
+
+// --- Debug hooks ---
+window.__piEvidenceCache=function(){return __piCache;};
+
+window.__piIDBHealthy=function(){
+  return new Promise(function(resolve){
+    if(idbFailed||!idbDb){resolve(false);return;}
+    idbRead().then(function(r){resolve(!!(r&&Array.isArray(r.rows)));}).catch(function(){resolve(false);});
+  });
+};
+
+window.__piEvidenceHealth=function(){
+  return new Promise(function(resolve){
+    var legacy=_nativeGet(ROWS_KEY);
+    if(!idbDb){
+      resolve({installed:true,idbHealthy:false,cacheRows:__piCache?__piCache.length:null,dbRows:null,lastSavedAt:null,schemaVersion:null,legacyLocalStoragePresent:!!legacy});
+      return;
+    }
+    idbRead().then(function(record){
+      resolve({installed:true,idbHealthy:!idbFailed,cacheRows:__piCache?__piCache.length:null,dbRows:record?record.rowCount:0,lastSavedAt:record?record.updatedAt:null,schemaVersion:record?record.schemaVersion:null,legacyLocalStoragePresent:!!legacy});
+    }).catch(function(){
+      resolve({installed:true,idbHealthy:false,cacheRows:__piCache?__piCache.length:null,dbRows:null,lastSavedAt:null,schemaVersion:null,legacyLocalStoragePresent:!!legacy});
+    });
+  });
+};
+
+window.__piRefreshEvidenceCache=function(){
+  return new Promise(function(resolve,reject){
+    idbRead().then(function(record){
+      if(record&&Array.isArray(record.rows)){__piCache=record.rows;resolve(record.rows.length);}
+      else{__piCache=[];resolve(0);}
+    }).catch(reject);
+  });
+};
+
+window.__piEvidenceClear=function(){
+  if(!confirm('Clear all PropIntel evidence from IDB and localStorage? This cannot be undone.'))return;
+  __piCache=[];
+  idbClear().catch(function(){});
+  _nativeDel(ROWS_KEY);
+  auditLog('evidence cleared via __piEvidenceClear');
+};
+
+// --- Boot ---
+openDB().then(function(db){
+  idbDb=db;
+  return migrate();
+}).then(function(){
+  auditLog('adapter installed — IDB open, cache ready ('+(__piCache?__piCache.length:0)+' rows)');
+}).catch(function(e){
+  idbFailed=true;
+  auditLog('IDB open failed: '+String(e)+' — fallback mode activated (localStorage)');
+  Storage.prototype.getItem=function(key){return _nativeGet(key);};
+  Storage.prototype.setItem=function(key,value){_nativeSet(key,value);};
+  Storage.prototype.removeItem=function(key){_nativeDel(key);};
+});
+
+var s=document.createElement('span');s.id='pi-idb-bridge-init';s.style.display='none';document.body.appendChild(s);
+console.info('[PropIntel] patch-idb-evidence-bridge-v1-1 loaded — debug: window.__piEvidenceHealth()');
+})();
+</script>
 </body>
 </html>
