@@ -38102,5 +38102,75 @@ body.redesign-v59 .sidebar-item[data-nav-key="data-quality-console"] { display: 
   console.info('[PropIntel] patch-comp-stack-score-filter-fix-v1 loaded · hardMin='+HARD_MIN);
 })();
 </script>
+<script id="patch-quota-guard-v1">(function(){
+  'use strict';
+  if(document.getElementById('patch-quota-guard-v1-init'))return;
+
+  var AUDIT_KEY='residential_agent_helper_v71_audit';
+  var nativeSetItem=Storage.prototype.setItem;
+
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
+  function auditLog(msg){
+    try{
+      var items=[];
+      try{items=JSON.parse(localStorage.getItem(AUDIT_KEY)||'[]')||[];}catch(e){}
+      items.push({ts:new Date().toLocaleString('en-GB'),msg:msg});
+      nativeSetItem.call(localStorage,AUDIT_KEY,JSON.stringify(items.slice(-80)));
+    }catch(e){}
+  }
+
+  function showBanner(msg){
+    var existing=document.getElementById('pi-quota-banner');
+    if(existing){existing.querySelector('#pi-quota-banner-msg').textContent=msg;return;}
+    var banner=document.createElement('div');
+    banner.id='pi-quota-banner';
+    banner.style.cssText='position:fixed;top:0;left:0;right:0;z-index:99999;background:#c0392b;color:#fff;font:700 13px/1.4 "DM Mono",monospace;padding:10px 56px 10px 16px;text-align:center;letter-spacing:.4px;box-shadow:0 2px 8px rgba(0,0,0,.4);';
+    var txt=document.createElement('span');
+    txt.id='pi-quota-banner-msg';
+    txt.textContent=msg;
+    var close=document.createElement('button');
+    close.textContent='✕';
+    close.style.cssText='position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:1px solid rgba(255,255,255,.6);color:#fff;border-radius:4px;padding:2px 8px;cursor:pointer;font:700 12px "DM Mono",monospace;';
+    close.onclick=function(){banner.remove();};
+    banner.appendChild(txt);
+    banner.appendChild(close);
+    document.body.appendChild(banner);
+  }
+
+  Storage.prototype.setItem=function(key,value){
+    try{
+      nativeSetItem.call(this,key,value);
+    }catch(e){
+      if(e&&(e.name==='QuotaExceededError'||e.name==='NS_ERROR_DOM_QUOTA_REACHED'||e.code===22)){
+        var msg='PropIntel — localStorage quota exceeded (key: '+esc(String(key||'').slice(0,60))+'). Export evidence data before continuing — some data was not saved.';
+        showBanner(msg);
+        auditLog('[quota-guard] QuotaExceededError on key: '+String(key||'').slice(0,80));
+      }else{
+        throw e;
+      }
+    }
+  };
+
+  setTimeout(function(){
+    try{
+      var total=0;
+      for(var i=0;i<localStorage.length;i++){
+        var k=localStorage.key(i);
+        total+=((localStorage.getItem(k)||'').length)*2;
+      }
+      var mb=(total/1048576).toFixed(2);
+      if(total>=4194304){
+        var warnMsg='PropIntel — localStorage at '+mb+'MB (≥4MB). Approaching quota. Export evidence data to free space before adding new rows.';
+        showBanner(warnMsg);
+        auditLog('[quota-guard] Proactive warning: localStorage at '+mb+'MB');
+      }
+    }catch(e){}
+  },3000);
+
+  var m=document.createElement('span');m.id='patch-quota-guard-v1-init';m.style.display='none';document.body.appendChild(m);
+  console.info('[PropIntel] patch-quota-guard-v1 loaded');
+})();
+</script>
 </body>
 </html>
