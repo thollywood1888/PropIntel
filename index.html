@@ -38514,5 +38514,159 @@ var m=document.createElement('span');m.id='patch-csf-bar-fix-v1-init';m.style.di
 console.info('[PropIntel] patch-csf-bar-fix-v1 loaded');
 })();
 </script>
+<script id="patch-pi-system-state-v1">
+(function(){
+'use strict';
+if(document.getElementById('patch-pi-system-state-v1-init'))return;
+
+(window.__piPatches=window.__piPatches||[]).push({id:'patch-pi-system-state-v1',loaded:true});
+
+// Audit log — first load only, not on each __piSystemState() call
+(function(){
+  var K='residential_agent_helper_v71_audit';
+  var items=[];
+  try{items=JSON.parse(localStorage.getItem(K)||'[]')||[];}catch(e){}
+  items.push({ts:new Date().toLocaleString('en-GB'),msg:'__piSystemState() registered'});
+  try{localStorage.setItem(K,JSON.stringify(items.slice(-80)));}catch(e){}
+})();
+
+window.__piSystemState=function(){
+  return new Promise(function(resolve){
+    var missingData=[];
+
+    // ── Version ───────────────────────────────────────────────────────────────
+    var version='unknown';
+    try{
+      var rel=window.__piRelease;
+      if(rel&&rel.version){version=String(rel.version);}
+      else if(window.__piCanon){missingData.push('version (__piRelease absent)');}
+      else{missingData.push('version');}
+    }catch(e){missingData.push('version');}
+
+    // ── Patch inventory ───────────────────────────────────────────────────────
+    // PRIMARY: __piPatches registry (explicit, authoritative)
+    // FALLBACK: DOM scan for [id^="patch-"][id$="-init"] spans only
+    var patchSource='none',patchIds=[];
+    try{
+      var reg=window.__piPatches;
+      if(reg&&Array.isArray(reg)&&reg.length){
+        patchIds=reg.map(function(p){return p.id||String(p);});
+        patchSource='registry';
+      }else{
+        var spans=document.querySelectorAll('[id$="-init"]');
+        var domIds=[];
+        for(var i=0;i<spans.length;i++){
+          if(spans[i].id.indexOf('patch-')===0){
+            domIds.push(spans[i].id.replace(/-init$/,''));
+          }
+        }
+        if(domIds.length){patchIds=domIds;patchSource='dom-scan';}
+      }
+    }catch(e){missingData.push('patches');}
+
+    // ── Async storage health (IDB round-trip) ─────────────────────────────────
+    var healthP=(typeof window.__piEvidenceHealth==='function')
+      ?window.__piEvidenceHealth()
+      :Promise.resolve(null);
+
+    healthP.then(function(h){
+      return h||null;
+    },function(e){
+      missingData.push('storage (error: '+String(e)+')');
+      return null;
+    }).then(function(h){
+      var storage={
+        idbHealthy:                h?Boolean(h.idbHealthy):null,
+        cacheRows:                 (h&&h.cacheRows!=null)?h.cacheRows:null,
+        dbRows:                    (h&&h.dbRows!=null)?h.dbRows:null,
+        legacyLocalStoragePresent: (h&&h.legacyLocalStoragePresent!=null)?Boolean(h.legacyLocalStoragePresent):null,
+        lastSavedAt:               (h&&h.lastSavedAt!=null)?h.lastSavedAt:null
+      };
+
+      if(!h){
+        missingData.push('storage (__piEvidenceHealth unavailable)');
+        // Sync fallback: at least report in-memory cache size
+        try{
+          var cache=window.__piEvidenceCache?window.__piEvidenceCache():null;
+          if(Array.isArray(cache))storage.cacheRows=cache.length;
+          else missingData.push('cacheRows');
+        }catch(e2){missingData.push('cacheRows');}
+      }
+
+      // ── Last sync timestamp ────────────────────────────────────────────────
+      // Prefer lastSavedAt from IDB health; fall back to propintel_last_sync key.
+      // Never call _nativeGet — it is a private closure variable, not on window.
+      var lastSync=storage.lastSavedAt||null;
+      if(!lastSync){
+        try{
+          var raw=localStorage.getItem('propintel_last_sync');
+          if(raw)lastSync=raw;
+          else missingData.push('lastSync');
+        }catch(e){missingData.push('lastSync');}
+      }
+
+      var lastSyncFormatted='unknown';
+      if(lastSync){
+        try{
+          var d=new Date(typeof lastSync==='number'?lastSync:String(lastSync));
+          lastSyncFormatted=isNaN(d.getTime())?String(lastSync):d.toLocaleString('en-GB');
+        }catch(e){lastSyncFormatted=String(lastSync);}
+      }
+
+      // ── Console output ─────────────────────────────────────────────────────
+      console.group('[PropIntel] System State');
+      console.log('Version:',version);
+      console.log('Last sync:',lastSyncFormatted);
+
+      console.groupCollapsed('Patches ('+patchIds.length+' registered)');
+      console.table(patchIds.map(function(id){return{id:id,present:true};}));
+      console.groupEnd();
+
+      console.group('Storage Health');
+      console.table([{
+        idbHealthy:                storage.idbHealthy,
+        cacheRows:                 storage.cacheRows,
+        dbRows:                    storage.dbRows,
+        legacyLocalStoragePresent: storage.legacyLocalStoragePresent
+      }]);
+      console.groupEnd();
+
+      if(missingData.length){
+        console.warn('[PropIntel] __piSystemState: data unavailable for:',missingData);
+      }
+
+      console.groupEnd();
+
+      // ── Structured return — frozen after every call ────────────────────────
+      window.__piSystemStateData=Object.freeze({
+        version:  version,
+        lastSync: lastSync,
+        patches:{
+          source: patchSource,
+          count:  patchIds.length,
+          ids:    patchIds.slice()
+        },
+        storage:{
+          idbHealthy:                storage.idbHealthy,
+          cacheRows:                 storage.cacheRows,
+          dbRows:                    storage.dbRows,
+          legacyLocalStoragePresent: storage.legacyLocalStoragePresent,
+          lastSavedAt:               storage.lastSavedAt
+        },
+        missingData: missingData.slice()
+      });
+
+      resolve(window.__piSystemStateData);
+    });
+  });
+};
+
+var s=document.createElement('span');
+s.id='patch-pi-system-state-v1-init';
+s.style.display='none';
+document.body.appendChild(s);
+console.info('[PropIntel] patch-pi-system-state-v1 loaded — run: await __piSystemState()');
+})();
+</script>
 </body>
 </html>
