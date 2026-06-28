@@ -38668,5 +38668,470 @@ document.body.appendChild(s);
 console.info('[PropIntel] patch-pi-system-state-v1 loaded — run: await __piSystemState()');
 })();
 </script>
+<style id="patch-ic-mode-v1-css">
+.pi-ic-sheet{padding:16px 18px 24px;font-family:'Outfit',system-ui,sans-serif;color:#102016;max-width:680px;}
+.pi-ic-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:4px;}
+.pi-ic-title-block{flex:1;}
+.pi-ic-eyebrow{font-family:'DM Mono',monospace;font-size:8px;font-weight:700;letter-spacing:1.8px;color:#B68D40;margin-bottom:4px;}
+.pi-ic-town{font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:700;color:#0f3d2e;margin:0 0 4px;}
+.pi-ic-meta{font-size:12px;color:#4a6055;}
+.pi-ic-verdict{display:inline-block;padding:1px 7px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.6px;background:#1b4332;color:#ffe9a1;}
+.pi-ic-verdict-strong-buy,.pi-ic-verdict-strong_buy{background:#0f3d2e;color:#ffe9a1;}
+.pi-ic-verdict-buy{background:#1b4332;color:#ffe9a1;}
+.pi-ic-verdict-watch{background:#4a6055;color:#F5F2EC;}
+.pi-ic-verdict-avoid{background:#6b2d2d;color:#ffe9a1;}
+.pi-ic-grade-block{text-align:center;flex-shrink:0;}
+.pi-ic-grade{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:20px;font-weight:700;border:2px solid currentColor;}
+.pi-ic-grade-A{color:#1b7a3e;background:rgba(27,122,62,0.08);}
+.pi-ic-grade-B{color:#B68D40;background:rgba(182,141,64,0.08);}
+.pi-ic-grade-C{color:#4a6055;background:rgba(74,96,85,0.08);}
+.pi-ic-grade-D{color:#8b3a3a;background:rgba(139,58,58,0.08);}
+.pi-ic-grade-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:#4a6055;margin-top:3px;}
+.pi-ic-evidence-meta{font-family:'DM Mono',monospace;font-size:10px;color:#4a6055;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid rgba(31,59,44,.13);}
+.pi-ic-section{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(31,59,44,.08);}
+.pi-ic-section:last-of-type{border-bottom:none;}
+.pi-ic-section-label{font-family:'DM Mono',monospace;font-size:8px;font-weight:700;letter-spacing:1.4px;color:#1b4332;margin-bottom:8px;text-transform:uppercase;}
+.pi-ic-count{font-weight:400;color:#4a6055;letter-spacing:.5px;margin-left:6px;}
+.pi-ic-yield-row{display:flex;align-items:baseline;gap:6px;margin-bottom:3px;}
+.pi-ic-yield-low{font-family:'DM Mono',monospace;font-size:14px;color:#7a9080;}
+.pi-ic-yield-mid{font-family:'DM Mono',monospace;font-size:22px;font-weight:700;color:#B68D40;}
+.pi-ic-yield-high{font-family:'DM Mono',monospace;font-size:14px;color:#1b4332;}
+.pi-ic-yield-sep{color:rgba(182,141,64,0.4);font-size:11px;}
+.pi-ic-yield-sub{font-family:'DM Mono',monospace;font-size:9px;color:#4a6055;letter-spacing:.4px;}
+.pi-ic-evidence-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:1px solid rgba(31,59,44,.04);}
+.pi-ic-evidence-row span{color:#4a6055;}
+.pi-ic-evidence-row b{color:#102016;font-family:'DM Mono',monospace;font-size:11px;}
+.pi-ic-table{width:100%;font-family:'DM Mono',monospace;font-size:10px;border-collapse:collapse;}
+.pi-ic-table thead th{font-size:8px;font-weight:700;letter-spacing:1px;color:#1b4332;text-align:left;padding:4px 6px;border-bottom:1px solid rgba(31,59,44,.12);}
+.pi-ic-table tbody td{padding:5px 6px;color:#102016;border-bottom:1px solid rgba(31,59,44,.04);}
+.pi-ic-worksheet{background:rgba(182,141,64,0.04);border:1px solid rgba(182,141,64,0.15);border-radius:10px;padding:10px 14px;margin-bottom:6px;}
+.pi-ic-ws-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;}
+.pi-ic-ws-row span{color:#4a6055;}
+.pi-ic-ws-row b{font-family:'DM Mono',monospace;font-size:11px;color:#102016;}
+.pi-ic-ws-deduct span,.pi-ic-ws-deduct b{color:#7a9080;}
+.pi-ic-ws-total{border-top:1px solid rgba(182,141,64,.2);margin-top:4px;padding-top:6px;}
+.pi-ic-ws-total b{color:#0f3d2e;font-weight:700;}
+.pi-ic-disclaimer{font-size:10px;color:#4a6055;font-style:italic;margin-top:4px;}
+.pi-ic-flags-label{font-family:'DM Mono',monospace;font-size:8px;font-weight:700;letter-spacing:1.2px;margin-bottom:5px;}
+.pi-ic-risk-label{color:#8b3a3a;}
+.pi-ic-up-label{color:#1b7a3e;}
+.pi-ic-up-label-gap{margin-top:10px;}
+.pi-ic-flag{font-size:11px;padding:2px 0;line-height:1.5;}
+.pi-ic-risk{color:#6b2d2d;}
+.pi-ic-upside{color:#1b5c34;}
+.pi-ic-gap{font-size:11px;color:#4a6055;padding:2px 0;font-family:'DM Mono',monospace;}
+.pi-ic-rec-section{background:rgba(15,61,46,.03);border-radius:12px;padding:12px 14px;border:1px solid rgba(31,59,44,.1);}
+.pi-ic-rec{font-size:14px;font-weight:700;padding:8px 12px;border-radius:8px;margin-bottom:8px;font-family:'DM Mono',monospace;}
+.pi-ic-rec-go{background:rgba(27,122,62,.1);color:#1b5c34;}
+.pi-ic-rec-watch{background:rgba(182,141,64,.1);color:#7a5a10;}
+.pi-ic-rec-warn{background:rgba(139,58,58,.1);color:#6b2d2d;}
+.pi-ic-rec-pending{background:rgba(74,96,85,.08);color:#4a6055;}
+.pi-ic-next-action{font-size:11px;color:#4a6055;line-height:1.5;}
+.pi-ic-actions{margin-top:16px;padding-top:12px;border-top:1px solid rgba(31,59,44,.1);}
+.pi-ic-print-btn{background:#1b4332;color:#ffe9a1;border:none;border-radius:8px;padding:8px 18px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Outfit',system-ui,sans-serif;}
+.pi-ic-print-btn:hover{background:#0f3d2e;}
+.pi-ic-loading,.pi-ic-error{padding:24px 18px;font-size:13px;color:#4a6055;font-family:'DM Mono',monospace;}
+.pi-ic-error{color:#8b3a3a;}
+.pi-ic-muted{font-size:11px;color:#4a6055;font-style:italic;}
+@media print{
+  .no-print{display:none!important;}
+  body > *:not(#town-intel-drawer){display:none!important;}
+  #town-intel-drawer{position:static!important;width:100%!important;box-shadow:none!important;}
+  .pi-ic-sheet{max-width:none;padding:0;}
+  .v63-tabs,.v63-bottom-bar,.v63-town-header .v63-tabs,.pi-ic-actions{display:none!important;}
+}
+</style>
+<script id="patch-ic-mode-v1">
+(function(){
+'use strict';
+if(document.getElementById('patch-ic-mode-v1-init'))return;
+
+(window.__piPatches=window.__piPatches||[]).push({id:'patch-ic-mode-v1',loaded:true});
+
+(function(){
+  var K='residential_agent_helper_v71_audit';
+  var items=[];
+  try{items=JSON.parse(localStorage.getItem(K)||'[]')||[];}catch(e){}
+  items.push({ts:new Date().toLocaleString('en-GB'),msg:'IC Mode loaded — renderICSheet() available'});
+  try{localStorage.setItem(K,JSON.stringify(items.slice(-80)));}catch(e){}
+})();
+
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function slugify(s){return String(s||'').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');}
+
+var _icCache={};
+var _inFlight={};
+
+// ── Async evidence fetch (Phase 5 IDB bridge pattern) ──────────────────────
+function buildICData(townId){
+  if(_inFlight[townId]) return _inFlight[townId];
+  _inFlight[townId]=(function(){
+    if(typeof window.__piEvidenceHealth!=='function'){
+      return Promise.resolve({error:'no-health-api'});
+    }
+    return window.__piEvidenceHealth().then(function(health){
+      if(!health||!health.idbHealthy||!(health.cacheRows>0)){
+        return {error:'evidence-unavailable',cacheRows:health?health.cacheRows:null};
+      }
+      var allRows=window.__piEvidenceCache?window.__piEvidenceCache():null;
+      if(!Array.isArray(allRows)) return {error:'cache-not-array'};
+      var town=window.TOWNS?window.TOWNS.find(function(t){return t.id===townId;}):null;
+      var townName=town?town.name:townId;
+      var rows=allRows.filter(function(r){
+        return r.town&&r.town.toLowerCase()===townName.toLowerCase();
+      });
+      return {rows:rows,townObj:town};
+    }).catch(function(e){
+      return {error:'exception:'+String(e)};
+    }).then(function(result){
+      delete _inFlight[townId];
+      return result;
+    });
+  })();
+  return _inFlight[townId];
+}
+
+// ── Evidence analysis ───────────────────────────────────────────────────────
+function parsePrice(str){
+  if(!str) return null;
+  var n=parseInt(String(str).replace(/[^0-9]/g,''),10);
+  return isNaN(n)||n<=0?null:n;
+}
+function avg(arr){
+  var v=arr.map(parsePrice).filter(function(x){return x!==null;});
+  return v.length?Math.round(v.reduce(function(a,b){return a+b;},0)/v.length):null;
+}
+function minV(arr){var v=arr.map(parsePrice).filter(function(x){return x!==null;});return v.length?Math.min.apply(null,v):null;}
+function maxV(arr){var v=arr.map(parsePrice).filter(function(x){return x!==null;});return v.length?Math.max.apply(null,v):null;}
+function latestDate(arr){
+  var d=arr.map(function(r){return r.dateChecked||'';}).filter(Boolean);
+  return d.length?d.slice().sort().pop():null;
+}
+
+function parseDateFreshness(str){
+  if(!str) return null;
+  var d=null;
+  var m=str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if(m) d=new Date(parseInt(m[3]),parseInt(m[2])-1,parseInt(m[1]));
+  if(!d||isNaN(d.getTime())){
+    var MO={jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+    var my=str.match(/([a-z]{3})\s+(\d{4})/i);
+    if(my) d=new Date(parseInt(my[2]),MO[my[1].toLowerCase()]||0,1);
+  }
+  if(!d||isNaN(d.getTime())){var yr=str.match(/^(\d{4})$/);if(yr) d=new Date(parseInt(yr[1]),6,1);}
+  if(!d||isNaN(d.getTime())) return null;
+  var now=new Date();
+  var ms=now-d;
+  var months=ms/(1000*60*60*24*30.44);
+  if(months>24) return 'stale';
+  if(months>12) return 'ageing';
+  return 'fresh';
+}
+
+function yieldBand(soldRows,rentRows){
+  var pairs=[];
+  soldRows.forEach(function(s){
+    var sp=parsePrice(s.priceRent);if(!sp)return;
+    rentRows.forEach(function(r){
+      var rp=parsePrice(r.priceRent);if(!rp)return;
+      pairs.push((rp*12/sp)*100);
+    });
+  });
+  if(pairs.length<2) return null;
+  pairs.sort(function(a,b){return a-b;});
+  var i10=Math.floor(pairs.length*0.10);
+  var i50=Math.floor(pairs.length*0.50);
+  var i90=Math.min(Math.floor(pairs.length*0.90),pairs.length-1);
+  return {low:pairs[i10],mid:pairs[i50],high:pairs[i90],n:pairs.length};
+}
+
+function analyseRows(rows){
+  var sold=rows.filter(function(r){return r.evidenceType==='Sold';});
+  var rent=rows.filter(function(r){return r.evidenceType==='Rent';});
+  var avgSold=avg(sold.map(function(r){return r.priceRent;}));
+  var avgRent=avg(rent.map(function(r){return r.priceRent;}));
+  var band=yieldBand(sold,rent);
+
+  var allDates=rows.map(function(r){return r.dateChecked||'';}).filter(Boolean);
+  var freshnessMap=allDates.map(parseDateFreshness);
+  var staleCount=freshnessMap.filter(function(f){return f==='stale';}).length;
+  var ageingCount=freshnessMap.filter(function(f){return f==='ageing';}).length;
+  var anyStale=staleCount>0||ageingCount>0;
+  var allStale=allDates.length>0&&staleCount===allDates.length;
+
+  var grade='D';
+  if(sold.length>=5&&rent.length>=3&&!anyStale) grade='A';
+  else if(sold.length>=3&&rent.length>=2) grade='B';
+  else if(sold.length>0||rent.length>0) grade='C';
+
+  var rec='',recClass='';
+  if(sold.length===0&&rent.length===0){rec='Data pending — no evidence available';recClass='pi-ic-rec-pending';}
+  else if(sold.length<3||rent.length<2){rec='Do not rely — insufficient evidence';recClass='pi-ic-rec-warn';}
+  else if(anyStale){rec='Watchlist — verify evidence freshness';recClass='pi-ic-rec-watch';}
+  else{rec='Proceed to underwriting — evidence adequate';recClass='pi-ic-rec-go';}
+
+  var soldNoDate=sold.filter(function(r){return!r.dateChecked;}).length;
+  var rentNoDate=rent.filter(function(r){return!r.dateChecked;}).length;
+  var soldNoUrl=sold.filter(function(r){return!r.sourceUrl||r.sourceUrl.indexOf('http')!==0;}).length;
+
+  return {
+    sold:sold,rent:rent,
+    avgSold:avgSold,avgRent:avgRent,
+    minSold:minV(sold.map(function(r){return r.priceRent;})),
+    maxSold:maxV(sold.map(function(r){return r.priceRent;})),
+    minRent:minV(rent.map(function(r){return r.priceRent;})),
+    maxRent:maxV(rent.map(function(r){return r.priceRent;})),
+    latestSold:latestDate(sold),latestRent:latestDate(rent),
+    band:band,grade:grade,rec:rec,recClass:recClass,
+    anyStale:anyStale,allStale:allStale,staleCount:staleCount,
+    soldNoDate:soldNoDate,rentNoDate:rentNoDate,soldNoUrl:soldNoUrl
+  };
+}
+
+// ── Read existing DOM output from dependency patches ───────────────────────
+function readYieldFromDOM(townName){
+  var el=document.getElementById('pi-yield-engine-'+slugify(townName));
+  if(!el) return null;
+  var low=el.querySelector('.pi-yield-low');
+  var mid=el.querySelector('.pi-yield-mid');
+  var high=el.querySelector('.pi-yield-high');
+  if(!low||!mid||!high) return null;
+  var lbl=el.querySelector('.pi-yield-engine-label');
+  var nm=lbl?lbl.textContent.match(/(\d+)\s+pair/):null;
+  return {lowT:low.textContent.trim(),midT:mid.textContent.trim(),highT:high.textContent.trim(),n:nm?parseInt(nm[1],10):null};
+}
+
+function readCompStack(townId){
+  var el=document.getElementById('pi-comp-stack-'+slugify(townId));
+  if(!el) return [];
+  var rows=el.querySelectorAll('.pi-comp-table tbody tr');
+  var out=[];
+  rows.forEach(function(tr){
+    if(tr.style.display==='none') return;
+    var td=tr.querySelectorAll('td');
+    if(td.length<5) return;
+    out.push({name:td[0].textContent.trim(),avgSold:td[1].textContent.trim(),avgRent:td[2].textContent.trim(),coverage:td[3].textContent.trim(),verdict:td[4].textContent.trim()});
+  });
+  return out.slice(0,4);
+}
+
+// ── Format helpers ──────────────────────────────────────────────────────────
+function fmt(n){return n==null?'—':'£'+n.toLocaleString('en-GB');}
+function fmtPcm(n){return n==null?'—':'£'+n.toLocaleString('en-GB')+' pcm';}
+function fmtPct(n){return n==null?'—':n.toFixed(1)+'%';}
+
+// ── Build IC sheet HTML ─────────────────────────────────────────────────────
+function buildICHtml(townId,data,a){
+  var town=data.townObj;
+  if(!town) return '<div class="pi-ic-error">Town not found for id: '+esc(townId)+'</div>';
+  var score=town.score!=null?town.score:0;
+  var verdict=town.verdict||'WATCH';
+  var verdictSlug=verdict.toLowerCase().replace(/[\s_]+/g,'-');
+
+  // Header
+  var html='<div class="pi-ic-sheet">';
+  html+='<div class="pi-ic-header"><div class="pi-ic-title-block">';
+  html+='<div class="pi-ic-eyebrow">INVESTMENT COMMITTEE</div>';
+  html+='<h2 class="pi-ic-town">'+esc(town.name)+'</h2>';
+  html+='<div class="pi-ic-meta">'+esc(town.postcode||'')+(town.postcode?' · ':'')+
+    'Score: '+esc(score)+' <span class="pi-ic-verdict pi-ic-verdict-'+esc(verdictSlug)+'">'+esc(verdict)+'</span></div>';
+  html+='</div><div class="pi-ic-grade-block">';
+  html+='<div class="pi-ic-grade pi-ic-grade-'+esc(a.grade)+'">'+esc(a.grade)+'</div>';
+  html+='<div class="pi-ic-grade-label">Confidence</div></div></div>';
+  html+='<div class="pi-ic-evidence-meta">'+esc(a.sold.length)+' sold · '+esc(a.rent.length)+' rental · '+esc(data.rows.length)+' total rows loaded</div>';
+
+  // Yield band — prefer DOM (already rendered by yield-engine-v1), fall back to computed
+  var domY=readYieldFromDOM(town.name);
+  if(domY){
+    html+='<div class="pi-ic-section"><div class="pi-ic-section-label">YIELD BAND</div>';
+    html+='<div class="pi-ic-yield-row"><span class="pi-ic-yield-low">'+esc(domY.lowT)+'</span>';
+    html+='<span class="pi-ic-yield-sep">→</span><span class="pi-ic-yield-mid">'+esc(domY.midT)+'</span>';
+    html+='<span class="pi-ic-yield-sep">→</span><span class="pi-ic-yield-high">'+esc(domY.highT)+'</span></div>';
+    html+='<div class="pi-ic-yield-sub">low · mid · high · gross unlevered'+(domY.n?' · '+domY.n+' pairs':'')+'</div></div>';
+  } else if(a.rent.length===0){
+    // suppressed — no rent rows
+  } else if(a.band){
+    html+='<div class="pi-ic-section"><div class="pi-ic-section-label">YIELD BAND</div>';
+    html+='<div class="pi-ic-yield-row"><span class="pi-ic-yield-low">'+esc(fmtPct(a.band.low))+'</span>';
+    html+='<span class="pi-ic-yield-sep">→</span><span class="pi-ic-yield-mid">'+esc(fmtPct(a.band.mid))+'</span>';
+    html+='<span class="pi-ic-yield-sep">→</span><span class="pi-ic-yield-high">'+esc(fmtPct(a.band.high))+'</span></div>';
+    html+='<div class="pi-ic-yield-sub">low · mid · high · gross unlevered · '+a.band.n+' pairs (computed)</div></div>';
+  } else {
+    html+='<div class="pi-ic-section"><div class="pi-ic-section-label">YIELD BAND</div>';
+    html+='<div class="pi-ic-muted">Insufficient matched pairs for yield band</div></div>';
+  }
+
+  // Sold evidence
+  if(a.sold.length===0){
+    html+='<div class="pi-ic-section"><div class="pi-ic-section-label">SOLD EVIDENCE</div>';
+    html+='<div class="pi-ic-muted">No sold evidence — not suitable for price comparison</div></div>';
+  } else {
+    html+='<div class="pi-ic-section"><div class="pi-ic-section-label">SOLD EVIDENCE <span class="pi-ic-count">'+a.sold.length+' rows</span></div>';
+    html+='<div class="pi-ic-evidence-row"><span>Avg</span><b>'+fmt(a.avgSold)+'</b></div>';
+    html+='<div class="pi-ic-evidence-row"><span>Range</span><b>'+fmt(a.minSold)+' – '+fmt(a.maxSold)+'</b></div>';
+    html+='<div class="pi-ic-evidence-row"><span>Latest</span><b>'+esc(a.latestSold||'—')+'</b></div></div>';
+  }
+
+  // Rent evidence
+  if(a.rent.length===0){
+    html+='<div class="pi-ic-section"><div class="pi-ic-section-label">RENT EVIDENCE</div>';
+    html+='<div class="pi-ic-muted">No rental evidence — yield band and worksheet suppressed</div></div>';
+  } else {
+    html+='<div class="pi-ic-section"><div class="pi-ic-section-label">RENT EVIDENCE <span class="pi-ic-count">'+a.rent.length+' rows</span></div>';
+    html+='<div class="pi-ic-evidence-row"><span>Avg</span><b>'+fmtPcm(a.avgRent)+'</b></div>';
+    html+='<div class="pi-ic-evidence-row"><span>Range</span><b>'+fmtPcm(a.minRent)+' – '+fmtPcm(a.maxRent)+'</b></div>';
+    html+='<div class="pi-ic-evidence-row"><span>Latest</span><b>'+esc(a.latestRent||'—')+'</b></div></div>';
+  }
+
+  // Comparable towns (from DOM — patch-comp-stack-score-filter-fix-v1 output)
+  var comps=readCompStack(townId);
+  if(comps.length===0){
+    html+='<div class="pi-ic-section"><div class="pi-ic-section-label">COMPARABLE TOWNS</div>';
+    html+='<div class="pi-ic-muted">No qualifying comparable towns found (score ≥65)</div></div>';
+  } else {
+    html+='<div class="pi-ic-section"><div class="pi-ic-section-label">COMPARABLE TOWNS <span class="pi-ic-count">score 65+</span></div>';
+    html+='<table class="pi-ic-table"><thead><tr><th>Town</th><th>Avg Sold</th><th>Avg Rent</th><th>Coverage</th><th>Verdict</th></tr></thead><tbody>';
+    comps.forEach(function(c){html+='<tr><td>'+esc(c.name)+'</td><td>'+esc(c.avgSold)+'</td><td>'+esc(c.avgRent)+'</td><td>'+esc(c.coverage)+'</td><td>'+esc(c.verdict)+'</td></tr>';});
+    html+='</tbody></table></div>';
+  }
+
+  // Adjustment worksheet — only when avg rent AND avg sold available
+  if(a.avgRent&&a.avgSold){
+    var gross=a.avgRent*12;
+    var voidA=Math.round(gross*0.05);
+    var agent=Math.round(gross*0.10);
+    var maint=Math.round(gross*0.10);
+    var netAnn=gross-voidA-agent-maint;
+    var netY=(netAnn/a.avgSold*100);
+    html+='<div class="pi-ic-section"><div class="pi-ic-section-label">ADJUSTMENT WORKSHEET <span class="pi-ic-count">illustrative only</span></div>';
+    html+='<div class="pi-ic-worksheet">';
+    html+='<div class="pi-ic-ws-row"><span>Avg rent pcm</span><b>'+fmtPcm(a.avgRent)+'</b></div>';
+    html+='<div class="pi-ic-ws-row"><span>Annual gross</span><b>'+fmt(gross)+'</b></div>';
+    html+='<div class="pi-ic-ws-row pi-ic-ws-deduct"><span>Void allowance 5%</span><b>–'+fmt(voidA)+'</b></div>';
+    html+='<div class="pi-ic-ws-row pi-ic-ws-deduct"><span>Agent fees 10%</span><b>–'+fmt(agent)+'</b></div>';
+    html+='<div class="pi-ic-ws-row pi-ic-ws-deduct"><span>Maintenance 10%</span><b>–'+fmt(maint)+'</b></div>';
+    html+='<div class="pi-ic-ws-row pi-ic-ws-total"><span>Net annual income</span><b>'+fmt(netAnn)+'</b></div>';
+    html+='<div class="pi-ic-ws-row pi-ic-ws-total"><span>At avg sold price</span><b>'+netY.toFixed(1)+'% net yield</b></div>';
+    html+='</div><div class="pi-ic-disclaimer">Figures illustrative only. Based on evidence averages. Verify all inputs before acquisition use.</div></div>';
+  }
+
+  // Risk and upside flags
+  var risks=[],ups=[];
+  if(a.allStale) risks.push('All evidence stale (>24 months) — verify before use');
+  else if(a.anyStale) risks.push('Some evidence ageing or stale (>12 months) — check dateChecked fields');
+  if(a.sold.length<3) risks.push('Thin sold evidence ('+a.sold.length+' rows) — insufficient for price anchor');
+  if(a.rent.length<2) risks.push('Thin rental evidence ('+a.rent.length+' rows) — yield band suppressed');
+  if(score<65) risks.push('Town score '+score+' — below investment threshold (65)');
+  if(!score) risks.push('No confidence score assigned');
+  if(comps.length===0) risks.push('No comparable towns with score ≥65 available');
+  if(!a.latestSold&&!a.latestRent) risks.push('No dateChecked values — evidence age unknown');
+
+  if(a.band&&a.band.mid>=7) ups.push('Mid yield '+fmtPct(a.band.mid)+' — above 7% threshold');
+  else if(domY){var mv=parseFloat(domY.midT);if(!isNaN(mv)&&mv>=7) ups.push('Mid yield '+domY.midT+' — above 7% threshold');}
+  if(verdict==='STRONG BUY'||verdict==='STRONG_BUY') ups.push('STRONG BUY verdict — highest category');
+  if(score>=80) ups.push('Score '+score+' — top tier (80+)');
+  if(a.sold.length>=10) ups.push('Strong sold evidence depth ('+a.sold.length+' rows)');
+  if(a.rent.length>=8) ups.push('Strong rental evidence depth ('+a.rent.length+' rows)');
+
+  if(risks.length||ups.length){
+    html+='<div class="pi-ic-section">';
+    if(risks.length){
+      html+='<div class="pi-ic-flags-label pi-ic-risk-label">RISK FLAGS</div>';
+      html+=risks.map(function(r){return '<div class="pi-ic-flag pi-ic-risk">⚠ '+esc(r)+'</div>';}).join('');
+    }
+    if(ups.length){
+      html+='<div class="pi-ic-flags-label pi-ic-up-label'+(risks.length?' pi-ic-up-label-gap':'')+'">UPSIDE FLAGS</div>';
+      html+=ups.map(function(u){return '<div class="pi-ic-flag pi-ic-upside">✓ '+esc(u)+'</div>';}).join('');
+    }
+    html+='</div>';
+  }
+
+  // Data gaps
+  var gaps=[];
+  if(a.soldNoDate>0) gaps.push('dateChecked missing: '+a.soldNoDate+' sold row'+(a.soldNoDate>1?'s':''));
+  if(a.rentNoDate>0) gaps.push('dateChecked missing: '+a.rentNoDate+' rent row'+(a.rentNoDate>1?'s':''));
+  if(a.soldNoUrl>0) gaps.push('sourceUrl missing or label-only: '+a.soldNoUrl+' sold row'+(a.soldNoUrl>1?'s':''));
+  if(gaps.length){
+    html+='<div class="pi-ic-section"><div class="pi-ic-section-label">DATA GAPS</div>';
+    html+=gaps.map(function(g){return '<div class="pi-ic-gap">• '+esc(g)+'</div>';}).join('');
+    html+='</div>';
+  }
+
+  // Recommendation
+  var nextAction='';
+  if(a.rec.indexOf('Proceed')!==-1) nextAction='Commission formal valuation and detailed acquisition cost analysis.';
+  else if(a.rec.indexOf('Watchlist')!==-1) nextAction='Update evidence dates and re-run IC sheet before committing to underwriting.';
+  else if(a.rec.indexOf('Do not rely')!==-1) nextAction='Add minimum 3 sold + 2 rent rows to Master Excel and run syncprop.';
+  else nextAction='Add evidence via Master Excel → syncprop before assessing this town.';
+
+  html+='<div class="pi-ic-section pi-ic-rec-section">';
+  html+='<div class="pi-ic-section-label">RECOMMENDATION</div>';
+  html+='<div class="pi-ic-rec '+esc(a.recClass)+'">'+esc(a.rec)+'</div>';
+  html+='<div class="pi-ic-next-action"><b>Next action:</b> '+esc(nextAction)+'</div></div>';
+
+  html+='<div class="pi-ic-actions no-print"><button class="pi-ic-print-btn" onclick="window.print()">Print IC Sheet</button></div>';
+  html+='</div>';
+  return html;
+}
+
+// ── Inject IC sheet into #v63-town-content ──────────────────────────────────
+function renderICSheet(townId){
+  var content=document.getElementById('v63-town-content');
+  if(!content) return;
+
+  var cached=_icCache[townId];
+
+  if(!cached){
+    content.innerHTML='<div class="pi-ic-loading">Loading IC sheet…</div>';
+    buildICData(townId).then(function(data){
+      _icCache[townId]=data;
+      var el=document.getElementById('v63-town-content');
+      if(!el) return;
+      var activeTab=document.querySelector('.v63-tab.active');
+      if(activeTab&&activeTab.getAttribute('data-tab')!=='board') return;
+      if(data.error){
+        el.innerHTML='<div class="pi-ic-error">Evidence unavailable ('+esc(data.error)+') — open Board Pack tab again to retry.</div>';
+        return;
+      }
+      el.innerHTML=buildICHtml(townId,data,analyseRows(data.rows));
+    }).catch(function(e){
+      var el=document.getElementById('v63-town-content');
+      if(el) el.innerHTML='<div class="pi-ic-error">IC sheet error: '+esc(String(e))+'</div>';
+    });
+    return;
+  }
+
+  if(cached.error){
+    content.innerHTML='<div class="pi-ic-error">Evidence unavailable ('+esc(cached.error)+(cached.error==='evidence-unavailable'?' — open Board Pack tab again to retry.':'.')+'</div>';
+    return;
+  }
+
+  content.innerHTML=buildICHtml(townId,cached,analyseRows(cached.rows));
+}
+
+// ── Listen to pi:town:open — pre-build IC data cache ───────────────────────
+document.addEventListener('pi:town:open',function(e){
+  var townId=e.detail&&e.detail.townId;
+  if(!townId) return;
+  buildICData(townId).then(function(data){ _icCache[townId]=data; }).catch(function(){});
+});
+
+// ── Wrap v60SetTownTab (Path B from brief) ──────────────────────────────────
+if(typeof window.v60SetTownTab==='function'&&!window.v60SetTownTab.__piICWrapped){
+  var _orig=window.v60SetTownTab;
+  window.v60SetTownTab=function(townId,tab,typeId,mode){
+    _orig.apply(this,arguments);
+    if(tab==='board') setTimeout(function(){renderICSheet(townId);},100);
+  };
+  window.v60SetTownTab.__piICWrapped=true;
+}
+
+var _s=document.createElement('span');
+_s.id='patch-ic-mode-v1-init';
+_s.style.display='none';
+document.body.appendChild(_s);
+console.info('[PropIntel] patch-ic-mode-v1 loaded — renderICSheet() available');
+})();
+</script>
 </body>
 </html>
