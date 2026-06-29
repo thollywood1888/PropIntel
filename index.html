@@ -39181,8 +39181,10 @@ body > *:not(#town-intel-drawer){display:none!important;}
 // v1 presence confirmed via window.__piICWrapped sentinel only
 // Exits silently if guards fail
 if(document.getElementById('patch-ic-mode-v2-init'))return;
-if(typeof window.v60SetTownTab!=='function'||!window.v60SetTownTab.__piICWrapped)return;
+if(typeof window.v60SetTownTab!=='function')return;
+if(!window.v60SetTownTab.__piICWrapped)return;
 if(typeof window.__piEvidenceCache!=='function')return;
+if(window.__DISABLE_IC_MODE_V2===true)return;
 
 (window.__piPatches=window.__piPatches||[]).push({id:'patch-ic-mode-v2',loaded:true});
 
@@ -39569,6 +39571,7 @@ return out.slice(0,4);
 function renderV2(townId){
 if(typeof window.v60SetTownTab!=='function'||!window.v60SetTownTab.__piICWrapped)return;
 if(typeof window.__piEvidenceCache!=='function')return;
+if(window.__DISABLE_IC_MODE_V2===true)return;
 var container=document.getElementById('v63-town-content');
 if(!container)return;
 var activeTab=document.querySelector('.v63-tab.active');
