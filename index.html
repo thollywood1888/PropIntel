@@ -39181,7 +39181,7 @@ body > *:not(#town-intel-drawer){display:none!important;}
 // v1 presence confirmed via window.__piICWrapped sentinel only
 // Exits silently if guards fail
 if(document.getElementById('patch-ic-mode-v2-init'))return;
-if(!window.__piICWrapped)return;
+if(typeof window.v60SetTownTab!=='function'||!window.v60SetTownTab.__piICWrapped)return;
 if(typeof window.__piEvidenceCache!=='function')return;
 
 (window.__piPatches=window.__piPatches||[]).push({id:'patch-ic-mode-v2',loaded:true});
@@ -39567,7 +39567,7 @@ return out.slice(0,4);
 
 // ── Main render function ──────────────────────────────────────────────────────
 function renderV2(townId){
-if(!window.__piICWrapped)return;
+if(typeof window.v60SetTownTab!=='function'||!window.v60SetTownTab.__piICWrapped)return;
 if(typeof window.__piEvidenceCache!=='function')return;
 var container=document.getElementById('v63-town-content');
 if(!container)return;
